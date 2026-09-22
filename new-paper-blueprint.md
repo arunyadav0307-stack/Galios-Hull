@@ -245,6 +245,17 @@ The paper should claim the following only after proofs and computations are comp
 
 The inequivalent-code/Burnside problem is a high-value optional extension, not a premise of the title.
 
+[FINAL LITERATURE AUDIT REQUIRED BEFORE SUBMISSION]
+
+The introduction must distinguish explicitly between:
+
+- established results imported from previous literature;
+- results derived in the present work;
+- computational observations on finite instances;
+- proposed extensions and future work.
+
+Use cautious positioning such as: “The present work focuses on the exact joint enumeration of code dimension and `k`-Galois hull dimension through factor-orbit and transfer-matrix methods.” Do not use “first,” “no previous work,” or “completely new” without a documented literature search supporting the exact claim.
+
 ---
 
 ## 2. Current-literature positioning
@@ -700,7 +711,7 @@ A convention using `0 -> 1`, namely `sum_i(1-epsilon_i)epsilon_{i+1}`, gives the
 
 ### 7.1 One-orbit matrix for the actual code dimension
 
-For an orbit of length `a` and weight `w`, a selected factor contributes `w` to the generator degree and therefore contributes **zero** to the component code dimension. An unselected factor contributes `w` to the component code dimension.
+For an orbit of length `a` and weight `w`, if `epsilon_i=1`, the factor is selected in the generator polynomial and therefore contributes zero to the code dimension. If `epsilon_i=0`, the factor is not selected and contributes `w` to the code dimension. Hence the exponent of `u` below tracks `dim_{F_q}(C)`, not the codimension, while the exponent of `z` tracks `dim_{F_q}(Hull_k(C))`.
 
 Thus, for a transition from state `r=epsilon_i` to state `t=epsilon_{i+1}`, assign:
 
@@ -798,7 +809,7 @@ Define
 \tag{7.5}
 \]
 
-The factor-selection choices on distinct `tau`-orbits and distinct components are independent. By (3.11), (6.3), and (7.4), the exponents add. Hence:
+Under the square-free and compatible-twist hypotheses, the factor-selection choices on distinct `tau_{s,k}`-orbits and distinct simple components are independent. By (3.11), (6.3), and (7.4), the exponents add. Hence:
 
 \[
 \boxed{
@@ -884,7 +895,7 @@ The coefficient sums are `2,4,8,16,32`, respectively. These cases are also check
 
 ### 8.3 Exact hull-dimension distribution
 
-Define
+Under the square-free and compatible-twist hypotheses, define
 
 \[
 H_{A,n,\lambda,k}(z)
@@ -1021,7 +1032,7 @@ For non-neighboring edges, the involved bits are disjoint and the covariance is 
 
 ### 9.3 Global moments
 
-Different factor orbits use independent selection bits. Therefore:
+Under the square-free and compatible-twist hypotheses, different factor orbits use independent selection bits. Therefore:
 
 \[
 \boxed{
@@ -1046,7 +1057,7 @@ These formulas can also be checked by differentiating `H(z)/H(1)` at `z=1`; the 
 
 ---
 
-## 10. Pilot example — fully verified
+## 10. Pilot example — computationally validated
 
 ### 10.1 Ring decomposition
 
@@ -1461,11 +1472,134 @@ Example B (m_s=2, orbit length 4):
 ALL LONG-ORBIT AND m_s>1 VALIDATIONS PASS
 ```
 
+### 10.7 Nontrivial compatible-constacyclic validation
+
+To test the `lambda`-constacyclic part of the framework beyond `lambda=1`, use
+
+\[
+q=4=2^2,
+\qquad K=\mathbb F_4,
+\qquad n=5,
+\qquad \lambda=\omega\ne1,
+\qquad k=1,
+\]
+
+where `omega^2+omega+1=0`. Here
+
+\[
+\rho=p^{e-k}=2,
+\qquad
+\lambda^{1+\rho}=\omega^3=1.
+\]
+
+The factorization verified by the script is
+
+\[
+x^5-\omega
+=(x+\omega+1)(x^2+x+\omega)(x^2+\omega x+\omega).
+\tag{10.9}
+\]
+
+The factors are distinct and the two quadratic factors have no root in `F_4`, so the displayed factorization is square-free and irreducible-factor complete. The `k`-Galois factor permutation is
+
+\[
+[0,2,1],
+\]
+
+with orbit lengths `[1,2]`. All `2^3=8` factor-selection codes are constructed directly. For every code the script checks the direct nullspace dual against the generator `h^{#}`, checks the hull, and compares the result with both the boundary formula and the transfer matrix.
+
+The direct joint histogram is
+
+\[
+\{(0,0):1,(1,0):1,(2,2):2,(3,2):2,(4,0):1,(5,0):1\},
+\]
+
+so the hull histogram is
+
+\[
+\{0:4,\;2:4\}.
+\]
+
+The corresponding joint enumerator is
+
+\[
+\mathscr E_{\omega}(u,z)
+=(u+1)(u^4+2u^2z^2+1).
+\tag{10.10}
+\]
+
+This is a genuinely nontrivial compatible constacyclic test; it is not the `lambda=1` cyclic pilot.
+
+Run:
+
+```bash
+python code/validate_nontrivial_constacyclic.py
+```
+
+The script reports `8 of 8` direct dual-generator checks and exact agreement between direct enumeration, orbit-boundary enumeration, and transfer-matrix enumeration.
+
+### 10.8 Incompatible-twist boundary diagnostic
+
+The compatible-twist hypothesis is not silently extended. For a diagnostic, take
+
+\[
+q=4,
+\qquad n=5,
+\qquad \lambda=\omega,
+\qquad k=0,
+\qquad \rho=p^{e-k}=4.
+\]
+
+Then
+
+\[
+\lambda^{1+\rho}=\omega^5=\omega^2\ne1,
+\]
+
+and
+
+\[
+\lambda'=
+\lambda^{-\rho}=\omega^2\ne\omega.
+\]
+
+For the code
+
+\[
+C=\langle x^2+x+\omega\rangle
+\subseteq \mathbb F_4[x]/\langle x^5-\omega\rangle,
+\]
+
+the direct Euclidean dual agrees with the code generated by `h^{#}` and is `lambda'`-constacyclic, but is not `lambda`-constacyclic. No transfer-matrix enumeration is attempted for this case.
+
+Run:
+
+```bash
+python code/diagnose_incompatible_twist.py
+```
+
+The diagnostic reports:
+
+```text
+lambda^(1+rho)=3 != 1
+lambda^(-rho)=3 != lambda
+direct dual equals <h^(#)>: True
+direct dual is lambda^(-rho)-constacyclic: True
+direct dual is lambda-constacyclic: False
+No transfer-matrix enumeration was attempted.
+```
+
+**Limitation statement:**
+
+> The present transfer-matrix theorem assumes the compatible-twist condition. The incompatible-twist case requires a separate two-polynomial or bipartite formulation and is outside the present theorem.
+
 ---
 
 ## 11. Brute-force validation protocol for the paper
 
-The pilot is one checked example, not a substitute for the theorem. The manuscript should include a short reproducibility subsection with the following protocol.
+The general hull-support theorem, orbit-boundary formula, transfer-matrix theorem, and distribution theorem are mathematical results that require general proofs. The scripts below provide only finite-instance validation.
+
+> **Validation distinction:** The computational experiments provide exhaustive verification for the stated finite parameter sets; they are not substitutes for the general proofs.
 
 For each small parameter set:
 
@@ -1496,10 +1630,11 @@ Minimum test family:
 - a product of split components;
 - unequal extension degrees `m_s`;
 - a fixed factor plus a 2-cycle;
-- a compatible nontrivial `lambda_s`;
+- the nontrivial compatible `lambda=omega` example in Section 10.7;
+- the incompatible-twist diagnostic in Section 10.8 (diagnostic only; no enumerator);
 - Euclidean and order-two Hermitian-type special cases.
 
-The computational experiment validates the theorem; it does not replace the proof.
+The computational experiment validates only the listed finite instances; it does not replace the mathematical proof of the general theorem.
 
 ---
 
@@ -1563,7 +1698,7 @@ Tasks:
 - Establish (6.1) from the support set.
 - Derive all four entries of (7.1).
 - Prove the trace/closed-walk identity.
-- Multiply independent orbit/component factors.
+- Under the square-free and compatible-twist hypotheses, multiply the independent orbit/component factors.
 
 **Deliverable:** joint enumerator theorem.
 
@@ -1582,8 +1717,8 @@ Tasks:
 
 **Duration:** 7–10 days
 
-- Run the pilot script.
-- Add at least two extension-degree or longer-orbit tests.
+- Run the existing pilot, long-orbit, extension-field, and nontrivial-`lambda` scripts.
+- Run the incompatible-twist diagnostic without invoking the enumerator.
 - Compare direct hull ranks and generating functions.
 - Store exact outputs, software version, and finite-field conventions.
 
@@ -1654,9 +1789,9 @@ The paper must **not** claim an unconditional polynomial-time algorithm in the f
 
 ---
 
-## 14. Optional Burnside / Pólya perspective
+## 14. Possible Extension: Equivalence-Class Enumeration
 
-This is not part of the main theorem unless completed.
+This is not part of the main theorem. Burnside enumeration remains future work unless the group action, fixed-point sets, and preservation of hull dimension are completely developed and proved.
 
 Define a finite group of allowed equivalences, for example
 
@@ -1702,6 +1837,8 @@ If the full group action cannot be established, present (14.1)–(14.2) only as 
 ## 15. Quantum-code application — conditional and secondary
 
 The classical enumerator is the main result. A quantum section should be included only after the classical proof and validation are complete.
+
+The hull enumerator determines the hull-dimension distribution but does not by itself determine the minimum distance. No quantum distance may be inferred from `h` alone.
 
 For a selected classical field code or verified Gray image `D`, record:
 
@@ -1912,8 +2049,13 @@ Each alternative requires a fresh literature audit.
 - [ ] `P_{a,w}` is derived and checked for `a=1,...,5`.
 - [ ] LCD count is stated as a corollary.
 - [ ] Mean and variance include fixed-orbit and 2-cycle cases.
-- [ ] Pilot factorization and Hermitian action are computationally verified.
-- [ ] Direct hull histograms equal theoretical histograms.
+- [ ] Existing `F_4` pilot remains unchanged mathematically and is computationally validated.
+- [ ] The `q=8`, orbit-length-6 example is computationally validated.
+- [ ] The `m_s=2` extension-field example is computationally validated.
+- [ ] The nontrivial compatible `lambda=omega` constacyclic example is computationally validated.
+- [ ] The incompatible-twist diagnostic confirms the different dual twist and uses no enumerator.
+- [ ] Direct hull histograms equal theoretical histograms on every stated finite instance.
+- [ ] The computational results are explicitly separated from general mathematical proofs.
 - [ ] Complexity language is cautious.
 - [ ] Burnside is conditional and has a defined group/action if included.
 - [ ] Quantum parameters are conditional on an explicit construction theorem.
@@ -1942,7 +2084,7 @@ If an optional section is incomplete at Week 8, omit it rather than weakening th
 
 ## 21. Immediate next actions
 
-1. Keep `code/validate_pilot.py` and `code/validate_long_orbit_examples.py` under version control and attach both outputs to the research notes.
+1. Keep `code/validate_pilot.py`, `code/validate_long_orbit_examples.py`, `code/validate_nontrivial_constacyclic.py`, and `code/diagnose_incompatible_twist.py` under version control and attach all outputs to the research notes.
 2. Implement the general `K_s` version with `rho_s=p^{e m_s-k}` before testing any extension-field example.
 3. Retain Example A as the genuine long-orbit test; do not infer long-cycle behavior from the `F_4`, Hermitian, 2-cycle pilot.
 4. Prove Lemma 5.1 and Theorem 5.3 in full before writing the transfer-matrix section.
@@ -1957,3 +2099,5 @@ The paper is mathematically ready only when:
 - the direct factor action, component hull support, boundary formula, transfer matrix, explicit orbit polynomial, joint enumerator, moments, and LCD count all agree;
 - the pilot and additional small cases pass exact brute-force checks;
 - every optional claim is either proved with hypotheses or clearly marked as future work.
+
+Current status must be reported conservatively: the general formulas are mathematical proof targets/results to be written rigorously; the scripts provide exhaustive computational validation for the listed finite instances; the final literature audit remains submission-dependent; Burnside/equivalence enumeration and quantum constructions remain optional unless their hypotheses are fully established.
