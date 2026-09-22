@@ -168,6 +168,18 @@ It returns `PASS`, with the distribution
 
 The complete verification is recorded in Section 10.
 
+The existing `F_4` setup and its numerical conclusions are retained. The only change to its exposition is the correction that the code-dimension transfer matrix is the unselected-factor matrix in Section 7.
+
+### Correction H2 — independent long-orbit and extension-field validations were added
+
+The new script `code/validate_long_orbit_examples.py` verifies:
+
+- a genuine `k=1` example over `F_8` with a `tau`-orbit of length `6`;
+- an `F_{16}=F_{4^2}` component with `m_s=2` and a `tau`-orbit of length `4`;
+- direct hull dimensions, orbit-boundary histograms, and transfer-matrix enumerators.
+
+All three computations agree in both examples.
+
 ### Correction I — complexity wording was weakened
 
 The transfer-matrix method avoids enumerating all factor selections, but no unsupported “polynomial-time” claim is made. The actual arithmetic cost depends on factorization, orbit lengths, truncation degrees, coefficient representation, and polynomial multiplication. A cautious estimate is given in Section 13.
@@ -1228,6 +1240,227 @@ Thus the following four objects agree in the pilot:
 
 The quantum application is not needed for this validation.
 
+### 10.6 Additional verified examples: long `tau`-orbit and `m_s>1`
+
+The existing `F_4` pilot above is retained. The following two examples are additional validations; they do not replace or alter the original pilot.
+
+#### Example A — a genuine non-involutory `k`-Galois orbit with `m_s=1`
+
+Take
+
+\[
+q=8=2^3,
+\qquad K=\mathbb F_8,
+\qquad n=7,
+\qquad \lambda=1,
+\qquad k=1.
+\]
+
+Here `m_s=1` and
+
+\[
+\rho=p^{e m_s-k}=2^{3-1}=4.
+\]
+
+Since `F_8^*` has order `7`, `x^7-1` splits into seven distinct linear factors. If `alpha` is a primitive seventh root and
+
+\[
+f_j(x)=x-\alpha^j,
+\qquad 0\le j\le6,
+\]
+
+then
+
+\[
+\tau(f_j)=f_{-4j}=f_{3j}\quad\text{(indices modulo 7)}.
+\]
+
+The factor permutation is
+
+\[
+[0,3,6,2,5,1,4],
+\]
+
+with orbits
+
+\[
+\{0\},
+\qquad
+\{1,3,2,6,4,5\}.
+\]
+
+Thus there is a genuine orbit of length `6`, even though `m_s=1`. This is not an Euclidean or ordinary Hermitian pair case: `q=8` has odd extension exponent `e=3` and `k=1`.
+
+Every factor has degree `1`, so every orbit weight is `1`. The theoretical hull enumerator is
+
+\[
+H_A(z)
+=P_{1,1}(z)P_{6,1}(z)
+=2\bigl(2+30z+30z^2+2z^3\bigr)
+=4+60z+60z^2+4z^3.
+\tag{10.5}
+\]
+
+The transfer-matrix joint enumerator is
+
+\[
+\mathscr E_A(u,z)
+=(u+1)
+\operatorname{tr}\left(
+\begin{pmatrix}u&1\\uz&1\end{pmatrix}^{6}
+\right).
+\tag{10.6}
+\]
+
+The direct generator-matrix computation agrees exactly with both (10.5) and (10.6):
+
+\[
+\#\{C:\dim\operatorname{Hull}_1(C)=h\}
+=\begin{cases}
+4,&h=0,\\
+60,&h=1,\\
+60,&h=2,\\
+4,&h=3,\\
+0,&\text{otherwise.}
+\end{cases}
+\]
+
+There are `2^7=128` codes. The direct joint histogram is stored in the validator output. The mean and variance predicted by the orbit calculation are
+
+\[
+\mathbb E[h]=\frac{6}{4}=\frac32,
+\qquad
+\operatorname{Var}(h)=\frac{6}{16}=\frac38.
+\]
+
+#### Example B — an extension-field component with `m_s=2`
+
+Let `omega` satisfy `omega^2+omega+1=0` over `F_4`, and take
+
+\[
+A=\mathbb F_4[u]/\langle u^2+u+\omega\rangle.
+\]
+
+The polynomial `u^2+u+omega` is irreducible over `F_4` because the absolute trace of `omega` from `F_4` to `F_2` is `1`. Therefore
+
+\[
+A\cong K=\mathbb F_{16}=\mathbb F_{4^2},
+\qquad m_s=2.
+\]
+
+Choose
+
+\[
+q=4=2^2,
+\qquad n=5,
+\qquad \lambda=1,
+\qquad k=1.
+\]
+
+Now
+
+\[
+\rho=p^{e m_s-k}=2^{2\cdot2-1}=8.
+\]
+
+Since `5` divides `15=|F_16^*|`, `x^5-1` splits into five linear factors over `F_16`. If `alpha` is an element of order `5`, then
+
+\[
+\tau(f_j)=f_{-8j}=f_{2j}\quad\text{(indices modulo 5)}.
+\]
+
+The factor permutation is
+
+\[
+[0,2,4,1,3],
+\]
+
+with orbit lengths `1` and `4`. Every factor has `K`-degree `1`, but its `F_4`-dimension weight is
+
+\[
+w=m_s\deg_K(f)=2.
+\]
+
+Therefore
+
+\[
+H_B(z)
+=P_{1,2}(z)P_{4,2}(z)
+=2\bigl(2+12z^2+2z^4\bigr)
+=4+24z^2+4z^4.
+\tag{10.7}
+\]
+
+The transfer-matrix joint enumerator is
+
+\[
+\mathscr E_B(u,z)
+=(u^2+1)
+\operatorname{tr}\left(
+\begin{pmatrix}u^2&1\\u^2z^2&1\end{pmatrix}^{4}
+\right).
+\tag{10.8}
+\]
+
+The direct computation over `F_16`, with dimensions converted to `F_4`-dimensions by multiplying by `m_s=2`, agrees exactly with the orbit formula and transfer matrix:
+
+\[
+\#\{C:\dim_{\mathbb F_4}\operatorname{Hull}_1(C)=h\}
+=\begin{cases}
+4,&h=0,\\
+24,&h=2,\\
+4,&h=4,\\
+0,&\text{otherwise.}
+\end{cases}
+\]
+
+There are `2^5=32` codes. The predicted moments are
+
+\[
+\mathbb E[h]=\frac{4\cdot2}{4}=2,
+\qquad
+\operatorname{Var}(h)=\frac{4\cdot2^2}{16}=1.
+\]
+
+#### Reproducible computation
+
+Both additional examples are verified by:
+
+```text
+code/validate_long_orbit_examples.py
+```
+
+Run:
+
+```bash
+python code/validate_long_orbit_examples.py
+```
+
+The script compares, for each example:
+
+1. direct factorization and explicit `tau` permutation;
+2. direct generator-matrix Galois hull dimensions for every factor selection;
+3. the orbit-boundary joint histogram;
+4. the `2 x 2` transfer-matrix joint enumerator.
+
+The exact output is:
+
+```text
+Example A (m_s=1, orbit length 6):
+  orbit lengths: [1, 6]
+  orbit-boundary == transfer: True
+  direct == theory: True
+  hull histogram: {0: 4, 1: 60, 2: 60, 3: 4}
+  PASS
+Example B (m_s=2, orbit length 4):
+  orbit lengths: [1, 4]
+  orbit-boundary == transfer: True
+  direct == theory: True
+  hull histogram: {0: 4, 2: 24, 4: 4}
+  PASS
+ALL LONG-ORBIT AND m_s>1 VALIDATIONS PASS
+```
+
 ---
 
 ## 11. Brute-force validation protocol for the paper
@@ -1257,11 +1490,12 @@ for each generator row `c` of the code. The calculation must be over the correct
 
 Minimum test family:
 
-- one split component `K_s=F_q`;
+- the existing verified `F_4` pilot (unchanged);
+- Example A with `q=8`, `m_s=1`, and an orbit of length `6`;
+- Example B with `q=4`, `m_s=2`, and an orbit of length `4`;
 - a product of split components;
 - unequal extension degrees `m_s`;
 - a fixed factor plus a 2-cycle;
-- an orbit of length at least `3` in a general `k` case;
 - a compatible nontrivial `lambda_s`;
 - Euclidean and order-two Hermitian-type special cases.
 
@@ -1708,9 +1942,9 @@ If an optional section is incomplete at Week 8, omit it rather than weakening th
 
 ## 21. Immediate next actions
 
-1. Keep `code/validate_pilot.py` under version control and attach its output to the research notes.
+1. Keep `code/validate_pilot.py` and `code/validate_long_orbit_examples.py` under version control and attach both outputs to the research notes.
 2. Implement the general `K_s` version with `rho_s=p^{e m_s-k}` before testing any extension-field example.
-3. Add a test with an orbit of length greater than two; do not infer long-cycle behavior from the `F_4`, Hermitian, 2-cycle pilot.
+3. Retain Example A as the genuine long-orbit test; do not infer long-cycle behavior from the `F_4`, Hermitian, 2-cycle pilot.
 4. Prove Lemma 5.1 and Theorem 5.3 in full before writing the transfer-matrix section.
 5. Derive the `a=1,...,5` orbit polynomials in the paper or an appendix.
 6. Keep Burnside and quantum applications explicitly optional until their hypotheses are checked.
