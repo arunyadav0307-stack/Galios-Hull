@@ -1,96 +1,323 @@
-# New-paper blueprint: Galois-hull enumeration over square-free affine algebras
+# Exact Enumeration of `k`-Galois Hull Dimensions of Constacyclic Codes over Square-Free Affine Algebras
 
-> **Language:** Hinglish + mathematical notation  
-> **Base paper studied:** `Galois hulls of constacyclic codes over affine algebra rings` (the PDF supplied in this repository).  
-> **Important:** This is a research blueprint, not a ready-to-submit manuscript. The novelty claim must be re-checked immediately before submission.
-
----
-
-## 1. Sabse pehle: base paper kya karta hai, aur naya paper kis jagah se alag hoga?
-
-### Base paper ka central contribution
-
-The supplied paper essentially does the following:
-
-1. Square-free affine algebra ring ko primitive idempotents/simple components me decompose karta hai.
-2. Ring ke upar `lambda`-constacyclic codes ke `k`-Galois dual aur hull ke generators deta hai.
-3. Factorization ke through ek formula deta hai jisse kisi **given code** ke hull dimension ko calculate kiya ja sakta hai.
-4. Galois LCD conditions aur EAQECC examples deta hai.
-5. Future direction ke roop me fixed hull dimension ke liye **non-isometric codes ki enumeration** ko open problem batata hai.
-
-### Proposed paper ka genuinely naya question
-
-> **Given `q, n, lambda, k` and a square-free affine algebra `A`, sirf possible hull dimensions nahi, balki har hull dimension par kitne codes hain, code-dimension aur hull-dimension ka joint distribution kya hai, average/variance kya hai, aur monomial-isometry ke modulo kitne inequivalent codes bachte hain?**
-
-Iska matlab: base paper ka output mostly `dim(Hull(C))` hai; proposed paper ka output ek **enumerator / distribution / counting theorem** hoga.
-
-### Recommended provisional title
-
-**A Cycle-Index Method for Enumerating `k`-Galois Hulls of Separable Constacyclic Codes over Affine Algebras**
-
-Alternative titles:
-
-- **Joint Code–Hull Enumerators for Constacyclic Codes over Square-Free Affine Algebras**
-- **Exact Distribution of Galois Hull Dimensions in Semisimple Affine-Algebra Codes**
-- **Inequivalent Constacyclic Codes with Prescribed Galois Hull Dimension** — only if the Burnside/isometry phase is completed.
-
-### One-line novelty statement
-
-> We replace a code-by-code hull-dimension formula by a factor-orbit/cycle-index framework that gives the exact multiplicity of every `k`-Galois hull dimension, a bivariate code–hull enumerator, statistical moments, and—under a clearly defined isometry group—counts of inequivalent codes.
+> **Status:** Revised mathematical blueprint after an explicit audit of the factor action, hull support, transfer matrix, orbit polynomial, moments, pilot example, complexity statement, Burnside section, and quantum-code claims.
+>
+> **Base paper:** `Galois hulls of constacyclic codes over affine algebra rings` (the supplied PDF).
+>
+> **Positioning:** The main object is an exact **enumerator**. The phrase “cycle-index method” has been removed from the title because factor cycles alone do not constitute a Pólya cycle-index construction.
 
 ---
 
-## 2. Novelty audit: kya claim nahi karna hai?
+## 0. Audit findings — what was corrected and why
 
-Submission se pehle literature ko dobara search karna compulsory hai. Quick audit se pata chalta hai ki:
+The previous framework had the right research direction, but several statements needed to be made conditional or proved more carefully.
 
-- Galois hulls over affine algebra rings wala base work ab published version ke roop me bhi appear hota hai; preprint link: [arXiv:2412.08512](https://arxiv.org/html/2412.08512).
-- `Average dimensions of Galois hulls of constacyclic codes` naam se finite fields aur `R_{m,q}` type ring par related average-dimension work available hai: [AIMS article](https://www.aimsciences.org//article/doi/10.3934/amc.2025010).
-- Small Galois hull dimensions aur EAQECCs par bhi recent work available hai: [Study of small Galois hull dimensions](https://www.aimsciences.org/article/doi/10.3934/amc.2025054).
-- New non-chain rings + Galois hulls + quantum constructions par 2026 work bhi milta hai: [Entropy/MDPI article](https://www.mdpi.com/1099-4300/28/4/407).
+### Correction A — title and positioning
 
-### Isliye novelty ko in cheezon par base mat karo
+The earlier title used “Cycle-Index Method.” The revised title is:
 
-- “Humne ek aur ring par same hull formula nikala.”
-- “Humne average hull dimension nikali.”
-- “Humne kuch EAQECC tables banayi.”
-- “Humne Galois dual/hull ka generator dobara likha.”
+> **Exact Enumeration of `k`-Galois Hull Dimensions of Constacyclic Codes over Square-Free Affine Algebras**
 
-Ye sab akela weak ya already-covered lag sakta hai.
+A shorter alternative, if the bivariate result is emphasized, is:
 
-### Strong novelty package
+> **Joint Enumeration of Code and `k`-Galois Hull Dimensions for Constacyclic Codes over Square-Free Affine Algebras**
 
-Paper me kam se kam ye teen independent outputs hone chahiye:
+The actual framework uses factor orbits, transfer matrices, and generating functions. A genuine Burnside/Pólya cycle-index construction is only optional and is not assumed in the main theorem.
 
-1. **Exact multiplicity theorem:** `N_h = number of codes with q-dimension of hull equal to h`.
-2. **Bivariate enumerator:** code dimension aur hull dimension dono ko ek saath count karna.
-3. **Inequivalent-code count:** clearly defined monomial/isometry group ke modulo Burnside/cycle-index count; agar ye phase complete na ho to paper ka title “enumeration/distribution” rakhein, “inequivalent” nahi.
+### Correction B — extension-field components need their own inverse Frobenius
+
+If
+
+\[
+A\cong\prod_{s=1}^{N}K_s,
+\qquad K_s=\mathbb F_{q^{m_s}},
+\]
+
+then the map `a -> a^(p^k)` on `K_s` has inverse
+
+\[
+a\longmapsto a^{p^{e m_s-k}},
+\]
+
+not always `a -> a^(p^{e-k})`. The latter is the correct exponent in the split case `m_s=1`.
+
+Therefore the rigorous general framework below uses
+
+\[
+\rho_s=p^{e m_s-k}
+\]
+
+as the inverse-Frobenius exponent on `K_s`. In the pilot example every component is `F_4`, so `m_s=1` and `rho_s=2^{2-1}=2` exactly.
+
+This correction is mathematically necessary because the supplied paper sometimes writes the simple components as if their coefficients were in `F_q`, even though a general square-free quotient can contain extension-field components.
+
+### Correction C — the factor permutation is now explicit
+
+For a monic factor
+
+\[
+f(x)=\sum_{i=0}^{d}f_i x^i,
+\qquad f_0\ne0,
+\]
+
+define the normalized `k`-Galois reciprocal over `K_s` by
+
+\[
+f^{\#_{s,k}}(x)
+=f_0^{-\rho_s}\sum_{i=0}^{d}f_i^{\rho_s}x^{d-i}.
+\tag{0.1}
+\]
+
+Then
+
+\[
+\tau_{s,k}(f):=f^{\#_{s,k}}
+\]
+
+is the precise factor map used in the paper. Its root action is
+
+\[
+\alpha\longmapsto \alpha^{-\rho_s}
+=\alpha^{-p^{e m_s-k}}.
+\]
+
+The compatibility condition for the same constacyclic polynomial is
+
+\[
+\lambda_s^{1+\rho_s}=1.
+\tag{0.2}
+\]
+
+Under (0.2), `tau` maps the factor set to itself. It is a permutation, but it is **not assumed to be an involution**. General orbit lengths are allowed.
+
+### Correction D — the support set is fixed by derivation
+
+With the convention `tau(f)=f^{#}`, the component hull support is
+
+\[
+(\mathcal F_s\setminus J_s)\cap\tau_{s,k}(J_s),
+\tag{0.3}
+\]
+
+not an arbitrarily chosen inverse-image variant. The reason is derived in Section 4 below from the lcm of the generator and the dual generator.
+
+### Correction E — boundary orientation is fixed
+
+Let `tau(f_i)=f_{i+1}`. A factor `f_{i+1}` contributes to the hull exactly when
+
+\[
+\varepsilon_i=1,
+\qquad \varepsilon_{i+1}=0.
+\]
+
+Thus the convention used throughout the revised blueprint is
+
+\[
+b_O(\varepsilon)
+=\sum_{i=0}^{a-1}\varepsilon_i(1-\varepsilon_{i+1}),
+\qquad \varepsilon_a=\varepsilon_0.
+\tag{0.4}
+\]
+
+This counts `1 -> 0` transitions. The number of `0 -> 1` transitions is equal on a cyclic binary word, but the paper will not switch orientation silently.
+
+### Correction F — the explicit orbit polynomial was checked
+
+The formula
+
+\[
+P_{a,w}(z)=2+
+\sum_{b=1}^{\lfloor a/2\rfloor}
+\frac{a}{b}\binom{a-1}{2b-1}z^{bw}
+\tag{0.5}
+\]
+
+is correct for the cyclic `1 -> 0` boundary statistic. Direct checks give:
+
+\[
+\begin{aligned}
+P_{1,w}(z)&=2,\\
+P_{2,w}(z)&=2+2z^w,\\
+P_{3,w}(z)&=2+6z^w,\\
+P_{4,w}(z)&=2+12z^w+2z^{2w},\\
+P_{5,w}(z)&=2+20z^w+10z^{2w}.
+\end{aligned}
+\]
+
+These agree with direct enumeration of all `2^a` binary words. The derivation is given in Section 6.
+
+### Correction G — moments are derived, including the `a=2` exception
+
+For an orbit of length `a=1`, the boundary indicator is identically zero. For `a=2`, the two cyclic transition indicators are mutually exclusive, so the variance is `1/4`, not `a/16=1/8`. For `a>=3`, the variance is `a/16`. The corrected formulas are in Section 8.
+
+### Correction H — the pilot example was actually verified
+
+The script `code/validate_pilot.py` performs an independent dependency-free computation over `F_4` and checks:
+
+1. factorization of `x^5-1`;
+2. the Hermitian factor action;
+3. all component factor selections;
+4. direct hull dimensions;
+5. the four-component ring histogram.
+
+It returns `PASS`, with the distribution
+
+\[
+256+1024z^2+1536z^4+1024z^6+256z^8.
+\]
+
+The complete verification is recorded in Section 10.
+
+### Correction I — complexity wording was weakened
+
+The transfer-matrix method avoids enumerating all factor selections, but no unsupported “polynomial-time” claim is made. The actual arithmetic cost depends on factorization, orbit lengths, truncation degrees, coefficient representation, and polynomial multiplication. A cautious estimate is given in Section 13.
+
+### Correction J — Burnside and quantum sections are secondary
+
+Burnside’s lemma is retained only conditionally, with a precise group-action requirement. The quantum section is an application plan only; no quantum parameter is inferred from hull dimension alone.
+
+### Correction K — the original transfer matrix tracked codimension, not code dimension
+
+The matrix
+
+\[
+\begin{pmatrix}1&u^w\\z^w&u^w\end{pmatrix}
+\]
+
+assigns `u^w` whenever a factor is selected. Therefore its `u`-exponent is the selected-factor degree, namely the **codimension** of the component code, not the code dimension stated in the original definition of `E(u,z)`.
+
+The corrected code-dimension matrix assigns `u^w` to an unselected factor:
+
+\[
+\widetilde T_w(u,z)=
+\begin{pmatrix}
+ u^w&1\\
+ u^w z^w&1
+\end{pmatrix}.
+\tag{0.6}
+\]
+
+The old matrix remains useful as a codimension enumerator, but it must not be used while claiming that `u` tracks `dim(C)`. The revised theorem uses `\widetilde T_w`. In the `F_4` pilot the final polynomial happens to be unchanged because the factor-degree polynomial is palindromic; the matrix interpretation is nevertheless different and must be stated correctly.
 
 ---
 
-## 3. Scope ko manageable rakhne ke liye final mathematical setting
+## 1. Research question and novelty
 
-Main paper ke liye pehle **separable/simple-root regime** lo. Repeated-root case ko stretch goal rakho.
+### What the supplied paper establishes
+
+The supplied paper studies `k`-Galois duals and hulls of `lambda`-constacyclic codes over an affine algebra. Its main path is:
+
+1. decompose the algebra using primitive idempotents;
+2. reduce to component constacyclic codes;
+3. describe dual and hull generators;
+4. obtain a formula for the hull dimension of a selected code;
+5. give LCD conditions and quantum-code examples.
+
+### New research question
+
+> For a fixed square-free affine algebra `A`, length `n`, unit `lambda`, and Galois parameter `k`, how many constacyclic codes have each possible `k`-Galois hull dimension? Can code dimension and hull dimension be enumerated jointly? Can the exact mean, variance, and LCD count be obtained from the factor action?
+
+The proposed paper is therefore an enumerative follow-up, not a paraphrase of the original hull-generator paper.
+
+### Main contribution package
+
+The paper should claim the following only after proofs and computations are complete:
+
+1. a precise factor permutation induced by the `k`-Galois reciprocal;
+2. a component hull-support characterization;
+3. a weighted cyclic-boundary formula for hull dimension;
+4. a bivariate transfer-matrix enumerator for code and hull dimensions;
+5. exact multiplicities for every hull dimension;
+6. LCD count, mean, and variance as corollaries;
+7. reproducible exhaustive validation for small examples.
+
+The inequivalent-code/Burnside problem is a high-value optional extension, not a premise of the title.
+
+---
+
+## 2. Current-literature positioning
+
+A final novelty audit must be repeated immediately before submission. The relevant starting points are:
+
+- the supplied affine-algebra paper: [arXiv:2412.08512](https://arxiv.org/html/2412.08512);
+- related average-dimension work: [AIMS article](https://www.aimsciences.org//article/doi/10.3934/amc.2025010);
+- recent small-hull work: [Study of small Galois hull dimensions](https://www.aimsciences.org/article/doi/10.3934/amc.2025054);
+- recent non-chain-ring quantum work: [MDPI article](https://www.mdpi.com/1099-4300/28/4/407).
+
+Do not position the new paper merely as:
+
+- another ring-specific hull formula;
+- an average-dimension calculation only;
+- a table of EAQECCs;
+- a repeated statement of the dual-generator formula.
+
+The distinct target is **exact multiplicity and joint enumeration** in the square-free affine-algebra setting.
+
+---
+
+## 3. Rigorous mathematical setting
+
+### 3.1 Affine algebra
 
 Let
 
 \[
-q=p^e,\qquad 0\le k<e,
+q=p^e,
+\qquad 0\le k<e,
 \]
 
 and
 
 \[
 A=\mathbb F_q[X_1,\ldots,X_\ell]
-  /\langle t_1(X_1),\ldots,t_\ell(X_\ell)\rangle,
+ /\langle t_1(X_1),\ldots,t_\ell(X_\ell)\rangle,
 \]
 
-where each `t_i` monic and square-free hai. Then finite commutative semisimple algebra ke roop me
+where each `t_i` is monic and square-free over `F_q`.
+
+Because the quotient is finite, commutative, and reduced, it decomposes as
 
 \[
-A\cong \prod_{s=1}^{N} K_s,
-\qquad K_s\cong \mathbb F_{q^{m_s}}.
+A\cong \prod_{s=1}^{N}K_s,
+\qquad K_s\cong\mathbb F_{q^{m_s}}.
+\tag{3.1}
 \]
+
+Let `e_s` denote the primitive orthogonal idempotent corresponding to `K_s`.
+
+### 3.2 The Galois inner product on each component
+
+On `K_s^n`, use
+
+\[
+\langle x,y\rangle_{s,k}
+=\sum_{i=0}^{n-1}x_i y_i^{p^k}.
+\tag{3.2}
+\]
+
+The map
+
+\[
+\sigma_{s,k}:K_s\to K_s,
+\qquad a\mapsto a^{p^k}
+\]
+
+is an automorphism whose inverse is
+
+\[
+\sigma_{s,k}^{-1}(a)=a^{p^{e m_s-k}}.
+\tag{3.3}
+\]
+
+Write
+
+\[
+\rho_s=p^{e m_s-k}.
+\]
+
+When `m_s=1`, this becomes the familiar exponent `p^{e-k}` used over `F_q`.
+
+### 3.3 Constacyclic polynomial
 
 Let
 
@@ -99,285 +326,1123 @@ Let
 \qquad \lambda_s\in K_s^\times.
 \]
 
-Main theorem ke liye assume:
+For the main theorem assume
 
 \[
 \gcd(n,p)=1
+\tag{3.4}
 \]
 
-and the twist is compatible with the `k`-Galois dual:
+and the same-twist compatibility condition
 
 \[
-\lambda_s^{\,1+p^{e-k}}=1
-\quad\text{for every }s.
+\lambda_s^{1+\rho_s}=1
+\qquad (1\le s\le N).
+\tag{3.5}
 \]
 
-This compatibility ensure karegi ki dual/hull ko same constacyclic ambient algebra me factor-orbit language me handle kiya ja sake. Agar ye condition fail ho, to dual `lambda'`-constacyclic hota hai; us case ko separate extension paper/section banaya ja sakta hai.
-
-For every component define
+Define
 
 \[
-R_s=K_s[x]/\langle x^n-\lambda_s\rangle.
+M_s(x)=x^n-\lambda_s.
 \]
 
-Because `gcd(n,p)=1`, `x^n-lambda_s` square-free hai. Let
+Since `p` does not divide `n` and `lambda_s` is nonzero,
 
 \[
-x^n-\lambda_s=\prod_{f\in\mathcal F_s}f(x)
+\gcd(M_s,M_s')=1,
 \]
 
-be its factorization into distinct monic irreducibles over `K_s`.
+so `M_s` is square-free.
 
-### Notation warning
+Factor it over `K_s` as
 
-`A` ke simple components generally `F_q` nahi, balki extension fields `K_s` hote hain. Isliye har component ke dimension ko `m_s=[K_s:F_q]` se multiply karna hoga. Source paper ki notation ko blindly copy na karein; proposed paper me `K_s` aur `m_s` explicitly define karna hai.
+\[
+M_s(x)=\prod_{f\in\mathcal F_s}f(x),
+\tag{3.6}
+\]
 
----
+where `F_s` is the set of distinct monic irreducible factors.
 
-## 4. Core idea: factor selection ko binary cycle problem me badalna
+### 3.4 Component codes
 
-For each irreducible factor `f`, a component constacyclic code is determined by choosing whether `f` generator polynomial me aayega ya nahi.
+The polynomial CRT gives
 
-For `J_s\subseteq\mathcal F_s`, define
+\[
+A[x]/\langle x^n-\lambda\rangle
+\cong
+\prod_{s=1}^{N}K_s[x]/\langle M_s(x)\rangle.
+\tag{3.7}
+\]
+
+A `lambda`-constacyclic `A`-code is therefore a tuple of ideals `C_s` in the component quotients.
+
+For `J_s subseteq F_s`, define
 
 \[
 g_{J_s}(x)=\prod_{f\in J_s}f(x),
 \qquad
 C_s(J_s)=\langle g_{J_s}(x)\rangle.
+\tag{3.8}
 \]
 
-Every ring code is a tuple
-
-\[
-C=(C_1(J_1),\ldots,C_N(J_N)).
-\]
-
-Thus code enumeration is a subset-enumeration problem.
-
-### Galois factor permutation
-
-The `k`-Galois reciprocal/Frobenius operation induces a permutation
-
-\[
-\tau_{s,k}:\mathcal F_s\longrightarrow\mathcal F_s.
-\]
-
-Paper me isko informal “reciprocal” kehne ke bajay precisely define karein: `tau_{s,k}(f)` woh irreducible factor hai jo coefficient-Frobenius plus reciprocal operation `f -> f_k^#` ke support ke roop me milta hai.
-
-Let `O` be a cycle/orbit of `tau_{s,k}`:
-
-\[
-O=(f_0,f_1,\ldots,f_{a_O-1}),
-\qquad \tau_{s,k}(f_i)=f_{i+1\pmod {a_O}}.
-\]
-
-All factors in one orbit have the same degree; write
-
-\[
-d_O=\deg_{K_s}(f_i),
-\qquad w_O=m_s d_O.
-\]
-
-The weight `w_O` is the contribution in **F_q-dimension**.
-
-For a chosen subset `J_s`, encode the orbit by a binary word
-
-\[
-\varepsilon_i=
-\begin{cases}
-1,& f_i\in J_s,\\
-0,& f_i\notin J_s.
-\end{cases}
-\]
-
-Define the number of directed `1 -> 0` boundaries
-
-\[
-b_O(J_s)=\#\{i\pmod {a_O}:\varepsilon_i=1,
-\varepsilon_{i+1}=0\}.
-\]
-
-Orientation reverse hone par bhi count same rahega, isliye exact convention paper me ek baar fix karke use karein.
-
----
-
-## 5. Proposed theorem package
-
-Ye paper ka actual mathematical backbone hoga. Theorem numbers final draft me naye honge; source ke theorem numbers reuse nahi karne.
-
-### Theorem 1 — CRT and code-factor classification
-
-Prove:
-
-\[
-A[x]/\langle x^n-\lambda\rangle
-\cong
-\prod_{s=1}^{N}K_s[x]/\langle x^n-\lambda_s\rangle.
-\]
-
-Since every component polynomial square-free hai, every component ideal uniquely ek subset `J_s` se determined hai. Consequently,
+Every component ideal has exactly one such factor-selection set. Therefore
 
 \[
 |\mathscr C(A,n,\lambda)|
 =2^{\sum_s|\mathcal F_s|}.
+\tag{3.9}
 \]
 
-**Proof tasks:** CRT, componentwise ideals, unique generator selection.
+The component dimensions are
 
-### Theorem 2 — Hull dimension as a boundary statistic
+\[
+\dim_{K_s}C_s(J_s)
+=n-\sum_{f\in J_s}\deg_{K_s}f,
+\tag{3.10}
+\]
 
-For the code corresponding to `(J_1,...,J_N)`, prove
+and
+
+\[
+\dim_{\mathbb F_q}C
+=\sum_s m_s\dim_{K_s}C_s.
+\tag{3.11}
+\]
+
+---
+
+## 4. Definition and proof of the factor permutation
+
+### 4.1 Normalized `k`-Galois reciprocal
+
+For a monic polynomial
+
+\[
+f(x)=\sum_{i=0}^{d}f_i x^i\in K_s[x],
+\qquad f_0\ne0,
+\]
+
+define
+
+\[
+f^{\#_{s,k}}(x)
+=f_0^{-\rho_s}\sum_{i=0}^{d}f_i^{\rho_s}x^{d-i},
+\qquad \rho_s=p^{e m_s-k}.
+\tag{4.1}
+\]
+
+This polynomial is monic. On monic polynomials with nonzero constant term, the operation is multiplicative:
+
+\[
+(fg)^{\#_{s,k}}
+=f^{\#_{s,k}}g^{\#_{s,k}}.
+\tag{4.2}
+\]
+
+The operation preserves irreducibility because it is the composition of a field automorphism on coefficients with reciprocal reversal. It also preserves degree, so every `tau`-orbit consists of factors of one common degree.
+
+### 4.2 Definition of `tau`
+
+Define
+
+\[
+\boxed{
+\tau_{s,k}:\mathcal F_s\to\mathcal F_s,
+\qquad
+\tau_{s,k}(f)=f^{\#_{s,k}}.
+}
+\tag{4.3}
+\]
+
+We now prove that the codomain really is `F_s`.
+
+Let `alpha` be a root of `f`. The roots of `f^{#_{s,k}}` are
+
+\[
+\alpha^{-\rho_s}=\alpha^{-p^{e m_s-k}}.
+\]
+
+Since `alpha^n=lambda_s`,
+
+\[
+(\alpha^{-\rho_s})^n
+=\lambda_s^{-\rho_s}
+=\lambda_s
+\]
+
+by (3.5). Thus every root of `f^{#_{s,k}}` is a root of `M_s`; hence
+
+\[
+\tau_{s,k}(\mathcal F_s)\subseteq\mathcal F_s.
+\]
+
+The operation is invertible, so the inclusion is equality:
+
+\[
+\boxed{\tau_{s,k}(\mathcal F_s)=\mathcal F_s.}
+\tag{4.4}
+\]
+
+Thus `tau_{s,k}` is a permutation of the finite factor set.
+
+### 4.3 `tau` need not be an involution
+
+Do not assume `tau^2=id` in the general `k`-Galois case. On roots, repeated application uses
+
+\[
+\alpha\longmapsto \alpha^{-p^{e m_s-k}}
+\longmapsto \alpha^{p^{2(e m_s-k)}}
+\longmapsto\cdots,
+\]
+
+up to the factor identification by the `K_s`-Frobenius action. The resulting permutation can have orbit lengths larger than two.
+
+Special cases:
+
+- `k=0`: the inverse-Frobenius operation is the identity on `K_s`, so this becomes the ordinary reciprocal map and is an involution.
+- If the chosen Galois automorphism has order two on `K_s`, the corresponding Hermitian-type operation is also an involution.
+- These are special cases only; the main theorem allows arbitrary finite orbit lengths.
+
+Let
+
+\[
+O=(f_0,f_1,\ldots,f_{a_O-1})
+\]
+
+be a `tau_{s,k}`-orbit, indexed so that
+
+\[
+\tau_{s,k}(f_i)=f_{i+1\pmod {a_O}}.
+\tag{4.5}
+\]
+
+All factors in one orbit have the same degree. Set
+
+\[
+d_O=\deg_{K_s}f_i,
+\qquad
+w_O=m_s d_O.
+\tag{4.6}
+\]
+
+The weight `w_O` is the contribution measured over `F_q`.
+
+---
+
+## 5. Component dual and hull support — rigorous derivation
+
+Fix one component `s` and omit the subscript `s` temporarily.
+
+Let
+
+\[
+M(x)=\prod_{f\in\mathcal F}f(x),
+\qquad
+g_J(x)=\prod_{f\in J}f(x),
+\qquad
+h_J(x)=\frac{M(x)}{g_J(x)}
+=\prod_{f\in\mathcal F\setminus J}f(x).
+\]
+
+Because `M` is square-free, `g_J` and `h_J` are coprime and all factor selections are unambiguous.
+
+### Lemma 5.1 — dual factor support
+
+Under the component inner product (3.2), the `k`-Galois dual of `C(J)=<g_J>` is generated by
+
+\[
+ h_J^{\#_{s,k}}.
+\tag{5.1}
+\]
+
+By multiplicativity of `#`, its factor support is
+
+\[
+\operatorname{Supp}(h_J^{\#_{s,k}})
+=\tau_{s,k}(\mathcal F\setminus J).
+\tag{5.2}
+\]
+
+This is the component-field version of the standard constacyclic dual-generator calculation; it uses the inverse of the semilinear map `a -> a^(p^k)`, namely the exponent `rho_s` from (3.3).
+
+### Lemma 5.2 — intersection/lcm support
+
+In `K_s[x]/<M>`, the intersection of the ideals generated by `g_J` and `h_J^{#}` is generated by their least common multiple:
+
+\[
+\operatorname{Hull}_k(C(J))
+=\langle\operatorname{lcm}(g_J,h_J^{\#_{s,k}})\rangle.
+\tag{5.3}
+\]
+
+The factor support of this lcm is
+
+\[
+J\cup\tau_{s,k}(\mathcal F\setminus J).
+\]
+
+Therefore the factors omitted from the lcm are
+
+\[
+\begin{aligned}
+\mathcal F\setminus
+\bigl(J\cup\tau_{s,k}(\mathcal F\setminus J)\bigr)
+&=(\mathcal F\setminus J)
+\cap\bigl(\mathcal F\setminus\tau_{s,k}(\mathcal F\setminus J)\bigr)\\
+&=(\mathcal F\setminus J)\cap\tau_{s,k}(J).
+\end{aligned}
+\tag{5.4}
+\]
+
+The second equality uses that `tau` is a bijection of `F`.
+
+### Theorem 5.3 — component hull dimension
+
+For `J_s subseteq F_s`,
+
+\[
+\boxed{
+\dim_{K_s}\operatorname{Hull}_k(C_s(J_s))
+=
+\sum_{f\in
+(\mathcal F_s\setminus J_s)\cap\tau_{s,k}(J_s)}
+\deg_{K_s}f.
+}
+\tag{5.5}
+\]
+
+The ring-code version is obtained by multiplying the `s`-component dimension by `m_s` and summing:
 
 \[
 \dim_{\mathbb F_q}\operatorname{Hull}_k(C)
 =
-\sum_{s=1}^{N}\sum_{O\in\mathcal O_s}
-  w_O\, b_O(J_s).
-\tag{H}
+\sum_s m_s\dim_{K_s}\operatorname{Hull}_k(C_s).
+\tag{5.6}
 \]
 
-The algebraic step is:
+This derivation fixes the `tau` versus `tau^{-1}` ambiguity. With the definition `tau(f)=f^{#}`, the correct support is (5.5). If a paper defines its factor permutation as the inverse map instead, the inverse appears in the notation; the mathematics is the same only after that redefinition.
+
+---
+
+## 6. Orbit boundary statistic
+
+Fix an orbit
 
 \[
-\operatorname{Hull}_k(C_s)
-=\langle \operatorname{lcm}(g_{J_s},h_{J_s,k}^{\#})\rangle,
+O=(f_0,\ldots,f_{a-1}),
+\qquad \tau(f_i)=f_{i+1}.
 \]
 
-and the factors **not** appearing in this lcm are exactly
+For a selected factor set `J`, define
 
 \[
-(\mathcal F_s\setminus J_s)\cap \tau_{s,k}(J_s).
+\varepsilon_i=
+\begin{cases}
+1,&f_i\in J,\\
+0,&f_i\notin J.
+\end{cases}
 \]
 
-On one `tau`-cycle, this set is exactly the set of `1 -> 0` boundaries. This turns the hull calculation into a cyclic binary-word calculation.
+The factor `f_{i+1}` belongs to the component hull support (5.4) exactly when
 
-### Theorem 3 — Bivariate joint enumerator
+- `f_i` is selected, so `epsilon_i=1`; and
+- `f_{i+1}` is not selected, so `epsilon_{i+1}=0`.
+
+Therefore define
+
+\[
+\boxed{
+ b_O(\varepsilon)
+=\sum_{i=0}^{a-1}
+\varepsilon_i(1-\varepsilon_{i+1}),
+\qquad \varepsilon_a=\varepsilon_0.
+}
+\tag{6.1}
+\]
+
+This counts the number of `1 -> 0` transitions. Because every factor in `O` has degree `d_O`, the orbit contribution to the `F_q`-dimension of the hull is
+
+\[
+ w_O b_O(\varepsilon),
+\qquad w_O=m_s d_O.
+\tag{6.2}
+\]
+
+Summing over all components and all orbits gives the rigorously derived global formula:
+
+\[
+\boxed{
+\dim_{\mathbb F_q}\operatorname{Hull}_k(C)
+=\sum_{s=1}^{N}\sum_{O\in\mathcal O_s}
+ w_O b_O(\varepsilon_O).
+}
+\tag{6.3}
+\]
+
+A convention using `0 -> 1`, namely `sum_i(1-epsilon_i)epsilon_{i+1}`, gives the same numerical count on a cyclic binary word, but (6.1) is the convention tied directly to the support set (5.4) and will be used everywhere.
+
+---
+
+## 7. Transfer matrix and joint enumerator
+
+### 7.1 One-orbit matrix for the actual code dimension
+
+For an orbit of length `a` and weight `w`, a selected factor contributes `w` to the generator degree and therefore contributes **zero** to the component code dimension. An unselected factor contributes `w` to the component code dimension.
+
+Thus, for a transition from state `r=epsilon_i` to state `t=epsilon_{i+1}`, assign:
+
+- `u^w` if the destination factor is unselected (`t=0`);
+- `z^w` if the transition is `1 -> 0`, because that destination factor is in the hull support.
+
+The correct code-dimension transition weight is
+
+\[
+\widetilde T_w(u,z)_{r,t}
+=u^{w(1-t)}z^{wr(1-t)}.
+\]
+
+With rows and columns indexed by `0,1`, this is
+
+\[
+\boxed{
+\widetilde T_w(u,z)=
+\begin{pmatrix}
+ u^w & 1\\
+ u^w z^w & 1
+\end{pmatrix}.
+}
+\tag{7.1}
+\]
+
+The four transitions are:
+
+| transition | code-dimension/hull weight |
+|---|---:|
+| `0 -> 0` | `u^w` |
+| `0 -> 1` | `1` |
+| `1 -> 0` | `u^w z^w` |
+| `1 -> 1` | `1` |
+
+For comparison, the matrix
+
+\[
+T_w^{\mathrm{codim}}(u,z)=
+\begin{pmatrix}
+1&u^w\\z^w&u^w
+\end{pmatrix}
+\tag{7.2}
+\]
+
+is also valid, but its `u`-exponent tracks the selected-factor degree, i.e. the `F_q`-codimension of the code. If `L=n\dim_{\mathbb F_q}A` is the ambient length over `F_q`, then the corresponding global enumerators satisfy
+
+\[
+\mathscr E_{\mathrm{dim}}(u,z)
+=u^L\mathscr E_{\mathrm{codim}}(u^{-1},z).
+\]
+
+It must not be called a code-dimension enumerator without this substitution and ambient-dimension shift. The revised paper uses `\widetilde T_w` for `\dim_q(C)`.
+
+For a cyclic binary word `(epsilon_0,...,epsilon_{a-1})`, the product
+
+\[
+\prod_{i=0}^{a-1}
+\widetilde T_w(u,z)_{\varepsilon_i,\varepsilon_{i+1}}
+\]
+
+is exactly
+
+\[
+ u^{w\sum_i(1-\varepsilon_i)}
+ z^{w\sum_i\varepsilon_i(1-\varepsilon_{i+1})}.
+\tag{7.3}
+\]
+
+The first exponent is the component code-dimension contribution; the second is the hull contribution.
+
+### 7.2 Why the trace is required
+
+The matrix product `(\widetilde T_w^a)_{r,r}` sums all length-`a` walks that start at state `r` and return to the same state. Summing over `r=0,1` closes the binary word around the orbit:
+
+\[
+\operatorname{tr}(\widetilde T_w(u,z)^a)
+=\sum_{\varepsilon_0,\ldots,\varepsilon_{a-1}\in\{0,1\}}
+ u^{w\sum_i(1-\varepsilon_i)}
+ z^{w b_O(\varepsilon)}.
+\tag{7.4}
+\]
+
+Without the trace, the edge from `epsilon_{a-1}` back to `epsilon_0` would be omitted, so open binary strings would be counted instead of cyclic selections.
+
+### 7.3 Joint enumerator theorem
 
 Define
 
 \[
 \mathscr E(u,z)
-=\sum_C
- u^{\dim_{\mathbb F_q}(C)}
- z^{\dim_{\mathbb F_q}(\operatorname{Hull}_k(C))}.
+=\sum_{C\in\mathscr C(A,n,\lambda)}
+ u^{\dim_{\mathbb F_q}C}
+ z^{\dim_{\mathbb F_q}\operatorname{Hull}_k(C)}.
+\tag{7.5}
 \]
 
-For an orbit `O` of length `a_O` and weight `w_O`, set
-
-\[
-T_O(u,z)=
-\begin{pmatrix}
-1 & u^{w_O}\\
- z^{w_O} & u^{w_O}
-\end{pmatrix}.
-\]
-
-Then prove the product formula
+The factor-selection choices on distinct `tau`-orbits and distinct components are independent. By (3.11), (6.3), and (7.4), the exponents add. Hence:
 
 \[
 \boxed{
-\mathscr E(u,z)=
-\prod_{s=1}^{N}\prod_{O\in\mathcal O_s}
-\operatorname{tr}\big(T_O(u,z)^{a_O}\big).
+\mathscr E(u,z)
+=\prod_{s=1}^{N}
+ \prod_{O\in\mathcal O_s}
+ \operatorname{tr}\bigl(\widetilde T_{w_O}(u,z)^{a_O}\bigr).
 }
-\tag{E}
+\tag{7.6}
 \]
 
-Interpretation:
+This is a transfer-matrix product formula, not a claim of a Pólya cycle-index theorem.
 
-- `u` tracks the q-dimension of the classical code.
-- `z` tracks the q-dimension of its Galois hull.
-- The trace closes the binary word around the cycle.
-- Product is valid because factor cycles/components are independent.
-
-This is the main theorem that should distinguish the new paper from a code-by-code hull formula.
-
-### Theorem 4 — Exact hull-dimension distribution
-
-Put `u=1` in (E). For an orbit of length `a` and weight `w`, define
+Sanity specializations:
 
 \[
-P_{a,w}(z)=
-\operatorname{tr}
-\begin{pmatrix}
-1&1\\ z^w&1
-\end{pmatrix}^{a}.
+\mathscr E(1,1)=2^{\sum_s|\mathcal F_s|},
+\tag{7.7}
+\]
+
+and
+
+\[
+\mathscr E(u,1)
+=\prod_s\prod_{f\in\mathcal F_s}
+(1+u^{m_s\deg f}),
+\tag{7.8}
+\]
+
+because setting `z=1` removes the transition statistic and leaves an independent selected/unselected factor choice.
+
+---
+
+## 8. Exact orbit polynomial and hull distribution
+
+### 8.1 Derivation of the coefficient formula
+
+Set `u=1`. For a cyclic binary word of length `a`, let `b` be the number of `1 -> 0` transitions.
+
+- If `b=0`, the word has no change around the cycle. It is either all zero or all one, giving exactly `2` words.
+- If `b>=1`, the word has exactly `b` positive runs of ones and `b` positive runs of zeros. The `2b` positive run lengths form a composition of `a` into `2b` positive parts, giving
+
+\[
+\binom{a-1}{2b-1}
+\]
+
+compositions. Choosing an indexed starting position and then forgetting which one of the `b` one-runs was declared the first gives the factor `a/b`.
+
+Therefore the number of indexed cyclic binary words with exactly `b` boundaries is
+
+\[
+N(a,b)=\frac{a}{b}\binom{a-1}{2b-1},
+\qquad 1\le b\le\left\lfloor\frac a2\right\rfloor.
+\tag{8.1}
+\]
+
+Consequently:
+
+\[
+\boxed{
+P_{a,w}(z)
+=2+\sum_{b=1}^{\lfloor a/2\rfloor}
+\frac{a}{b}\binom{a-1}{2b-1}z^{bw}.
+}
+\tag{8.2}
+\]
+
+At `z=1`, this has value `2^a`, as it must.
+
+### 8.2 Independent small-orbit checks
+
+Directly listing all binary words gives:
+
+| orbit length | boundary counts | orbit polynomial |
+|---:|---|---|
+| `1` | `0: 2` | `P_{1,w}=2` |
+| `2` | `0: 2, 1: 2` | `P_{2,w}=2+2z^w` |
+| `3` | `0: 2, 1: 6` | `P_{3,w}=2+6z^w` |
+| `4` | `0: 2, 1: 12, 2: 2` | `P_{4,w}=2+12z^w+2z^{2w}` |
+| `5` | `0: 2, 1: 20, 2: 10` | `P_{5,w}=2+20z^w+10z^{2w}` |
+
+The coefficient sums are `2,4,8,16,32`, respectively. These cases are also checked by the transfer matrix and by direct enumeration in the validation methodology.
+
+### 8.3 Exact hull-dimension distribution
+
+Define
+
+\[
+H_{A,n,\lambda,k}(z)
+=\mathscr E(1,z)
+=\sum_C z^{\dim_{\mathbb F_q}\operatorname{Hull}_k(C)}.
+\tag{8.3}
 \]
 
 Then
 
 \[
+\boxed{
 H_{A,n,\lambda,k}(z)
-:=\sum_C z^{\dim_q\operatorname{Hull}_k(C)}
-=\prod_{s,O}P_{a_O,w_O}(z).
+=\prod_{s=1}^{N}\prod_{O\in\mathcal O_s}P_{a_O,w_O}(z).
+}
+\tag{8.4}
 \]
 
-For `a>=1`, an explicit expansion is
-
-\[
-P_{a,w}(z)
-=2+
-\sum_{b=1}^{\lfloor a/2\rfloor}
- \frac{a}{b}\binom{a-1}{2b-1}z^{bw}.
-\tag{P}
-\]
-
-Therefore, the exact number of codes with hull dimension `h` is
+The exact number of codes with hull dimension `h` is
 
 \[
 \boxed{
 N_h=[z^h]H_{A,n,\lambda,k}(z).
 }
+\tag{8.5}
 \]
 
-The coefficient formula is the paper ka main enumerative answer.
+This coefficient theorem, rather than a list of possible dimensions only, is the central enumerative result.
 
-### Theorem 5 — Statistical corollaries
+---
 
-Uniformly random constacyclic code ke liye:
+## 9. LCD count, mean, and variance
+
+### 9.1 LCD count as a corollary
+
+All weights `w_O` are positive. Hence (6.3) gives
 
 \[
-\mathbb E[\dim_q\operatorname{Hull}_k(C)]
-=
-\sum_{s,O:\,a_O\ge2}\frac{a_Ow_O}{4}.
+\operatorname{Hull}_k(C)=0
+\iff b_O(\varepsilon_O)=0
+\quad\text{for every orbit }O.
 \]
 
-Variance:
+A cyclic binary word has zero `1 -> 0` transitions if and only if it is constant. Therefore every orbit has exactly two admissible selections:
+
+- all factors unselected;
+- all factors selected.
+
+Thus, under hypotheses (3.1)–(3.5),
 
 \[
-\operatorname{Var}(\dim_q\operatorname{Hull}_k(C))
-=
-\sum_{s,O:\,a_O=2}\frac{w_O^2}{4}
-+
-\sum_{s,O:\,a_O\ge3}\frac{a_Ow_O^2}{16}.
-\]
-
-The safest proof is generating-function differentiation. Direct random-variable proof optional hai.
-
-Immediate corollary:
-
-\[
+\boxed{
 \#\{C:\operatorname{Hull}_k(C)=0\}
 =2^{\sum_s|\mathcal O_s|}.
+}
+\tag{9.1}
 \]
 
-Yani compatible square-free regime me every factor cycle ke liye all-zero ya all-one selection choose karni hoti hai; isse exact LCD-code count milta hai.
+This is a corollary of the support/boundary theorem, not an independent assumption.
 
-### Optional Theorem 6 — Inequivalent-code enumeration
+### 9.2 Indicator-variable calculation
 
-Agar non-isometric part complete karna ho, pehle equivalence group explicitly define karein:
+For one orbit of length `a`, let
+
+\[
+X_i=\varepsilon_i(1-\varepsilon_{i+1}),
+\qquad B=\sum_{i=0}^{a-1}X_i.
+\]
+
+#### Fixed orbit: `a=1`
+
+Here `X_0=epsilon_0(1-epsilon_0)=0`, so
+
+\[
+\mathbb E[B]=0,
+\qquad \operatorname{Var}(B)=0.
+\tag{9.2}
+\]
+
+Fixed-point orbits contribute zero to both mean and variance.
+
+#### Orbit length `a>=2`: mean
+
+Each `X_i` requires two distinct independent bits, so
+
+\[
+\mathbb E[X_i]=\frac14,
+\qquad
+\mathbb E[B]=\frac a4.
+\tag{9.3}
+\]
+
+#### Orbit length `a=2`: variance
+
+The two indicators are
+
+\[
+X_0=\varepsilon_0(1-\varepsilon_1),
+\qquad
+X_1=\varepsilon_1(1-\varepsilon_0).
+\]
+
+They are mutually exclusive. Thus `B` is `0` for `00,11` and `1` for `10,01`, each with probability `1/2`. Therefore
+
+\[
+\operatorname{Var}(B)=\frac14.
+\tag{9.4}
+\]
+
+#### Orbit length `a>=3`: variance
+
+Each indicator has
+
+\[
+\operatorname{Var}(X_i)=\frac14-\frac1{16}=\frac3{16}.
+\]
+
+For neighboring directed edges, `X_i X_{i+1}=0`, hence
+
+\[
+\operatorname{Cov}(X_i,X_{i+1})=-\frac1{16}.
+\]
+
+For non-neighboring edges, the involved bits are disjoint and the covariance is zero. On a cycle of length `a>=3` there are `a` neighboring unordered pairs. Hence
+
+\[
+\begin{aligned}
+\operatorname{Var}(B)
+&=a\frac3{16}+2a\left(-\frac1{16}\right)\\
+&=\frac a{16}.
+\end{aligned}
+\tag{9.5}
+\]
+
+### 9.3 Global moments
+
+Different factor orbits use independent selection bits. Therefore:
+
+\[
+\boxed{
+\mathbb E\bigl[\dim_q\operatorname{Hull}_k(C)\bigr]
+=\sum_{s,O:\,a_O\ge2}\frac{a_Ow_O}{4}.
+}
+\tag{9.6}
+\]
+
+and
+
+\[
+\boxed{
+\operatorname{Var}\bigl(\dim_q\operatorname{Hull}_k(C)\bigr)
+=\sum_{s,O:\,a_O=2}\frac{w_O^2}{4}
++\sum_{s,O:\,a_O\ge3}\frac{a_Ow_O^2}{16}.
+}
+\tag{9.7}
+\]
+
+These formulas can also be checked by differentiating `H(z)/H(1)` at `z=1`; the indicator proof explains the exceptional `a=2` term.
+
+---
+
+## 10. Pilot example — fully verified
+
+### 10.1 Ring decomposition
+
+Take
+
+\[
+A=\mathbb F_4[u,v]/\langle u^2-u,v^2-v\rangle.
+\]
+
+Both polynomials split into distinct linear factors over `F_4`, so
+
+\[
+A\cong\mathbb F_4^4.
+\]
+
+Thus `N=4` and `m_s=1` for every component.
+
+Choose
+
+\[
+n=5,
+\qquad \lambda=1,
+\qquad q=4=2^2,
+\qquad k=1.
+\]
+
+The inverse-Frobenius exponent is
+
+\[
+\rho=2^{2-1}=2.
+\]
+
+### 10.2 Factorization over `F_4`
+
+Let `omega` satisfy
+
+\[
+\omega^2+\omega+1=0.
+\]
+
+In characteristic two,
+
+\[
+x^5-1=x^5+1
+\]
+
+and direct factorization gives
+
+\[
+\boxed{
+ x^5-1
+=(x+1)(x^2+\omega x+1)(x^2+(\omega+1)x+1).
+}
+\tag{10.1}
+\]
+
+The two quadratic factors are irreducible over `F_4` and the factorization is square-free.
+
+### 10.3 Explicit Hermitian factor action
+
+For
+
+\[
+f_1=x^2+\omega x+1,
+\qquad
+f_2=x^2+(\omega+1)x+1,
+\]
+
+formula (4.1) with `rho=2` gives
+
+\[
+f_1^{\#}=x^2+\omega^2x+1
+=x^2+(\omega+1)x+1=f_2,
+\]
+
+and similarly
+
+\[
+f_2^{\#}=f_1.
+\]
+
+Also
+
+\[
+(x+1)^{\#}=x+1.
+\]
+
+Therefore each component has exactly:
+
+- one fixed orbit of weight `1`;
+- one orbit of length `2` and weight `2`.
+
+This action is not assumed; it is explicitly computed.
+
+### 10.4 Component joint enumerator
+
+Here `u` tracks **code dimension**, so an unselected factor contributes its weight and a selected factor contributes zero code-dimension weight. The fixed factor therefore contributes
+
+\[
+u+1.
+\]
+
+For the quadratic 2-cycle, the four binary selections give:
+
+- `00`: code-dimension weight `u^4`, hull weight `1`;
+- `01` and `10`: code-dimension weight `u^2`, hull weight `z^2` each;
+- `11`: code-dimension weight `1`, hull weight `1`.
+
+Thus the quadratic orbit contributes
+
+\[
+u^4+2u^2z^2+1.
+\]
+
+Therefore
+
+\[
+\boxed{
+\mathscr E_{\mathrm{component}}(u,z)
+=(u+1)(u^4+2u^2z^2+1).
+}
+\tag{10.2}
+\]
+
+This happens to equal `(1+u)(1+2u^2z^2+u^4)` because the factor-degree polynomial is palindromic in this particular example. That coincidence must not be used to justify the uncorrected matrix in general.
+
+For four independent components:
+
+\[
+\boxed{
+\mathscr E_A(u,z)
+=\bigl((1+u)(1+2u^2z^2+u^4)\bigr)^4.
+}
+\tag{10.3}
+\]
+
+Putting `u=1` gives
+
+\[
+H_A(z)=2^8(1+z^2)^4,
+\tag{10.4}
+\]
+
+so the predicted hull distribution is:
+
+| hull dimension `h` | number of codes |
+|---:|---:|
+| `0` | `256` |
+| `2` | `1024` |
+| `4` | `1536` |
+| `6` | `1024` |
+| `8` | `256` |
+
+The total is `4096=8^4`, as required because each component has three irreducible factors and hence eight ideals.
+
+### 10.5 Independent computational verification
+
+The repository contains:
+
+```text
+code/validate_pilot.py
+```
+
+It uses no third-party package. It implements `F_4`, polynomial arithmetic, the factor action, direct generator-row code construction, direct `k=1` hull testing, and enumeration of all four-component choices.
+
+Run:
+
+```bash
+python code/validate_pilot.py
+```
+
+Verified output:
+
+```text
+orbit polynomial checks: a=1,...,5 PASS
+factorisation: x + 1 * x^2 + (a)x + 1 * x^2 + (a+1)x + 1
+Hermitian factor action: fixed linear factor; quadratic factors swapped
+component joint histogram: {(0, 0): 1, (1, 0): 1, (2, 2): 2,
+                           (3, 2): 2, (4, 0): 1, (5, 0): 1}
+ring joint histogram terms: 65
+ring hull histogram: {0: 256, 2: 1024, 4: 1536, 6: 1024, 8: 256}
+PASS: direct hulls, factor action, orbit formula, and enumerator agree
+```
+
+Thus the following four objects agree in the pilot:
+
+1. direct factorization and `tau` action;
+2. direct hull calculation for every component selection;
+3. the orbit-boundary formula;
+4. the transfer-matrix/joint enumerator and its four-component product.
+
+The quantum application is not needed for this validation.
+
+---
+
+## 11. Brute-force validation protocol for the paper
+
+The pilot is one checked example, not a substitute for the theorem. The manuscript should include a short reproducibility subsection with the following protocol.
+
+For each small parameter set:
+
+1. construct `A` and its component fields `K_s`;
+2. factor every `M_s=x^n-lambda_s`;
+3. compute `tau_{s,k}` using (4.1);
+4. enumerate every factor-selection tuple `(J_1,...,J_N)`;
+5. construct each component code from its generator polynomial;
+6. compute the Galois dual by the defining inner product;
+7. compute the intersection with the code;
+8. record `dim_q(C)` and `dim_q(Hull_k(C))`;
+9. compare with (5.5), (6.3), and (7.4);
+10. compare the complete histogram with coefficients of `E(u,z)`.
+
+For a direct linear-algebra check, the dual can be computed as the nullspace of the constraint matrix obtained from
+
+\[
+\sum_i x_i c_i^{p^k}=0
+\]
+
+for each generator row `c` of the code. The calculation must be over the correct component field, then weighted by `m_s` when reported over `F_q`.
+
+Minimum test family:
+
+- one split component `K_s=F_q`;
+- a product of split components;
+- unequal extension degrees `m_s`;
+- a fixed factor plus a 2-cycle;
+- an orbit of length at least `3` in a general `k` case;
+- a compatible nontrivial `lambda_s`;
+- Euclidean and order-two Hermitian-type special cases.
+
+The computational experiment validates the theorem; it does not replace the proof.
+
+---
+
+## 12. Phase-by-phase execution plan
+
+### Phase 0 — Mathematical and literature audit
+
+**Duration:** 2–3 days
+
+Tasks:
+
+- Read the supplied paper and mark results as `cite`, `use as lemma`, or `do not reproduce`.
+- Record the extension-field inverse-Frobenius issue explicitly.
+- Freeze the main hypotheses: square-free algebra, `gcd(n,p)=1`, and (3.5).
+- Search recent literature for exact multiplicity/joint enumerator results.
+- Keep “inequivalent codes” and quantum constructions outside the main claim until proved.
+
+**Deliverable:** gap matrix plus one-page problem statement.
+
+**Go/no-go:** If exact same joint enumerator already exists, change the contribution before drafting.
+
+### Phase 1 — Algebra and notation
+
+**Duration:** 4–6 days
+
+- Prove or cite the product decomposition (3.1).
+- Define `K_s`, `m_s`, `e_s`, component dimensions, and the componentwise inner product.
+- State the split case separately so readers can compare with the supplied paper.
+- Verify (3.7) and square-freeness.
+
+**Deliverable:** clean preliminaries section and notation table.
+
+### Phase 2 — `tau` construction
+
+**Duration:** 5–7 days
+
+- Define (4.1) precisely.
+- Prove irreducibility preservation.
+- Prove (4.4) from the root action and compatibility.
+- Compute the permutation and all orbit lengths.
+- Do not collapse general orbits to pairs.
+
+**Deliverable:** factor-action lemma and reproducible factor-orbit routine.
+
+### Phase 3 — Component hull support
+
+**Duration:** 5–8 days
+
+- Define `g_J` and `h_J`.
+- Prove the dual support is `tau(F\J)`.
+- Prove the hull is generated by the lcm.
+- Derive exactly `(F\J) cap tau(J)`.
+- Check the result on small direct examples.
+
+**Deliverable:** Theorem 5.3 with a complete proof.
+
+### Phase 4 — Orbit boundaries and transfer matrix
+
+**Duration:** 4–6 days
+
+- Establish (6.1) from the support set.
+- Derive all four entries of (7.1).
+- Prove the trace/closed-walk identity.
+- Multiply independent orbit/component factors.
+
+**Deliverable:** joint enumerator theorem.
+
+### Phase 5 — Explicit distribution and moments
+
+**Duration:** 4–6 days
+
+- Derive (8.1), not just quote it.
+- Check `a=1,2,3,4,5` directly.
+- Derive LCD count as a boundary corollary.
+- Derive mean and variance, with the `a=1` and `a=2` cases separated.
+
+**Deliverable:** exact distribution and statistical corollaries.
+
+### Phase 6 — Exhaustive validation
+
+**Duration:** 7–10 days
+
+- Run the pilot script.
+- Add at least two extension-degree or longer-orbit tests.
+- Compare direct hull ranks and generating functions.
+- Store exact outputs, software version, and finite-field conventions.
+
+**Deliverable:** reproducibility folder and validation table.
+
+### Phase 7 — Optional Burnside section
+
+**Duration:** 10–14 days, only if feasible
+
+- Define a finite equivalence group.
+- Prove it preserves the code family and hull dimension.
+- Define the action on factor selections.
+- Determine fixed-code sets.
+- Apply Burnside only after the group action is complete.
+
+If this is incomplete, move it to future work and do not use “cycle-index” in the title.
+
+### Phase 8 — Optional quantum application
+
+**Duration:** 4–6 days
+
+- Select one exact quantum construction theorem.
+- State all hypotheses.
+- Verify field/Gray-image compatibility.
+- Compute minimum distance independently.
+- Report only parameters justified by the theorem.
+
+### Phase 9 — Writing and proof audit
+
+**Duration:** 7–10 days
+
+- Run a symbol-before-use check.
+- Run a theorem-dependency check.
+- Reproduce every table from code.
+- Perform phrase-level similarity audit against the source.
+- Separate proven results, computational evidence, conjectures, and future work.
+
+---
+
+## 13. Complexity statement — cautious version
+
+Let
+
+- `N` be the number of simple components;
+- `r=sum_s |O_s|` be the total number of factor orbits;
+- `a_max` be the maximum orbit length;
+- `w_max` be the maximum orbit weight;
+- `D_u,D_z` be chosen truncation degrees in `u,z`.
+
+The direct enumeration of all factor selections has `2^{sum_s |F_s|}` cases. The transfer-matrix method avoids this explicit enumeration.
+
+At the level of polynomial operations:
+
+- each orbit contribution is a power of a `2 x 2` matrix of bivariate polynomials;
+- repeated squaring uses `O(log a_O)` matrix multiplications per orbit;
+- with dense truncated bivariate multiplication, a coarse multiplication bound is `O(D_u^2 D_z^2)` coefficient operations per polynomial product;
+- the final product over `r` orbit factors requires additional polynomial convolutions of the same type.
+
+Thus the transfer computation is much smaller than explicit factor-subset enumeration for many instances, but the exact arithmetic/bit complexity depends on:
+
+- the cost of factoring `M_s`;
+- orbit lengths and weights;
+- coefficient growth;
+- truncation limits;
+- dense versus sparse polynomial representation.
+
+The paper must **not** claim an unconditional polynomial-time algorithm in the full input size unless a precise encoding and complexity proof is added.
+
+---
+
+## 14. Optional Burnside / Pólya perspective
+
+This is not part of the main theorem unless completed.
+
+Define a finite group of allowed equivalences, for example
 
 \[
 \Gamma_{A,n,\lambda,k}
 =\{\phi:A^n\to A^n:
-\phi \text{ is A-linear monomial},
+\phi \text{ is an A-linear monomial map},
 \phi T_\lambda=T_\lambda\phi,
 \langle\phi x,\phi y\rangle_k=\langle x,y\rangle_k\}.
+\tag{14.1}
 \]
 
-Here `T_lambda` is the constacyclic shift. Ye definition ensure karti hai ki code family aur hull dimension dono preserved rahen.
+Here `T_lambda` is the constacyclic shift. To use Burnside rigorously, the paper must establish:
 
-If `gamma` acts on factor selections, let
+1. `Gamma` is finite;
+2. it acts on the set of codes under study;
+3. it preserves the Galois hull dimension;
+4. the fixed-code set of each element can be computed.
+
+For `gamma in Gamma`, define
 
 \[
 \mathscr E_\gamma(u,z)
@@ -385,585 +1450,276 @@ If `gamma` acts on factor selections, let
  u^{\dim_q C}z^{\dim_q\operatorname{Hull}_k(C)}.
 \]
 
-Burnside se:
+Then, if all four points above have been proved,
 
 \[
-\boxed{
-N_h^{\mathrm{iso}}
+N_h^{\mathrm{equiv}}
 =\frac1{|\Gamma|}
- \sum_{\gamma\in\Gamma}[z^h]\mathscr E_\gamma(1,z).
-}
+\sum_{\gamma\in\Gamma}[z^h]\mathscr E_\gamma(1,z).
+\tag{14.2}
 \]
 
-**Caution:** Is theorem ko tabhi claim karein jab induced group action aur fixed-code enumerators rigorously derive ho jayein. Warna ise future work rakhein.
+This is a Burnside formula. The main transfer-matrix result should not be called a Pólya cycle-index method merely because `tau` has cycles.
+
+If the full group action cannot be established, present (14.1)–(14.2) only as a future-work direction.
 
 ---
 
-## 6. Phase-by-phase execution plan
+## 15. Quantum-code application — conditional and secondary
 
-### Phase 0 — Paper audit and research question freeze
+The classical enumerator is the main result. A quantum section should be included only after the classical proof and validation are complete.
 
-**Duration:** 2–3 days  
-**Goal:** Base paper ko samajhna, copy boundary define karna.
-
-Tasks:
-
-- Base paper ka 1-page contribution map banao.
-- Har result ko tag karo: `reuse as lemma`, `cite only`, `do not reproduce`.
-- Existing work ka search log banao: query, date, database, result, novelty impact.
-- Final research question lock karo:
-  - Main: exact code/hull enumerator.
-  - Secondary: mean, variance, LCD count.
-  - Stretch: inequivalent codes via Burnside.
-- Scope freeze: `gcd(n,p)=1`, square-free `t_i`, compatible `lambda`.
-
-**Deliverable:** `literature-gap-matrix.md` + one-paragraph problem statement.
-
-**Go/no-go condition:** Agar kisi current paper me exactly same bivariate/cycle-index theorem mil jaye, title aur contribution ko immediately change karo.
-
----
-
-### Phase 1 — Algebraic setup and notation
-
-**Duration:** 4–6 days  
-**Goal:** Ring decomposition ko clean aur self-contained banana.
-
-Tasks:
-
-1. CRT decomposition `A ~= product K_s` prove/quote with correct hypotheses.
-2. Primitive idempotents `e_s` define karo; explicit formula sirf example ke liye.
-3. Component degrees `m_s=[K_s:F_q]` record karo.
-4. `lambda=(lambda_s)` and twist compatibility verify karo.
-5. Explain why `gcd(n,p)=1` gives square-free `x^n-lambda_s`.
-6. Define q-dimension vs K_s-dimension clearly.
-
-**Deliverable:** Section 2 ka draft + notation table.
-
-**Validation:** Small rings ke liye SageMath me `A.cardinality() = product_s |K_s|` verify karo.
-
----
-
-### Phase 2 — Factor-orbit engine
-
-**Duration:** 5–7 days  
-**Goal:** `tau_{s,k}` ko computationally aur mathematically define karna.
-
-Tasks:
-
-- Har `x^n-lambda_s` ko factor karo.
-- Har irreducible factor par coefficient-Frobenius + reciprocal operation apply karo.
-- Confirm karo ki output same factor set me aata hai.
-- Permutation cycles compute karo.
-- Har cycle ke liye `(a_O, d_O, w_O)` store karo.
-- Special cases test karo:
-  - Euclidean `k=0`.
-  - Hermitian `e` even, `k=e/2`.
-  - `lambda=1`.
-  - Nontrivial compatible `lambda`.
-
-**Deliverable:** `factor_orbits.sage` or equivalent notebook + machine-readable orbit tables.
-
-**Important check:** `tau` ka order general Galois case me 2 zaroori nahi hai. General cycles ko preserve karo; sirf Euclidean/Hermitian cases ko pair case na samjho.
-
----
-
-### Phase 3 — Generator and hull factor lemma
-
-**Duration:** 5–8 days  
-**Goal:** Base paper ke hull-generator result ko apne enumerator theorem ke liye minimal lemma ke roop me use karna.
-
-Tasks:
-
-1. Component code `C_s(J_s)` ka generator and check polynomial likho.
-2. `k`-Galois dual ke factor support ko `tau_{s,k}(F_s\setminus J_s)` prove karo.
-3. Hull generator ka lcm support derive karo.
-4. Complement ko `(F_s\setminus J_s) cap tau(J_s)` me simplify karo.
-5. Is set ko cyclic binary transitions se identify karo.
-
-**Deliverable:** Theorem 2 + complete proof.
-
-**Do not do:** Source ka theorem paragraph paraphrase karke use mat karo. Apni factor-set proof likho aur source ko citation do.
-
----
-
-### Phase 4 — Transfer matrix / cycle-index theorem
-
-**Duration:** 4–6 days  
-**Goal:** Main new result prove karna.
-
-Tasks:
-
-- One orbit par binary word weight define karo.
-- Matrix `T_O(u,z)` derive karo.
-- `trace(T_O^a)` ko closed walks ke roop me explain karo.
-- Independent factor cycles ka product lo.
-- `u=1`, `z=1`, derivatives ke corollaries derive karo.
-
-**Deliverable:** Theorem 3, Theorem 4, Theorem 5.
-
-**Sanity identities:**
+For a selected classical field code or verified Gray image `D`, record:
 
 \[
-\mathscr E(1,1)=2^{\sum_s|\mathcal F_s|},
+[L,K,d]_q,
+\qquad h=\dim_q\operatorname{Hull}_k(D).
 \]
 
-and
+The paper must then name one exact quantum construction theorem and verify its hypotheses, including:
+
+- which inner product is used;
+- whether dual-containment, hull, or a related condition is required;
+- whether the map from the ring code to `D` preserves the relevant dual/hull relation;
+- how the quantum dimension is obtained;
+- how the minimum distance is obtained;
+- how the entanglement parameter is obtained.
+
+A formula such as
 
 \[
-\mathscr E(u,1)
-=\prod_{s}\prod_{f\in\mathcal F_s}(1+u^{m_s\deg f}).
+[[L,K-h,d;L-K-h]]_q
 \]
 
-Agar ye identities fail karein, factor weights ya trace convention me error hai.
+must not be presented as universal. It may be written only as a conditional consequence of a cited construction theorem whose hypotheses have been checked for the particular `D`.
+
+The joint enumerator can help filter classical candidates by `(K,h)`, but it does not determine `d`. Minimum distance must be calculated or bounded independently.
+
+No “new best quantum code” claim should be made without comparison with the current table/database and a recorded access date.
 
 ---
 
-### Phase 5 — Exact enumeration and LCD distribution
-
-**Duration:** 3–5 days  
-**Goal:** Counting results ko usable form me present karna.
-
-Tasks:
-
-- `N_h=[z^h]H(z)` define karo.
-- Nonzero coefficients ka support characterize karo.
-- LCD count `H(0)` do.
-- Maximum hull dimension ke liye coefficient / feasibility condition do.
-- Pair-cycle special case ko short corollary ke roop me show karo:
-
-\[
-P_{2,w}(z)=2+2z^w.
-\]
-
-- General-cycle result ko main rakho; pair-only result ko special case rakho.
-
-**Deliverable:** Counting theorem + at least 2 nontrivial examples.
-
----
-
-### Phase 6 — Computation and exhaustive verification
-
-**Duration:** 7–10 days  
-**Goal:** Har theorem ko brute force se check karna.
-
-For small factor counts:
-
-1. All subsets `J_s` enumerate karo.
-2. Direct generator matrix banao.
-3. Galois dual/hull rank direct calculate karo.
-4. Formula (H) se compare karo.
-5. Polynomial `H(z)` ke coefficients se compare karo.
-6. Joint enumerator ke `u` coefficients se code dimensions compare karo.
-
-Use exact integer arithmetic only. Float/approximation avoid karo.
-
-**Minimum tests:**
-
-- One component field.
-- Product of two fields with unequal `m_s`.
-- One fixed factor + one 2-cycle.
-- One 3-cycle or 4-cycle, so general-k result really test ho.
-- Nontrivial lambda.
-- Euclidean and Hermitian cases.
-
-**Deliverable:** Reproducibility folder:
-
-```text
-code/
-  factor_orbits.sage
-  joint_enumerator.sage
-  brute_force_check.sage
-examples/
-  example_q4_n5.json
-  example_product_fields.json
-README.md
-```
-
----
-
-### Phase 7 — Worked examples and tables
-
-**Duration:** 4–6 days  
-**Goal:** Examples theorem ko illustrate karein, source ke examples ko repeat na karein.
-
-Recommended examples:
-
-1. `A = F_4[u,v]/<u^2-u, v^2-v>`, `n=5`, `lambda=1`, Hermitian `k=1`.
-2. A product with unequal component degrees, e.g. one `F_{q^2}` component and one `F_q` component.
-3. A compatible nontrivial `lambda` of order dividing `1+p^{e-k}`.
-4. A general Galois case with a cycle length `a>2`.
-
-Har example me show karo:
-
-- `A` ka component decomposition.
-- `lambda_s`.
-- Factorization of `x^n-lambda_s`.
-- `tau` cycles.
-- Orbit weights.
-- `E(u,z)` or at least `H(z)`.
-- Coefficient table `h -> number of codes`.
-- Brute-force confirmation.
-
----
-
-### Phase 8 — Non-isometric codes via Burnside (stretch but high-value)
-
-**Duration:** 10–14 days  
-**Goal:** Base paper ke future direction ko complete karna.
-
-Suggested order:
-
-1. Pehle `lambda=1` cyclic case lo.
-2. Coordinate multiplier group ka exact subgroup define karo.
-3. Check karo ki group `tau` factor cycles par kaise act karta hai.
-4. Fixed subsets/codes enumerate karo.
-5. Har group element ke liye fixed hull enumerator banao.
-6. Burnside average se inequivalent counts nikalo.
-7. Small cases brute-force canonical forms se verify karo.
-
-**Fallback:** Agar full monomial group complicated ho, paper me “componentwise factor-selection equivalence” define karke clearly state karo ki ye full monomial equivalence se weaker notion hai. Terminology honest rakho.
-
----
-
-### Phase 9 — Optional quantum-code application
-
-**Duration:** 4–6 days  
-**Goal:** Application ko main theorem ka natural consequence rakhna, paper ka sole contribution nahi.
-
-For a verified field/Gray image code with parameters `[L,K,d]_q` and hull dimension `h`, apply the appropriate EAQECC construction to obtain parameters of the form
-
-\[
-[[L, K-h, d; L-K-h]]_q,
-\]
-
-subject to the exact hypotheses of the cited construction.
-
-New angle:
-
-- Enumerate **how many classical codes** give each entanglement consumption `c`.
-- Use the bivariate enumerator to filter candidates by `(K,h)`.
-- Compute minimum distance independently; hull enumerator alone distance prove nahi karta.
-- Current best-known tables se comparison with access date record karo.
-
-**Do not claim:** “New quantum codes” only because a table entry looks different. Every claim must be checked against current database and all parameter conventions.
-
----
-
-### Phase 10 — Writing, proof audit, and submission readiness
-
-**Duration:** 7–10 days  
-**Goal:** Paper ko independent, reproducible aur plagiarism-safe banana.
-
-Tasks:
-
-- Every imported result ke saamne citation.
-- Every new theorem ka dependency graph.
-- Source PDF se phrase-level similarity scan.
-- Notation consistency check: `q`, `p`, `e`, `k`, `m_s`, `N`, `a_O`, `d_O`, `w_O`.
-- All examples scripts se regenerate.
-- Tables me software version, finite-field convention, factor ordering record.
-- Limitations section honestly write karo.
-- Journal-specific formatting last me karo; pehle mathematics freeze karo.
-
----
-
-## 7. Worked pilot example — paper start karne ke liye
-
-Take
-
-\[
-A=\mathbb F_4[u,v]/\langle u^2-u, v^2-v\rangle.
-\]
-
-Because both polynomials split into distinct linear factors,
-
-\[
-A\cong\mathbb F_4^4.
-\]
-
-Hence `N=4`, every component has `m_s=1`. Choose
-
-\[
-n=5,\qquad \lambda=1,\qquad q=4=2^2,
-\qquad k=1.
-\]
-
-Over `F_4`,
-
-\[
-x^5-1=(x-1)f_1(x)f_2(x),
-\]
-
-where `f_1,f_2` are the two irreducible quadratic factors. Under the Hermitian factor operation, the two quadratic factors form one 2-cycle and `(x-1)` is fixed. Therefore each component has:
-
-- one fixed orbit of weight `1`,
-- one 2-cycle of weight `2`.
-
-The per-component hull polynomial is
-
-\[
-P_{1,1}(z)P_{2,2}(z)=2(2+2z^2).
-\]
-
-For four independent components,
-
-\[
-H(z)=2^8(1+z^2)^4.
-\]
-
-Thus the predicted distribution is:
-
-| hull dimension `h` | number of codes |
-|---:|---:|
-| 0 | 256 |
-| 2 | 1024 |
-| 4 | 1536 |
-| 6 | 1024 |
-| 8 | 256 |
-
-Checks:
-
-- Total codes: `256+1024+1536+1024+256=4096=8^4`.
-- Average hull dimension: `4`.
-- Variance: `4`.
-- LCD codes: `256=2^8`.
-
-Is example ko paper me tabhi use karein jab SageMath se factorization, `tau` action aur every code ka direct hull rank verify ho jaye. Ye source paper ke examples ka copy nahi hai; iska purpose cycle-enumerator mechanism ko transparent banana hai.
-
----
-
-## 8. Algorithm blueprint
-
-### Algorithm A — Enumerated hull distribution
-
-```text
-Input:
-  p, e, q=p^e, k, n
-  square-free t_1,...,t_l
-  unit lambda in A
-
-1. Construct A and compute A ~= product_s K_s.
-2. Record m_s=[K_s:F_q] and lambda_s in K_s.
-3. Check gcd(n,p)=1.
-4. Check lambda_s^(1+p^(e-k))=1 for every s.
-5. For each s:
-     a. Factor x^n-lambda_s over K_s.
-     b. Build the factor permutation tau_{s,k}.
-     c. Compute cycles O.
-     d. For every O, store:
-          a_O = cycle length,
-          d_O = factor degree,
-          w_O = m_s*d_O.
-     e. Multiply E(u,z) by trace(T_O(u,z)^a_O).
-6. Return E(u,z), H(z)=E(1,z), and coefficients N_h.
-7. Run all sanity checks:
-     E(1,1)=2^(sum_s |F_s|),
-     H(1)=total number of codes,
-     brute force on small instances.
-```
-
-### Algorithm B — Direct brute-force verifier
-
-```text
-For every component s:
-  enumerate every subset J_s of irreducible factors.
-  construct g_Js and the generator matrix G_s.
-  compute the k-Galois dual/hull directly.
-  record (dim_q(C), dim_q(Hull_k(C))).
-Compare the histogram with coefficients of E(u,z).
-```
-
-### Complexity statement to target
-
-Naive code enumeration is exponential in the total number of irreducible factors. The enumerator algorithm is polynomial in the number of factor cycles and in the target polynomial degree, because it uses `2 x 2` matrix powers and polynomial convolution. A formal complexity paragraph is worth adding, but exact model/bit complexity ko overclaim na karein.
-
----
-
-## 9. Paper ka recommended section structure
+## 16. Recommended paper structure
 
 ### 1. Introduction
 
-- Hulls and why exact distribution matters.
-- What the base paper established.
-- Clear gap: multiplicities/joint enumerator/inequivalent codes.
-- Contributions in bullet form.
-- Scope restrictions openly state karo.
+- motivation for exact hull distributions;
+- what the supplied paper proves;
+- exact gap;
+- contributions and hypotheses;
+- no overclaim about Burnside or quantum codes.
 
-### 2. Semisimple affine algebras and constacyclic codes
+### 2. Square-free affine algebras and component codes
 
-- Ring decomposition.
-- Component fields and q-dimension.
-- Constacyclic ideal correspondence.
-- `k`-Galois factor operation.
+- product decomposition;
+- component fields and dimensions;
+- constacyclic ideals;
+- split versus extension-field convention.
 
-### 3. Factor-orbit description of hulls
+### 3. The `k`-Galois factor permutation
 
-- Factor subsets.
-- Dual factor action.
-- Hull factor support.
-- Boundary-statistic lemma.
+- inner product;
+- inverse Frobenius;
+- normalized reciprocal;
+- proof that `tau(F)=F`;
+- arbitrary orbit lengths.
 
-### 4. Joint enumerator and exact distribution
+### 4. Component hull characterization
 
-- Transfer matrix.
-- Product theorem.
-- Coefficient formula.
-- LCD count.
+- generator/check polynomials;
+- dual factor support;
+- lcm intersection;
+- exact support `(F\J) cap tau(J)`.
 
-### 5. Moments and special cases
+### 5. Orbit boundary formula
 
-- Mean, variance.
-- Euclidean/Hermitian pair-cycle corollaries.
-- Conditions for all hull dimensions to occur, if provable.
+- binary selection words;
+- orientation convention;
+- weighted global dimension formula.
 
-### 6. Inequivalent codes (optional/high-value)
+### 6. Joint enumerator and exact distribution
 
-- Equivalence group.
-- Fixed selections.
-- Burnside formula.
-- Small-case validation.
+- transfer matrix;
+- trace and cyclic closure;
+- product theorem;
+- explicit `P_{a,w}` formula;
+- coefficient distribution.
 
-### 7. Algorithms and examples
+### 7. Corollaries and moments
 
-- Pseudocode.
-- Reproducible examples.
-- Tables and plots of distributions.
+- LCD count;
+- mean;
+- variance;
+- fixed-point and 2-cycle special cases.
 
-### 8. Optional quantum application
+### 8. Computational validation
 
-- Only after classical enumeration is complete.
-- Candidate filtering by code/hull dimension.
-- Distance computation and current comparison.
+- algorithms;
+- pilot example;
+- exhaustive tables;
+- reproducibility files.
 
-### 9. Conclusion and limitations
+### 9. Optional Burnside section
 
-- What was proved.
-- What remains open: repeated roots, incompatible twists, full isometry classification, asymptotics.
+Only if the group action is fully proved.
+
+### 10. Optional quantum application
+
+Only with a named construction theorem and verified hypotheses.
+
+### 11. Conclusion and limitations
+
+State clearly that the main theorem assumes square-free/simple-root data and compatible twists. Repeated-root polynomials, incompatible twists, and full isometry classification remain separate problems unless proved.
 
 ---
 
-## 10. Proof-dependency map
+## 17. Proof-dependency order
+
+The theoretical dependency must be presented in this order:
 
 ```text
-CRT decomposition
-      |
-      v
-component ideal classification
-      |
-      v
-factor action tau_{s,k}
-      |
-      v
-hull support = complement of lcm support
-      |
-      v
-binary boundary statistic
-      |
-      v
-transfer-matrix enumerator E(u,z)
-      |
-      +--> exact N_h
-      +--> LCD count
-      +--> mean/variance
-      +--> EA candidate distribution
-      +--> Burnside fixed-code enumerator (stretch)
+Componentwise k-Galois inner product
+        |
+        v
+Inverse Frobenius and normalized reciprocal
+        |
+        v
+Definition of tau_{s,k}
+        |
+        v
+Proof tau_{s,k}(F_s)=F_s
+        |
+        v
+Component factor-selection classification
+        |
+        v
+Dual factor support
+        |
+        v
+Hull lcm and component support
+        |
+        v
+Orbit boundary statistic
+        |
+        v
+Transfer matrix and cyclic trace
+        |
+        v
+Explicit orbit polynomial
+        |
+        v
+Joint enumerator
+        |
+        v
+Exact distribution
+        |
+        v
+LCD count, mean, variance
+        |
+        v
+Brute-force validation
+        |
+        +--> optional Burnside
+        +--> optional quantum application
 ```
 
-Reviewer ko ye dependency map paper ke start/end me useful lagega, kyunki main theorem ka mechanism immediately visible ho jayega.
+No later formula should be used before the definition and lemma on which it depends.
 
 ---
 
-## 11. 9-week practical timeline
+## 18. Risk register and mathematically safe fallbacks
+
+### Risk 1: General extension-field convention conflicts with source notation
+
+Use the rigorous component version (3.2)–(3.5). State explicitly that the supplied paper’s `p^{e-k}` formula is recovered when all components are `F_q`.
+
+### Risk 2: `tau` has long cycles and the intended application only has pairs
+
+Keep arbitrary cycles in the theorem. Treat fixed points and 2-cycles as special corollaries.
+
+### Risk 3: Incompatible twist
+
+If `lambda_s^{1+rho_s} != 1`, the dual is a `lambda_s^{-rho_s}`-constacyclic code. Do not force it into the same factor set. Either develop a two-polynomial/bipartite version or state it as future work.
+
+### Risk 4: Full Burnside group is difficult
+
+Remove it from the main paper and keep the labeled-code enumerator. Do not use “cycle-index” in the title.
+
+### Risk 5: Quantum distance is not controlled
+
+Report the classical distribution only, or compute distance independently. Hull dimension alone is not a distance theorem.
+
+### Risk 6: A future paper already has the same enumerator
+
+Possible genuinely different extensions are:
+
+1. extension-field-weighted joint enumerators;
+2. rigorous inequivalent-code counts;
+3. repeated-root factor multiplicities;
+4. asymptotic distribution under a specified family.
+
+Each alternative requires a fresh literature audit.
+
+---
+
+## 19. Originality and reproducibility checklist
+
+- [ ] The title does not overclaim a cycle-index method.
+- [ ] `K_s` and `m_s` are defined before use.
+- [ ] The inverse Frobenius exponent is `p^{e m_s-k}` in the general component setting.
+- [ ] The split case `m_s=1` is explicitly identified.
+- [ ] `tau_{s,k}` is defined by equation (4.1).
+- [ ] `tau(F_s)=F_s` is proved from the root action and compatibility.
+- [ ] General orbit lengths are allowed.
+- [ ] The hull support is derived as `(F\J) cap tau(J)`.
+- [ ] The boundary orientation is fixed as `1 -> 0`.
+- [ ] The transfer matrix entries are explained one by one.
+- [ ] The trace/closed-walk argument is included.
+- [ ] `P_{a,w}` is derived and checked for `a=1,...,5`.
+- [ ] LCD count is stated as a corollary.
+- [ ] Mean and variance include fixed-orbit and 2-cycle cases.
+- [ ] Pilot factorization and Hermitian action are computationally verified.
+- [ ] Direct hull histograms equal theoretical histograms.
+- [ ] Complexity language is cautious.
+- [ ] Burnside is conditional and has a defined group/action if included.
+- [ ] Quantum parameters are conditional on an explicit construction theorem.
+- [ ] No computational observation is presented as a proof.
+- [ ] Source wording, examples, and theorem order are not cosmetically copied.
+
+---
+
+## 20. Revised 9-week timeline
 
 | Week | Target | Output |
 |---:|---|---|
-| 1 | Literature audit + scope freeze | Gap matrix, title, hypotheses |
-| 2 | CRT/component algebra | Section 2 draft |
-| 3 | Factor action + hull support | Lemmas and proof skeleton |
-| 4 | Transfer matrix theorem | Main theorem draft |
-| 5 | Coefficient, mean, variance corollaries | Enumeration section |
-| 6 | Sage/Python implementation | Reproducible code |
-| 7 | Exhaustive checks + examples | Verified tables |
-| 8 | Burnside extension or quantum application | Optional section |
-| 9 | Writing, similarity audit, journal formatting | Submission package |
+| 1 | Mathematical audit and literature search | hypotheses, gap matrix, notation freeze |
+| 2 | Component-field and inverse-Frobenius setup | Section 2–3 draft |
+| 3 | Precise factor permutation | Lemmas for `tau(F)=F` and orbit lengths |
+| 4 | Dual/hull support proof | Section 4–5 draft |
+| 5 | Boundary statistic and transfer matrix | Main enumerator theorem |
+| 6 | Explicit coefficients and moments | Distribution/corollaries |
+| 7 | Exhaustive computational validation | scripts and exact tables |
+| 8 | Optional Burnside or quantum section | only if fully justified |
+| 9 | Full proof audit and originality review | submission-ready blueprint/manuscript |
 
-If Week 8 ka Burnside result incomplete ho, usko force na karein; stronger, fully verified distribution paper weakly verified isometry paper se better hai.
-
----
-
-## 12. Risk register and fallback plans
-
-### Risk 1: General `k` me factor operation ka orbit structure confusing nikle
-
-**Fallback:** Main theorem ko compatible Euclidean/Hermitian cases tak restrict karo; general `k` ko a separate proposition/algorithm rakho.
-
-### Risk 2: `lambda` nontrivial hone par dual different twist me chala jaye
-
-**Fallback:** Main theorem me `lambda_s^(1+p^(e-k))=1` explicitly impose karo; incompatible twists ko future work bolo.
-
-### Risk 3: Full monomial equivalence group difficult ho
-
-**Fallback:** Labeled-code enumeration publishable main result rakho; componentwise factor-selection equivalence ko clearly weaker auxiliary result ke roop me do.
-
-### Risk 4: Quantum table me current best parameters improve na hon
-
-**Fallback:** Quantum section ko “distribution of entanglement requirements” tak rakho; new-best-code claim mat karo.
-
-### Risk 5: Source ke notation aur apne notation me mismatch
-
-**Fallback:** Start me independent notation table banao; every formula ko direct small-case computation se test karo.
-
-### Risk 6: Literature me same enumerator already mil jaye
-
-**Fallback options:**
-
-1. Weighted joint enumerator with unequal component extension degrees.
-2. Burnside/isometry classification.
-3. Repeated-root extension.
-4. Asymptotic distribution/central-limit behavior for factor-cycle families.
+If an optional section is incomplete at Week 8, omit it rather than weakening the main theorem.
 
 ---
 
-## 13. Originality / plagiarism checklist
+## 21. Immediate next actions
 
-- [ ] Base paper ka abstract, introduction, theorem wording, proof order copy nahi kiya.
-- [ ] New paper ka title aur research question different hai.
-- [ ] Source ke results ko clearly cited lemmas ke roop me use kiya.
-- [ ] Every new formula independently derived and brute-force tested hai.
-- [ ] Source ke examples, parameter tables, variable names unnecessarily repeat nahi kiye.
-- [ ] “New code” claim se pehle current database comparison kiya.
-- [ ] AI-assisted drafting hua ho to journal ki AI policy follow ki.
-- [ ] Authors ne final mathematics, code aur citations manually verify kiye.
-- [ ] Reproducibility code and exact software versions included hain.
+1. Keep `code/validate_pilot.py` under version control and attach its output to the research notes.
+2. Implement the general `K_s` version with `rho_s=p^{e m_s-k}` before testing any extension-field example.
+3. Add a test with an orbit of length greater than two; do not infer long-cycle behavior from the `F_4`, Hermitian, 2-cycle pilot.
+4. Prove Lemma 5.1 and Theorem 5.3 in full before writing the transfer-matrix section.
+5. Derive the `a=1,...,5` orbit polynomials in the paper or an appendix.
+6. Keep Burnside and quantum applications explicitly optional until their hypotheses are checked.
+7. Repeat the literature audit at submission time.
 
-### Safe writing rule
+### Final success criterion
 
-Source se idea lena allowed hai; source ka sentence structure, proof sequence, notation aur examples ko cosmetic paraphrase karna allowed nahi samajhna chahiye. Naye paper ka **mathematical object** hi alag rakho: source me individual hull formula; proposed paper me factor-cycle enumerator and exact distribution.
+The paper is mathematically ready only when:
 
----
-
-## 14. Final recommended contribution list
-
-Agar paper ko concise but strong rakhna ho, final abstract/contributions me sirf ye claims rakhein:
-
-1. We classify separable constacyclic codes over a square-free affine algebra by component factor selections.
-2. We encode the Galois hull dimension as a weighted boundary statistic on the cycles of the induced factor permutation.
-3. We derive a bivariate transfer-matrix enumerator for code dimension and hull dimension.
-4. We obtain exact counts, LCD counts, mean and variance of Galois hull dimensions.
-5. We provide an exact algorithm and exhaustive computational verification.
-6. If completed: we add a Burnside formula for inequivalent codes under a precisely defined isometry group.
-
-Ye contribution base paper ki copy nahi, balki uske “open enumeration problem” ka structured, verifiable aur mathematically stronger follow-up hoga.
-
----
-
-## 15. First 48 hours me kya karna hai?
-
-1. `q=4, A=F_4[u,v]/<u^2-u,v^2-v>, n=5, lambda=1, k=1` pilot example ko SageMath me verify karo.
-2. Factor permutation `tau` aur cycle lengths print karo.
-3. Brute-force histogram nikalo.
-4. `H(z)` ke coefficients se compare karo.
-5. Agar match ho, Theorem 2–4 ka proof likhna start karo.
-6. Agar match na ho, pehle `k`-Galois reciprocal convention fix karo; theorem likhne ki jaldi mat karo.
-
-**Success criterion:** pilot example me direct hull histogram aur enumerator histogram exactly identical hon, aur total code count bhi match kare.
+- the direct factor action, component hull support, boundary formula, transfer matrix, explicit orbit polynomial, joint enumerator, moments, and LCD count all agree;
+- the pilot and additional small cases pass exact brute-force checks;
+- every optional claim is either proved with hypotheses or clearly marked as future work.
