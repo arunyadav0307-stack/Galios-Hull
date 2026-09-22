@@ -33,21 +33,26 @@ A\cong\prod_{s=1}^{N}K_s,
 \qquad K_s=\mathbb F_{q^{m_s}},
 \]
 
-then the map `a -> a^(p^k)` on `K_s` has inverse
+then define the inverse-Frobenius residue by
 
 \[
-a\longmapsto a^{p^{e m_s-k}},
+r_s\equiv-k\pmod{e m_s},
+\qquad 0\le r_s<e m_s,
+\tag{0.0}
 \]
 
-not always `a -> a^(p^{e-k})`. The latter is the correct exponent in the split case `m_s=1`.
-
-Therefore the rigorous general framework below uses
+and put
 
 \[
-\rho_s=p^{e m_s-k}
+\rho_s=p^{r_s}.
 \]
 
-as the inverse-Frobenius exponent on `K_s`. In the pilot example every component is `F_4`, so `m_s=1` and `rho_s=2^{2-1}=2` exactly.
+The map `a -> a^(p^k)` on `K_s` has inverse `a -> a^(p^{r_s})`, because the Frobenius group on `K_s` has order `e m_s`. In particular:
+
+- if `1 <= k < e m_s`, then `r_s=e m_s-k`;
+- if `k=0`, then `r_s=0` and `rho_s=1`.
+
+The earlier shorthand `p^{e m_s-k}` is therefore valid only when `k` is positive in the relevant range. In the pilot example every component is `F_4`, so `m_s=1`, `r_s=1`, and `rho_s=2` exactly.
 
 This correction is mathematically necessary because the supplied paper sometimes writes the simple components as if their coefficients were in `F_q`, even though a general square-free quotient can contain extension-field components.
 
@@ -78,7 +83,7 @@ is the precise factor map used in the paper. Its root action is
 
 \[
 \alpha\longmapsto \alpha^{-\rho_s}
-=\alpha^{-p^{e m_s-k}}.
+=\alpha^{-p^{r_s}}.
 \]
 
 The compatibility condition for the same constacyclic polynomial is
@@ -325,20 +330,22 @@ The map
 \qquad a\mapsto a^{p^k}
 \]
 
-is an automorphism whose inverse is
+is an automorphism. Define
 
 \[
-\sigma_{s,k}^{-1}(a)=a^{p^{e m_s-k}}.
+r_s\equiv-k\pmod{e m_s},
+\qquad 0\le r_s<e m_s,
+\qquad \rho_s=p^{r_s}.
 \tag{3.3}
 \]
 
-Write
+Then
 
 \[
-\rho_s=p^{e m_s-k}.
+\sigma_{s,k}^{-1}(a)=a^{\rho_s}=a^{p^{r_s}}.
 \]
 
-When `m_s=1`, this becomes the familiar exponent `p^{e-k}` used over `F_q`.
+If `1 <= k < e m_s`, then `r_s=e m_s-k`; if `k=0`, then `r_s=0` and `rho_s=1`. This is the inverse of `a -> a^(p^k)` on `K_s=F_{q^{m_s}}`. When `m_s=1` and `k>0`, it reduces to the familiar exponent `p^{e-k}` over `F_q`.
 
 ### 3.3 Constacyclic polynomial
 
@@ -451,7 +458,8 @@ define
 \[
 f^{\#_{s,k}}(x)
 =f_0^{-\rho_s}\sum_{i=0}^{d}f_i^{\rho_s}x^{d-i},
-\qquad \rho_s=p^{e m_s-k}.
+\qquad \rho_s=p^{r_s},
+\qquad r_s\equiv-k\pmod{e m_s},\quad 0\le r_s<e m_s.
 \tag{4.1}
 \]
 
@@ -483,7 +491,7 @@ We now prove that the codomain really is `F_s`.
 Let `alpha` be a root of `f`. The roots of `f^{#_{s,k}}` are
 
 \[
-\alpha^{-\rho_s}=\alpha^{-p^{e m_s-k}}.
+\alpha^{-\rho_s}=\alpha^{-p^{r_s}}.
 \]
 
 Since `alpha^n=lambda_s`,
@@ -514,8 +522,8 @@ Thus `tau_{s,k}` is a permutation of the finite factor set.
 Do not assume `tau^2=id` in the general `k`-Galois case. On roots, repeated application uses
 
 \[
-\alpha\longmapsto \alpha^{-p^{e m_s-k}}
-\longmapsto \alpha^{p^{2(e m_s-k)}}
+\alpha\longmapsto \alpha^{-p^{r_s}}
+\longmapsto \alpha^{p^{2r_s}}
 \longmapsto\cdots,
 \]
 
@@ -1084,10 +1092,11 @@ n=5,
 \qquad k=1.
 \]
 
-The inverse-Frobenius exponent is
+The modular inverse-Frobenius residue is
 
 \[
-\rho=2^{2-1}=2.
+r=(-1)\bmod2=1,
+\qquad \rho=2^r=2.
 \]
 
 ### 10.2 Factorization over `F_4`
@@ -1270,7 +1279,9 @@ q=8=2^3,
 Here `m_s=1` and
 
 \[
-\rho=p^{e m_s-k}=2^{3-1}=4.
+r_s\equiv-1\pmod 3,
+\qquad r_s=2,
+\qquad \rho=p^{r_s}=2^2=4.
 \]
 
 Since `F_8^*` has order `7`, `x^7-1` splits into seven distinct linear factors. If `alpha` is a primitive seventh root and
@@ -1371,7 +1382,9 @@ q=4=2^2,
 Now
 
 \[
-\rho=p^{e m_s-k}=2^{2\cdot2-1}=8.
+r_s\equiv-1\pmod 4,
+\qquad r_s=3,
+\qquad \rho=p^{r_s}=2^3=8.
 \]
 
 Since `5` divides `15=|F_16^*|`, `x^5-1` splits into five linear factors over `F_16`. If `alpha` is an element of order `5`, then
@@ -1487,7 +1500,9 @@ q=4=2^2,
 where `omega^2+omega+1=0`. Here
 
 \[
-\rho=p^{e-k}=2,
+r_s\equiv-1\pmod 2,
+\qquad r_s=1,
+\qquad \rho=p^{r_s}=2,
 \qquad
 \lambda^{1+\rho}=\omega^3=1.
 \]
@@ -1547,20 +1562,21 @@ q=4,
 \qquad n=5,
 \qquad \lambda=\omega,
 \qquad k=0,
-\qquad \rho=p^{e-k}=4.
+\qquad r_s=0,
+\qquad \rho=p^{r_s}=1.
 \]
 
 Then
 
 \[
-\lambda^{1+\rho}=\omega^5=\omega^2\ne1,
+\lambda^{1+\rho}=\omega^2\ne1,
 \]
 
 and
 
 \[
 \lambda'=
-\lambda^{-\rho}=\omega^2\ne\omega.
+\lambda^{-\rho}=\lambda^{-1}=\omega^2\ne\omega.
 \]
 
 For the code
@@ -2002,7 +2018,7 @@ No later formula should be used before the definition and lemma on which it depe
 
 ### Risk 1: General extension-field convention conflicts with source notation
 
-Use the rigorous component version (3.2)–(3.5). State explicitly that the supplied paper’s `p^{e-k}` formula is recovered when all components are `F_q`.
+Use the rigorous component version (3.2)–(3.5). State explicitly that when all components are `F_q` and `1 <= k < e`, the familiar `p^{e-k}` exponent is recovered; for `k=0`, use the modular convention `r_s=0`, `rho_s=1`.
 
 ### Risk 2: `tau` has long cycles and the intended application only has pairs
 
@@ -2037,7 +2053,7 @@ Each alternative requires a fresh literature audit.
 
 - [ ] The title does not overclaim a cycle-index method.
 - [ ] `K_s` and `m_s` are defined before use.
-- [ ] The inverse Frobenius exponent is `p^{e m_s-k}` in the general component setting.
+- [ ] The inverse Frobenius is defined by `r_s = (-k) mod (e m_s)`, `rho_s=p^{r_s}`, including the `k=0` case.
 - [ ] The split case `m_s=1` is explicitly identified.
 - [ ] `tau_{s,k}` is defined by equation (4.1).
 - [ ] `tau(F_s)=F_s` is proved from the root action and compatibility.
@@ -2085,7 +2101,7 @@ If an optional section is incomplete at Week 8, omit it rather than weakening th
 ## 21. Immediate next actions
 
 1. Keep `code/validate_pilot.py`, `code/validate_long_orbit_examples.py`, `code/validate_nontrivial_constacyclic.py`, and `code/diagnose_incompatible_twist.py` under version control and attach all outputs to the research notes.
-2. Implement the general `K_s` version with `rho_s=p^{e m_s-k}` before testing any extension-field example.
+2. Implement the general `K_s` version with `r_s=(-k) mod (e m_s)` and `rho_s=p^{r_s}` before testing any extension-field example.
 3. Retain Example A as the genuine long-orbit test; do not infer long-cycle behavior from the `F_4`, Hermitian, 2-cycle pilot.
 4. Prove Lemma 5.1 and Theorem 5.3 in full before writing the transfer-matrix section.
 5. Derive the `a=1,...,5` orbit polynomials in the paper or an appendix.

@@ -3,8 +3,8 @@
 Parameters:
     q=4=2^2, K=F_4, n=5, lambda=omega, k=0 (Euclidean).
 
-Here rho=p^(e-k)=4 and
-    lambda^(1+rho)=omega^5=omega^2 != 1.
+Here r=(-k) mod e=0 and rho=p^r=1, so
+    lambda^(1+rho)=omega^2 != 1.
 The direct dual is checked to be lambda^(-rho)=omega^2-constacyclic,
 while it is not lambda-constacyclic for the selected code.
 """
@@ -24,7 +24,8 @@ OMEGA = F.alpha
 LENGTH = 5
 LAMBDA = OMEGA
 K = 0
-RHO = 2 ** (2 - K)  # p^(e-k)=4
+R_EXP = (-K) % 2     # r=(-k) mod e=0
+RHO = 2 ** R_EXP      # p^r=1
 SIGMA = 2 ** K        # p^k=1
 FACTORS = (
     (3, 1),
@@ -82,7 +83,7 @@ def main():
     assert not is_constacyclic(direct_dual, LAMBDA)
 
     print("incompatible-twist diagnostic:")
-    print("  q=4, n=5, lambda=omega, k=0, rho=4")
+    print("  q=4, n=5, lambda=omega, k=0, r=0, rho=1")
     print("  lambda^(1+rho)=", F.pow(LAMBDA, 1 + RHO), "!= 1")
     print("  lambda^(-rho)=", lambda_prime, "!= lambda")
     print("  direct dual equals <h^(#)>:", direct_dual == expected_dual)

@@ -363,7 +363,8 @@ def direct_histogram(F, factors, n, sigma_exponent, component_weight):
 
 
 def validate_example(name, F, q, e, m, k, n):
-    rho = 2 ** (e * m - k)
+    r_s = (-k) % (e * m)
+    rho = 2 ** r_s
     sigma_exponent = 2 ** k
     roots, factors = roots_and_factors(F, n)
     permutation, index_orbits = tau_orbits(F, factors, rho)
@@ -383,7 +384,7 @@ def validate_example(name, F, q, e, m, k, n):
 
     print(f"{name}:")
     print(f"  q={q}, e={e}, m_s={m}, k={k}, n={n}")
-    print(f"  rho_s={rho}, sigma=p^k={sigma_exponent}")
+    print(f"  r_s={r_s}, rho_s={rho}, sigma=p^k={sigma_exponent}")
     print(f"  tau permutation on root indices: {permutation}")
     print(f"  orbit lengths: {[len(orbit) for orbit in index_orbits]}")
     print(f"  orbit-boundary == transfer: {boundary == transfer}")
@@ -398,7 +399,8 @@ def validate_example(name, F, q, e, m, k, n):
 
 def main():
     # Example A: m_s=1 but a genuine non-involutory k-Galois orbit.
-    # F_8 = F_2[a]/(a^3+a+1), q=8=2^3, k=1, rho=2^(3-1)=4.
+    # F_8 = F_2[a]/(a^3+a+1), q=8=2^3, k=1,
+    # r_s=(-1) mod 3=2 and rho=2^2=4.
     F8 = BinaryField(3, 0b1011)
     validate_example(
         "Example A (m_s=1, orbit length 6)",
@@ -411,7 +413,8 @@ def main():
     )
 
     # Example B: an extension component K=F_16=F_{4^2}.
-    # q=4=2^2, m_s=2, k=1, rho=2^(4-1)=8.
+    # q=4=2^2, m_s=2, k=1,
+    # r_s=(-1) mod 4=3 and rho=2^3=8.
     F16 = BinaryField(4, 0b10011)
     validate_example(
         "Example B (m_s=2, orbit length 4)",

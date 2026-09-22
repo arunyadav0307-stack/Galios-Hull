@@ -3,7 +3,7 @@
 Parameters:
     q=4=2^2, K=F_4, n=5, lambda=omega != 1, k=1.
 
-Here rho=p^(e-k)=2 and lambda^(1+rho)=omega^3=1.  The polynomial
+Here r=(-k) mod e=1, rho=p^r=2 and lambda^(1+rho)=omega^3=1.  The polynomial
 x^5-lambda factors as one linear factor and two irreducible quadratics.
 The two quadratic factors form a tau-orbit of length 2.
 
@@ -33,7 +33,8 @@ OMEGA = F.alpha
 LENGTH = 5
 LAMBDA = OMEGA
 K = 1
-RHO = 2 ** (2 - K)  # p^(e-k)=2
+R_EXP = (-K) % 2     # r=(-k) mod e=1
+RHO = 2 ** R_EXP      # p^r=2
 SIGMA = 2 ** K        # p^k=2
 
 # x^5-lambda = x^5+lambda in characteristic two.
@@ -201,7 +202,7 @@ def main():
     assert sum(direct_joint.values()) == 2 ** len(FACTORS)
 
     print("nontrivial compatible constacyclic example:")
-    print("  q=4, n=5, lambda=omega != 1, k=1, rho=2")
+    print("  q=4, n=5, lambda=omega != 1, k=1, r=1, rho=2")
     print("  factorisation:", " * ".join(p_repr(factor) for factor in FACTORS))
     print("  square-free: True")
     print("  lambda^(1+rho)=", F.pow(LAMBDA, 1 + RHO), "= 1")
