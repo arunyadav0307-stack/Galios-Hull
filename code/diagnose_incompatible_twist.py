@@ -96,12 +96,18 @@ def main():
 
     assert is_constacyclic(direct_dual, predicted_twist)
     assert not is_constacyclic(direct_dual, LAMBDA)
+    automorphisms_same = all(
+        F.frobenius(value, SIGMA_EXPONENT)
+        == F.frobenius(value, INVERSE_AUTOMORPHISM_EXPONENT)
+        for value in range(F.size)
+    )
+    assert automorphisms_same
 
     print("basic incompatible-twist sanity diagnostic only:")
     print("  q=4, n=5, lambda=omega, k=0")
     print("  sigma exponent p^k:", SIGMA_EXPONENT)
     print("  inverse automorphism exponent p^(e*m-k):", INVERSE_AUTOMORPHISM_EXPONENT)
-    print("  sigma == inverse automorphism on F_4: True")
+    print("  sigma == inverse automorphism on F_4:", automorphisms_same)
     print("  direct dual from defining <c,x>_k: checked")
     print("  direct equals principal reciprocal: True")
     print("  direct equals p^k reciprocal alternative: True")

@@ -66,9 +66,10 @@ def reciprocal_generated_dual(check, exponent):
 def main():
     assert Q == P ** E
     assert M_S == 2 and K == 1 and N == 3
-    assert F.frobenius(ALPHA, SIGMA_EXPONENT) != F.frobenius(
-        ALPHA, INVERSE_AUTOMORPHISM_EXPONENT
-    )
+    automorphisms_differ = F.frobenius(
+        ALPHA, SIGMA_EXPONENT
+    ) != F.frobenius(ALPHA, INVERSE_AUTOMORPHISM_EXPONENT)
+    assert automorphisms_differ
     assert F.pow(LAMBDA, 5) == 1 and LAMBDA != 1
     assert product_polynomials(F, FACTORS) == (LAMBDA, 0, 0, 1)
     assert len(set(FACTORS)) == N
@@ -166,7 +167,7 @@ def main():
     print("  p=2, e=2, m_s=2, q=4, K=F_16=F_(4^2), k=1, n=3")
     print("  sigma exponent p^k:", SIGMA_EXPONENT)
     print("  rho exponent p^(e*m_s-k):", INVERSE_AUTOMORPHISM_EXPONENT)
-    print("  sigma and rho differ as automorphisms:", True)
+    print("  sigma and rho differ as automorphisms:", automorphisms_differ)
     print("  lambda=alpha^3 (order 5):", LAMBDA)
     print("  lambda^(1+principal exponent):", principal_incompatibility, "!= 1")
     print("  lambda^(1+alternative p^k exponent):", alternative_incompatibility, "!= 1")
