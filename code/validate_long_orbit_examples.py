@@ -35,6 +35,7 @@ from itertools import product
 
 class BinaryField:
     def __init__(self, degree, modulus):
+        self.characteristic = 2
         self.degree = degree
         self.modulus = modulus
         self.size = 1 << degree
@@ -76,8 +77,11 @@ class BinaryField:
             raise ZeroDivisionError
         return self.pow(x, self.size - 2)
 
-    def frobenius(self, x, exponent):
-        return self.pow(x, exponent)
+    def frobenius(self, x, frobenius_power):
+        """Apply a -> a^(2^r), where r is the iteration number."""
+        if frobenius_power < 0:
+            raise ValueError("Frobenius iteration number must be nonnegative")
+        return self.pow(x, self.characteristic ** frobenius_power)
 
     def neg(self, x):
         # Characteristic two.
@@ -132,20 +136,19 @@ def product_polynomials(F, factors):
     return result
 
 
-def normalized_galois_reciprocal(F, f, automorphism_exponent):
-    """Apply one explicit automorphism to reciprocal coefficients.
+def normalized_galois_reciprocal(F, f, frobenius_power):
+    """Apply a -> a^(2^r) to reciprocal coefficients, with r explicit.
 
-    ``automorphism_exponent`` is the integer r in a -> a^(2^r), not
-    the Galois parameter k itself and not a symbolic rho.  The caller
-    supplies either the principal inverse-Frobenius exponent or the
-    explicitly labeled alternative p^k exponent.
+    ``frobenius_power`` is the Frobenius iteration number r.  It is not the
+    field exponent 2^r and it is not an implicit reciprocal convention.
+    The caller labels the principal or alternative candidate before passing r.
     """
     degree = len(f) - 1
-    constant_image = F.frobenius(f[0], automorphism_exponent)
+    constant_image = F.frobenius(f[0], frobenius_power)
     scale = F.inv(constant_image)
     result = [0] * (degree + 1)
     for i, coefficient in enumerate(f):
-        image = F.frobenius(coefficient, automorphism_exponent)
+        image = F.frobenius(coefficient, frobenius_power)
         result[degree - i] = F.mul(scale, image)
     return p_monic(F, result)
 
@@ -221,8 +224,9 @@ def span(F, rows, length):
     return result
 
 
-def vector_frobenius(F, vector, exponent):
-    return tuple(F.frobenius(x, exponent) for x in vector)
+def vector_frobenius(F, vector, k):
+    """Apply the k-th Frobenius iterate a -> a^(2^k) coordinatewise."""
+    return tuple(F.frobenius(x, k) for x in vector)
 
 
 def generator_rows(F, generator, length):
@@ -236,8 +240,8 @@ def generator_rows(F, generator, length):
     ]
 
 
-def direct_dual_from_inner_product(F, code_basis, sigma_exponent,
-                                   inverse_exponent, length):
+def direct_dual_from_inner_product(F, code_basis, k,
+                                   inverse_frobenius_power, length):
     """Compute {x: sum c_i x_i^(2^k)=0} from the defining equations.
 
     Put y_i=x_i^(2^k).  The actual equations are c dot y=0, so the
@@ -247,11 +251,11 @@ def direct_dual_from_inner_product(F, code_basis, sigma_exponent,
     """
     transformed_candidate_basis = nullspace(F, code_basis, length)
     direct_basis = [
-        vector_frobenius(F, vector, inverse_exponent)
+        vector_frobenius(F, vector, inverse_frobenius_power)
         for vector in transformed_candidate_basis
     ]
     assert all(
-        vector_frobenius(F, candidate, sigma_exponent) == transformed
+        vector_frobenius(F, candidate, k) == transformed
         for transformed, candidate in zip(
             transformed_candidate_basis, direct_basis
         )
@@ -259,23 +263,24 @@ def direct_dual_from_inner_product(F, code_basis, sigma_exponent,
     return direct_basis, span(F, direct_basis, length)
 
 
-def galois_inner_product(F, codeword, candidate, sigma_exponent):
+def galois_inner_product(F, x, y, k):
+    """Return <x,y>_k = sum_i x_i y_i^(2^k), with k the Galois parameter."""
     value = 0
-    for c, x in zip(codeword, candidate):
-        value ^= F.mul(c, F.frobenius(x, sigma_exponent))
+    for x_i, y_i in zip(x, y):
+        value ^= F.mul(x_i, F.frobenius(y_i, k))
     return value
 
 
-def direct_hull_dimensions(F, rows, sigma_exponent, inverse_exponent):
+def direct_hull_dimensions(F, rows, k, inverse_frobenius_power):
     """Return (K-dimension of C, K-dimension of Hull_k(C))."""
     n = len(rows[0]) if rows else 0
     C_basis = row_basis(F, rows, n)
     code_dimension = len(C_basis)
     dual_basis, direct_dual = direct_dual_from_inner_product(
-        F, C_basis, sigma_exponent, inverse_exponent, n
+        F, C_basis, k, inverse_frobenius_power, n
     )
     assert all(
-        galois_inner_product(F, row, candidate, sigma_exponent) == 0
+        galois_inner_product(F, row, candidate, k) == 0
         for row in C_basis
         for candidate in dual_basis
     )
@@ -378,11 +383,11 @@ def roots_and_factors(F, n):
     return roots, factors
 
 
-def tau_orbits(F, factors, automorphism_exponent):
+def tau_orbits(F, factors, reciprocal_frobenius_power):
     index = {factor: i for i, factor in enumerate(factors)}
     permutation = []
     for factor in factors:
-        image = normalized_galois_reciprocal(F, factor, automorphism_exponent)
+        image = normalized_galois_reciprocal(F, factor, reciprocal_frobenius_power)
         assert image in index
         permutation.append(index[image])
 
@@ -410,8 +415,9 @@ def is_constacyclic(F, code, twist):
     return all(constacyclic_shift(F, vector, twist) in code for vector in code)
 
 
-def direct_histogram(F, factors, n, sigma_exponent,
-                     inverse_exponent, principal_exponent, component_weight):
+def direct_histogram(F, factors, n, k, inverse_frobenius_power,
+                     principal_reciprocal_power,
+                     component_weight):
     histogram = Counter()
     dual_checks = 0
     for mask in range(1 << len(factors)):
@@ -430,14 +436,14 @@ def direct_histogram(F, factors, n, sigma_exponent,
         rows = generator_rows(F, generator, n)
         code_basis = row_basis(F, rows, n)
         direct_dual_basis, direct_dual = direct_dual_from_inner_product(
-            F, code_basis, sigma_exponent, inverse_exponent, n
+            F, code_basis, k, inverse_frobenius_power, n
         )
         assert all(
-            galois_inner_product(F, codeword, candidate, sigma_exponent) == 0
+            galois_inner_product(F, codeword, candidate, k) == 0
             for codeword in code_basis
             for candidate in direct_dual_basis
         )
-        predicted = normalized_galois_reciprocal(F, check, principal_exponent)
+        predicted = normalized_galois_reciprocal(F, check, principal_reciprocal_power)
         predicted_dual = span(F, generator_rows(F, predicted, n), n)
         assert direct_dual == predicted_dual
         # These examples have lambda=1, so the predicted twist is also 1.
@@ -445,7 +451,7 @@ def direct_histogram(F, factors, n, sigma_exponent,
         dual_checks += 1
 
         code_dimension, hull_dimension = direct_hull_dimensions(
-            F, rows, sigma_exponent, inverse_exponent
+            F, rows, k, inverse_frobenius_power
         )
         histogram[
             (component_weight * code_dimension,
@@ -455,11 +461,15 @@ def direct_histogram(F, factors, n, sigma_exponent,
 
 
 def validate_example(name, F, q, e, m, k, n):
-    sigma_exponent = 2 ** k
-    inverse_exponent = 2 ** (e * m - k)
-    principal_exponent = inverse_exponent
+    sigma_power = k  # Frobenius iteration number
+    sigma_field_exponent = 2 ** sigma_power
+    rho_power = e * m - k  # inverse-Frobenius iteration number
+    rho_field_exponent = 2 ** rho_power
+    principal_reciprocal_power = rho_power  # reciprocal iteration number
     roots, factors = roots_and_factors(F, n)
-    permutation, index_orbits = tau_orbits(F, factors, principal_exponent)
+    permutation, index_orbits = tau_orbits(
+        F, factors, principal_reciprocal_power
+    )
     orbit_data = [(len(orbit), m) for orbit in index_orbits]
 
     # For a linear factor every K-degree is one, so w=m.
@@ -469,7 +479,8 @@ def validate_example(name, F, q, e, m, k, n):
          for length, weight in orbit_data]
     )
     direct, dual_checks = direct_histogram(
-        F, factors, n, sigma_exponent, inverse_exponent, principal_exponent, m
+        F, factors, n, k, rho_power,
+        principal_reciprocal_power, m
     )
 
     assert boundary == transfer
@@ -478,8 +489,9 @@ def validate_example(name, F, q, e, m, k, n):
 
     print(f"{name}:")
     print(f"  q={q}, e={e}, m_s={m}, k={k}, n={n}")
-    print(f"  sigma exponent p^k={sigma_exponent}")
-    print(f"  principal reciprocal exponent p^(e*m_s-k)={principal_exponent}; direct uses p^k={sigma_exponent}")
+    print(f"  sigma Frobenius power k={sigma_power}; field exponent p^k={sigma_field_exponent}")
+    print(f"  rho Frobenius power em-k={rho_power}; field exponent p^(em-k)={rho_field_exponent}")
+    print(f"  principal reciprocal Frobenius power={principal_reciprocal_power}; direct k={k}")
     print(f"  tau permutation on root indices: {permutation}")
     print(f"  orbit lengths: {[len(orbit) for orbit in index_orbits]}")
     print(f"  orbit-boundary == transfer: {boundary == transfer}")
@@ -496,8 +508,9 @@ def validate_example(name, F, q, e, m, k, n):
 def main():
     # Example A: m_s=1 but a genuine non-involutory k-Galois orbit.
     # F_8 = F_2[a]/(a^3+a+1), q=8=2^3, k=1,
-    # sigma=p^k=2 is used in the defining inner product; the finalized
-    # principal reciprocal exponent is p^(e*m-k)=4.
+    # sigma has iteration number k=1 and field exponent p^k=2 in the
+    # defining inner product; rho has iteration number e*m-k=2 and field
+    # exponent p^(e*m-k)=4 for the principal reciprocal.
     F8 = BinaryField(3, 0b1011)
     validate_example(
         "Example A (m_s=1, orbit length 6)",
@@ -511,8 +524,9 @@ def main():
 
     # Example B: an extension component K=F_16=F_{4^2}.
     # q=4=2^2, m_s=2, k=1,
-    # sigma=p^k=2 is used in the defining inner product; the finalized
-    # principal reciprocal exponent is p^(e*m-k)=8.
+    # sigma has iteration number k=1 and field exponent p^k=2 in the
+    # defining inner product; rho has iteration number e*m-k=3 and field
+    # exponent p^(e*m-k)=8 for the principal reciprocal.
     F16 = BinaryField(4, 0b10011)
     validate_example(
         "Example B (m_s=2, orbit length 4)",

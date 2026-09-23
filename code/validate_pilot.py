@@ -122,19 +122,19 @@ def brute_factor(p):
     return [p]
 
 
-def normalized_galois_reciprocal(f, automorphism_exponent=2):
-    """Apply the explicit automorphism a -> a^(2^r) to reciprocal coefficients.
+def f4_frobenius(value, frobenius_power):
+    """Apply a -> a^(2^r) on F_4, with r the iteration number."""
+    return square(value) if frobenius_power % 2 else value
 
-    The argument is an automorphism exponent, not the Galois parameter k and
-    not an implicit rho.  The caller labels the principal reciprocal or an
-    alternative comparator before passing it here.
-    """
+
+def normalized_galois_reciprocal(f, frobenius_power=0):
+    """Apply a -> a^(2^r) to reciprocal coefficients, with r explicit."""
     degree = len(f) - 1
-    image = square if automorphism_exponent == 2 else (lambda value: value)
-    constant = image(f[0])
+    constant = f4_frobenius(f[0], frobenius_power)
     out = [0] * (degree + 1)
     for i, coefficient in enumerate(f):
-        out[degree - i] = mul(inverse(constant), image(coefficient))
+        image = f4_frobenius(coefficient, frobenius_power)
+        out[degree - i] = mul(inverse(constant), image)
     return p_monic(out)
 
 
@@ -168,13 +168,12 @@ def v_scale(c, a):
     return tuple(mul(c, x) for x in a)
 
 
-def galois_dot(codeword, candidate, sigma_exponent):
+def galois_dot(codeword, candidate, k):
     # This is the defining equation <c,x>_k=0, evaluated directly.
-    # sigma_exponent is p^k; no reciprocal convention is used here.
+    # k is the Galois iteration number; no reciprocal convention is used here.
     value = 0
     for c, x in zip(codeword, candidate):
-        sigma_x = square(x) if sigma_exponent == 2 else x
-        value ^= mul(c, sigma_x)
+        value ^= mul(c, f4_frobenius(x, k))
     return value
 
 
@@ -207,24 +206,23 @@ def selected_product(factors, selected):
     return result
 
 
-def direct_dual(rows, sigma_exponent, length=5):
+def direct_dual(rows, k, length=5):
     """Compute the dual directly from <c,x>_k=0."""
     return {
         vector
         for vector in product(range(4), repeat=length)
         if all(
-            galois_dot(row, vector, sigma_exponent) == 0
+            galois_dot(row, vector, k) == 0
             for row in rows
         )
     }
 
 
-def hull_dimension_for_selection(factors, selected, sigma_exponent,
-                                length=5):
+def hull_dimension_for_selection(factors, selected, k, length=5):
     generator = selected_product(factors, selected)
     rows = generator_rows(generator, length)
     code = span(rows, length)
-    hull = code & direct_dual(rows, sigma_exponent, length)
+    hull = code & direct_dual(rows, k, length)
     size = len(hull)
     dimension = 0
     while size > 1:
@@ -256,9 +254,19 @@ def verify_small_orbit_counts():
 
 
 def main():
-    sigma_exponent = 2  # p^k for q=4, k=1
-    principal_exponent = 2  # p^(e*m_s-k), equal here by coincidence
+    k_galois = 1
+    sigma_power = k_galois  # Frobenius iteration number
+    sigma_field_exponent = 2 ** sigma_power
+    rho_power = 2 * 1 - k_galois  # inverse-Frobenius iteration number
+    rho_field_exponent = 2 ** rho_power
+    principal_reciprocal_power = rho_power  # reciprocal iteration number
     verify_small_orbit_counts()
+    print("F4 pilot parameters: q=4, n=5, lambda=1, k=1")
+    print("  sigma Frobenius power k:", sigma_power)
+    print("  sigma field exponent p^k:", sigma_field_exponent)
+    print("  rho Frobenius power em-k:", rho_power)
+    print("  rho field exponent p^(em-k):", rho_field_exponent)
+    print("  principal reciprocal Frobenius power:", principal_reciprocal_power)
     print("orbit polynomial checks: a=1,...,5 PASS")
     # In characteristic two, x^5-1 = x^5+1.
     polynomial = (1, 0, 0, 0, 0, 1)
@@ -270,12 +278,12 @@ def main():
 
     quadratic_factors = [factor for factor in factors if len(factor) - 1 == 2]
     assert len(quadratic_factors) == 2
-    images = [normalized_galois_reciprocal(factor, automorphism_exponent=principal_exponent) for factor in quadratic_factors]
+    images = [normalized_galois_reciprocal(factor, principal_reciprocal_power) for factor in quadratic_factors]
     assert images[0] == quadratic_factors[1]
     assert images[1] == quadratic_factors[0]
 
     linear_factor = next(factor for factor in factors if len(factor) - 1 == 1)
-    assert normalized_galois_reciprocal(linear_factor, principal_exponent) == linear_factor
+    assert normalized_galois_reciprocal(linear_factor, principal_reciprocal_power) == linear_factor
     print("Hermitian factor action: fixed linear factor; quadratic factors swapped")
 
     component_histogram = Counter()
@@ -286,12 +294,12 @@ def main():
         generator = selected_product(factors, selected)
         check = selected_product(factors, complement)
         rows = generator_rows(generator)
-        direct = direct_dual(rows, sigma_exponent)
-        predicted = normalized_galois_reciprocal(check, principal_exponent)
+        direct = direct_dual(rows, k_galois)
+        predicted = normalized_galois_reciprocal(check, principal_reciprocal_power)
         assert direct == span(generator_rows(predicted))
         dual_generator_checks += 1
         hull_dimension, code_size = hull_dimension_for_selection(
-            factors, selected, sigma_exponent
+            factors, selected, k_galois
         )
         code_dimension = 0
         size = code_size
@@ -320,7 +328,7 @@ def main():
     for mask in range(1 << len(factors)):
         selected = [i for i in range(len(factors)) if (mask >> i) & 1]
         hull_dimension, code_size = hull_dimension_for_selection(
-            factors, selected, sigma_exponent
+            factors, selected, k_galois
         )
         code_dimension = 0
         size = code_size

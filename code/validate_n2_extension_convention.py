@@ -3,8 +3,8 @@
 The defining inner product is
     <c,x>_k = sum_i c_i x_i^(p^k),
 with K=F_16=F_{4^2}, p=2, e=2, m_s=2, k=1.
-Thus sigma has exponent p^k=2 and its inverse has exponent
-p^(e*m_s-k)=8.
+Thus sigma has Frobenius power k=1 and field exponent p^k=2; its inverse
+has Frobenius power em_s-k=3 and field exponent p^(em_s-k)=8.
 
 The direct dual is computed from the defining equations, independently of
 both reciprocal candidates.  The finalized code-first convention predicts the
@@ -30,12 +30,14 @@ P = 2
 Q = 4
 E = 2
 M_S = 2
-K = 1
+K_GALOIS = 1
 N = 5
-SIGMA_EXPONENT = P ** K
-INVERSE_AUTOMORPHISM_EXPONENT = P ** (E * M_S - K)
-PRINCIPAL_RECIPROCAL_EXPONENT = INVERSE_AUTOMORPHISM_EXPONENT
-ALTERNATIVE_RECIPROCAL_EXPONENT = SIGMA_EXPONENT
+SIGMA_POWER = K_GALOIS  # Frobenius iteration number k
+SIGMA_FIELD_EXPONENT = P ** SIGMA_POWER
+RHO_POWER = E * M_S - K_GALOIS  # inverse-Frobenius iteration number
+RHO_FIELD_EXPONENT = P ** RHO_POWER
+PRINCIPAL_RECIPROCAL_POWER = RHO_POWER  # iteration number passed to reciprocal
+ALTERNATIVE_RECIPROCAL_POWER = SIGMA_POWER  # N2 comparator iteration number
 LAMBDA = 1
 
 
@@ -52,14 +54,14 @@ def main():
     _, factors = roots_and_factors(F, N)
     assert Q == P ** E
     assert LAMBDA == 1
-    assert F.pow(LAMBDA, 1 + INVERSE_AUTOMORPHISM_EXPONENT) == LAMBDA
+    assert F.pow(LAMBDA, 1 + RHO_FIELD_EXPONENT) == LAMBDA
     assert len(factors) == N
 
     factor_index = {factor: i for i, factor in enumerate(factors)}
     principal_tau = [
         factor_index[
             normalized_galois_reciprocal(
-                F, factor, PRINCIPAL_RECIPROCAL_EXPONENT
+                F, factor, PRINCIPAL_RECIPROCAL_POWER
             )
         ]
         for factor in factors
@@ -67,7 +69,7 @@ def main():
     alternative_tau = [
         factor_index[
             normalized_galois_reciprocal(
-                F, factor, ALTERNATIVE_RECIPROCAL_EXPONENT
+                F, factor, ALTERNATIVE_RECIPROCAL_POWER
             )
         ]
         for factor in factors
@@ -93,13 +95,13 @@ def main():
         direct_basis, direct_dual = direct_dual_from_inner_product(
             F,
             code_basis,
-            SIGMA_EXPONENT,
-            INVERSE_AUTOMORPHISM_EXPONENT,
+            K_GALOIS,
+            RHO_POWER,
             N,
         )
         assert all(
             galois_inner_product(
-                F, codeword, candidate, SIGMA_EXPONENT
+                F, codeword, candidate, K_GALOIS
             ) == 0
             for codeword in code_basis
             for candidate in direct_basis
@@ -108,7 +110,7 @@ def main():
 
         # B: finalized principal reciprocal convention.
         principal_sharp = normalized_galois_reciprocal(
-            F, check, PRINCIPAL_RECIPROCAL_EXPONENT
+            F, check, PRINCIPAL_RECIPROCAL_POWER
         )
         principal_dual = span(
             F, generator_rows(F, principal_sharp, N), N
@@ -119,7 +121,7 @@ def main():
 
         # C: independently implemented p^k reciprocal alternative.
         alternative_sharp = normalized_galois_reciprocal(
-            F, check, ALTERNATIVE_RECIPROCAL_EXPONENT
+            F, check, ALTERNATIVE_RECIPROCAL_POWER
         )
         alternative_dual = span(
             F, generator_rows(F, alternative_sharp, N), N
@@ -139,10 +141,12 @@ def main():
 
     print("N2-A extension-field convention validation:")
     print("  K=F_16=F_(4^2), p=2, q=4, e=2, m_s=2, n=5, lambda=1, k=1")
-    print("  sigma exponent p^k:", SIGMA_EXPONENT)
-    print("  inverse automorphism exponent p^(e*m_s-k):", INVERSE_AUTOMORPHISM_EXPONENT)
-    print("  principal reciprocal exponent:", PRINCIPAL_RECIPROCAL_EXPONENT)
-    print("  alternative reciprocal exponent:", ALTERNATIVE_RECIPROCAL_EXPONENT)
+    print("  sigma Frobenius power k:", SIGMA_POWER)
+    print("  sigma field exponent p^k:", SIGMA_FIELD_EXPONENT)
+    print("  rho Frobenius power em_s-k:", RHO_POWER)
+    print("  rho field exponent p^(em_s-k):", RHO_FIELD_EXPONENT)
+    print("  principal reciprocal Frobenius power:", PRINCIPAL_RECIPROCAL_POWER)
+    print("  alternative reciprocal Frobenius power:", ALTERNATIVE_RECIPROCAL_POWER)
     print("  principal reciprocal permutation:", principal_tau)
     print("  alternative reciprocal permutation:", alternative_tau)
     print("  direct dual from defining <c,x>_k equations:", direct_equation_checks, "of 32")

@@ -52,7 +52,10 @@ where `u` records `F_q`-code dimension and `z` records `F_q`-hull dimension. Its
 | `p` | characteristic prime | `q=p^e` |
 | `q` | base-field size | `\mathbb F_q` |
 | `e` | base-field extension degree | reserved for `q=p^e` |
-| `k` | Galois parameter | `0\le k<e` |
+| `k` | Galois/Frobenius iteration number | `0\le k<e`; pass this index to a Frobenius API |
+| `p^k` | sigma field exponent | actual multiplicative field exponent in `a\mapsto a^{p^k}`; not an API iteration argument |
+| `e m_s-k` | inverse-Frobenius iteration number | the iteration index for rho on `K_s` |
+| `p^{e m_s-k}` | rho field exponent | actual multiplicative field exponent in the principal reciprocal and twist formulas |
 | `\sigma_{s,k}` | second-slot coefficient Frobenius | `\sigma_{s,k}(a)=a^{p^k}` on `K_s` |
 | `\rho_{s,k}` | inverse Frobenius on `K_s` | `\rho_{s,k}(a)=a^{p^{e m_s-k}}=\sigma_{s,k}^{-1}(a)` |
 | `A` | square-free affine algebra | decomposes as `\prod_s K_s` |
@@ -107,7 +110,7 @@ Because `K_s=\mathbb F_{p^{e m_s}}`, the inverse automorphism is
 \rho_{s,k}(a)=a^{p^{e m_s-k}}=\sigma_{s,k}^{-1}(a).
 \]
 
-The principal normalized reciprocal, dual-generator identity, root action, and compatibility condition use `\rho_{s,k}`, not `\sigma_{s,k}`. The exponent `p^k` remains in the inner product itself. This argument order and inverse-Frobenius translation must be stated before the dual-generator proof and used consistently in every component and example.
+The principal normalized reciprocal, dual-generator identity, root action, and compatibility condition use `\rho_{s,k}`, not `\sigma_{s,k}`. The field exponent `p^k` remains in the inner product itself. Throughout the code audit, a Frobenius API argument means an iteration number (`k` or `e m_s-k`), whereas a multiplicative field-power calculation uses the corresponding actual field exponent (`p^k` or `p^{e m_s-k}`). This argument order and inverse-Frobenius translation must be stated before the dual-generator proof and used consistently in every component and example.
 
 
 ---
@@ -128,7 +131,7 @@ A shorter alternative, if the bivariate result is emphasized, is:
 
 The actual framework uses factor orbits, transfer matrices, and generating functions. A genuine Burnside/Pólya equivalence-class construction is only optional and is not assumed in the main theorem.
 
-### Correction B — the principal exponent is derived from the dual slot
+### Correction B — the principal reciprocal field exponent is derived from the dual slot
 
 The convention is fixed by the component inner product and the explicitly declared dual slot, not by a validator or by preference. On
 
@@ -136,7 +139,7 @@ The convention is fixed by the component inner product and the explicitly declar
 K_s=\mathbb F_{q^{m_s}}=\mathbb F_{p^{e m_s}},
 \]
 
-set
+Set `k` to be the Galois/Frobenius iteration number, not the field exponent. The actual field exponent used in the second slot is `p^k`. Then
 
 \[
 \sigma_{s,k}(a)=a^{p^k},
@@ -145,6 +148,8 @@ set
 \qquad
 \rho_{s,k}(a)=a^{p^{e m_s-k}}.
 \]
+
+Thus the rho iteration number is `e m_s-k`, while its actual field exponent is `p^{e m_s-k}`. A Frobenius API receives the iteration number; a multiplicative field-power calculation receives the actual field exponent.
 
 The dual is defined with the codeword in the first slot:
 
@@ -315,7 +320,7 @@ The existing `F_4` setup and its numerical conclusions are retained. The only ch
 The existing script `code/validate_long_orbit_examples.py` verifies:
 
 - a genuine `k=1` example over `F_8` with a `tau`-orbit of length `6`;
-- an `F_{16}=F_{4^2}` component with `m_s=2`, `sigma=2`, `rho=8`, and a `tau`-orbit of length `4`;
+- an `F_{16}=F_{4^2}` component with `m_s=2`, sigma iteration `k=1` and field exponent `p^k=2`, rho iteration `e m_s-k=3` and field exponent `p^(e m_s-k)=8`, and a `tau`-orbit of length `4`;
 - direct hull dimensions, orbit-boundary histograms, and transfer-matrix enumerators.
 
 The N2-A validator computes the direct dual from the defining equations and compares it with both reciprocal candidates: principal 32/32 and alternative 8/32. The N2-B validator independently checks an incompatible nontrivial twist with `m_s=2`, compares both reciprocal candidates and both predicted twists, and checks failure under the original twist without transfer-matrix enumeration.
@@ -524,13 +529,31 @@ The map
 \qquad a\mapsto a^{p^k}
 \]
 
-is an automorphism. Since `K_s=\mathbb F_{p^{e m_s}}`, its inverse is
+uses two distinct quantities: `k` is the Frobenius iteration number, while `p^k` is the actual field exponent. For audit purposes write
+
+\[
+\sigma\text{-power}=k,
+\qquad
+\sigma\text{-field exponent}=p^k.
+\]
+
+Since `K_s=\mathbb F_{p^{e m_s}}`, the inverse automorphism has
+
+\[
+\rho\text{-power}=e m_s-k,
+\qquad
+\rho\text{-field exponent}=p^{e m_s-k},
+\]
+
+that is,
 
 \[
 \rho_{s,k}:K_s\to K_s,
 \qquad a\mapsto a^{p^{e m_s-k}}.
 \tag{3.3}
 \]
+
+The iteration numbers `k` and `e m_s-k` must not be passed to an API that expects the actual field exponents, and conversely.
 
 Define the component dual by placing the codeword in the first argument:
 
@@ -722,7 +745,7 @@ f^{\#_{s,k}}(x)
 \tag{4.1}
 \]
 
-The polynomial is monic. It is the inverse-Frobenius coefficient image of the ordinary normalized reciprocal. Therefore it is multiplicative on monic polynomials with nonzero constant term:
+The polynomial is monic. Its coefficient map is the automorphism at Frobenius iteration `e m_s-k`; the actual coefficient field power is `p^{e m_s-k}`. It is the inverse-Frobenius coefficient image of the ordinary normalized reciprocal. Therefore it is multiplicative on monic polynomials with nonzero constant term:
 
 \[
 (fg)^{\#_{s,k}}
@@ -802,7 +825,7 @@ Do not assume `\tau_{s,k}^2=id` in the general extension-field case. On roots, r
 \alpha\longmapsto\alpha^{-p^{e m_s-k}},
 \]
 
-and the next application uses the same inverse-Frobenius exponent, followed by the factor identification induced by the field automorphism. The resulting factor permutation can have orbit lengths larger than two.
+and the next application uses the same inverse-Frobenius iteration `e m_s-k` (field exponent `p^{e m_s-k}`), followed by the factor identification induced by the field automorphism. The resulting factor permutation can have orbit lengths larger than two.
 
 Special cases are only checks, not hypotheses:
 
@@ -878,7 +901,7 @@ C_s(J_s)^{\perp_k}
 \tag{5.2}
 \]
 
-Thus `C_s(J_s)^{\perp_k}` is the ordinary Euclidean dual of the coefficientwise `\rho`-image of `C_s(J_s)`. That image is the ideal generated by `\rho(g_{J_s})` in
+Thus `C_s(J_s)^{\perp_k}` is the ordinary Euclidean dual of the coefficientwise `\rho`-image of `C_s(J_s)`. Here `\rho` means the automorphism at iteration `e m_s-k`, equivalently field power `p^{e m_s-k}`. That image is the ideal generated by `\rho(g_{J_s})` in
 
 \[
 K_s[x]/\langle x^n-\rho(\lambda_s)\rangle.
@@ -1434,15 +1457,15 @@ q=4=2^2,
 \qquad k=1.
 \]
 
-Here
+Here sigma has Frobenius iteration `k=1` and field exponent `p^k=2`, while rho has iteration `e m_s-k=1` and field exponent `p^{e m_s-k}=2`:
 
 \[
-\sigma_{s,k}=2,
+\sigma_{s,k}(a)=a^{p^k}=a^2,
 \qquad
-\rho_{s,k}=2^{e m_s-k}=2.
+\rho_{s,k}(a)=a^{p^{e m_s-k}}=a^2.
 \]
 
-The two exponents happen to coincide in this pilot, so it cannot separate the two convention candidates. The validator evaluates the defining inner product directly and compares that result with the principal reciprocal. Let `\omega^2+\omega+1=0`. In characteristic two,
+The two field exponents happen to coincide in this pilot, so it cannot separate the two convention candidates. The validator evaluates the defining inner product directly and compares that result with the principal reciprocal. Let `\omega^2+\omega+1=0`. In characteristic two,
 
 \[
 x^5-1=x^5+1
@@ -1450,7 +1473,7 @@ x^5-1=x^5+1
 \tag{10.1}
 \]
 
-The quadratic factors are exchanged by the principal `\rho=2` reciprocal and `x+1` is fixed. Each component therefore has one orbit of weight `1` and one orbit of length `2` and weight `2`.
+The quadratic factors are exchanged by the principal reciprocal at rho iteration `1` (field exponent `2`), and `x+1` is fixed. Each component therefore has one orbit of weight `1` and one orbit of length `2` and weight `2`.
 
 The component joint enumerator, with `u` tracking actual `\mathbb F_4`-code dimension, is
 
@@ -1496,6 +1519,12 @@ PYTHONDONTWRITEBYTECODE=1 python code/validate_pilot.py
 The executed output is:
 
 ```text
+F4 pilot parameters: q=4, n=5, lambda=1, k=1
+  sigma Frobenius power k: 1
+  sigma field exponent p^k: 2
+  rho Frobenius power em-k: 1
+  rho field exponent p^(em-k): 2
+  principal reciprocal Frobenius power: 1
 orbit polynomial checks: a=1,...,5 PASS
 factorisation: x + 1 * x^2 + (a)x + 1 * x^2 + (a+1)x + 1
 Hermitian factor action: fixed linear factor; quadratic factors swapped
@@ -1519,12 +1548,12 @@ q=8=2^3,
 \qquad k=1.
 \]
 
-Here
+Here sigma has Frobenius iteration `k=1` and field exponent `p^k=2`, while rho has iteration `e m_s-k=2` and field exponent `p^{e m_s-k}=4`:
 
 \[
-\sigma_{s,k}=2,
+\sigma_{s,k}(a)=a^{p^k}=a^2,
 \qquad
-\rho_{s,k}=2^{e m_s-k}=2^2=4.
+\rho_{s,k}(a)=a^{p^{e m_s-k}}=a^4.
 \]
 
 Since `\mathbb F_8^\times` has order `7`, `x^7-1` splits into seven distinct linear factors. If `\alpha` is primitive and `f_j=x-\alpha^j`, the principal root action is
@@ -1569,8 +1598,9 @@ The executed output for Example A is:
 ```text
 Example A (m_s=1, orbit length 6):
   q=8, e=3, m_s=1, k=1, n=7
-  sigma exponent p^k=2
-  principal reciprocal exponent p^(e*m_s-k)=4; direct uses p^k=2
+  sigma Frobenius power k=1; field exponent p^k=2
+  rho Frobenius power em-k=2; field exponent p^(em-k)=4
+  principal reciprocal Frobenius power=2; direct k=1
   tau permutation on root indices: [0, 3, 6, 2, 5, 1, 4]
   orbit lengths: [1, 6]
   orbit-boundary == transfer: True
@@ -1580,7 +1610,7 @@ Example A (m_s=1, orbit length 6):
   PASS
 ```
 
-The mean and variance are `3/2` and `3/8`, respectively. The `p^k=2` value is printed only as the inner-product `\sigma` exponent; it is not the principal reciprocal ordering.
+The mean and variance are `3/2` and `3/8`, respectively. The `p^k=2` value is printed only as the inner-product `\sigma` field exponent; it is not the principal reciprocal ordering.
 
 ### 10.3 F16 extension component: `m_s=2` and orbit length `4`
 
@@ -1601,12 +1631,12 @@ q=4=2^2,
 \qquad k=1.
 \]
 
-The two automorphism exponents are
+Here sigma has Frobenius iteration `k=1` and field exponent `p^k=2`, while rho has iteration `e m_s-k=3` and field exponent `p^{e m_s-k}=8`:
 
 \[
-\sigma_{s,k}=2,
+\sigma_{s,k}(a)=a^{p^k}=a^2,
 \qquad
-\rho_{s,k}=2^{e m_s-k}=2^3=8.
+\rho_{s,k}(a)=a^{p^{e m_s-k}}=a^8.
 \]
 
 The five linear factors have inverse-Frobenius factor permutation
@@ -1641,8 +1671,9 @@ The executed Example B output is:
 ```text
 Example B (m_s=2, orbit length 4):
   q=4, e=2, m_s=2, k=1, n=5
-  sigma exponent p^k=2
-  principal reciprocal exponent p^(e*m_s-k)=8; direct uses p^k=2
+  sigma Frobenius power k=1; field exponent p^k=2
+  rho Frobenius power em-k=3; field exponent p^(em-k)=8
+  principal reciprocal Frobenius power=3; direct k=1
   tau permutation on root indices: [0, 2, 4, 1, 3]
   orbit lengths: [1, 4]
   orbit-boundary == transfer: True
@@ -1665,10 +1696,10 @@ q=4=2^2,
 \qquad k=1.
 \]
 
-Here `m_s=1`, so `\sigma=2` and `\rho=2`; compatibility is
+Here `m_s=1`, `k=1`, so sigma has iteration `1` and field exponent `2`, while rho has iteration `1` and field exponent `2`; compatibility is
 
 \[
-\lambda^{1+\rho}=\omega^3=1.
+\lambda^{1+p^{e m_s-k}}=\omega^3=1.
 \]
 
 The verified factorization is
@@ -1704,10 +1735,11 @@ The executed output is:
 ```text
 nontrivial compatible constacyclic example:
   q=4, n=5, lambda=omega != 1, k=1
-  sigma exponent p^k=2; principal reciprocal exponent p^(e*m-k)=2
+  sigma Frobenius power k=1; field exponent p^k=2
+  rho Frobenius power em-k=1; field exponent p^(em-k)=2
   factorisation: x + omega+1 * x^2 + x + omega * x^2 + (omega)x + omega
   square-free: True
-  lambda^(1+principal exponent)= 1 = 1
+  lambda^(1+principal field exponent)= 1 = 1
   tau permutation: [0, 2, 1]
   orbit lengths: [1, 2]
   direct dual-generator checks: 8 of 8
@@ -1730,15 +1762,15 @@ q=4=2^2,
 \qquad k=0.
 \]
 
-Here
+Here sigma has iteration number `0` and field exponent `1`, while rho has iteration number `e m_s-k=2` and field exponent `4`:
 
 \[
-\sigma_{s,0}=1,
+\sigma(a)=a^{2^0}=a,
 \qquad
-\rho_{s,0}=2^{e m_s}=4,
+\rho(a)=a^{2^2}=a^4=a.
 \]
 
-and `\sigma` and `\rho` induce the same identity automorphism on `\mathbb F_4`. In the direct computation this means the `\sigma`-row nullspace is exactly the defining Euclidean nullspace. The validator then compares that direct result with both the finalized principal reciprocal and the `p^k` alternative. Both reciprocal candidates coincide in this field.
+Thus `\sigma` and `\rho` coincide as the identity automorphism on `\mathbb F_4`. In the direct computation this means the `\sigma`-row nullspace is exactly the defining Euclidean nullspace. The validator then compares that direct result with both the finalized principal reciprocal and the `p^k` alternative. Both reciprocal candidates coincide in this field.
 
 This test validates incompatible-twist behavior and that the dual need not retain the original twist. It does **not** resolve the principal Frobenius convention, does **not** validate the general extension-field reciprocal formula, and is therefore **DIAGNOSTIC ONLY**.
 
@@ -1770,14 +1802,16 @@ The executed output is:
 ```text
 basic incompatible-twist sanity diagnostic only:
   q=4, n=5, lambda=omega, k=0
-  sigma exponent p^k: 1
-  inverse automorphism exponent p^(e*m-k): 4
+  sigma Frobenius power k: 0
+  sigma field exponent p^k: 1
+  rho Frobenius power em-k: 2
+  rho field exponent p^(em-k): 4
   sigma == inverse automorphism on F_4: True
   direct dual from defining <c,x>_k: checked
   direct equals principal reciprocal: True
   direct equals p^k reciprocal alternative: True
-  lambda^(1+principal exponent)= 3 != 1
-  predicted dual twist lambda^(-principal)= 3 != lambda
+  lambda^(1+principal field exponent)= 3 != 1
+  predicted dual twist lambda^(-principal field exponent)= 3 != lambda
   direct dual is predicted-twist constacyclic: True
   direct dual is original-lambda constacyclic: False
 This F4,k=0 example cannot distinguish sigma from rho because both are the identity automorphism on F4.
@@ -1819,26 +1853,26 @@ K=\mathbb F_{16}=\mathbb F_{4^2},
 \qquad k=1.
 \]
 
-Thus
+Thus sigma has Frobenius iteration `k=1` and field exponent `p^k=2`, while rho has Frobenius iteration `e m_s-k=3` and field exponent `p^{e m_s-k}=8`:
 
 \[
-\sigma_{s,k}(a)=a^2,
+\sigma_{s,k}(a)=a^{p^k}=a^2,
 \qquad
-\rho_{s,k}(a)=a^8.
+\rho_{s,k}(a)=a^{p^{e m_s-k}}=a^8.
 \]
 
 The validator makes three independent comparisons:
 
 - **A. Direct dual:** evaluate the defining equations `\langle c,x\rangle_{s,k}=0`. Computationally it sets `y=\sigma(x)`, solves `c\cdot y=0` with the original code rows, and maps `y` back through the inverse automorphism.
-- **B. Principal reciprocal:** generate the candidate dual with `h^{\#_{s,k}}` using exponent `8`, as derived from the code-first dual slot.
-- **C. Alternative comparator:** generate the candidate with exponent `2`, namely the `p^k` coefficient reciprocal. This is not a principal formula.
+- **B. Principal reciprocal:** generate the candidate dual with `h^{\#_{s,k}}` using rho iteration `3`, hence actual field exponent `8`, as derived from the code-first dual slot.
+- **C. Alternative comparator:** generate the candidate with Frobenius iteration `1`, hence actual field exponent `p^k=2`, namely the `p^k` coefficient reciprocal. This is not a principal formula.
 
 The compatible principal predicted twist is
 
 \[
-\lambda^{-\rho}=1,
+\lambda^{-p^{e m_s-k}}=1,
 \qquad
-\lambda^{1+\rho}=1.
+\lambda^{1+p^{e m_s-k}}=1.
 \]
 
 The principal and alternative ordered factor permutations are
@@ -1860,10 +1894,12 @@ The executed output is:
 ```text
 N2-A extension-field convention validation:
   K=F_16=F_(4^2), p=2, q=4, e=2, m_s=2, n=5, lambda=1, k=1
-  sigma exponent p^k: 2
-  inverse automorphism exponent p^(e*m_s-k): 8
-  principal reciprocal exponent: 8
-  alternative reciprocal exponent: 2
+  sigma Frobenius power k: 1
+  sigma field exponent p^k: 2
+  rho Frobenius power em_s-k: 3
+  rho field exponent p^(em_s-k): 8
+  principal reciprocal Frobenius power: 3
+  alternative reciprocal Frobenius power: 1
   principal reciprocal permutation: [0, 2, 4, 1, 3]
   alternative reciprocal permutation: [0, 3, 1, 4, 2]
   direct dual from defining <c,x>_k equations: 32 of 32
@@ -1899,9 +1935,9 @@ Let `\alpha` be the primitive element used by the validator and take
 The two automorphisms are genuinely different:
 
 \[
-\sigma(a)=a^2,
+\sigma(a)=a^{p^k}=a^2,
 \qquad
-\rho(a)=a^{2^{e m_s-k}}=a^8,
+\rho(a)=a^{p^{e m_s-k}}=a^8,
 \qquad
 \sigma(\alpha)\ne\rho(\alpha).
 \]
@@ -1915,18 +1951,18 @@ x^3-\lambda=(x+\alpha)(x+\alpha^6)(x+\alpha^{11}).
 N2-B compares the following independently:
 
 - **A. Direct dual:** the code-first defining equations `\langle c,x\rangle_{s,k}=0`, evaluated using `p^k=2` on the candidate slot and an explicit inverse map only to recover the candidate vectors;
-- **B. Principal reciprocal prediction:** the finalized inverse-Frobenius coefficient/root transformation with exponent `8`;
-- **C. Alternative reciprocal prediction:** the `p^k=2` coefficient/root transformation, retained only as the convention alternative.
+- **B. Principal reciprocal prediction:** the finalized inverse-Frobenius coefficient/root transformation at rho iteration `3`, with actual field exponent `p^{e m_s-k}=8`;
+- **C. Alternative reciprocal prediction:** the coefficient/root transformation at sigma iteration `k=1`, with actual field exponent `p^k=2`, retained only as the convention alternative.
 
 For each candidate twist, the validator checks the direct dual's constacyclicity. The principal incompatibility and alternative incompatibility values are respectively
 
 \[
-\lambda^{1+8}\ne1,
+\lambda^{1+p^{e m_s-k}}=\lambda^{1+8}\ne1,
 \qquad
-\lambda^{1+2}\ne1.
+\lambda^{1+p^k}=\lambda^{1+2}\ne1.
 \]
 
-The principal predicted dual twist is `\lambda^{-8}`, while the alternative predicted twist is `\lambda^{-2}`. The validator checks all eight factor selections, compares both reciprocal generators against the direct dual, checks both predicted twists, and checks all six proper nonzero selections against the original `\lambda` twist. It does **not** enumerate a transfer matrix.
+The principal predicted dual twist is `\lambda^{-p^{e m_s-k}}=\lambda^{-8}`, while the alternative predicted twist is `\lambda^{-p^k}=\lambda^{-2}`. The validator checks all eight factor selections, compares both reciprocal generators against the direct dual, checks both predicted twists, and checks all six proper nonzero selections against the original `\lambda` twist. It does **not** enumerate a transfer matrix.
 
 Run:
 
@@ -1939,17 +1975,19 @@ The executed output is:
 ```text
 N2-B incompatible extension-field convention diagnostic:
   p=2, e=2, m_s=2, q=4, K=F_16=F_(4^2), k=1, n=3
-  sigma exponent p^k: 2
-  rho exponent p^(e*m_s-k): 8
+  sigma Frobenius power k: 1
+  sigma field exponent p^k: 2
+  rho Frobenius power em_s-k: 3
+  rho field exponent p^(em_s-k): 8
   sigma and rho differ as automorphisms: True
   lambda=alpha^3 (order 5): 8
-  lambda^(1+principal exponent): 15 != 1
-  lambda^(1+alternative p^k exponent): 10 != 1
+  lambda^(1+principal field exponent): 15 != 1
+  lambda^(1+alternative field exponent p^k): 10 != 1
   defining-inner-product direct dual checks: 8 of 8
   principal reciprocal direct agreements: 8 of 8
   alternative p^k reciprocal direct agreements: 2 of 8
   example alternative discrepancy mask: 1
-  predicted principal dual twist lambda^(-principal): 12
+  predicted principal dual twist lambda^(-principal field exponent): 12
   predicted alternative dual twist lambda^(-p^k): 10
   direct dual constacyclic under principal predicted twist: 8 of 8
   direct dual constacyclic under alternative predicted twist: 2 of 8
@@ -1966,13 +2004,13 @@ This is a finite **COMPUTATIONAL VALIDATION** and **DIAGNOSTIC** outside the com
 | Test | Parameters and status | Exhaustive scope | Result status |
 |---|---|---:|---|
 | F4 pilot | `q=4`, `n=5`, `\lambda=1`, `k=1`, four `F_4` components | `8^4=4096` ring codes plus component checks | **COMPUTATIONAL VALIDATION**: PASS; direct generator checks 8/8 |
-| F8 long orbit | `q=8`, `n=7`, `m_s=1`, `k=1`, `\rho=4`; orbit lengths `[1,6]` | `2^7=128` codes | **COMPUTATIONAL VALIDATION**: PASS; direct generator checks 128/128 |
-| F16 extension | `K=F_{16}=F_{4^2}`, `n=5`, `k=1`, `\rho=8`; orbit lengths `[1,4]` | `2^5=32` codes | **COMPUTATIONAL VALIDATION**: PASS; direct generator checks 32/32 |
+| F8 long orbit | `q=8`, `n=7`, `m_s=1`, `k=1`; rho iteration `2`, field exponent `4`; orbit lengths `[1,6]` | `2^7=128` codes | **COMPUTATIONAL VALIDATION**: PASS; direct generator checks 128/128 |
+| F16 extension | `K=F_{16}=F_{4^2}`, `n=5`, `k=1`; rho iteration `3`, field exponent `8`; orbit lengths `[1,4]` | `2^5=32` codes | **COMPUTATIONAL VALIDATION**: PASS; direct generator checks 32/32 |
 | Compatible nontrivial twist | `q=4`, `n=5`, `\lambda=\omega`, `k=1`; orbit lengths `[1,2]` | `2^3=8` codes | **COMPUTATIONAL VALIDATION**: PASS; direct generator checks 8/8 |
 | Basic incompatible diagnostic | `q=4`, `n=5`, `\lambda=\omega`, `k=0`; `\sigma` and `\rho` are both identity automorphisms | one selected code; no enumerator | **DIAGNOSTIC ONLY**; not a convention-resolution test |
 | N1 | `q=16`, `n=15`, 32,768 selections | `2^{15}` | **VERIFY BEFORE MANUSCRIPT FINALIZATION** |
-| N2-A | `K=F_{16}=F_{4^2}`, `\sigma=2`, `\rho=8`, `n=5`, `\lambda=1` | all `32` selections and direct/principal/alternative comparison | **COMPUTATIONAL VALIDATION**: PASS; direct/principal 32/32, alternative 8/32 |
-| N2-B | `K=F_{16}=F_{4^2}`, `\sigma=2`, `\rho=8`, `k=1`, `n=3`, `\lambda=\alpha^3`; incompatible | all `8` selections; both reciprocal candidates; six proper nonzero original-twist checks; no transfer enumeration | **COMPUTATIONAL VALIDATION**: PASS; principal 8/8, alternative 2/8; **DIAGNOSTIC** outside theorem |
+| N2-A | `K=F_{16}=F_{4^2}`, `k=1`; sigma field exponent `2`, rho iteration `3` and field exponent `8`, `n=5`, `\lambda=1` | all `32` selections and direct/principal/alternative comparison | **COMPUTATIONAL VALIDATION**: PASS; direct/principal 32/32, alternative 8/32 |
+| N2-B | `K=F_{16}=F_{4^2}`, `k=1`; sigma field exponent `2`, rho iteration `3` and field exponent `8`, `n=3`, `\lambda=\alpha^3`; incompatible | all `8` selections; both reciprocal candidates; six proper nonzero original-twist checks; no transfer enumeration | **COMPUTATIONAL VALIDATION**: PASS; principal 8/8, alternative 2/8; **DIAGNOSTIC** outside theorem |
 
 Computational validation is evidence for the listed finite instances only. It never substitutes for theorem-level proofs, and the incompatible rows do not enlarge the compatible same-factor-set theorem.
 
@@ -2399,9 +2437,9 @@ Each alternative requires a fresh literature audit.
 - [ ] The `q=8`, orbit-length-6 example is computationally validated.
 - [ ] The `m_s=2` extension-field example is computationally validated.
 - [ ] The nontrivial compatible `lambda=omega` constacyclic example is computationally validated.
-- [ ] The basic `F_4`, `k=0` incompatible check is labeled `DIAGNOSTIC ONLY` because `\sigma=\rho` there, and it uses no enumerator.
-- [ ] N2-A computes the defining-inner-product direct dual independently, agrees with the principal `\rho=8` reciprocal on 32/32, and records the alternative `p^k=2` agreement as 8/32.
-- [ ] N2-B uses `K=\mathbb F_{16}`, `k=1`, `n=3`, `\lambda=\alpha^3`, distinguishes `\sigma=2` from `\rho=8`, compares both reciprocal candidates and both predicted twists, checks failure under the original twist, and uses no transfer enumeration.
+- [ ] The basic `F_4`, `k=0` incompatible check is labeled `DIAGNOSTIC ONLY` because sigma iteration `0` and rho iteration `2` induce the same identity automorphism there, and it uses no enumerator.
+- [ ] N2-A computes the defining-inner-product direct dual independently, agrees with the principal rho-iteration-`3` reciprocal (field exponent `8`) on 32/32, and records the alternative sigma-iteration-`1` reciprocal (field exponent `2`) agreement as 8/32.
+- [ ] N2-B uses `K=\mathbb F_{16}`, `k=1`, `n=3`, `\lambda=\alpha^3`, distinguishes sigma field exponent `2` from rho field exponent `8` as automorphisms, compares both reciprocal candidates and both predicted twists, checks failure under the original twist, and uses no transfer enumeration.
 - [ ] Direct hull histograms equal theoretical histograms on every stated finite instance.
 - [ ] The computational results are explicitly separated from general mathematical proofs.
 - [ ] Complexity language is cautious.
@@ -2483,7 +2521,7 @@ The supplied local PDF remains a source input, but its text is not locally extra
 Before manuscript submission, verify all of the following:
 
 - `\sigma_{s,k}(a)=a^{p^k}` is used for the second-slot inner product, field-automorphism comparison, and the explicitly labeled incorrect N2 comparator only; it is never a competing principal formula.
-- `\rho_{s,k}=p^{e m_s-k}` is used consistently in the principal reciprocal, dual generator, root action, compatibility, and predicted incompatible twist; the direct-dual validator evaluates the defining `\sigma` equations independently and N2 explicitly contrasts both candidates.
+- rho is used consistently in the principal reciprocal, dual generator, root action, compatibility, and predicted incompatible twist at iteration `e m_s-k` and field exponent `p^{e m_s-k}`; the direct-dual validator evaluates the defining `\sigma` equations independently and N2 explicitly contrasts both candidates.
 - The proof of `\tau_{s,k}(\mathcal F_s)=\mathcal F_s` is complete.
 - Reciprocal multiplicativity, irreducibility preservation, and invertibility are proved.
 - The dual-generator identity `\langle h_{J_s}^{\#_{s,k}}\rangle` is proved, not inferred from computations.
@@ -2521,6 +2559,7 @@ Current status must be reported conservatively: the general formulas are mathema
 - **Literature/reference corrections:** Added explicit theorem-level, publisher/abstract, metadata-only, and DOI-unverified categories; downgraded unresolved source theorem labels and DOI claims to `VERIFY BEFORE MANUSCRIPT FINALIZATION`.
 - **Novelty corrections:** Removed unsupported priority language, kept labeled-code enumeration as the main scope, and left Burnside/equivalence classes and quantum applications conditional or future work.
 - **Validation corrections:** Rebuilt the validators so A is computed from the defining inner product, B is the finalized principal reciprocal, and C is an explicit alternative comparator; verified N2-A at 32/32 principal and 8/32 alternative, added checked N2-B at 8/8 principal and 2/8 alternative with both twist checks, labeled the old `F_4`, `k=0` case `DIAGNOSTIC ONLY`, and retained N1 as unverified.
+- **Frobenius audit corrections:** Made every Frobenius API argument an explicit iteration number, separated sigma/rho field exponents in code and output, renamed the direct APIs around `k`, and reran all six validators with `PYTHONDONTWRITEBYTECODE=1` before recording PASS statuses.
 
 ## Final Consistency Status
 
@@ -2528,14 +2567,17 @@ Current status must be reported conservatively: the general formulas are mathema
 
 | Item | Status | Checked basis |
 |---|---|---|
-| F4 incompatible diagnostic | **DIAGNOSTIC ONLY** | `k=0` on `F_4` makes `\sigma` and `\rho` the same identity automorphism; it is not a convention-resolution test. |
-| Sigma/Rho distinction | **PASS** | N2-B uses `K=F_{16}`, `\sigma=2`, `\rho=8`, and confirms they differ as automorphisms. |
-| N2-B | **PASS** | Eight defining-inner-product direct checks; principal reciprocal agrees 8/8; alternative `p^k` reciprocal agrees 2/8; both candidate twists are checked. |
-| Direct dual vs theoretical dual | **PASS** | Direct defining-inner-product dual agrees with the finalized principal reciprocal in N2-A 32/32, N2-B 8/8, the long-orbit examples, the compatible nontrivial-twist example, and the pilot. |
+| F4 diagnostic | **PASS — DIAGNOSTIC ONLY** | `k=0` on `F_4` explicitly has `sigma(a)=a^(2^0)=a` and `rho(a)=a^(2^2)=a^4=a`; the direct sigma computation, incompatible twist behavior, and no-enumerator boundary pass, but the case is not a convention-resolution test. |
+| Frobenius parameter audit | **PASS** | `BinaryField.frobenius`, `vector_frobenius(F, vector, k)`, `galois_inner_product(F, x, y, k)`, direct-dual recovery, pilot helper, and every audited call distinguish iteration numbers from field exponents; all six validators were rerun with `PYTHONDONTWRITEBYTECODE=1`. |
+| Reciprocal parameter audit | **PASS** | `normalized_galois_reciprocal(..., frobenius_power)` receives an iteration number; principal uses rho iteration `e m_s-k`, alternative uses sigma iteration `k`, and all labels/output distinguish their actual field exponents. |
+| Direct k-Galois dual | **PASS** | The defining equations `\langle c,x\rangle_k=\sum_i c_i x_i^{p^k}` are evaluated independently: F4 8/8, long examples 128/128 and 32/32, compatible nontrivial twist 8/8, N2-A 32/32, and N2-B 8/8. |
+| N2 sigma-vs-rho | **PASS** | N2-B confirms sigma iteration `1`/field exponent `2` and rho iteration `3`/field exponent `8` differ as automorphisms. |
+| Direct/principal agreement | **PASS** | Direct equals principal on N2-A 32/32 and N2-B 8/8, as well as the pilot, both long-orbit examples, and the compatible nontrivial-twist validator. |
+| N2-B candidate comparison | **PASS** | Eight defining-inner-product checks; alternative reciprocal agrees 2/8; both candidate twists are tested, and the original twist fails for all six proper nonzero selections. |
 | Dual twist | **PASS** | N2-B direct dual is constacyclic under the principal predicted twist 8/8; the alternative predicted twist succeeds only 2/8. |
-| Original-twist incompatibility | **PASS** | All six proper nonzero N2-B selections fail constacyclicity under the original `\lambda` twist; the basic F4 diagnostic also records the failure. |
-| Transfer-matrix exclusion for incompatible case | **PASS** | No transfer-matrix enumeration was attempted because the original and dual constacyclic twists are incompatible. |
-| Blueprint/code consistency | **PASS** | The blueprint records the defining-inner-product direct computation, the finalized inverse-Frobenius principal reciprocal, the alternative comparator, the executed outputs, and the same scope boundary as the validators. |
+| Original-twist incompatibility | **PASS** | All six proper nonzero N2-B selections fail constacyclicity under the original `\lambda` twist; incompatible cases receive no transfer enumeration. |
+| Transfer-matrix exclusion for incompatible case | **PASS** | The exact required message was emitted: no transfer-matrix enumeration was attempted because the original and dual constacyclic twists are incompatible. |
+| Blueprint/code consistency | **PASS** | The blueprint records the defining-inner-product direct computation, explicit iteration/field-exponent notation, finalized inverse-Frobenius principal reciprocal, alternative comparator, executed outputs, and the same scope boundary as the validators. |
 
 The principal convention remains mathematically derived from the code-first definition `\langle c,x\rangle_{s,k}=0`: the defining equations use `\sigma_{s,k}` on the candidate, and applying its inverse `\rho_{s,k}` is the proof change of variables that yields the principal reciprocal and predicted twist. The validators do not silently define A by the reciprocal; they compute A from the defining equations and compare A with B and C.
 

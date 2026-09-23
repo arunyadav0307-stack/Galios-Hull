@@ -3,7 +3,9 @@
 Parameters:
     q=4=2^2, K=F_4, n=5, lambda=omega != 1, k=1.
 
-Here sigma=p^k=2 and rho=p^(e*m-k)=2, so lambda^(1+principal exponent)=omega^3=1.  The polynomial
+Here sigma has Frobenius iteration number k=1 and field exponent p^k=2;
+rho has iteration number e*m-k=1 and field exponent p^(e*m-k)=2.  Thus
+lambda^(1+principal field exponent)=omega^3=1.  The polynomial
 x^5-lambda factors as one linear factor and two irreducible quadratics.
 The two quadratic factors form a tau-orbit of length 2.
 
@@ -33,10 +35,12 @@ F = BinaryField(2, 0b111)  # F_4 = F_2[omega], omega^2+omega+1=0
 OMEGA = F.alpha
 LENGTH = 5
 LAMBDA = OMEGA
-K = 1
-SIGMA_EXPONENT = 2 ** K
-INVERSE_AUTOMORPHISM_EXPONENT = 2 ** (2 * 1 - K)
-PRINCIPAL_RECIPROCAL_EXPONENT = INVERSE_AUTOMORPHISM_EXPONENT
+K_GALOIS = 1
+SIGMA_POWER = K_GALOIS  # Frobenius iteration number k
+SIGMA_FIELD_EXPONENT = 2 ** SIGMA_POWER
+RHO_POWER = 2 * 1 - K_GALOIS  # inverse-Frobenius iteration number
+RHO_FIELD_EXPONENT = 2 ** RHO_POWER
+PRINCIPAL_RECIPROCAL_POWER = RHO_POWER  # iteration number passed to reciprocal
 
 # x^5-lambda = x^5+lambda in characteristic two.
 MODULUS = (LAMBDA, 0, 0, 0, 0, 1)
@@ -106,7 +110,7 @@ def is_constacyclic(code, twist):
 
 def main():
     assert LAMBDA != 1
-    assert F.pow(LAMBDA, 1 + PRINCIPAL_RECIPROCAL_EXPONENT) == 1
+    assert F.pow(LAMBDA, 1 + RHO_FIELD_EXPONENT) == 1
 
     factor_product = product_polynomials(F, FACTORS)
     assert factor_product == MODULUS
@@ -119,7 +123,7 @@ def main():
     factor_index = {factor: i for i, factor in enumerate(FACTORS)}
     tau = []
     for factor in FACTORS:
-        image = normalized_galois_reciprocal(F, factor, PRINCIPAL_RECIPROCAL_EXPONENT)
+        image = normalized_galois_reciprocal(F, factor, PRINCIPAL_RECIPROCAL_POWER)
         assert image in factor_index
         tau.append(factor_index[image])
 
@@ -166,20 +170,20 @@ def main():
         direct_dual_basis, direct_dual = direct_dual_from_inner_product(
             F,
             code_basis,
-            SIGMA_EXPONENT,
-            INVERSE_AUTOMORPHISM_EXPONENT,
+            K_GALOIS,
+            RHO_POWER,
             LENGTH,
         )
         assert all(
             galois_inner_product(
-                F, codeword, candidate, SIGMA_EXPONENT
+                F, codeword, candidate, K_GALOIS
             ) == 0
             for codeword in code_basis
             for candidate in direct_dual_basis
         )
 
         check_sharp = normalized_galois_reciprocal(
-            F, check, PRINCIPAL_RECIPROCAL_EXPONENT
+            F, check, PRINCIPAL_RECIPROCAL_POWER
         )
         expected_dual_rows = generator_rows(F, check_sharp, LENGTH)
         expected_dual = span(F, expected_dual_rows, LENGTH)
@@ -195,8 +199,8 @@ def main():
         rank_code_dimension, rank_hull_dimension = direct_hull_dimensions(
             F,
             rows,
-            SIGMA_EXPONENT,
-            INVERSE_AUTOMORPHISM_EXPONENT,
+            K_GALOIS,
+            RHO_POWER,
         )
         assert (code_dimension, hull_dimension) == (
             rank_code_dimension,
@@ -216,10 +220,11 @@ def main():
 
     print("nontrivial compatible constacyclic example:")
     print("  q=4, n=5, lambda=omega != 1, k=1")
-    print("  sigma exponent p^k=2; principal reciprocal exponent p^(e*m-k)=2")
+    print("  sigma Frobenius power k=1; field exponent p^k=2")
+    print("  rho Frobenius power em-k=1; field exponent p^(em-k)=2")
     print("  factorisation:", " * ".join(p_repr(factor) for factor in FACTORS))
     print("  square-free: True")
-    print("  lambda^(1+principal exponent)=", F.pow(LAMBDA, 1 + PRINCIPAL_RECIPROCAL_EXPONENT), "= 1")
+    print("  lambda^(1+principal field exponent)=", F.pow(LAMBDA, 1 + RHO_FIELD_EXPONENT), "= 1")
     print("  tau permutation:", tau)
     print("  orbit lengths:", [len(orbit) for orbit in orbits])
     print("  direct dual-generator checks:", dual_checks, "of", 2 ** len(FACTORS))
