@@ -3,23 +3,24 @@
 Parameters:
     q=4=2^2, K=F_4, n=5, lambda=omega != 1, k=1.
 
-Here sigma=p^k=2 and rho=p^(e*m-k)=2, so lambda^(1+rho)=omega^3=1.  The polynomial
+Here sigma=p^k=2 and rho=p^(e*m-k)=2, so lambda^(1+principal exponent)=omega^3=1.  The polynomial
 x^5-lambda factors as one linear factor and two irreducible quadratics.
 The two quadratic factors form a tau-orbit of length 2.
 
 The script checks factorisation, square-freeness, tau, direct constacyclic
-codes, direct k-Galois duals, direct hulls, the orbit formula, and the
-transfer-matrix joint enumerator for all 2^3 codes.
+codes, direct k-Galois duals from the defining inner product, direct hulls,
+the orbit formula, and the transfer-matrix joint enumerator for all 2^3 codes.
 """
 
 from collections import Counter
 from itertools import product
 from validate_long_orbit_examples import (
     BinaryField,
+    direct_dual_from_inner_product,
     direct_hull_dimensions,
     generator_rows,
+    galois_inner_product,
     normalized_galois_reciprocal,
-    nullspace,
     product_polynomials,
     row_basis,
     boundary_global_polynomial,
@@ -33,8 +34,9 @@ OMEGA = F.alpha
 LENGTH = 5
 LAMBDA = OMEGA
 K = 1
-SIGMA = 2 ** K        # inner-product exponent p^k=2
-RHO = 2 ** (2 * 1 - K)  # principal reciprocal/direct-dual exponent p^(e*m-k)=2
+SIGMA_EXPONENT = 2 ** K
+INVERSE_AUTOMORPHISM_EXPONENT = 2 ** (2 * 1 - K)
+PRINCIPAL_RECIPROCAL_EXPONENT = INVERSE_AUTOMORPHISM_EXPONENT
 
 # x^5-lambda = x^5+lambda in characteristic two.
 MODULUS = (LAMBDA, 0, 0, 0, 0, 1)
@@ -85,10 +87,6 @@ def span(FIELD, rows, length):
     return result
 
 
-def vector_frobenius(vector, exponent):
-    return tuple(F.frobenius(value, exponent) for value in vector)
-
-
 def log_q(size):
     dimension = 0
     while size > 1:
@@ -108,7 +106,7 @@ def is_constacyclic(code, twist):
 
 def main():
     assert LAMBDA != 1
-    assert F.pow(LAMBDA, 1 + RHO) == 1
+    assert F.pow(LAMBDA, 1 + PRINCIPAL_RECIPROCAL_EXPONENT) == 1
 
     factor_product = product_polynomials(F, FACTORS)
     assert factor_product == MODULUS
@@ -121,7 +119,7 @@ def main():
     factor_index = {factor: i for i, factor in enumerate(FACTORS)}
     tau = []
     for factor in FACTORS:
-        image = normalized_galois_reciprocal(F, factor, RHO)
+        image = normalized_galois_reciprocal(F, factor, PRINCIPAL_RECIPROCAL_EXPONENT)
         assert image in factor_index
         tau.append(factor_index[image])
 
@@ -163,14 +161,26 @@ def main():
         code = span(F, rows, LENGTH)
         assert is_constacyclic(code, LAMBDA)
 
-        # Direct dual from <c,x>_{s,k}=0: apply rho to code rows and
-        # solve rho(c) dot x=0.  This is the declared dual-slot convention.
+        # Direct dual from the actual defining equation <c,x>_k=0.
         code_basis = row_basis(F, rows, LENGTH)
-        rho_rows = [vector_frobenius(row, RHO) for row in code_basis]
-        direct_dual_basis = nullspace(F, rho_rows, LENGTH)
-        direct_dual = span(F, direct_dual_basis, LENGTH)
+        direct_dual_basis, direct_dual = direct_dual_from_inner_product(
+            F,
+            code_basis,
+            SIGMA_EXPONENT,
+            INVERSE_AUTOMORPHISM_EXPONENT,
+            LENGTH,
+        )
+        assert all(
+            galois_inner_product(
+                F, codeword, candidate, SIGMA_EXPONENT
+            ) == 0
+            for codeword in code_basis
+            for candidate in direct_dual_basis
+        )
 
-        check_sharp = normalized_galois_reciprocal(F, check, RHO)
+        check_sharp = normalized_galois_reciprocal(
+            F, check, PRINCIPAL_RECIPROCAL_EXPONENT
+        )
         expected_dual_rows = generator_rows(F, check_sharp, LENGTH)
         expected_dual = span(F, expected_dual_rows, LENGTH)
         assert direct_dual == expected_dual
@@ -183,7 +193,10 @@ def main():
         code_dimension = log_q(len(code))
         hull_dimension = log_q(len(hull))
         rank_code_dimension, rank_hull_dimension = direct_hull_dimensions(
-            F, rows, RHO
+            F,
+            rows,
+            SIGMA_EXPONENT,
+            INVERSE_AUTOMORPHISM_EXPONENT,
         )
         assert (code_dimension, hull_dimension) == (
             rank_code_dimension,
@@ -202,10 +215,11 @@ def main():
     assert sum(direct_joint.values()) == 2 ** len(FACTORS)
 
     print("nontrivial compatible constacyclic example:")
-    print("  q=4, n=5, lambda=omega != 1, k=1, sigma=2, rho=2")
+    print("  q=4, n=5, lambda=omega != 1, k=1")
+    print("  sigma exponent p^k=2; principal reciprocal exponent p^(e*m-k)=2")
     print("  factorisation:", " * ".join(p_repr(factor) for factor in FACTORS))
     print("  square-free: True")
-    print("  lambda^(1+rho)=", F.pow(LAMBDA, 1 + RHO), "= 1")
+    print("  lambda^(1+principal exponent)=", F.pow(LAMBDA, 1 + PRINCIPAL_RECIPROCAL_EXPONENT), "= 1")
     print("  tau permutation:", tau)
     print("  orbit lengths:", [len(orbit) for orbit in orbits])
     print("  direct dual-generator checks:", dual_checks, "of", 2 ** len(FACTORS))

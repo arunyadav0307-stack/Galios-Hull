@@ -1,8 +1,9 @@
 """Validate two genuinely k-Galois examples for the hull-enumerator blueprint.
 
-The declared inner product is <c,x> = sum c_i x_i^(p^k).  Applying
-rho=p^(e*m-k) to that equation makes the direct dual the nullspace of the
-rho-transformed code rows.  The principal reciprocal uses the same rho.
+The declared inner product is <c,x> = sum c_i x_i^(p^k).  The direct
+validator solves those defining equations independently: it introduces
+y_i=x_i^(p^k), solves c dot y=0, and maps y back through the inverse
+field automorphism.  The principal reciprocal is checked separately.
 
 Example A (m=1, genuine non-involutory action):
     q=8=2^3, K=F_8, n=7, lambda=1, k=1.
@@ -131,14 +132,20 @@ def product_polynomials(F, factors):
     return result
 
 
-def normalized_galois_reciprocal(F, f, rho_exponent):
-    """Principal f_0^{-rho} sum_i rho(f_i) x^(d-i), for monic f."""
+def normalized_galois_reciprocal(F, f, automorphism_exponent):
+    """Apply one explicit automorphism to reciprocal coefficients.
+
+    ``automorphism_exponent`` is the integer r in a -> a^(2^r), not
+    the Galois parameter k itself and not a symbolic rho.  The caller
+    supplies either the principal inverse-Frobenius exponent or the
+    explicitly labeled alternative p^k exponent.
+    """
     degree = len(f) - 1
-    constant_image = F.frobenius(f[0], rho_exponent)
+    constant_image = F.frobenius(f[0], automorphism_exponent)
     scale = F.inv(constant_image)
     result = [0] * (degree + 1)
     for i, coefficient in enumerate(f):
-        image = F.frobenius(coefficient, rho_exponent)
+        image = F.frobenius(coefficient, automorphism_exponent)
         result[degree - i] = F.mul(scale, image)
     return p_monic(F, result)
 
@@ -229,16 +236,49 @@ def generator_rows(F, generator, length):
     ]
 
 
-def direct_hull_dimensions(F, rows, rho_exponent):
+def direct_dual_from_inner_product(F, code_basis, sigma_exponent,
+                                   inverse_exponent, length):
+    """Compute {x: sum c_i x_i^(2^k)=0} from the defining equations.
+
+    Put y_i=x_i^(2^k).  The actual equations are c dot y=0, so the
+    nullspace is formed from the original code rows, not from a reciprocal
+    convention.  Since x= y^(2^(em-k)), map the nullspace basis back through
+    the inverse automorphism.  The returned set is the direct semilinear dual.
+    """
+    transformed_candidate_basis = nullspace(F, code_basis, length)
+    direct_basis = [
+        vector_frobenius(F, vector, inverse_exponent)
+        for vector in transformed_candidate_basis
+    ]
+    assert all(
+        vector_frobenius(F, candidate, sigma_exponent) == transformed
+        for transformed, candidate in zip(
+            transformed_candidate_basis, direct_basis
+        )
+    )
+    return direct_basis, span(F, direct_basis, length)
+
+
+def galois_inner_product(F, codeword, candidate, sigma_exponent):
+    value = 0
+    for c, x in zip(codeword, candidate):
+        value ^= F.mul(c, F.frobenius(x, sigma_exponent))
+    return value
+
+
+def direct_hull_dimensions(F, rows, sigma_exponent, inverse_exponent):
     """Return (K-dimension of C, K-dimension of Hull_k(C))."""
     n = len(rows[0]) if rows else 0
     C_basis = row_basis(F, rows, n)
     code_dimension = len(C_basis)
-
-    # x is in C^{perp_k} iff <c,x>_{s,k}=0 for every c.
-    # Applying rho gives rho(c) dot x = 0, so use rho-transformed rows.
-    rho_rows = [vector_frobenius(F, row, rho_exponent) for row in C_basis]
-    dual_basis = nullspace(F, rho_rows, n)
+    dual_basis, direct_dual = direct_dual_from_inner_product(
+        F, C_basis, sigma_exponent, inverse_exponent, n
+    )
+    assert all(
+        galois_inner_product(F, row, candidate, sigma_exponent) == 0
+        for row in C_basis
+        for candidate in dual_basis
+    )
     stacked = C_basis + dual_basis
     intersection_dimension = (
         len(C_basis) + len(dual_basis) - matrix_rank(F, stacked, n)
@@ -338,11 +378,11 @@ def roots_and_factors(F, n):
     return roots, factors
 
 
-def tau_orbits(F, factors, rho_exponent):
+def tau_orbits(F, factors, automorphism_exponent):
     index = {factor: i for i, factor in enumerate(factors)}
     permutation = []
     for factor in factors:
-        image = normalized_galois_reciprocal(F, factor, rho_exponent)
+        image = normalized_galois_reciprocal(F, factor, automorphism_exponent)
         assert image in index
         permutation.append(index[image])
 
@@ -370,7 +410,8 @@ def is_constacyclic(F, code, twist):
     return all(constacyclic_shift(F, vector, twist) in code for vector in code)
 
 
-def direct_histogram(F, factors, n, rho_exponent, component_weight):
+def direct_histogram(F, factors, n, sigma_exponent,
+                     inverse_exponent, principal_exponent, component_weight):
     histogram = Counter()
     dual_checks = 0
     for mask in range(1 << len(factors)):
@@ -388,10 +429,15 @@ def direct_histogram(F, factors, n, rho_exponent, component_weight):
         check = product_polynomials(F, complement)
         rows = generator_rows(F, generator, n)
         code_basis = row_basis(F, rows, n)
-        rho_rows = [vector_frobenius(F, row, rho_exponent) for row in code_basis]
-        direct_dual_basis = nullspace(F, rho_rows, n)
-        direct_dual = span(F, direct_dual_basis, n)
-        predicted = normalized_galois_reciprocal(F, check, rho_exponent)
+        direct_dual_basis, direct_dual = direct_dual_from_inner_product(
+            F, code_basis, sigma_exponent, inverse_exponent, n
+        )
+        assert all(
+            galois_inner_product(F, codeword, candidate, sigma_exponent) == 0
+            for codeword in code_basis
+            for candidate in direct_dual_basis
+        )
+        predicted = normalized_galois_reciprocal(F, check, principal_exponent)
         predicted_dual = span(F, generator_rows(F, predicted, n), n)
         assert direct_dual == predicted_dual
         # These examples have lambda=1, so the predicted twist is also 1.
@@ -399,7 +445,7 @@ def direct_histogram(F, factors, n, rho_exponent, component_weight):
         dual_checks += 1
 
         code_dimension, hull_dimension = direct_hull_dimensions(
-            F, rows, rho_exponent
+            F, rows, sigma_exponent, inverse_exponent
         )
         histogram[
             (component_weight * code_dimension,
@@ -410,9 +456,10 @@ def direct_histogram(F, factors, n, rho_exponent, component_weight):
 
 def validate_example(name, F, q, e, m, k, n):
     sigma_exponent = 2 ** k
-    rho_exponent = 2 ** (e * m - k)
+    inverse_exponent = 2 ** (e * m - k)
+    principal_exponent = inverse_exponent
     roots, factors = roots_and_factors(F, n)
-    permutation, index_orbits = tau_orbits(F, factors, rho_exponent)
+    permutation, index_orbits = tau_orbits(F, factors, principal_exponent)
     orbit_data = [(len(orbit), m) for orbit in index_orbits]
 
     # For a linear factor every K-degree is one, so w=m.
@@ -421,7 +468,9 @@ def validate_example(name, F, q, e, m, k, n):
         [transfer_orbit_polynomial(length, weight)
          for length, weight in orbit_data]
     )
-    direct, dual_checks = direct_histogram(F, factors, n, rho_exponent, m)
+    direct, dual_checks = direct_histogram(
+        F, factors, n, sigma_exponent, inverse_exponent, principal_exponent, m
+    )
 
     assert boundary == transfer
     assert direct == boundary
@@ -430,7 +479,7 @@ def validate_example(name, F, q, e, m, k, n):
     print(f"{name}:")
     print(f"  q={q}, e={e}, m_s={m}, k={k}, n={n}")
     print(f"  sigma exponent p^k={sigma_exponent}")
-    print(f"  principal reciprocal/direct-dual rho exponent p^(e*m_s-k)={rho_exponent}")
+    print(f"  principal reciprocal exponent p^(e*m_s-k)={principal_exponent}; direct uses p^k={sigma_exponent}")
     print(f"  tau permutation on root indices: {permutation}")
     print(f"  orbit lengths: {[len(orbit) for orbit in index_orbits]}")
     print(f"  orbit-boundary == transfer: {boundary == transfer}")
@@ -447,7 +496,8 @@ def validate_example(name, F, q, e, m, k, n):
 def main():
     # Example A: m_s=1 but a genuine non-involutory k-Galois orbit.
     # F_8 = F_2[a]/(a^3+a+1), q=8=2^3, k=1,
-    # sigma=p^k=2, but the principal reciprocal exponent is rho=p^(e*m-k)=4.
+    # sigma=p^k=2 is used in the defining inner product; the finalized
+    # principal reciprocal exponent is p^(e*m-k)=4.
     F8 = BinaryField(3, 0b1011)
     validate_example(
         "Example A (m_s=1, orbit length 6)",
@@ -461,7 +511,8 @@ def main():
 
     # Example B: an extension component K=F_16=F_{4^2}.
     # q=4=2^2, m_s=2, k=1,
-    # sigma=p^k=2, but the principal reciprocal exponent is rho=p^(e*m-k)=8.
+    # sigma=p^k=2 is used in the defining inner product; the finalized
+    # principal reciprocal exponent is p^(e*m-k)=8.
     F16 = BinaryField(4, 0b10011)
     validate_example(
         "Example B (m_s=2, orbit length 4)",
