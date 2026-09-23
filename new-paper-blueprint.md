@@ -375,9 +375,9 @@ Use cautious positioning such as: “The present work focuses on the exact joint
 
 **Audit date:** 23 September 2026. Publisher landing pages, abstracts, metadata, and the openly accessible prepublication record for the affine-algebra paper were checked. The audit distinguishes what is explicitly stated in an abstract or publisher record from theorem-level overlap. A paywalled or incompletely exposed full text is not treated as proof that a displayed theorem is absent. Every unresolved theorem-level comparison remains **VERIFY BEFORE MANUSCRIPT FINALIZATION**.
 
-The audited records establish the following scope statements:
+The audit records the following provisional scope statements. Only a row whose Section 20A ledger category is **PUBLISHER/ABSTRACT VERIFIED** may be used for broad publisher/abstract scope; rows marked **METADATA-ONLY** or **DOI UNVERIFIED** are leads only and must not support a theorem-level comparison.
 
-| Record | Scope verified from the publisher record | Limitation of the present audit |
+| Record | Scope verified or provisionally recorded | Limitation of the present audit |
 |---|---|---|
 | Sangwisut, Jitman, Ling, and Udomkavanich, *Finite Fields and Their Applications* 33 (2015), 232–257, DOI `10.1016/j.ffa.2014.12.008` | Euclidean and Hermitian hull dimensions and fixed-hull-dimension enumerations for cyclic and negacyclic finite-field codes | The exact translation of every theorem into the present `k`-Galois and orbit notation still requires a full-text check. |
 | Debnath, Prakash, and Islam, *Cryptography and Communications* 15 (2023), 111–127, DOI `10.1007/s12095-022-00591-6`, with its correction | A Galois-hull dimension formula for finite-field constacyclic codes and, under restrictions on `q`, counts for a prescribed hull dimension | The exact restrictions and whether the count is equivalent to the proposed coefficient formula require theorem-by-theorem comparison. |
