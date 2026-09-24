@@ -2014,6 +2014,27 @@ This is a finite **COMPUTATIONAL VALIDATION** and **DIAGNOSTIC** outside the com
 
 Computational validation is evidence for the listed finite instances only. It never substitutes for theorem-level proofs, and the incompatible rows do not enlarge the compatible same-factor-set theorem.
 
+### 10.10 Reproducibility evidence files
+
+The current audited branch stores the complete clean-environment captures for the six listed validators in `validation/`:
+
+- `validation/validate_pilot.out`;
+- `validation/validate_long_orbit_examples.out`;
+- `validation/validate_nontrivial_constacyclic.out`;
+- `validation/diagnose_incompatible_twist.out`;
+- `validation/validate_n2_extension_convention.out`;
+- `validation/diagnose_n2_incompatible_twist.out`.
+
+`validation/VALIDATION_REPORT.md` records the command, UTC execution time, Python version, exit code, complete stdout/stderr, finite mathematical purpose, and limitation of each run. These files are reproducibility evidence for the listed computational instances only. They do not prove the general reciprocal, hull-support, orbit-boundary, transfer-matrix, moment, LCD, or quantum results.
+
+### 10.11 Manuscript source availability
+
+No manuscript TeX source currently exists in the audited branch.
+
+No BibTeX database currently exists in the audited branch.
+
+The Markdown blueprint remains the research/manuscript plan. No `.tex` or `.bib` source is fabricated in response to this absence. The literature records and their verification categories remain in Section 20A and must be upgraded only after direct checking.
+
 ## 11. Brute-force validation protocol for the paper
 
 The general hull-support theorem, orbit-boundary formula, transfer-matrix theorem, and distribution theorem are mathematical results that require general proofs. The scripts below provide only finite-instance validation.
@@ -2506,7 +2527,7 @@ The supplied local PDF remains a source input, but its text is not locally extra
 
 ## 21. Immediate next actions
 
-1. Keep `code/validate_pilot.py`, `code/validate_long_orbit_examples.py`, `code/validate_nontrivial_constacyclic.py`, `code/diagnose_incompatible_twist.py`, `code/validate_n2_extension_convention.py`, and `code/diagnose_n2_incompatible_twist.py` under version control and attach all executed outputs to the research notes.
+1. Keep `code/validate_pilot.py`, `code/validate_long_orbit_examples.py`, `code/validate_nontrivial_constacyclic.py`, `code/diagnose_incompatible_twist.py`, `code/validate_n2_extension_convention.py`, and `code/diagnose_n2_incompatible_twist.py` under version control together with the captured `validation/*.out` files and `validation/VALIDATION_REPORT.md`.
 2. Prove and implement the `K_s` version with the declared code-first dual slot: `p^k` remains in the inner product and `rho_{s,k}` is principal for the reciprocal and dual generator.
 3. Retain Example A as the genuine long-orbit test; do not infer long-cycle behavior from the `F_4`, Hermitian, 2-cycle pilot.
 4. Prove Lemma 5.1 and Theorem 5.3 in full before writing the transfer-matrix section.
@@ -2560,6 +2581,7 @@ Current status must be reported conservatively: the general formulas are mathema
 - **Novelty corrections:** Removed unsupported priority language, kept labeled-code enumeration as the main scope, and left Burnside/equivalence classes and quantum applications conditional or future work.
 - **Validation corrections:** Rebuilt the validators so A is computed from the defining inner product, B is the finalized principal reciprocal, and C is an explicit alternative comparator; verified N2-A at 32/32 principal and 8/32 alternative, added checked N2-B at 8/8 principal and 2/8 alternative with both twist checks, labeled the old `F_4`, `k=0` case `DIAGNOSTIC ONLY`, and retained N1 as unverified.
 - **Frobenius audit corrections:** Made every Frobenius API argument an explicit iteration number, separated sigma/rho field exponents in code and output, renamed the direct APIs around `k`, and reran all six validators with `PYTHONDONTWRITEBYTECODE=1` before recording PASS statuses.
+- **Reproducibility corrections:** Added complete per-validator stdout/stderr captures and `validation/VALIDATION_REPORT.md`, explicitly recorded the finite scope and limitations of each run, and documented that no manuscript `.tex` or BibTeX `.bib` source exists in the audited branch.
 
 ## Final Consistency Status
 
@@ -2577,8 +2599,10 @@ Current status must be reported conservatively: the general formulas are mathema
 | Dual twist | **PASS** | N2-B direct dual is constacyclic under the principal predicted twist 8/8; the alternative predicted twist succeeds only 2/8. |
 | Original-twist incompatibility | **PASS** | All six proper nonzero N2-B selections fail constacyclicity under the original `\lambda` twist; incompatible cases receive no transfer enumeration. |
 | Transfer-matrix exclusion for incompatible case | **PASS** | The exact required message was emitted: no transfer-matrix enumeration was attempted because the original and dual constacyclic twists are incompatible. |
-| Blueprint/code consistency | **PASS** | The blueprint records the defining-inner-product direct computation, explicit iteration/field-exponent notation, finalized inverse-Frobenius principal reciprocal, alternative comparator, executed outputs, and the same scope boundary as the validators. |
+| Blueprint/code consistency | **PASS** | The blueprint records the defining-inner-product direct computation, explicit iteration/field-exponent notation, finalized inverse-Frobenius principal reciprocal, alternative comparator, executed outputs, captured `validation/` evidence, and the same scope boundary as the validators. |
+| Manuscript TeX source | **VERIFY BEFORE MANUSCRIPT FINALIZATION** | No `.tex` source exists in the audited branch; the Markdown blueprint remains the manuscript plan. |
+| BibTeX database | **VERIFY BEFORE MANUSCRIPT FINALIZATION** | No `.bib` source exists in the audited branch; literature records remain in Section 20A with their verification categories. |
 
 The principal convention remains mathematically derived from the code-first definition `\langle c,x\rangle_{s,k}=0`: the defining equations use `\sigma_{s,k}` on the candidate, and applying its inverse `\rho_{s,k}` is the proof change of variables that yields the principal reciprocal and predicted twist. The validators do not silently define A by the reciprocal; they compute A from the defining equations and compare A with B and C.
 
-The exact executed commands are the pilot, long-orbit, compatible nontrivial-`\lambda`, basic incompatible diagnostic, N2-A, and N2-B validators, all run with `PYTHONDONTWRITEBYTECODE=1`. No unexecuted computation is labeled `PASS`. N1 remains **VERIFY BEFORE MANUSCRIPT FINALIZATION**. Literature records marked metadata-only, DOI-unverified, or theorem-level unresolved remain so until directly checked. Counts remain for distinct labeled codes; incompatible twists remain outside the compatible same-factor-set transfer theorem; Burnside/equivalence enumeration and quantum applications remain conditional or future work; no minimum distance is inferred from hull dimension; and no unconditional complexity or priority claim is made.
+The exact executed commands are the pilot, long-orbit, compatible nontrivial-`\lambda`, basic incompatible diagnostic, N2-A, and N2-B validators, all run with `PYTHONDONTWRITEBYTECODE=1` and recorded in `validation/VALIDATION_REPORT.md`. No unexecuted computation is labeled `PASS`. N1 remains **VERIFY BEFORE MANUSCRIPT FINALIZATION**. Literature records marked metadata-only, DOI-unverified, or theorem-level unresolved remain so until directly checked. Counts remain for distinct labeled codes; incompatible twists remain outside the compatible same-factor-set transfer theorem; Burnside/equivalence enumeration and quantum applications remain conditional or future work; no minimum distance is inferred from hull dimension; and no unconditional complexity or priority claim is made.
