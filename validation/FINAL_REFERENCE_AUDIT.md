@@ -65,3 +65,18 @@ The readable theorem-bearing record is [arXiv:2412.08512](https://arxiv.org/html
 The bibliographic identity and broad abstract scope of the primary article are now verified, and several related publisher records were independently checked. The central theorem-level transfer remains conditional because the final/corrected source texts are not fully accessible and because the readable primary record requires the explicit slot-convention transformation. The manuscript-readiness verdict therefore remains:
 
 > **NOT READY — MATERIAL GAPS REMAIN**
+
+## 6. Phase-8 source additions
+
+The Phase-7 source records above remain unchanged. Phase 8 additionally inspected the following theorem-bearing or publisher-level records:
+
+| Source | Phase-8 evidence | Safe use |
+|---|---|---|
+| Talbi–Batoul–Fotue Tabue–Martínez-Moro, arXiv:2102.06995, [HTML](https://arxiv.org/html/2102.06995) | Readable theorem text through Proposition 8: cyclic serial finite-chain-ring hull parameters and fixed-`q`-dimension counts. | Strong adjacent enumeration; chain-ring hypotheses must remain explicit. |
+| Zhang–Kong–Zheng, *Entropy* 28 (2026), DOI [10.3390/e28040407](https://doi.org/10.3390/e28040407), [full text](https://www.mdpi.com/1099-4300/28/4/407) | Open full text: restricted CRT/direct-product non-chain ring, code-first-looking Galois dual, component hull decomposition, lcm generator, Gram-rank dimensions. | Adjacent structural comparison; no central labeled enumerator or unconditional quantum transfer. |
+| Aliabadi–Kalaycı–Zadehdabbagh, *Cryptography and Communications* 18 (2026), DOI [10.1007/s12095-025-00861-z](https://doi.org/10.1007/s12095-025-00861-z) | Open article with prescribed Euclidean-hull enumeration for double and four circulant codes. | Counterevidence to broad enumeration novelty; different code family. |
+| Gao–Wu–Fu, *Finite Fields and Their Applications* 88 (2023), DOI [10.1016/j.ffa.2023.102189](https://doi.org/10.1016/j.ffa.2023.102189) | Publisher abstract and theorem preview: fixed-hull enumeration for double cyclic codes over `Z_2`. | Adjacent generalized-cyclic background only. |
+| Debnath–Prakash, *Advances in Mathematics of Communications* 19 (2025), DOI [10.3934/amc.2025010](https://doi.org/10.3934/amc.2025010), and Debnath–Islam–Yadav–Prakash, DOI [10.3934/amc.2025054](https://doi.org/10.3934/amc.2025054) | Publisher records for average-dimension and small-dimension Galois-hull constacyclic results. | Scope/background only; full theorem text is restricted. |
+| Transfer-matrix reference, [Combinatorics Notes](https://seragunn.github.io/combinatorics-notes/regular-languages/transfer-matrix.html) | Theorem 24.1/24.2: matrix powers count walks and generating functions; cyclic closure uses the closed-walk trace identity. | Standard combinatorial tool; not evidence of a hull theorem. |
+
+The final publisher text of the primary affine article and the corrected finite-field constacyclic article remain `SOURCE UNAVAILABLE` for complete theorem-level transfer. This limitation is carried into the Phase-8 audit rather than hidden.

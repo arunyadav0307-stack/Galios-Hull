@@ -45,3 +45,36 @@ It must not say “first,” “new,” “novel,” “best,” “complete cla
 ## 4. Boundary conclusion
 
 The mathematical package is a conditional, self-contained extension/combination of known tools with a **potentially distinct** bivariate factor-orbit transfer formulation. The exact novelty boundary is **NOT ESTABLISHED**. This is a deliberate publication-safety conclusion, not a negative mathematical result.
+
+---
+
+# Phase-8 narrowed boundary and decision
+
+**Phase-8 audit date:** 2026-09-24
+**Current decision:** `B. READY WITH NARROWED CONTRIBUTION CLAIMS`
+
+The Phase-7 clause classifications above are preserved. Phase 8 refines them after direct inspection of the chain-ring, non-chain/direct-product, generalized-cyclic, and transfer-matrix records.
+
+| Phase-8 clause | Current classification | Verified reason | Required wording |
+|---|---|---|---|
+| Exact fixed-hull-dimension enumeration in the broad sense | `KNOWN` | Verified in finite-field cyclic/negacyclic, restricted finite-field constacyclic, chain-ring, `Z4`, double cyclic, and double/four circulant families. | Acknowledge these records explicitly. |
+| CRT/direct-product component hull decomposition and lcm support | `KNOWN` | Verified in the primary affine and adjacent non-chain/direct-product sources, with source-specific conventions. | Present the exact hypotheses and do not claim the decomposition itself. |
+| `b_O` as cyclic `1-to-0` transition/run statistic | `STANDARD TOOL` | Direct elementary identity: nonconstant cyclic binary words have one `1-to-0` exit per one-run and one zero-run. | Call it a standard statistic. |
+| Two-state transfer matrix and closed-walk trace | `STANDARD TOOL` | Standard weighted walk/trace mechanism. | Call the matrix method standard. |
+| Code-first inverse-Frobenius convention and explicit candidate-first comparison | `EXTENSION` | The transformation and object distinctions are independently proved and are necessary for the frozen convention. | State the convention proposition separately. |
+| Hull-support boundary combined with factor-orbit weights | `COMBINATION` | It combines reciprocal/lcm support with the standard cyclic transition statistic. | Say “combining” or “we derive,” not “we introduce a new statistic.” |
+| Exact weighted bivariate product for the specified labeled square-free affine family | `POTENTIALLY DISTINCT` | No checked source states the complete product, while exact adjacent counts exist. | State the conditional theorem without priority language. |
+| External priority/absence of an exact prior product | `NOT ESTABLISHED` | Final/corrected source text and exhaustive priority comparison remain incomplete. | Prohibit “first,” “novel,” “unique,” and “no prior work.” |
+| Burnside/Pólya quotient enumeration | `FUTURE WORK` | No group action or fixed-code calculation is proved. | Keep out of the central theorem. |
+| Repeated roots and incompatible two-modulus transfer | `FUTURE WORK` | Excluded by the simple-root/compatibility hypotheses. | State as limitations. |
+| Unconditional quantum claims and N1 | `FUTURE WORK` / `NOT ESTABLISHED` | Quantum distance is not implied; N1 lacks its specification. | Exclude from manuscript evidence. |
+
+## Phase-8 safe boundary statement
+
+> “Exact hull-dimension enumeration is established in several narrower finite-field, constacyclic, chain-ring, `Z4`, and generalized-cyclic settings. Under explicit square-free, simple-root, compatible-twist, and labeled-component hypotheses, we derive a self-contained exact joint enumerator for code dimension and code-first `k`-Galois hull dimension by combining factor-orbit hull support with a standard cyclic transfer-matrix calculation. The audit did not verify an exact prior theorem identical to the resulting weighted bivariate product, so no priority claim is made.”
+
+This sentence is narrower than the prior Phase-7 positioning statement and is the only approved novelty-facing summary for Phase 8.
+
+## Phase-8 decision rationale
+
+The exact novelty classification remains `NOT ESTABLISHED`, but that does not eliminate the bounded mathematical contribution. The manuscript is therefore ready only with the narrowed contribution claims in `CONTRIBUTION_BOUNDARY.md`, not for unrestricted full-manuscript priority claims.

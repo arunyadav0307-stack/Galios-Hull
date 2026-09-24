@@ -2810,3 +2810,15 @@ The manuscript must use only the fully specified finite examples listed in the P
 > **NOT READY — MATERIAL GAPS REMAIN**
 
 This verdict remains in force until the central final/corrected source transfer and the exact external novelty boundary are independently closed.
+
+## Phase 8 literature-gap and novelty closure
+
+**Audit date:** 2026-09-24. The historical Phase-1 through Phase-7 status sections above remain unchanged. Phase 8 adds the theorem-level comparison in `validation/CENTRAL_RESULT_COMPARISON.md`, the contribution boundary in `validation/CONTRIBUTION_BOUNDARY.md`, and the final gap audit in `validation/PHASE8_LITERATURE_GAP_AND_NOVELTY_AUDIT.md`.
+
+The verified literature boundary is now narrower and more explicit: fixed-hull-dimension enumeration is known in several finite-field, constacyclic, chain-ring, `Z4`, double cyclic, and double/four circulant settings; component hull/lcm formulas are known in restricted affine/non-chain direct-product settings; and the binary `1-to-0` transition plus transfer trace are standard combinatorial tools. The primary affine source explicitly leaves enumeration of non-isometric codes with prescribed hull dimension as future work, but the final publisher/corrected source comparison is not exhaustive.
+
+The only approved central contribution statement is a conditional, self-contained exact joint enumerator for distinct labeled factor selections in the frozen square-free/simple-root/compatible code-first family. No firstness, novelty, uniqueness, or absence claim is authorized. The Phase-8 decision is:
+
+> **B. READY WITH NARROWED CONTRIBUTION CLAIMS**
+
+The frozen convention, 19-result architecture, Phase-5 verdict, N1 status, and all repeated-root/incompatible/Burnside/quantum exclusions are unchanged.

@@ -973,3 +973,47 @@ The status values in the table are restricted to the Phase-7 vocabulary required
 ## Final Phase-7 package verification
 
 The final archive was rebuilt after all Phase-7 files and the package capture were present. It passed `unzip -t`, exact manifest/content comparison, Git-metadata exclusion, required-file checks, manuscript-specification N1 exclusion, and a clean extracted validation-suite run with zero stderr lines. The extracted suite ended with the preserved `PHASE6 END-TO-END CHECK: PASS` and the internal artifact status `N1 UNSPECIFIED — CANNOT VALIDATE`. The final archive contains 53 manifest files; its SHA-256 is reported with the final deliverable.
+
+# Phase-8 literature-gap and novelty validation
+
+**Date:** 2026-09-24
+**Base:** `703260d610b4980df25610694bbe6a04f937abbc`
+**Decision:** `B. READY WITH NARROWED CONTRIBUTION CLAIMS`
+
+Phase 8 adds no mathematical implementation changes. It records the theorem-level comparison, the explicit primary-source enumeration gap, the adjacent exact finite-field/chain-ring/non-chain/generalized-cyclic enumerations, the standard status of the cyclic transition statistic and transfer trace, and the narrowed contribution boundary. `validation/CENTRAL_RESULT_COMPARISON.md` contains 19 required result-level rows, and `validation/PHASE8_LITERATURE_GAP_AND_NOVELTY_AUDIT.md` contains all 17 numbered audit sections.
+
+## Phase-8 full validator suite
+
+The complete clean-environment suite was rerun:
+
+```text
+env -i PATH="$PATH" HOME="$HOME" LANG=C.UTF-8 LC_ALL=C PYTHONDONTWRITEBYTECODE=1 PYTHONPATH="" bash -c '<13-validator suite>'
+```
+
+The capture is `validation/phase8_full_validation.out`.
+
+- exit code: `0`;
+- unexpected stderr lines: `0`;
+- Phase-1 through Phase-7 finite validators and independent mathematical checks: pass at their recorded scopes;
+- final independent line: `PHASE6 END-TO-END CHECK: PASS`;
+- N1: `UNSPECIFIED — CANNOT VALIDATE`.
+
+The suite includes the pilot, long-orbit, compatible/nontrivial-twist, incompatible diagnostics, extension convention, Phase-2 counterexample search, Phase-3 independent enumerator, Phase-4 convention equivalence, Phase-5 counterexample search, Phase-6 end-to-end check, source-PDF structural check, and N1 exclusion search.
+
+## Phase-8 package verification
+
+The clean extracted package verification is captured in `validation/phase8_package_verification.out`.
+
+- `unzip -t`: pass;
+- exact manifest comparison: pass;
+- source-PDF SHA-256: `0db90bfbeda69ad1af231b81d92f24be3589ed15ac2e0ade6605ba7ad0ddc039`;
+- Git metadata: absent;
+- all Phase-8 required documents: present;
+- manuscript specification N1 numeric evidence: absent;
+- extracted validation suite: exit `0`, zero stderr lines;
+- extracted N1 status: `UNSPECIFIED — CANNOT VALIDATE`;
+- extracted final independent status: `PHASE6 END-TO-END CHECK: PASS`.
+
+## Phase-8 interpretation
+
+The internal enumerator remains proved with conditions. Exact hull enumeration is known in narrower families, and `b_O` plus the transfer trace are standard tools. No exact external theorem identical to the complete weighted labeled product was verified, but the final/corrected source comparison remains incomplete. The only authorized manuscript position is the bounded contribution in `validation/CONTRIBUTION_BOUNDARY.md`; no priority language is permitted.

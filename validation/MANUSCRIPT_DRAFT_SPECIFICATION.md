@@ -245,3 +245,50 @@ The conclusion may claim that the stated conditional theorem chain yields an exa
 - [ ] Re-run the listed validators in a clean environment and cite the captured output.
 - [ ] Ensure all tables are labeled as labeled-code tables and all quantum claims are conditional.
 - [ ] Keep the manuscript readiness verdict at `NOT READY — MATERIAL GAPS REMAIN` until the central transfer and exact novelty boundary are closed.
+
+---
+
+# Phase-8 manuscript amendment: verified literature boundary
+
+**Amendment date:** 2026-09-24
+**Current drafting decision:** `B. READY WITH NARROWED CONTRIBUTION CLAIMS`
+
+The Phase-7 specification and its historical `NOT READY — MATERIAL GAPS REMAIN` verdict are preserved above. This amendment records only verified Phase-8 conclusions and does not create a full manuscript source.
+
+## 12. Verified literature position for the revised introduction
+
+The introduction must now say explicitly that exact hull-dimension enumeration is already known in narrower finite-field cyclic/negacyclic, restricted finite-field constacyclic, finite-chain-ring, `Z4`, double cyclic, and double/four circulant settings. It must also acknowledge adjacent componentwise hull/lcm results over restricted non-chain/direct-product rings and average/small-dimension Galois-hull studies.
+
+The primary affine-algebra source is the closest structural record. Its readable conclusion states that enumeration of non-isometric constacyclic codes with a prescribed Galois hull dimension over that affine algebra remains an open problem. This supports the statement that the accessible primary source does not provide the present all-selection enumerator, but it must not be inflated into a universal absence or priority claim. The final publisher text and the corrected full text of the 2023 finite-field constacyclic record remain to be checked before final submission.
+
+Use this approved wording:
+
+> “Exact hull-dimension enumeration is available in several narrower finite-field, constacyclic, chain-ring, `Z4`, and generalized-cyclic settings. Related affine and non-chain records establish component hull formulas, averages, or small-dimension results. Under the square-free, simple-root, compatible-twist, and labeled-component hypotheses stated here, we derive a self-contained exact joint enumerator for code and code-first `k`-Galois hull dimensions. The audit did not verify an exact prior theorem identical to this weighted bivariate product; no priority claim is made.”
+
+## 13. Revised contribution list
+
+The contribution list must use “we derive” or “we prove,” not “new contributions.” It may contain:
+
+1. the frozen code-first second-slot convention and the explicit candidate-first transformation;
+2. the inverse-Frobenius extension-component reciprocal and compatible factor action;
+3. the lcm hull-support formula and its weighted cyclic boundary expression;
+4. the exact labeled bivariate code/hull enumerator for the stated square-free affine family;
+5. the total count, hull distribution, LCD count, mean, and variance corollaries;
+6. reproducible finite validation of the stated instances.
+
+The transfer matrix, trace, cyclic transition statistic, CRT, reciprocal, and fixed-dimension hull-enumeration background must be described as standard or previously available ingredients. The application-specific conjunction is potentially distinct, not established as a priority result.
+
+## 14. Required limitations added by Phase 8
+
+The limitations section must add:
+
+- fixed-hull enumeration already exists in multiple narrower families;
+- the exact external prior-match/priority boundary is `NOT ESTABLISHED`;
+- the primary final publisher text and corrected finite-field full text were not available for complete theorem-level transfer;
+- `b_O` and the transfer trace are standard combinatorial tools;
+- the central count is labeled, not inequivalent-code enumeration;
+- N1 remains `UNSPECIFIED — CANNOT VALIDATE` and is excluded.
+
+## 15. Current manuscript recommendation
+
+A draft may proceed only as a conditional exact labeled-enumerator paper with the safe boundary in `validation/CONTRIBUTION_BOUNDARY.md`. It must not proceed as a priority paper or as a claim that exact hull enumeration, CRT decomposition, or transfer matrices are themselves new. Before submission, complete the final/corrected source-text checks and any journal-specific differentiation review.

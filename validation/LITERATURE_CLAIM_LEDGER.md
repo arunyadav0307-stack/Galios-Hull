@@ -67,3 +67,29 @@ The statuses in this section use only: `VERIFIED`, `VERIFIED WITH CONVENTION TRA
 ## Phase-7 ledger conclusion
 
 The primary article's identity and broad scope are verified, the readable source convention is verified, and the convention mismatch is explicit. Related finite-field and average results are partially verified at publisher/abstract scope. No central external theorem is silently transferred, and no priority claim is made. The unresolved final/corrected theorem comparison is a material manuscript gap.
+
+---
+
+# Phase-8 theorem-level source additions and gap closure
+
+**Audit date:** 2026-09-24
+**Purpose:** preserve the Phase-4/Phase-7 ledgers while recording the stronger theorem-level and publisher-level records inspected in Phase 8. The historical sections above are not deleted or weakened.
+
+The permitted literature-status vocabulary remains: `VERIFIED`, `VERIFIED WITH CONVENTION TRANSFORMATION`, `PARTIALLY VERIFIED`, `METADATA ONLY`, `CONVENTION MISMATCH`, `SOURCE UNAVAILABLE`, `DOI UNVERIFIED`, and `VERIFY BEFORE MANUSCRIPT FINALIZATION`.
+
+| ID | Phase-8 claim | Evidence checked | Convention/transfer note | Status | Manuscript action |
+|---|---|---|---|---|---|
+| P8-L1 | The primary affine-algebra source explicitly leaves enumeration of non-isometric constacyclic codes with prescribed Galois hull dimension as an open future problem over its affine algebra. | Readable arXiv:2412.08512v1, Section 5 conclusion: [arXiv HTML](https://arxiv.org/html/2412.08512). | This is a source-specific open-problem statement, not a universal priority theorem. | `VERIFIED` | Use as evidence that the primary source does not itself supply the target enumeration; do not convert it into a field-wide absence claim. |
+| P8-L2 | The primary source's accessible theorem-bearing record has the candidate-first dual definition, while the frozen framework is code-first. | arXiv Section 2.2 and the independent Phase-3/4/5 convention checks. | Retain `D_candidate(C)=sigma_k^2(D_code-first(C))`; do not identify dual or hull subspaces. | `VERIFIED WITH CONVENTION TRANSFORMATION` | Use only with the explicit transformation and component exponent replacement. |
+| P8-L3 | Talbi et al. give an exact fixed-`q`-dimension hull count for cyclic serial codes over a finite chain ring. | arXiv:2102.06995v1 HTML, Theorem 1 and Proposition 8: [arXiv HTML](https://arxiv.org/html/2102.06995). | Chain-ring ordered partitions and nilpotent layers are not the square-free affine product. | `VERIFIED` | Cite as strong adjacent enumeration; do not transfer its theorem to the present ring. |
+| P8-L4 | The 2026 Entropy paper gives componentwise Galois dual/hull and lcm formulas over a restricted finite non-chain direct-product ring. | Full open MDPI record: [Entropy DOI](https://doi.org/10.3390/e28040407), [full article](https://www.mdpi.com/1099-4300/28/4/407). | Its code-first-looking pairing and `p^{m-l}` component formulas require notation mapping; no all-selection enumerator is stated. | `VERIFIED` | Use for adjacent structural context only; keep quantum conclusions outside the central theorem. |
+| P8-L5 | Exact prescribed-hull enumeration is also present for double cyclic and double/four circulant families. | Gao–Wu–Fu publisher record and theorem preview: [DOI](https://doi.org/10.1016/j.ffa.2023.102189); Aliabadi–Kalaycı–Zadehdabbagh open article: [DOI](https://doi.org/10.1007/s12095-025-00861-z). | These are generalized/quasi-cyclic families, not the labeled affine factor-selection family. | `VERIFIED` | Cite as counterevidence to broad enumeration novelty claims, not as a transfer theorem. |
+| P8-L6 | The 2025 average-dimension and 2026 small-dimension constacyclic records establish active neighboring Galois-hull results. | AIMS records [10.3934/amc.2025010](https://doi.org/10.3934/amc.2025010) and [10.3934/amc.2025054](https://doi.org/10.3934/amc.2025054). | Average and small-dimension records do not establish the target bivariate product; full texts are restricted. | `PARTIALLY VERIFIED` | Use only for scoped background. |
+| P8-L7 | The `1-to-0` cyclic transition/run identity and the closed-walk trace mechanism are standard combinatorial tools. | Direct elementary proof in `PHASE8_LITERATURE_GAP_AND_NOVELTY_AUDIT.md`; walk/trace theorem in [Combinatorics Notes](https://seragunn.github.io/combinatorics-notes/regular-languages/transfer-matrix.html). | The application to the code-first hull support is the present combination, not a new transfer-matrix principle. | `VERIFIED` | Classify the statistic and matrix as standard tools in the novelty boundary. |
+| P8-L8 | No checked source was verified to state the complete weighted product `product_s product_O trace(T_(w_O)^a_O)` for the exact frozen square-free affine/code-first/labeled family. | `CENTRAL_RESULT_COMPARISON.md`, source-by-source comparison, and all source records above. | This is a bounded comparison conclusion, not a universal absence or priority result; final/corrected records remain incomplete. | `VERIFY BEFORE MANUSCRIPT FINALIZATION` | State “the audit did not verify an exact prior theorem identical to the product”; prohibit firstness language. |
+
+## Phase-8 ledger conclusion
+
+Exact hull-dimension enumeration is already known in several narrower finite-field, constacyclic, chain-ring, `Z4`, double cyclic, and double/four circulant settings. Component hull structure is also known in restricted non-chain/direct-product settings. The primary affine source itself leaves enumeration open, but that fact does not settle the entire literature.
+
+The only defensible manuscript boundary is therefore a conditional, self-contained exact labeled joint enumerator for the specified square-free affine/code-first family, with standard transfer machinery and no priority claim. The exact external novelty boundary remains `NOT ESTABLISHED` in `validation/NOVELTY_BOUNDARY.md`.

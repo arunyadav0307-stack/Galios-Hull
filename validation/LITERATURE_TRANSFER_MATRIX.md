@@ -51,3 +51,29 @@ Transfer statuses use only: `DIRECT`, `DIRECT AFTER CONVENTION TRANSFORMATION`, 
 ## Phase-7 transfer conclusion
 
 The only direct literature-to-manuscript transfer is the explicitly transformed comparison of the two dual-slot conventions. Structural and background results transfer only partially. The weighted bivariate enumerator, exact moments, and labeled-code product are not replaced by an external theorem; their status is `UNVERIFIED` as an external literature match and conditional/proved independently in the internal theorem audits.
+
+---
+
+# Phase-8 transfer additions and final gap characterization
+
+**Audit date:** 2026-09-24
+**Purpose:** add the theorem-level comparisons inspected in Phase 8 without deleting the historical Phase-6/Phase-7 matrix.
+
+Transfer statuses remain restricted to: `DIRECT`, `DIRECT AFTER CONVENTION TRANSFORMATION`, `PARTIAL`, `NOT TRANSFERABLE`, and `UNVERIFIED`.
+
+| ID | Source result | Present statement | Conditions and reason | Phase-8 transfer status |
+|---|---|---|---|---|
+| P8-T1 | Primary affine source's square-free component/hull setting and its explicit open enumeration statement. | Frozen labeled square-free affine component model and exact labeled enumerator. | Structural setting overlaps; the source's conclusion leaves enumeration open, but the final publisher theorem text is inaccessible and the source convention differs. | `PARTIAL` |
+| P8-T2 | Primary source candidate-first dual definition. | Frozen code-first second-slot dual. | Apply `D_candidate(C)=sigma_k^2(D_code-first(C))`; retain distinct subspaces/supports. | `DIRECT AFTER CONVENTION TRANSFORMATION` |
+| P8-T3 | Primary source displayed rho reciprocal/twist attached to the candidate-first display. | Frozen code-first rho reciprocal/twist. | The displayed operation is not the literal candidate-first consequence in non-involutory cases. | `NOT TRANSFERABLE` |
+| P8-T4 | Talbi et al. cyclic serial chain-ring Proposition 8 fixed-hull-dimension count. | Exact labeled square-free affine bivariate product. | Chain ring has nilpotent layers and ordered partition data; no square-free field-product or target transfer product. | `PARTIAL` |
+| P8-T5 | `Z4` cyclic fixed-2-dimension enumerations. | Exact labeled square-free affine bivariate product. | Ring, inner product, and dimension/type hypotheses differ. | `PARTIAL` |
+| P8-T6 | 2026 finite non-chain direct-product component hull/lcm formulas. | Component code-first hull support and global product. | Restricted direct-product ring gives adjacent structural support only; no all-selection weighted trace product is stated. | `PARTIAL` |
+| P8-T7 | Finite-field cyclic/negacyclic and restricted constacyclic fixed-dimension counts. | Full affine labeled distribution. | Source families are narrower; use only their stated background counts and factor/lcm ingredients. | `PARTIAL` |
+| P8-T8 | Double cyclic and double/four circulant prescribed-hull enumerations. | Constacyclic factor-selection product over affine components. | Different generalized/quasi-cyclic code families and constituent parameter spaces. | `PARTIAL` |
+| P8-T9 | Standard finite-state transfer matrix and `tr(A^a)` closed-walk identity. | Orbit polynomial `tr(T_w(u,z)^a)`. | Direct combinatorial identity; it does not transfer the algebraic hull-support identification. | `DIRECT` |
+| P8-T10 | Any external theorem exactly equal to the central weighted bivariate product. | `E(u,z)=product_s product_O trace(T_(w_O)^a_O)`. | No exact source theorem was verified; final/corrected source comparison remains incomplete. | `UNVERIFIED` |
+
+## Phase-8 transfer conclusion
+
+The standard transfer mechanism is directly usable as combinatorial background. The candidate-first/code-first relation is directly usable only after the explicit convention transformation. Every source-specific hull enumeration or non-chain component theorem transfers only partially to the frozen target. No external theorem replaces the internally proved central product.
