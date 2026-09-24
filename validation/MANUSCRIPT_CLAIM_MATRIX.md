@@ -1,0 +1,30 @@
+# Phase-9 Manuscript Claim Matrix
+
+**Audit date:** 2026-09-24
+**Purpose:** final wording guardrail for the proposed manuscript. Confidence refers to the repository evidence under the stated conditions, not to external priority.
+
+| Claim | Section | Mathematical evidence | Literature evidence | Confidence | Allowed wording | Forbidden wording |
+|---|---|---|---|---|---|---|
+| `A` decomposes into labeled finite-field components under square-free hypotheses. | 2–3 | Conditional CRT proof; Phase-2/6 audits. | R1/R2 broad affine scope. | High, conditional | “Under the square-free hypotheses, `A` decomposes...” | “We introduce a new CRT decomposition.” |
+| Simple-root component ideals are indexed by factor subsets. | 3 | Factor-selection and injectivity proof. | R1/R5 adjacent factor methods. | High, conditional | “The selected ideals are in bijection with subsets...” | “We are the first to enumerate these ideals.” |
+| The code-first pairing uses the second slot. | 4 | Direct definition and Phase-2/5 derivation. | R2 has the comparison slot convention. | High | “We use the code-first convention...” | “The source and present duals are identical.” |
+| `D_candidate(C)=sigma_k^2(D_code-first(C))`. | 4 | General finite-field-linear transformation proposition. | R2 source convention motivates the comparison. | High | “The two duals are related by...” | “The dual codes coincide.” |
+| Same-code hull dimensions and LCD decisions agree under both pairings. | 4 and 9 | Restricted Gram-matrix rank proof; Phase-5 checks. | R7 general Galois-hull matrix context. | High, conditional | “The Gram argument gives equality of dimensions and LCD decisions.” | “The hull subspaces are equal.” |
+| The inverse-Frobenius reciprocal sends roots by `alpha -> alpha^(-p^(d_s-k))`. | 4 | Direct polynomial/root derivation. | R2 displayed formulas, after convention qualification. | High, conditional | “We derive the inverse-Frobenius root action.” | “This is transferred unchanged from the source.” |
+| Compatibility makes `tau` a permutation of the same factor set. | 4 | Root action, irreducibility, bijection proof. | R1/R2 structural comparison. | High, conditional | “Under `lambda_s^(1+p^(d_s-k))=1`, ...” | “The formula covers incompatible twists.” |
+| Hull support is the forward `1-to-0` boundary. | 5 | lcm/intersection support proof. | R1/R5 lcm/hull background only. | High, conditional | “The lcm support yields...” | “The boundary statistic is a new invariant.” |
+| `b_O` is a cyclic transition/run statistic. | 5–6 | Elementary binary-word proof. | Transfer-matrix reference; standard combinatorics. | High | “We use the standard cyclic transition statistic.” | “We introduce a new run statistic.” |
+| `P_(a,w)(z)` has the stated binomial coefficients. | 6 | Exhaustive word argument and Phase-2 search. | No external hull theorem needed. | High, conditional | “A direct cyclic-word count gives...” | “The coefficient formula is a new enumeration principle.” |
+| `T_w` is a two-state weighted transfer matrix. | 7 | Four-entry derivation and trace expansion. | Standard walk/trace reference. | High | “A standard transfer matrix represents...” | “We introduce a novel transfer matrix.” |
+| `trace(T_w^a)` counts indexed cyclic selections once. | 7 | Closed-walk expansion. | Standard closed-walk trace identity. | High | “The trace closes the orbit...” | “The trace method is new.” |
+| `E(u,z)` is the exact global labeled joint enumerator. | 8 | Product over independent orbit selections. | No exact external match verified; adjacent records only. | High, conditional; external priority unresolved | “We derive the exact conditional labeled enumerator...” | “We give the first/only complete hull enumerator.” |
+| `[u^K z^H]E` counts codes with dimensions `K,H`. | 8 | Definition and product expansion. | Not a literature-transfer claim. | High | “The coefficient counts...” | “The coefficient counts equivalence classes.” |
+| `E(1,1)` gives the total labeled-code count. | 9 | Factor-selection bijection. | Exact counts exist in narrower families. | High, conditional | “The total is a corollary...” | “The total count establishes priority.” |
+| `E(1,z)` gives the exact hull distribution. | 9 | Coefficient specialization. | R3/R5/Talbi/Z4/generalized-cyclic adjacent counts. | High, conditional | “The distribution follows...” | “No prior hull distribution exists.” |
+| `z=0` gives the LCD count. | 9 | Zero-boundary characterization. | R1/R7/R8 restricted LCD/average context. | High, conditional | “The LCD count is the zero-hull specialization.” | “The LCD count is new.” |
+| Mean and variance have the displayed orbit formulas. | 9 | Independent indicators and covariance calculation. | R8 average context only. | High, conditional | “The moments are derived from the product.” | “The average result transfers from R8.” |
+| Listed finite checks pass. | 10 | Captured validators and independent end-to-end checks. | Not a literature claim. | High for listed cases | “The listed finite instances pass.” | “The computations prove the general theorem.” |
+| Literature contains narrower exact enumeration results. | 1, 11 | Phase-8 central comparison and reference audit. | R5, R3/R4, Talbi, Z4, double cyclic/circulant, R8, R9. | Scoped | “Prior work establishes narrower results...” | “Exact hull enumeration is unstudied.” |
+| The target product has no prior theorem. | Introduction/conclusion | No exact match verified; source coverage incomplete. | Final/corrected records incomplete. | Not established | “The audit did not verify an identical theorem.” | “No prior work contains this result.” |
+| Quantum constructions follow from the present theorem. | Not central | No independent quantum derivation. | Conditional source literature only. | None | “Hull data may inform constructions under additional hypotheses.” | Any distance, optimality, QECC, or performance claim. |
+| N1 is a manuscript example. | Nowhere | N1 is underspecified. | None. | None | “N1 is excluded.” | Any N1 histogram, factorization, or PASS claim. |

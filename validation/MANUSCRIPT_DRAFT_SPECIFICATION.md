@@ -292,3 +292,54 @@ The limitations section must add:
 ## 15. Current manuscript recommendation
 
 A draft may proceed only as a conditional exact labeled-enumerator paper with the safe boundary in `validation/CONTRIBUTION_BOUNDARY.md`. It must not proceed as a priority paper or as a claim that exact hull enumeration, CRT decomposition, or transfer matrices are themselves new. Before submission, complete the final/corrected source-text checks and any journal-specific differentiation review.
+
+---
+
+# Phase-9 manuscript architecture amendment
+
+**Amendment date:** 2026-09-24
+**Base commit:** `2be1c505c4d79741bc5378bc20de0cd2d17b05e8`
+**Phase-9 decision:** `A. MANUSCRIPT ARCHITECTURE FROZEN — READY FOR DRAFTING`
+
+The historical Phase-7 and Phase-8 specification remains unchanged above. Phase 9 converts it into a detailed drafting architecture without creating a final manuscript source. The controlling files are:
+
+- `validation/PHASE9_MANUSCRIPT_ARCHITECTURE_AUDIT.md` — title, abstract, contribution, Q1-logic, and decision gate;
+- `validation/MANUSCRIPT_SECTION_ARCHITECTURE.md` — section-by-section writing and proof obligations;
+- `validation/THEOREM_DEPENDENCY_GRAPH.md` — acyclic theorem order and proposed numbering;
+- `validation/MANUSCRIPT_ASSUMPTIONS.md` — single assumption source of truth;
+- `validation/MANUSCRIPT_NOTATION_AUDIT.md` — notation and first-use controls;
+- `validation/MANUSCRIPT_CLAIM_MATRIX.md` — allowed and forbidden wording;
+- `validation/MANUSCRIPT_FIGURE_PLAN.md` — five figure designs only;
+- `validation/MANUSCRIPT_TABLE_PLAN.md` — five table designs only;
+- `validation/PHASE9_REVIEWER_OBJECTIONS.md` — algebraic, combinatorial, and Galois/finite-field objections.
+
+## Phase-9 default title and keywords
+
+The recommended default title is:
+
+> **Exact Joint Enumeration of `k`-Galois Hull Dimensions for Labeled Constacyclic Codes over Square-Free Affine Algebras**
+
+Acceptable alternatives and their evaluations are recorded in `PHASE9_MANUSCRIPT_ARCHITECTURE_AUDIT.md`. The approved keywords are `k-Galois hulls`, `constacyclic codes`, `square-free affine algebras`, `exact labeled enumeration`, `generating polynomials`, `transfer matrices`, and `finite-field decomposition`.
+
+## Phase-9 central theorem writing rule
+
+The draft must state one central Theorem 8.1 under the consolidated square-free, simple-root, compatible-twist, fixed-component, equal-degree-within-orbit, and labeled-selection hypotheses:
+
+```text
+E(u,z)
+ = sum_(J_1,...,J_N) u^(K(C(J))) z^(H_k(C(J)))
+ = product_s product_(O in mathcal O_s) trace(T_(w_O)(u,z)^(a_O)),
+T_w(u,z) = [[u^w, 1], [u^w z^w, 1]].
+```
+
+Here `u` records global `F_q`-code dimension, `z` records global code-first `F_q`-hull dimension, `epsilon_i=1` means a selected generator factor, and `[u^K z^H]E` counts distinct labeled factor selections with dimensions `K,H`. The theorem does not count equivalence classes, repeated-root codes, incompatible same-factor-set families, unrestricted ring codes, or quantum parameters.
+
+The convention-transformation proposition and Gram-matrix hull/LCD invariance proposition remain separate branches. The draft must retain
+
+```text
+sigma(a)=a^(p^k),
+rho(a)=a^(p^(e*m_s-k)),
+D_candidate(C)=sigma_k^2(D_code-first(C)).
+```
+
+Phase 9 does not change the mathematical formulas, literature statuses, N1 exclusion, Phase-5 verdict, or Phase-8 contribution boundary. It only freezes the writing order and guardrails. This is readiness for drafting, not submission readiness.

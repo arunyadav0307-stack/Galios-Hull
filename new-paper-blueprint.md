@@ -2822,3 +2822,38 @@ The only approved central contribution statement is a conditional, self-containe
 > **B. READY WITH NARROWED CONTRIBUTION CLAIMS**
 
 The frozen convention, 19-result architecture, Phase-5 verdict, N1 status, and all repeated-root/incompatible/Burnside/quantum exclusions are unchanged.
+
+## Phase 9 manuscript architecture closure
+
+**Audit date:** 2026-09-24. Phase 9 is an architecture and mathematical-writing audit only; it does not create a final manuscript, `.tex`, `.bib`, Word source, submission letter, or graphical abstract.
+
+The proposed drafting architecture and its decision gate are recorded in `validation/PHASE9_MANUSCRIPT_ARCHITECTURE_AUDIT.md`. The detailed section obligations are in `validation/MANUSCRIPT_SECTION_ARCHITECTURE.md`; the acyclic proof order and proposed theorem numbering are in `validation/THEOREM_DEPENDENCY_GRAPH.md`; and the single-source assumption and notation controls are in `validation/MANUSCRIPT_ASSUMPTIONS.md` and `validation/MANUSCRIPT_NOTATION_AUDIT.md`.
+
+The recommended default title is:
+
+> **Exact Joint Enumeration of `k`-Galois Hull Dimensions for Labeled Constacyclic Codes over Square-Free Affine Algebras**
+
+The architecture freezes the following central theorem-writing form under the existing hypotheses. For compatible reciprocal orbits `O` with length `a_O` and weight `w_O=m_s deg(f)`, and with `epsilon_i=1` for a selected generator factor,
+
+```text
+K(C)=sum_(s,O,i) w_O(1-epsilon_i),
+H_k(C)=sum_(s,O,i) w_O epsilon_i(1-epsilon_(i+1)),
+T_w(u,z)=[[u^w,1],[u^w z^w,1]],
+E(u,z)=product_s product_(O in mathcal O_s) trace(T_(w_O)(u,z)^(a_O)).
+```
+
+The coefficient `[u^K z^H]E` counts distinct labeled factor selections with global `F_q`-code dimension `K` and code-first `F_q`-hull dimension `H`. It does not count equivalence classes, repeated-root codes, incompatible same-factor-set codes, unrestricted ring codes, or quantum parameters.
+
+The manuscript must display the code-first convention and the separate comparison relation:
+
+```text
+sigma(a)=a^(p^k),
+rho(a)=a^(p^(e*m_s-k)),
+D_candidate(C)=sigma_k^2(D_code-first(C)).
+```
+
+The Phase-9 decision is:
+
+> **A. MANUSCRIPT ARCHITECTURE FROZEN — READY FOR DRAFTING**
+
+This is not a submission-readiness or journal-acceptance claim. The Phase-8 no-priority boundary, N1 exclusion, literature-source limitations, and all scope exclusions remain in force.

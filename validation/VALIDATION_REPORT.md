@@ -1017,3 +1017,50 @@ The clean extracted package verification is captured in `validation/phase8_packa
 ## Phase-8 interpretation
 
 The internal enumerator remains proved with conditions. Exact hull enumeration is known in narrower families, and `b_O` plus the transfer trace are standard tools. No exact external theorem identical to the complete weighted labeled product was verified, but the final/corrected source comparison remains incomplete. The only authorized manuscript position is the bounded contribution in `validation/CONTRIBUTION_BOUNDARY.md`; no priority language is permitted.
+
+# Phase-9 manuscript architecture and mathematical writing audit
+
+**Date:** 2026-09-24
+**Base:** `2be1c505c4d79741bc5378bc20de0cd2d17b05e8`
+**Decision:** `A. MANUSCRIPT ARCHITECTURE FROZEN — READY FOR DRAFTING`
+
+Phase 9 creates a rigorous manuscript architecture without creating a final manuscript source. The architecture preserves the Phase-8 safe contribution statement, the 19-result theorem chain, the separate candidate-first/code-first transformation and Gram-invariance propositions, the single-source assumptions, the notation controls, the literature boundary, and every exclusion.
+
+## Phase-9 architecture records
+
+- `validation/PHASE9_MANUSCRIPT_ARCHITECTURE_AUDIT.md` records the starting state, title audit, abstract/keyword specification, central theorem, proof order, Q1-level logic check, reviewer synthesis, and decision gate.
+- `validation/MANUSCRIPT_SECTION_ARCHITECTURE.md` specifies the purpose, definitions, equations, proof obligations, examples, figures, tables, dependencies, citations, and prohibited claims for all 13 proposed manuscript sections.
+- `validation/THEOREM_DEPENDENCY_GRAPH.md` gives the acyclic 19-result graph, the separate convention and Gram branches, and the proposed numbering map.
+- `validation/MANUSCRIPT_ASSUMPTIONS.md` freezes the square-free/simple-root/compatible/labeled hypotheses and exclusions in one location.
+- `validation/MANUSCRIPT_NOTATION_AUDIT.md` resolves `A`/`R`, `K_s`/`K`, and `mathcal F_s`/`F_s` ambiguities and audits first use.
+- `validation/MANUSCRIPT_CLAIM_MATRIX.md` provides section-level evidence, confidence, permitted wording, and forbidden wording.
+- `validation/MANUSCRIPT_FIGURE_PLAN.md` designs five figures without generating them.
+- `validation/MANUSCRIPT_TABLE_PLAN.md` designs five tables without unverifiable data.
+- `validation/PHASE9_REVIEWER_OBJECTIONS.md` records algebraic, combinatorial, and Galois/finite-field reviewer objections and required revisions.
+
+## Phase-9 gate checks
+
+- exact central theorem: conditional labeled joint enumerator with coefficient interpretation;
+- theorem graph: acyclic;
+- assumptions: consolidated and complete for the frozen family;
+- notation: consistent after retiring bare `F_s` and main-theorem `R`;
+- convention branch: explicit and separate;
+- literature claims: Phase-8 conservative statuses retained;
+- N1: excluded;
+- figures/tables: plans only, no fabricated data;
+- final manuscript source: not created.
+
+The recommended default title is **Exact Joint Enumeration of `k`-Galois Hull Dimensions for Labeled Constacyclic Codes over Square-Free Affine Algebras**. This is a clarity recommendation, not a priority claim.
+
+## Phase-9 package and clean-extraction verification
+
+The Phase-9 archive is rebuilt after the architecture files and validation capture are present. `validation/phase9_package_verification.out` records:
+
+- ZIP integrity and exact manifest/content comparison;
+- presence of all nine principal Phase-9 files and updated manuscript documents;
+- absence of Git metadata and final `.tex`/`.bib` source fabrication;
+- absence of N1 numerical evidence from the Phase-9 principal architecture files;
+- the full extracted 13-validator suite with zero stderr lines;
+- the acyclic dependency check, 13-section architecture, 19-result comparison, five-figure plan, and five-table plan.
+
+The archive remains a drafting handoff, not a submission-ready manuscript. No historical audit or capture is deleted or weakened.
