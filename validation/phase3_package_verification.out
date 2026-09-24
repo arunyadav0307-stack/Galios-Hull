@@ -1,13 +1,13 @@
 Package: Galios-Hull-main-files.zip
-UTC timestamp: 2026-09-24T10:08:39+00:00
+UTC timestamp: 2026-09-24T10:25:46+00:00
 Python version: Python 3.11.2
-Archive SHA-256: 3f5233d2ed2690004f1ef539076b4305a39abf675bc456280cae904450f8bc0b
+Archive SHA-256: 38cad308d51bcf994fe03498b6eb2f231969219936411fedcdeff36ca86e19fd
 unzip -t exit code: 0
 clean extraction content diff exit code: 0
 manifest comparison exit code: 0
 clean extracted run command: env -i PATH="$PATH" HOME="$HOME" LANG=C.UTF-8 LC_ALL=C PYTHONDONTWRITEBYTECODE=1 PYTHONPATH="" bash run_all_validations.sh
 clean extracted run exit code: 0
-clean extracted stdout lines: 203
+clean extracted stdout lines: 254
 clean extracted stderr lines: 0
 --- CONTENT DIFF ---
 --- MANIFEST DIFF ---
@@ -153,19 +153,62 @@ F16 over F4 lambda=1 k=1: sigma_perm=(0, 2, 4, 1, 3), rho_perm=(0, 3, 1, 4, 2)
 F16 over F4 lambda=alpha^3 k=1: factors=3, selections=8, sigma_iter=1, rho_iter=3, dual_differences=6, hull_dimension_differences=0, lcd_criterion_differences=0, code_lcd_count=8, candidate_lcd_count=8, factor_support_differences=0, candidate_sigma_generator_agreements=8, code_rho_generator_agreements=8, candidate_twist=10, code_twist=12, candidate_twist_checks=8, code_twist_checks=8, relation_failures=0, source_displayed_rho_disagreements=6
 F16 over F4 lambda=alpha^3 k=1: sigma_perm=None, rho_perm=None
 PHASE4 CONVENTION EQUIVALENCE CHECK: PASS (finite evidence only)
+F4 k=0 lambda=1: factors=3, selections=8, compatible=True, dual_differences=0, relation_failures=0, hull_dimension_differences=0, lcd_differences=0, code_lcd=4, candidate_lcd=4, dual_support_differences=0, hull_generator_support_differences=0, support_differences=0, frobenius_noninvariant=0, hull_subspace_differences=0, tau_inverse_failures=0, mean=0.5, variance=0.25
+F4 k=0 lambda=1: sigma_perm=(0, 2, 1), rho_perm=(0, 2, 1), support_comparison=available
+F4 k=1 lambda=1: factors=3, selections=8, compatible=True, dual_differences=0, relation_failures=0, hull_dimension_differences=0, lcd_differences=0, code_lcd=8, candidate_lcd=8, dual_support_differences=0, hull_generator_support_differences=0, support_differences=0, frobenius_noninvariant=0, hull_subspace_differences=0, tau_inverse_failures=0, mean=0, variance=0
+F4 k=1 lambda=1: sigma_perm=(0, 1, 2), rho_perm=(0, 1, 2), support_comparison=available
+F4 k=1 compatible-nontrivial: factors=1, selections=2, compatible=True, dual_differences=0, relation_failures=0, hull_dimension_differences=0, lcd_differences=0, code_lcd=2, candidate_lcd=2, dual_support_differences=0, hull_generator_support_differences=0, support_differences=0, frobenius_noninvariant=0, hull_subspace_differences=0, tau_inverse_failures=0, mean=0, variance=0
+F4 k=1 compatible-nontrivial: sigma_perm=(0,), rho_perm=(0,), support_comparison=available
+F8 k=0 lambda=1: factors=7, selections=128, compatible=True, dual_differences=0, relation_failures=0, hull_dimension_differences=0, lcd_differences=0, code_lcd=16, candidate_lcd=16, dual_support_differences=0, hull_generator_support_differences=0, support_differences=0, frobenius_noninvariant=0, hull_subspace_differences=0, tau_inverse_failures=0, mean=1.5, variance=0.75
+F8 k=0 lambda=1: sigma_perm=(0, 4, 5, 6, 1, 2, 3), rho_perm=(0, 4, 5, 6, 1, 2, 3), support_comparison=available
+F8 k=1 lambda=1: factors=7, selections=128, compatible=True, dual_differences=120, relation_failures=0, hull_dimension_differences=0, lcd_differences=0, code_lcd=4, candidate_lcd=4, dual_support_differences=120, hull_generator_support_differences=90, support_differences=90, frobenius_noninvariant=120, hull_subspace_differences=90, tau_inverse_failures=0, mean=1.5, variance=0.375
+F8 k=1 lambda=1: first_examples={'frobenius_noninvariant': 2, 'dual_difference': 2, 'hull_subspace_difference': 2, 'dual_support_difference': 2, 'hull_generator_support_difference': 2, 'support_difference': 2}
+F8 k=1 lambda=1: sigma_perm=(0, 6, 1, 2, 3, 4, 5), rho_perm=(0, 2, 3, 4, 5, 6, 1), support_comparison=available
+F8 k=1 incompatible: factors=2, selections=4, compatible=False, dual_differences=2, relation_failures=0, hull_dimension_differences=0, lcd_differences=0, code_lcd=4, candidate_lcd=4, dual_support_differences=0, hull_generator_support_differences=0, support_differences=0, frobenius_noninvariant=2, hull_subspace_differences=0, tau_inverse_failures=0, mean=0, variance=0
+F8 k=1 incompatible: first_examples={'frobenius_noninvariant': 1, 'dual_difference': 1}
+F8 k=1 incompatible: support_comparison=not_applicable_for_incompatible_twist
+F8 k=2 lambda=1: factors=7, selections=128, compatible=True, dual_differences=120, relation_failures=0, hull_dimension_differences=0, lcd_differences=0, code_lcd=4, candidate_lcd=4, dual_support_differences=120, hull_generator_support_differences=90, support_differences=90, frobenius_noninvariant=120, hull_subspace_differences=90, tau_inverse_failures=0, mean=1.5, variance=0.375
+F8 k=2 lambda=1: first_examples={'frobenius_noninvariant': 2, 'dual_difference': 2, 'hull_subspace_difference': 2, 'dual_support_difference': 2, 'hull_generator_support_difference': 2, 'support_difference': 2}
+F8 k=2 lambda=1: sigma_perm=(0, 2, 3, 4, 5, 6, 1), rho_perm=(0, 6, 1, 2, 3, 4, 5), support_comparison=available
+F8 k=2 incompatible: factors=2, selections=4, compatible=False, dual_differences=2, relation_failures=0, hull_dimension_differences=0, lcd_differences=0, code_lcd=4, candidate_lcd=4, dual_support_differences=0, hull_generator_support_differences=0, support_differences=0, frobenius_noninvariant=2, hull_subspace_differences=0, tau_inverse_failures=0, mean=0, variance=0
+F8 k=2 incompatible: first_examples={'frobenius_noninvariant': 1, 'dual_difference': 1}
+F8 k=2 incompatible: support_comparison=not_applicable_for_incompatible_twist
+F16 k=0 lambda=1: factors=5, selections=32, compatible=True, dual_differences=0, relation_failures=0, hull_dimension_differences=0, lcd_differences=0, code_lcd=8, candidate_lcd=8, dual_support_differences=0, hull_generator_support_differences=0, support_differences=0, frobenius_noninvariant=0, hull_subspace_differences=0, tau_inverse_failures=0, mean=1, variance=0.5
+F16 k=0 lambda=1: sigma_perm=(0, 4, 3, 2, 1), rho_perm=(0, 4, 3, 2, 1), support_comparison=available
+F16 k=1 lambda=1: factors=5, selections=32, compatible=True, dual_differences=24, relation_failures=0, hull_dimension_differences=0, lcd_differences=0, code_lcd=4, candidate_lcd=4, dual_support_differences=24, hull_generator_support_differences=16, support_differences=16, frobenius_noninvariant=24, hull_subspace_differences=16, tau_inverse_failures=0, mean=1, variance=0.25
+F16 k=1 lambda=1: first_examples={'frobenius_noninvariant': 2, 'dual_difference': 2, 'hull_subspace_difference': 2, 'dual_support_difference': 2, 'hull_generator_support_difference': 2, 'support_difference': 2}
+F16 k=1 lambda=1: sigma_perm=(0, 2, 4, 1, 3), rho_perm=(0, 3, 1, 4, 2), support_comparison=available
+F16 k=1 compatible-nontrivial: factors=1, selections=2, compatible=True, dual_differences=0, relation_failures=0, hull_dimension_differences=0, lcd_differences=0, code_lcd=2, candidate_lcd=2, dual_support_differences=0, hull_generator_support_differences=0, support_differences=0, frobenius_noninvariant=0, hull_subspace_differences=0, tau_inverse_failures=0, mean=0, variance=0
+F16 k=1 compatible-nontrivial: sigma_perm=(0,), rho_perm=(0,), support_comparison=available
+F16 k=1 incompatible: factors=1, selections=2, compatible=False, dual_differences=0, relation_failures=0, hull_dimension_differences=0, lcd_differences=0, code_lcd=2, candidate_lcd=2, dual_support_differences=0, hull_generator_support_differences=0, support_differences=0, frobenius_noninvariant=0, hull_subspace_differences=0, tau_inverse_failures=0, mean=0, variance=0
+F16 k=1 incompatible: support_comparison=not_applicable_for_incompatible_twist
+F16 k=2 lambda=1: factors=5, selections=32, compatible=True, dual_differences=0, relation_failures=0, hull_dimension_differences=0, lcd_differences=0, code_lcd=32, candidate_lcd=32, dual_support_differences=0, hull_generator_support_differences=0, support_differences=0, frobenius_noninvariant=0, hull_subspace_differences=0, tau_inverse_failures=0, mean=0, variance=0
+F16 k=2 lambda=1: sigma_perm=(0, 1, 2, 3, 4), rho_perm=(0, 1, 2, 3, 4), support_comparison=available
+F16 k=2 compatible-nontrivial: factors=3, selections=8, compatible=True, dual_differences=0, relation_failures=0, hull_dimension_differences=0, lcd_differences=0, code_lcd=4, candidate_lcd=4, dual_support_differences=0, hull_generator_support_differences=0, support_differences=0, frobenius_noninvariant=0, hull_subspace_differences=0, tau_inverse_failures=0, mean=0.5, variance=0.25
+F16 k=2 compatible-nontrivial: sigma_perm=(2, 1, 0), rho_perm=(2, 1, 0), support_comparison=available
+F16 k=2 incompatible: factors=1, selections=2, compatible=False, dual_differences=0, relation_failures=0, hull_dimension_differences=0, lcd_differences=0, code_lcd=2, candidate_lcd=2, dual_support_differences=0, hull_generator_support_differences=0, support_differences=0, frobenius_noninvariant=0, hull_subspace_differences=0, tau_inverse_failures=0, mean=0, variance=0
+F16 k=2 incompatible: support_comparison=not_applicable_for_incompatible_twist
+F16 k=3 lambda=1: factors=5, selections=32, compatible=True, dual_differences=24, relation_failures=0, hull_dimension_differences=0, lcd_differences=0, code_lcd=4, candidate_lcd=4, dual_support_differences=24, hull_generator_support_differences=16, support_differences=16, frobenius_noninvariant=24, hull_subspace_differences=16, tau_inverse_failures=0, mean=1, variance=0.25
+F16 k=3 lambda=1: first_examples={'frobenius_noninvariant': 2, 'dual_difference': 2, 'hull_subspace_difference': 2, 'dual_support_difference': 2, 'hull_generator_support_difference': 2, 'support_difference': 2}
+F16 k=3 lambda=1: sigma_perm=(0, 3, 1, 4, 2), rho_perm=(0, 2, 4, 1, 3), support_comparison=available
+F16 k=3 compatible-nontrivial: factors=1, selections=2, compatible=True, dual_differences=0, relation_failures=0, hull_dimension_differences=0, lcd_differences=0, code_lcd=2, candidate_lcd=2, dual_support_differences=0, hull_generator_support_differences=0, support_differences=0, frobenius_noninvariant=0, hull_subspace_differences=0, tau_inverse_failures=0, mean=0, variance=0
+F16 k=3 compatible-nontrivial: sigma_perm=(0,), rho_perm=(0,), support_comparison=available
+F16 k=3 incompatible: factors=1, selections=2, compatible=False, dual_differences=0, relation_failures=0, hull_dimension_differences=0, lcd_differences=0, code_lcd=2, candidate_lcd=2, dual_support_differences=0, hull_generator_support_differences=0, support_differences=0, frobenius_noninvariant=0, hull_subspace_differences=0, tau_inverse_failures=0, mean=0, variance=0
+F16 k=3 incompatible: support_comparison=not_applicable_for_incompatible_twist
+arbitrary F8^3 rank-2 sample: sampled=1182, hull_dimension_counterexamples=0, lcd_counterexamples=0, relation_failures=0
+PHASE5 CONVENTION COUNTEREXAMPLE SEARCH: PASS (finite evidence only)
 N1 repository search: current text-file anchor/context summary
-current_anchor_match_count=121
-anchor_source=README.md | count=4
-anchor_context=README.md:8 | 2. Read **validation/PHASE4_LITERATURE_CONVENTION_AUDIT.md** for the exact source-convention reconciliation, theorem-transfer audit, novelty boundary, and N1 decision.
-anchor_context=README.md:11 | 5. Read **validation/phase4_convention_equivalence.py** for the independent candidate-first/code-first comparison over F4, F8, and F16.
-anchor_context=README.md:39 | The conditional proofs and enumerator require the explicit square-free positive-degree affine relations, simple-root length `gcd(n,p)=1` (equivalently `gcd(n,q)=1`), finite-field components, componentwise Frobenius labels, compatible twi...
+current_anchor_match_count=133
+anchor_source=README.md | count=3
+anchor_context=README.md:11 | 5. Read **validation/phase5_convention_counterexamples.py** for the independent F4/F8/F16 invariance search.
+anchor_context=README.md:23 | The script runs the six existing finite validators, the Phase-2 counterexample search, the Phase-3 independent checker, the Phase-4 convention checker, the Phase-5 independent convention/invariance search, and the N1 specification search...
 anchor_source=code/validate_long_orbit_examples.py | count=2
 anchor_context=code/validate_long_orbit_examples.py:530 | F16 = BinaryField(4, 0b10011)
 anchor_context=code/validate_long_orbit_examples.py:533 | F=F16,
 anchor_source=new-paper-blueprint.md | count=23
 anchor_context=new-paper-blueprint.md:46 | where `u` records `F_q`-code dimension and `z` records `F_q`-hull dimension. Its specialization gives the exact hull-distribution polynomial, the total-code count, the LCD count, and closed mean and variance formulas, including the excep...
-anchor_context=new-paper-blueprint.md:1625 | ### 10.3 F16 extension component: `m_s=2` and orbit length `4`
-anchor_context=new-paper-blueprint.md:2685 | The exact executed commands are the pilot, long-orbit, compatible nontrivial-`\lambda`, basic incompatible diagnostic, N2-A, and N2-B validators, all run with `PYTHONDONTWRITEBYTECODE=1` and recorded in `validation/VALIDATION_REPORT.md`....
+anchor_context=new-paper-blueprint.md:1659 | ### 10.3 F16 extension component: `m_s=2` and orbit length `4`
+anchor_context=new-paper-blueprint.md:2739 | The exact executed commands are the pilot, long-orbit, compatible nontrivial-`\lambda`, basic incompatible diagnostic, N2-A, and N2-B validators, all run with `PYTHONDONTWRITEBYTECODE=1` and recorded in `validation/VALIDATION_REPORT.md`....
 anchor_source=validation/PHASE2_PROOF_AUDIT.md | count=10
 anchor_context=validation/PHASE2_PROOF_AUDIT.md:114 | These statuses mean that the displayed identities follow from the hypotheses in Section 2 and the derivations in Sections 4–12. They do not upgrade the separate literature-comparison records, N1, the incompatible-twist diagnostics, the o...
 anchor_context=validation/PHASE2_PROOF_AUDIT.md:665 | ## 13. Exact N1 identification and resolution
@@ -178,26 +221,34 @@ anchor_source=validation/PHASE4_LITERATURE_CONVENTION_AUDIT.md | count=28
 anchor_context=validation/PHASE4_LITERATURE_CONVENTION_AUDIT.md:5 | Phase 4 resolves the remaining Phase-3 publication-critical issues rather than repeating the general proof audit. It independently reads the accessible source record, derives the relation between candidate-first and code-first Galois dua...
 anchor_context=validation/PHASE4_LITERATURE_CONVENTION_AUDIT.md:174 | | F16 over F4, `lambda=1`, `k=1` | 24/32 | 0/32 | 0/32 | 4/4 | 16/32 | 24/32 |
 anchor_context=validation/PHASE4_LITERATURE_CONVENTION_AUDIT.md:456 | The present mathematical framework can be stated conservatively, but the literature theorem transfer and exact novelty boundary are not fully closed. The source convention mismatch is documented rather than hidden, and N1 remains optiona...
-anchor_source=validation/VALIDATION_REPORT.md | count=21
+anchor_source=validation/PHASE5_CONVENTION_INVARIANCE_AUDIT.md | count=10
+anchor_context=validation/PHASE5_CONVENTION_INVARIANCE_AUDIT.md:305 | - F16, `lambda=1`, `k=1`: 24 of 32 selections were not `T`-invariant;
+anchor_context=validation/PHASE5_CONVENTION_INVARIANCE_AUDIT.md:306 | - F16, `lambda=1`, `k=3`: 24 of 32 selections were not `T`-invariant.
+anchor_context=validation/PHASE5_CONVENTION_INVARIANCE_AUDIT.md:673 | 2. N1 remains `UNSPECIFIED — CANNOT VALIDATE`;
+anchor_source=validation/VALIDATION_REPORT.md | count=23
 anchor_context=validation/VALIDATION_REPORT.md:17 | | `code/validate_long_orbit_examples.py` | Yes | 0 | **PASS** | F8 orbit-length-6 and F16 extension orbit-length-4 examples; direct duals, orbit boundary, transfer matrix, and histograms. |
 anchor_context=validation/VALIDATION_REPORT.md:20 | | `code/validate_n2_extension_convention.py` | Yes | 0 | **PASS** | N2-A over F16; independent direct/principal/alternative reciprocal comparison for all 32 selections. |
-anchor_context=validation/VALIDATION_REPORT.md:663 | The existing Phase-1/Phase-2/Phase-3 captures remain unchanged. The Phase-4 checker passed its finite assertions; the N1 search exited 0 with unresolved metadata; and the package rebuild, clean extraction comparison, hash check, and extr...
+anchor_context=validation/VALIDATION_REPORT.md:753 | The fresh implementation directly computes both annihilators separately and tests F4, F8, and F16 with `k=0`, every nonzero admissible `k`, `lambda=1`, compatible nontrivial twists where available, and incompatible twists where relevant....
 anchor_source=validation/phase3_independent_enumerator_check.py | count=2
 anchor_context=validation/phase3_independent_enumerator_check.py:575 | f16 = GF2m(4, 0b10011)
 anchor_context=validation/phase3_independent_enumerator_check.py:591 | evaluate_case("F16 over F4 lambda=1 k=1", f16, 2, 5, 1, 1)
 anchor_source=validation/phase4_convention_equivalence.py | count=3
 anchor_context=validation/phase4_convention_equivalence.py:463 | f16 = Field(4, 0b10011)
 anchor_context=validation/phase4_convention_equivalence.py:469 | evaluate_case("F16 over F4 lambda=1 k=1", f16, 5, 1, 1),
+anchor_source=validation/phase5_convention_counterexamples.py | count=1
+anchor_context=validation/phase5_convention_counterexamples.py:634 | ("F16", BinaryField(4, 0b10011), 5),
 related-term counts within files containing an N1 anchor:
 related_source=README.md | {'histogram': 0, 'factorization': 0, 'orbit': 0, 'lambda': 2, 'k': 9}
 related_source=code/validate_long_orbit_examples.py | {'histogram': 10, 'factorization': 0, 'orbit': 33, 'lambda': 3, 'k': 81}
-related_source=new-paper-blueprint.md | {'histogram': 19, 'factorization': 11, 'orbit': 131, 'lambda': 116, 'k': 787}
+related_source=new-paper-blueprint.md | {'histogram': 19, 'factorization': 11, 'orbit': 132, 'lambda': 122, 'k': 798}
 related_source=validation/PHASE2_PROOF_AUDIT.md | {'histogram': 2, 'factorization': 4, 'orbit': 26, 'lambda': 33, 'k': 87}
 related_source=validation/PHASE3_ADVERSARIAL_AUDIT.md | {'histogram': 10, 'factorization': 3, 'orbit': 45, 'lambda': 31, 'k': 215}
 related_source=validation/PHASE4_LITERATURE_CONVENTION_AUDIT.md | {'histogram': 1, 'factorization': 2, 'orbit': 12, 'lambda': 25, 'k': 97}
-related_source=validation/VALIDATION_REPORT.md | {'histogram': 22, 'factorization': 4, 'orbit': 52, 'lambda': 40, 'k': 170}
+related_source=validation/PHASE5_CONVENTION_INVARIANCE_AUDIT.md | {'histogram': 1, 'factorization': 0, 'orbit': 4, 'lambda': 44, 'k': 65}
+related_source=validation/VALIDATION_REPORT.md | {'histogram': 22, 'factorization': 4, 'orbit': 52, 'lambda': 49, 'k': 182}
 related_source=validation/phase3_independent_enumerator_check.py | {'histogram': 0, 'factorization': 1, 'orbit': 45, 'lambda': 7, 'k': 56}
 related_source=validation/phase4_convention_equivalence.py | {'histogram': 0, 'factorization': 1, 'orbit': 0, 'lambda': 5, 'k': 52}
+related_source=validation/phase5_convention_counterexamples.py | {'histogram': 3, 'factorization': 0, 'orbit': 0, 'lambda': 4, 'k': 59}
 N1 repository search: Git history matches
 git_search_exit_code=128
 history=no matching Git commit message/patch metadata found

@@ -663,3 +663,107 @@ The conservative contribution statement is a conditional, self-contained code-fi
 The existing Phase-1/Phase-2/Phase-3 captures remain unchanged. The Phase-4 checker passed its finite assertions; the N1 search exited 0 with unresolved metadata; and the package rebuild, clean extraction comparison, hash check, and extracted validation-suite run are recorded in `validation/phase3_package_verification.out` after the final Phase-4 package rebuild.
 
 **Phase-4 status: `VERIFY — MATERIAL LITERATURE OR CONVENTION GAPS REMAIN`.**
+
+# PHASE 5 — CONVENTION TRANSFORMATION AND INVARIANCE
+
+This section is appended after the preserved Phase-1 through Phase-4 evidence. The full audit is `validation/PHASE5_CONVENTION_INVARIANCE_AUDIT.md`; the independent search is `validation/phase5_convention_counterexamples.py` and its capture is `validation/phase5_convention_counterexamples.out`.
+
+## Exact dual transformation
+
+The frozen code-first dual is
+
+```text
+D_code(C) = { x : sum_i c_i sigma(x_i) = 0 for every c in C }.
+```
+
+The verified source candidate-first dual is
+
+```text
+D_cand(C) = { y : sum_i y_i sigma(c_i) = 0 for every c in C }.
+```
+
+With `rho=sigma^(-1)` and `T=sigma^2`, direct transformation of the defining equations gives
+
+```text
+D_cand(C) = T(D_code(C)) = sigma^2(D_code(C)).
+```
+
+Here `sigma^2(a)=a^(p^(2k))`, with the Frobenius iteration reduced modulo `e*m_s` as a field automorphism. The dual codes are not generally equal; they are coordinatewise Frobenius-conjugate and dimension-preserving.
+
+## Twist and family transformation
+
+Coordinatewise `T` maps a `lambda`-constacyclic code to a `sigma^2(lambda)`-constacyclic code. The separately derived dual twists are
+
+```text
+code-first:      rho(lambda^(-1)) = lambda^(-p^(e*m_s-k))
+candidate-first: sigma(lambda^(-1)) = lambda^(-p^k).
+```
+
+The frozen compatibility condition and the candidate-first compatibility condition are equivalent, and under compatibility `sigma^2(lambda)=lambda`. Thus the compatible family is stable under `T`, but an individual selected-factor code need not be Frobenius-invariant.
+
+## Hull and LCD invariance
+
+The exact subspace identity is
+
+```text
+T(C intersect D_code(C)) = T(C) intersect D_cand(C).
+```
+
+It reduces to a same-code hull transformation only when `T(C)=C`; that individual-code condition fails for many non-involutory selections.
+
+Nevertheless, for any finite-field-linear code with basis `c_1,...,c_r`, let
+
+```text
+G_ij = sum_l c_i[l] sigma(c_j[l]).
+```
+
+The code-first hull has coefficient nullity `r-rank(G)`, while the candidate-first hull has coefficient nullity `r-rank(G transpose)`. Therefore
+
+```text
+dim(C intersect D_code(C)) = dim(C intersect D_cand(C))
+```
+
+for every finite-field-linear code. LCD decisions are consequently invariant as well. This is a dimension theorem, not equality of hull subspaces.
+
+## Supports, factor permutations, and enumerators
+
+For a compatible simple-root factor set, the reciprocal root actions are
+
+```text
+rho action:   alpha -> alpha^(-p^(e*m_s-k))
+sigma action: alpha -> alpha^(-p^k).
+```
+
+Their factor permutations satisfy `tau_sigma=tau_rho^(-1)`. The actual dual-generator supports are `tau_rho(F minus J)` and `tau_sigma(F minus J)`; the hull-generator supports are obtained by adjoining `J`, while the complementary dimension-support sets are `(F minus J) intersect tau_rho(J)` and `(F minus J) intersect tau_sigma(J)`. These supports can differ: the Phase-5 search found 120/128 dual-support and 90/128 hull-support differences in each tested F8 non-involutory case, and 24/32 dual-support and 16/32 hull-support differences in the tested F16 `k=1` and `k=3` cases, even though weighted hull dimensions agreed.
+
+Because hull dimension is invariant term by term on the same code collection, the following are invariant under the two dual conventions:
+
+- total labeled-code count;
+- code-dimension distribution;
+- hull-dimension distribution;
+- joint code/hull enumerator;
+- LCD count;
+- mean hull dimension;
+- hull-dimension variance.
+
+The present enumerator remains explicitly code-first and uses the frozen inverse-Frobenius support formula. Support labels and dual-generator polynomials are not silently identified with the candidate-first objects.
+
+## Phase-5 independent search
+
+The fresh implementation directly computes both annihilators separately and tests F4, F8, and F16 with `k=0`, every nonzero admissible `k`, `lambda=1`, compatible nontrivial twists where available, and incompatible twists where relevant. It exhausts the listed factor selections and samples 1,182 arbitrary rank-2 codes in `F8^3`.
+
+Results:
+
+- zero dual-transformation failures;
+- zero hull-dimension counterexamples;
+- zero LCD counterexamples;
+- zero reciprocal-composition failures;
+- zero inverse-factor-permutation failures;
+- zero twist-transformation failures;
+- nonzero individual-code Frobenius-invariance failures;
+- nonzero dual-code, hull-subspace, and factor-support differences;
+- zero arbitrary-code hull/LCD counterexamples in the deterministic sample.
+
+The finite output is evidence for the implementation; the Gram-matrix derivation is the proof of hull-dimension/LCD invariance.
+
+**Phase-5 status: `PASS WITH CONDITIONS — INVARIANCE PROVED UNDER EXPLICIT CONDITIONS`.**

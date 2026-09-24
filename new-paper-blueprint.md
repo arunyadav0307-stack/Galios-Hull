@@ -1,6 +1,6 @@
 # Exact Enumeration of `k`-Galois Hull Dimensions of Constacyclic Codes over Square-Free Affine Algebras
 
-> **Blueprint status:** This is the corrected inverse-Frobenius blueprint with a completed Phase-2 conditional proof audit. Theorems 1–19 carry the allowed Phase-2 statuses in the proof-status ledger; finite runs remain `COMPUTATIONAL VALIDATION`; literature records carry an explicit verification category.
+> **Blueprint status:** This is the corrected inverse-Frobenius blueprint with completed Phase-2 and Phase-5 mathematical audits. Theorems 1–19 carry the allowed Phase-2 statuses in the proof-status ledger; the Phase-5 dual transformation, hull-dimension/LCD invariance, support non-invariance, and same-family enumerator conditions are recorded explicitly; finite runs remain `COMPUTATIONAL VALIDATION`; literature records carry an explicit verification category.
 >
 > **Principal convention:**
 > \[
@@ -43,7 +43,7 @@ and the dual defined by `\langle c,x\rangle_{s,k}=0`, we define the normalized i
 T_w(u,z)=\begin{pmatrix}u^w&1\\u^wz^w&1\end{pmatrix},
 \]
 
-where `u` records `F_q`-code dimension and `z` records `F_q`-hull dimension. Its specialization gives the exact hull-distribution polynomial, the total-code count, the LCD count, and closed mean and variance formulas, including the exceptional two-cycle variance. The paper distinguishes theorem-level proofs from exhaustive finite computations. The current `COMPUTATIONAL VALIDATION` suite confirms the listed `F_4`, `F_8`, `F_{16}`, compatible nontrivial-`\lambda`, and N2 finite instances by separating the defining-inner-product direct dual from the reciprocal candidates; the basic `F_4` incompatible check is **DIAGNOSTIC ONLY**, while N2-B is the extension-field convention-resolution diagnostic. N1 remains explicitly `UNSPECIFIED — CANNOT VALIDATE`; no N1 result is invented.
+where `u` records `F_q`-code dimension and `z` records `F_q`-hull dimension. Its specialization gives the exact hull-distribution polynomial, the total-code count, the LCD count, and closed mean and variance formulas, including the exceptional two-cycle variance. The candidate-first literature convention is not identified with the present code-first dual: its dual is `\\sigma_{s,k}^2`-conjugate to the code-first dual, while a Gram-matrix argument proves equality of hull dimensions and LCD decisions for the same code. The main theorem and support formula remain explicitly code-first. The paper distinguishes theorem-level proofs from exhaustive finite computations. The current `COMPUTATIONAL VALIDATION` suite confirms the listed `F_4`, `F_8`, `F_{16}`, compatible nontrivial-`\lambda`, and N2 finite instances by separating the defining-inner-product direct dual from the reciprocal candidates; the basic `F_4` incompatible check is **DIAGNOSTIC ONLY**, while N2-B is the extension-field convention-resolution diagnostic. N1 remains explicitly `UNSPECIFIED — CANNOT VALIDATE`; no N1 result is invented.
 
 ## Notation table and convention audit
 
@@ -234,6 +234,40 @@ Thus the compatibility condition is derived from the root action. Under (C.4), `
 ### Source theorem references and scope
 
 The publisher/abstract audit confirms the broad finite-field and affine-algebra hull scope. The accessible arXiv preprint's Section 2.2 displays the candidate-first definition `C^{\perp_k}={\alpha:\langle\alpha,c\rangle_k=0}` but its Lemma 1 and Theorem 1 display the inverse-Frobenius reciprocal and twist. For the literal candidate-first equations, the direct derivation gives `D_{cand}(C)=\sigma_{s,k}^{2}(D_{cf}(C))` and selects the `p^k` reciprocal/twist, whereas the frozen present code-first convention selects the inverse-Frobenius `\rho_{s,k}` formulas. This is a **CONVENTION MISMATCH**, not a source theorem transfer. The present work proves its formulas independently under `\langle c,x\rangle_k=0`; no source formula is imported without the explicit conversion recorded in `validation/PHASE4_LITERATURE_CONVENTION_AUDIT.md`.
+
+### Convention Reconciliation with Existing Literature
+
+The source convention is candidate-first:
+
+\[
+D_{\mathrm{cand}}(C)=\{y:\sum_i y_i\sigma_{s,k}(c_i)=0\text{ for every }c\in C\}.
+\]
+
+The present convention is code-first:
+
+\[
+D_{\mathrm{code}}(C)=\{x:\sum_i c_i\sigma_{s,k}(x_i)=0\text{ for every }c\in C\}.
+\]
+
+With `d_s=e m_s`, `\rho_{s,k}=\sigma_{s,k}^{-1}`, and `T=\sigma_{s,k}^{2}`, the exact theorem is
+
+\[
+D_{\mathrm{cand}}(C)=T(D_{\mathrm{code}}(C)).
+\]
+
+The dual subspaces are therefore Frobenius-conjugate and dimension-preserving, not generally equal. The same transformation sends a `\lambda`-constacyclic code to a `\sigma_{s,k}^{2}(\lambda)`-constacyclic code; under the frozen compatibility condition `\lambda^{1+p^{d_s-k}}=1`, this transformed twist equals `\lambda`. Individual selected-factor codes still need not be `T`-invariant.
+
+For every finite-field-linear code, a restricted Gram-matrix argument proves
+
+\[
+\dim(C\cap D_{\mathrm{cand}}(C))
+ =\dim(C\cap D_{\mathrm{code}}(C)),
+\]
+
+and hence the two conventions give the same LCD decision. This is equality of a numerical invariant, not equality of hull subspaces. In the compatible simple-root constacyclic factor model, the dual-generator supports are `\tau_\rho(F\setminus J)` and `\tau_\sigma(F\setminus J)`, and the two factor-labelled hull supports are the opposite boundary orientations of the same factor orbit; they can differ while their degree-weighted dimensions agree. Consequently, the main bivariate code/hull enumerator, total count, dimension distribution, hull distribution, LCD count, mean, and variance are invariant when evaluated on the same labeled code family, while the principal support formula remains the frozen code-first inverse-Frobenius formula.
+
+The main theorem uses the frozen code-first convention, twist, reciprocal, factor permutation, and support formula. The accessible literature theorem is background/convention-qualified: its candidate-first definition and displayed inverse-Frobenius formulas cannot be transferred literally without the transformation above and the stated component/twist hypotheses. Full final-source theorem verification remains a separate literature-status issue recorded in the Phase-4 ledger.
+
 
 ### Correction D — the support set is fixed by derivation
 
@@ -2640,6 +2674,7 @@ Current Phase-2 status is reported conservatively: Theorems 1–19 have conditio
 - **Phase-2 status and N1 corrections:** Added the 19-item theorem-status ledger, replaced the unresolved N1 placeholder with its exact known record and missing specification, and added an independent bounded counterexample-search program and Phase-2 regression-capture references.
 - **Phase-3 adversarial corrections:** Added explicit componentwise-Frobenius and `gcd(n,q)=1` assumptions, recorded the identities `(#_rho)^2=rho^2` and `#_sigma=#_rho^{-1}`, qualified `k`-Galois LCD terminology, documented the source candidate-first convention issue, marked N1 `UNSPECIFIED — CANNOT VALIDATE`, and added the hostile manuscript audit with an independent enumerator checker.
 - **Phase-4 literature/convention corrections:** Added the exact source candidate-first definition, derived `D_{cand}(C)=\sigma_{s,k}^{2}(D_{cf}(C))`, distinguished dual-code/support differences from tested hull-dimension equality, marked the displayed source theorem formulas as convention-mismatched for non-involutory parameters, added the literature claim ledger and N1 search, and kept the novelty statement conservative.
+- **Phase-5 invariance corrections:** Proved the dual transformation `D_{cand}=\sigma_{s,k}^{2}(D_{code})`, proved general hull-dimension and LCD invariance by the restricted Gram matrix, retained the non-invariance of dual/hull subspaces and factor supports, proved inverse factor permutations and equal same-family dimension/hull enumerators, and added the independent Phase-5 counterexample search.
 
 
 ## Phase 3 adversarial audit status
@@ -2659,6 +2694,25 @@ D_{\mathrm{cand}}(C)=\sigma_{s,k}^{2}(D_{\mathrm{cf}}(C)).
 The source formulas therefore require explicit convention conversion and are not direct support for the frozen theorem when `\sigma_{s,k}^{2}\ne1`. The present framework remains independently derived. N1 remains `UNSPECIFIED — CANNOT VALIDATE`; the exact novelty boundary remains unestablished; quantum and Burnside/Pólya extensions remain conditional/future work.
 
 **Phase-4 status: `VERIFY — MATERIAL LITERATURE OR CONVENTION GAPS REMAIN`.**
+
+## Phase 5 convention-transformation and invariance status
+
+`validation/PHASE5_CONVENTION_INVARIANCE_AUDIT.md` gives the independent derivation and exact conditions. With `T=\sigma_{s,k}^{2}`,
+
+\[
+D_{\mathrm{cand}}(C)=T(D_{\mathrm{code}}(C)).
+\]
+
+The dual codes are generally different but semilinearly isomorphic. `T` maps a `\lambda`-constacyclic code to a `T(\lambda)`-constacyclic code; under the frozen compatibility condition, the family twist is fixed, although an individual factor selection need not be `T`-invariant. A restricted Gram-matrix proof establishes
+
+\[
+\dim(C\cap D_{\mathrm{cand}}(C))
+=\dim(C\cap D_{\mathrm{code}}(C))
+\]
+
+for every finite-field-linear code, so LCD decisions and the same-code dimension/hull enumerator, total count, dimension distribution, hull distribution, mean, and variance are invariant. The actual hull subspaces and factor-labelled supports are not generally equal; the present theorem retains the frozen code-first inverse-Frobenius support formula.
+
+**Phase-5 status: `PASS WITH CONDITIONS — INVARIANCE PROVED UNDER EXPLICIT CONDITIONS`.**
 
 ## Final Consistency Status
 
