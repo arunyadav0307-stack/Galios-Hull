@@ -1,0 +1,69 @@
+Command: env -i PATH="$PATH" HOME="$HOME" LANG=C.UTF-8 LC_ALL=C PYTHONDONTWRITEBYTECODE=1 PYTHONPATH="" python validation/search_n1_specification.py
+UTC timestamp: 2026-09-24T10:07:59+00:00
+Python version: Python 3.11.2
+Exit code: 0
+--- STDOUT ---
+N1 repository search: current text-file anchor/context summary
+current_anchor_match_count=117
+anchor_source=code/validate_long_orbit_examples.py | count=2
+anchor_context=code/validate_long_orbit_examples.py:530 | F16 = BinaryField(4, 0b10011)
+anchor_context=code/validate_long_orbit_examples.py:533 | F=F16,
+anchor_source=new-paper-blueprint.md | count=23
+anchor_context=new-paper-blueprint.md:46 | where `u` records `F_q`-code dimension and `z` records `F_q`-hull dimension. Its specialization gives the exact hull-distribution polynomial, the total-code count, the LCD count, and closed mean and variance formulas, including the excep...
+anchor_context=new-paper-blueprint.md:1625 | ### 10.3 F16 extension component: `m_s=2` and orbit length `4`
+anchor_context=new-paper-blueprint.md:2685 | The exact executed commands are the pilot, long-orbit, compatible nontrivial-`\lambda`, basic incompatible diagnostic, N2-A, and N2-B validators, all run with `PYTHONDONTWRITEBYTECODE=1` and recorded in `validation/VALIDATION_REPORT.md`....
+anchor_source=validation/PHASE2_PROOF_AUDIT.md | count=10
+anchor_context=validation/PHASE2_PROOF_AUDIT.md:114 | These statuses mean that the displayed identities follow from the hypotheses in Section 2 and the derivations in Sections 4–12. They do not upgrade the separate literature-comparison records, N1, the incompatible-twist diagnostics, the o...
+anchor_context=validation/PHASE2_PROOF_AUDIT.md:665 | ## 13. Exact N1 identification and resolution
+anchor_context=validation/PHASE2_PROOF_AUDIT.md:717 | **Phase-2 verdict: `PASS WITH CONDITIONS`.** The requested general theory has a complete conditional proof audit, the frozen inverse-Frobenius convention and hull-support orientation are derived independently, N1 is identified without in...
+anchor_source=validation/PHASE3_ADVERSARIAL_AUDIT.md | count=28
+anchor_context=validation/PHASE3_ADVERSARIAL_AUDIT.md:7 | The audit covers the 19 mathematical claims, every stated hypothesis, the factor-selection counting model, the hull-support orientation, edge cases, literature-dependent statements, N1, manuscript-level scope, quantum/Burnside boundaries...
+anchor_context=validation/PHASE3_ADVERSARIAL_AUDIT.md:202 | **G. Counterexample search.** The independent checker explicitly tests both identities on F4, F8, and F16 factors. F8 supplies a non-involutory orbit.
+anchor_context=validation/PHASE3_ADVERSARIAL_AUDIT.md:930 | The conditional mathematical chain survives the adversarial audit, and no critical mathematical counterexample was found. The verdict remains `VERIFY`, not `PASS WITH CONDITIONS`, because N1 is not reconstructable, the source convention ...
+anchor_source=validation/PHASE4_LITERATURE_CONVENTION_AUDIT.md | count=28
+anchor_context=validation/PHASE4_LITERATURE_CONVENTION_AUDIT.md:5 | Phase 4 resolves the remaining Phase-3 publication-critical issues rather than repeating the general proof audit. It independently reads the accessible source record, derives the relation between candidate-first and code-first Galois dua...
+anchor_context=validation/PHASE4_LITERATURE_CONVENTION_AUDIT.md:174 | | F16 over F4, `lambda=1`, `k=1` | 24/32 | 0/32 | 0/32 | 4/4 | 16/32 | 24/32 |
+anchor_context=validation/PHASE4_LITERATURE_CONVENTION_AUDIT.md:456 | The present mathematical framework can be stated conservatively, but the literature theorem transfer and exact novelty boundary are not fully closed. The source convention mismatch is documented rather than hidden, and N1 remains optiona...
+anchor_source=validation/VALIDATION_REPORT.md | count=21
+anchor_context=validation/VALIDATION_REPORT.md:17 | | `code/validate_long_orbit_examples.py` | Yes | 0 | **PASS** | F8 orbit-length-6 and F16 extension orbit-length-4 examples; direct duals, orbit boundary, transfer matrix, and histograms. |
+anchor_context=validation/VALIDATION_REPORT.md:20 | | `code/validate_n2_extension_convention.py` | Yes | 0 | **PASS** | N2-A over F16; independent direct/principal/alternative reciprocal comparison for all 32 selections. |
+anchor_context=validation/VALIDATION_REPORT.md:663 | The existing Phase-1/Phase-2/Phase-3 captures remain unchanged. The Phase-4 checker passed its finite assertions; the N1 search exited 0 with unresolved metadata; and the package rebuild, clean extraction comparison, hash check, and extr...
+anchor_source=validation/phase3_independent_enumerator_check.py | count=2
+anchor_context=validation/phase3_independent_enumerator_check.py:575 | f16 = GF2m(4, 0b10011)
+anchor_context=validation/phase3_independent_enumerator_check.py:591 | evaluate_case("F16 over F4 lambda=1 k=1", f16, 2, 5, 1, 1)
+anchor_source=validation/phase4_convention_equivalence.py | count=3
+anchor_context=validation/phase4_convention_equivalence.py:463 | f16 = Field(4, 0b10011)
+anchor_context=validation/phase4_convention_equivalence.py:469 | evaluate_case("F16 over F4 lambda=1 k=1", f16, 5, 1, 1),
+related-term counts within files containing an N1 anchor:
+related_source=code/validate_long_orbit_examples.py | {'histogram': 10, 'factorization': 0, 'orbit': 33, 'lambda': 3, 'k': 81}
+related_source=new-paper-blueprint.md | {'histogram': 19, 'factorization': 11, 'orbit': 131, 'lambda': 116, 'k': 787}
+related_source=validation/PHASE2_PROOF_AUDIT.md | {'histogram': 2, 'factorization': 4, 'orbit': 26, 'lambda': 33, 'k': 87}
+related_source=validation/PHASE3_ADVERSARIAL_AUDIT.md | {'histogram': 10, 'factorization': 3, 'orbit': 45, 'lambda': 31, 'k': 215}
+related_source=validation/PHASE4_LITERATURE_CONVENTION_AUDIT.md | {'histogram': 1, 'factorization': 2, 'orbit': 12, 'lambda': 25, 'k': 97}
+related_source=validation/VALIDATION_REPORT.md | {'histogram': 22, 'factorization': 4, 'orbit': 52, 'lambda': 40, 'k': 170}
+related_source=validation/phase3_independent_enumerator_check.py | {'histogram': 0, 'factorization': 1, 'orbit': 45, 'lambda': 7, 'k': 56}
+related_source=validation/phase4_convention_equivalence.py | {'histogram': 0, 'factorization': 1, 'orbit': 0, 'lambda': 5, 'k': 52}
+N1 repository search: Git history matches
+git_search_exit_code=0
+history=63e929bed4820bbf0dbf89dd1a86ae1d10cf3c2b	2026-09-24T09:48:25+00:00	Record resolved Phase-2 provenance
+history=96752c7ffe9f5337a39c835eafd7c847734393dc	2026-09-24T09:46:17+00:00	Add adversarial Phase-3 manuscript audit
+history=5e4ea83903f721db9ae690623415ceef27209359	2026-09-24T09:05:13+00:00	Add rigorous Phase-2 proof audit
+history=7e4fbbb9abe541555695c7661932f6030312802f	2026-09-24T08:52:29+00:00	Add reproducible validation evidence
+history=5e407a617ea9952db7daefa04d5b5d57247d7e02	2026-09-23T18:23:43+00:00	Separate direct inner-product dual validation
+history=7391902b35ac82118e792945519635b3a7c2aad6	2026-09-23T18:03:38+00:00	Add corrected Galois hull blueprint and validation suite
+history=22759061e6508f7020dfb114cd5f71ab6aad59fd	2026-09-23T17:44:07+00:00	Rewrite blueprint for inverse Frobenius dual convention
+history=2992f80ab0f29f2c6216ada0ee2af62370784106	2026-09-23T10:19:40+00:00	Finalize square-free affine hull enumeration blueprint
+N1 known parameters explicitly recovered from repository evidence:
+  q=16
+  n=15
+  proposed selection count=32768=2^15
+N1 missing parameters (not inferred):
+  missing=lambda
+  missing=k
+  missing=factorization
+  missing=orbit decomposition
+  missing=expected histogram
+N1 status: UNSPECIFIED — CANNOT VALIDATE
+N1 remains unspecified and cannot be validated from repository evidence.
+No lambda, k, factorization, orbit decomposition, expected histogram, or output is fabricated.
+--- STDERR ---

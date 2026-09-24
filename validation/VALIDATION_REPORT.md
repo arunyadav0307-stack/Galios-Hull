@@ -590,3 +590,76 @@ The forward formula agrees with every direct hull dimension tested. The two supp
 For every tested component selection, a canonical reduced row-space signature was enumerated and no two distinct factor selections collided. The two-component F4 × F4 signature product likewise had 64 unique labeled product codes. The mathematical reason is the unique monic divisor generator of each square-free component ideal followed by primitive-idempotent projection; this is not a claim about equivalence classes.
 
 The Phase-3 ZIP rebuild and clean extraction are recorded in `validation/phase3_package_verification.out`. The extraction comparison, SHA-256 verification, and validation-suite execution are required package checks; no generated archive is treated as a mathematical proof.
+
+# PHASE 4 — LITERATURE / CONVENTION / NOVELTY AUDIT
+
+This section is appended after the preserved Phase-1, Phase-2, and Phase-3 evidence. The full report is `validation/PHASE4_LITERATURE_CONVENTION_AUDIT.md`; the literature claim ledger is `validation/LITERATURE_CLAIM_LEDGER.md`.
+
+## Phase-4 convention result
+
+The accessible source preprint `arXiv:2412.08512v1` Section 2.2 defines
+
+```text
+<alpha,beta>_k = sum_i alpha_i beta_i^(p^k)
+C^(perp_k) = { alpha : <alpha,c>_k = 0 for every c in C }.
+```
+
+This is candidate-first. The frozen present convention is code-first:
+
+```text
+<c,x>_k = sum_i c_i x_i^(p^k).
+```
+
+For `sigma(a)=a^(p^k)` and `rho=sigma^(-1)`, the exact relation is
+
+```text
+D_code-first(C) = rho(C^(perp_E))
+D_candidate-first(C) = sigma(C^(perp_E))
+D_candidate-first(C) = sigma^2(D_code-first(C)).
+```
+
+The source displays a rho-based reciprocal and rho-based twist while displaying the candidate-first dual. The literal candidate-first equations instead select the sigma reciprocal and twist. The source formulas are therefore convention-mismatched for non-involutory parameters and are not transferred as printed.
+
+## Phase-4 independent convention capture
+
+The new independent checker is `validation/phase4_convention_equivalence.py`. It does not import the Phase-3 checker or existing validator dual routines. The captured run is in `validation/phase4_convention_equivalence.out` and records command, UTC timestamp, Python version, stdout, stderr, and exit code.
+
+Finite results:
+
+| Case | Dual-code differences | Hull-dimension differences | LCD-criterion differences | Code/Candidate LCD counts | Support differences | Source rho-display disagreements |
+|---|---:|---:|---:|---:|---:|---:|
+| F4 `lambda=1`, `k=1` | 0/8 | 0/8 | 0/8 | 4/4 | 0/8 | 0/8 |
+| F8 `lambda=1`, `k=1` | 120/128 | 0/128 | 0/128 | 4/4 | 90/128 | 120/128 |
+| F8 `lambda=1`, `k=2` | 120/128 | 0/128 | 0/128 | 4/4 | 90/128 | 120/128 |
+| F16 over F4 `lambda=1`, `k=1` | 24/32 | 0/32 | 0/32 | 4/4 | 16/32 | 24/32 |
+| F16 over F4 `lambda=alpha^3`, `k=1` | 6/8 | 0/8 | 0/8 | 8/8 | not applicable: incompatible twists | 6/8 |
+
+The exact relation `D_candidate-first=sigma^2(D_code-first)` passed for every tested selection. The equal hull dimensions in these constacyclic tests do not imply equal dual codes or equal hull supports.
+
+## Phase-4 N1 search
+
+The new repository search is `validation/search_n1_specification.py`; its complete capture is `validation/search_n1_specification.out`. It searched current source/document text files (excluding generated output captures) and all available Git history without inferring values. It recovered only:
+
+```text
+q=16
+n=15
+2^15=32768
+```
+
+It found no `lambda`, `k`, factorization, orbit decomposition, expected histogram, or executable output. The result remains:
+
+> **N1: `UNSPECIFIED — CANNOT VALIDATE`.**
+
+N1 is optional numerical evidence, not a dependency of Theorems 1–19. It must not be presented as a passing validation row.
+
+## Phase-4 literature and novelty result
+
+`validation/LITERATURE_CLAIM_LEDGER.md` records source-specific claims, exact accessible results, convention status, DOI status, and manuscript actions. The primary source supports the broad affine-algebra Galois-hull setting and displays Theorems 4–8, but its candidate-first definition and rho-based formulas require explicit conversion. Related finite-field hull formulas and enumerations are verified only at their stated publisher/abstract scope and do not establish the present labeled bivariate transfer product.
+
+The conservative contribution statement is a conditional, self-contained code-first theory and labeled joint enumerator with independent finite validation. No first-ever, novel, state-of-the-art, or priority claim is made. The exact novelty boundary remains `VERIFY`.
+
+## Phase-4 package and regression status
+
+The existing Phase-1/Phase-2/Phase-3 captures remain unchanged. The Phase-4 checker passed its finite assertions; the N1 search exited 0 with unresolved metadata; and the package rebuild, clean extraction comparison, hash check, and extracted validation-suite run are recorded in `validation/phase3_package_verification.out` after the final Phase-4 package rebuild.
+
+**Phase-4 status: `VERIFY — MATERIAL LITERATURE OR CONVENTION GAPS REMAIN`.**

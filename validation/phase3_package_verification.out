@@ -1,153 +1,218 @@
-Phase-3 package rebuild and verification record
-UTC timestamp: 2026-09-24T09:48:20+00:00
-
-Archive build:
-  staging tree: /tmp/galios-hull-package/Galios-Hull-main-files
-  command: zip -X -q -r Galios-Hull-main-files.zip Galios-Hull-main-files
-  archive: Galios-Hull-main-files.zip
-  archive sha256: 0e372629e2c839009dc1f58813b0780706e5fb080ca5ce6f9dcefe9eb1bced74
-  zip entry test: No errors detected in compressed data of Galios-Hull-main-files.zip.
-  archive listing: 38 entries, 32 regular files
-
-Clean extraction comparison:
-  command: unzip -q Galios-Hull-main-files.zip -d /tmp/galios-hull-extracted-final
-  clean extraction comparison: PASS (32 files, byte-identical)
-  staged-tree-sha256: c34297bd4dc81123051852e3cbed7e43ece29caab3d55e92651b1195688d096a
-
-Extracted validation suite:
-  command: env -i PATH="$PATH" HOME="$HOME" LANG=C.UTF-8 LC_ALL=C PYTHONDONTWRITEBYTECODE=1 PYTHONPATH="" bash -c 'cd /tmp/galios-hull-extracted-final/Galios-Hull-main-files && bash run_all_validations.sh'
-  exit code: 0
-  stdout lines: 130
-  stderr bytes: 0
-  --- stdout ---
-  F4 pilot parameters: q=4, n=5, lambda=1, k=1
-    sigma Frobenius power k: 1
-    sigma field exponent p^k: 2
-    rho Frobenius power em-k: 1
-    rho field exponent p^(em-k): 2
-    principal reciprocal Frobenius power: 1
-  orbit polynomial checks: a=1,...,5 PASS
-  factorisation: x + 1 * x^2 + (a)x + 1 * x^2 + (a+1)x + 1
-  Hermitian factor action: fixed linear factor; quadratic factors swapped
+Package: Galios-Hull-main-files.zip
+UTC timestamp: 2026-09-24T10:08:39+00:00
+Python version: Python 3.11.2
+Archive SHA-256: 3f5233d2ed2690004f1ef539076b4305a39abf675bc456280cae904450f8bc0b
+unzip -t exit code: 0
+clean extraction content diff exit code: 0
+manifest comparison exit code: 0
+clean extracted run command: env -i PATH="$PATH" HOME="$HOME" LANG=C.UTF-8 LC_ALL=C PYTHONDONTWRITEBYTECODE=1 PYTHONPATH="" bash run_all_validations.sh
+clean extracted run exit code: 0
+clean extracted stdout lines: 203
+clean extracted stderr lines: 0
+--- CONTENT DIFF ---
+--- MANIFEST DIFF ---
+--- CLEAN EXTRACTED STDOUT ---
+F4 pilot parameters: q=4, n=5, lambda=1, k=1
+  sigma Frobenius power k: 1
+  sigma field exponent p^k: 2
+  rho Frobenius power em-k: 1
+  rho field exponent p^(em-k): 2
+  principal reciprocal Frobenius power: 1
+orbit polynomial checks: a=1,...,5 PASS
+factorisation: x + 1 * x^2 + (a)x + 1 * x^2 + (a+1)x + 1
+Hermitian factor action: fixed linear factor; quadratic factors swapped
+direct dual-generator checks: 8 of 8
+component joint histogram: {(0, 0): 1, (1, 0): 1, (2, 2): 2, (3, 2): 2, (4, 0): 1, (5, 0): 1}
+ring joint histogram terms: 65
+ring hull histogram: {0: 256, 2: 1024, 4: 1536, 6: 1024, 8: 256}
+PASS: direct hulls, factor action, orbit formula, and enumerator agree
+Example A (m_s=1, orbit length 6):
+  q=8, e=3, m_s=1, k=1, n=7
+  sigma Frobenius power k=1; field exponent p^k=2
+  rho Frobenius power em-k=2; field exponent p^(em-k)=4
+  principal reciprocal Frobenius power=2; direct k=1
+  tau permutation on root indices: [0, 3, 6, 2, 5, 1, 4]
+  orbit lengths: [1, 6]
+  orbit-boundary == transfer: True
+  direct dual-generator checks: 128 of 128
+  direct == theory: True
+  joint histogram: {(0, 0): 1, (1, 0): 1, (1, 1): 6, (2, 1): 12, (2, 2): 9, (3, 1): 12, (3, 2): 21, (3, 3): 2, (4, 1): 12, (4, 2): 21, (4, 3): 2, (5, 1): 12, (5, 2): 9, (6, 0): 1, (6, 1): 6, (7, 0): 1}
+  hull histogram: {0: 4, 1: 60, 2: 60, 3: 4}
+  PASS
+Example B (m_s=2, orbit length 4):
+  q=4, e=2, m_s=2, k=1, n=5
+  sigma Frobenius power k=1; field exponent p^k=2
+  rho Frobenius power em-k=3; field exponent p^(em-k)=8
+  principal reciprocal Frobenius power=3; direct k=1
+  tau permutation on root indices: [0, 2, 4, 1, 3]
+  orbit lengths: [1, 4]
+  orbit-boundary == transfer: True
+  direct dual-generator checks: 32 of 32
+  direct == theory: True
+  joint histogram: {(0, 0): 1, (2, 0): 1, (2, 2): 4, (4, 2): 8, (4, 4): 2, (6, 2): 8, (6, 4): 2, (8, 0): 1, (8, 2): 4, (10, 0): 1}
+  hull histogram: {0: 4, 2: 24, 4: 4}
+  PASS
+ALL LONG-ORBIT AND m_s>1 VALIDATIONS PASS
+nontrivial compatible constacyclic example:
+  q=4, n=5, lambda=omega != 1, k=1
+  sigma Frobenius power k=1; field exponent p^k=2
+  rho Frobenius power em-k=1; field exponent p^(em-k)=2
+  factorisation: x + omega+1 * x^2 + x + omega * x^2 + (omega)x + omega
+  square-free: True
+  lambda^(1+principal field exponent)= 1 = 1
+  tau permutation: [0, 2, 1]
+  orbit lengths: [1, 2]
   direct dual-generator checks: 8 of 8
-  component joint histogram: {(0, 0): 1, (1, 0): 1, (2, 2): 2, (3, 2): 2, (4, 0): 1, (5, 0): 1}
-  ring joint histogram terms: 65
-  ring hull histogram: {0: 256, 2: 1024, 4: 1536, 6: 1024, 8: 256}
-  PASS: direct hulls, factor action, orbit formula, and enumerator agree
-  Example A (m_s=1, orbit length 6):
-    q=8, e=3, m_s=1, k=1, n=7
-    sigma Frobenius power k=1; field exponent p^k=2
-    rho Frobenius power em-k=2; field exponent p^(em-k)=4
-    principal reciprocal Frobenius power=2; direct k=1
-    tau permutation on root indices: [0, 3, 6, 2, 5, 1, 4]
-    orbit lengths: [1, 6]
-    orbit-boundary == transfer: True
-    direct dual-generator checks: 128 of 128
-    direct == theory: True
-    joint histogram: {(0, 0): 1, (1, 0): 1, (1, 1): 6, (2, 1): 12, (2, 2): 9, (3, 1): 12, (3, 2): 21, (3, 3): 2, (4, 1): 12, (4, 2): 21, (4, 3): 2, (5, 1): 12, (5, 2): 9, (6, 0): 1, (6, 1): 6, (7, 0): 1}
-    hull histogram: {0: 4, 1: 60, 2: 60, 3: 4}
-    PASS
-  Example B (m_s=2, orbit length 4):
-    q=4, e=2, m_s=2, k=1, n=5
-    sigma Frobenius power k=1; field exponent p^k=2
-    rho Frobenius power em-k=3; field exponent p^(em-k)=8
-    principal reciprocal Frobenius power=3; direct k=1
-    tau permutation on root indices: [0, 2, 4, 1, 3]
-    orbit lengths: [1, 4]
-    orbit-boundary == transfer: True
-    direct dual-generator checks: 32 of 32
-    direct == theory: True
-    joint histogram: {(0, 0): 1, (2, 0): 1, (2, 2): 4, (4, 2): 8, (4, 4): 2, (6, 2): 8, (6, 4): 2, (8, 0): 1, (8, 2): 4, (10, 0): 1}
-    hull histogram: {0: 4, 2: 24, 4: 4}
-    PASS
-  ALL LONG-ORBIT AND m_s>1 VALIDATIONS PASS
-  nontrivial compatible constacyclic example:
-    q=4, n=5, lambda=omega != 1, k=1
-    sigma Frobenius power k=1; field exponent p^k=2
-    rho Frobenius power em-k=1; field exponent p^(em-k)=2
-    factorisation: x + omega+1 * x^2 + x + omega * x^2 + (omega)x + omega
-    square-free: True
-    lambda^(1+principal field exponent)= 1 = 1
-    tau permutation: [0, 2, 1]
-    orbit lengths: [1, 2]
-    direct dual-generator checks: 8 of 8
-    direct == orbit-boundary: True
-    orbit-boundary == transfer: True
-    joint histogram: {(0, 0): 1, (1, 0): 1, (2, 2): 2, (3, 2): 2, (4, 0): 1, (5, 0): 1}
-    hull histogram: {0: 4, 2: 4}
-  PASS: nontrivial compatible constacyclic validation
-  basic incompatible-twist sanity diagnostic only:
-    q=4, n=5, lambda=omega, k=0
-    sigma Frobenius power k: 0
-    sigma field exponent p^k: 1
-    rho Frobenius power em-k: 2
-    rho field exponent p^(em-k): 4
-    sigma == inverse automorphism on F_4: True
-    direct dual from defining <c,x>_k: checked
-    direct equals principal reciprocal: True
-    direct equals p^k reciprocal alternative: True
-    lambda^(1+principal field exponent)= 3 != 1
-    predicted dual twist lambda^(-principal field exponent)= 3 != lambda
-    direct dual is predicted-twist constacyclic: True
-    direct dual is original-lambda constacyclic: False
-  This F4,k=0 example cannot distinguish sigma from rho because both are the identity automorphism on F4.
-  It validates incompatible-twist behavior, but not the principal Frobenius convention or the general extension-field reciprocal formula.
-  No transfer-matrix enumeration was attempted because the original and dual constacyclic twists are incompatible.
-  DIAGNOSTIC ONLY: basic incompatible twist correctly left outside the theorem
-  N2-A extension-field convention validation:
-    K=F_16=F_(4^2), p=2, q=4, e=2, m_s=2, n=5, lambda=1, k=1
-    sigma Frobenius power k: 1
-    sigma field exponent p^k: 2
-    rho Frobenius power em_s-k: 3
-    rho field exponent p^(em_s-k): 8
-    principal reciprocal Frobenius power: 3
-    alternative reciprocal Frobenius power: 1
-    principal reciprocal permutation: [0, 2, 4, 1, 3]
-    alternative reciprocal permutation: [0, 3, 1, 4, 2]
-    direct dual from defining <c,x>_k equations: 32 of 32
-    direct equals principal reciprocal: 32 of 32
-    direct equals alternative p^k reciprocal: 8 of 32
-    example alternative discrepancies: [2, 3, 4]
-  PASS: direct dual selects the principal inverse-Frobenius convention
-  N2-B incompatible extension-field convention diagnostic:
-    p=2, e=2, m_s=2, q=4, K=F_16=F_(4^2), k=1, n=3
-    sigma Frobenius power k: 1
-    sigma field exponent p^k: 2
-    rho Frobenius power em_s-k: 3
-    rho field exponent p^(em_s-k): 8
-    sigma and rho differ as automorphisms: True
-    lambda=alpha^3 (order 5): 8
-    lambda^(1+principal field exponent): 15 != 1
-    lambda^(1+alternative field exponent p^k): 10 != 1
-    defining-inner-product direct dual checks: 8 of 8
-    principal reciprocal direct agreements: 8 of 8
-    alternative p^k reciprocal direct agreements: 2 of 8
-    example alternative discrepancy mask: 1
-    predicted principal dual twist lambda^(-principal field exponent): 12
-    predicted alternative dual twist lambda^(-p^k): 10
-    direct dual constacyclic under principal predicted twist: 8 of 8
-    direct dual constacyclic under alternative predicted twist: 2 of 8
-    proper nonzero direct duals failing original lambda twist: 6 of 6
-    example original-twist failure mask: 1
-  No transfer-matrix enumeration was attempted because the original and dual constacyclic twists are incompatible.
-  PASS: N2-B independently selects the finalized principal convention
-  orbit-polynomial identity checked for lengths 1 through 12
-  transfer trace checked for lengths 1 through 8 and weights 1, 2, 3
-  support/boundary orientation checked for every binary word of lengths 1 through 12
-  No combinatorial counterexample found in the tested finite range.
-  This search is computational evidence only, not a general proof.
-  F4 lambda=1 k=1: factors=3, orbit_lengths=[1, 2], selections=8, unique_codes=8, selection_collisions=0, reciprocal_checks=8, support_checks=8, inverse_orientation_differences=0, inverse_dimension_failures=0, total=8
-  F4 lambda=1 k=1: direct_joint == transfer_joint: True
-  F4 lambda=alpha k=1: factors=3, orbit_lengths=[1, 2], selections=8, unique_codes=8, selection_collisions=0, reciprocal_checks=8, support_checks=8, inverse_orientation_differences=0, inverse_dimension_failures=0, total=8
-  F4 lambda=alpha k=1: direct_joint == transfer_joint: True
-  F8 lambda=1 k=1: factors=7, orbit_lengths=[1, 6], selections=128, unique_codes=128, selection_collisions=0, reciprocal_checks=128, support_checks=128, inverse_orientation_differences=90, inverse_dimension_failures=0, total=128
-  F8 lambda=1 k=1: direct_joint == transfer_joint: True
-  F8 lambda=1 k=2: factors=7, orbit_lengths=[1, 6], selections=128, unique_codes=128, selection_collisions=0, reciprocal_checks=128, support_checks=128, inverse_orientation_differences=90, inverse_dimension_failures=0, total=128
-  F8 lambda=1 k=2: direct_joint == transfer_joint: True
-  F16 over F4 lambda=1 k=1: factors=5, orbit_lengths=[1, 4], selections=32, unique_codes=32, selection_collisions=0, reciprocal_checks=32, support_checks=32, inverse_orientation_differences=16, inverse_dimension_failures=0, total=32
-  F16 over F4 lambda=1 k=1: direct_joint == transfer_joint: True
-  F4 x F4 labeled product: component enumerators multiply, unique_product_codes=64, product_collisions=0
-  literal candidate-first literature convention probe: sigma reciprocal matches and rho reciprocal differs on F8 n=7 selection
-  incompatible F4 k=0 edge: predicted_twist differs from original and direct dual is not original-twist constacyclic
-  PHASE3 INDEPENDENT ENUMERATOR CHECK: PASS (finite evidence only)
-  --- stderr ---
+  direct == orbit-boundary: True
+  orbit-boundary == transfer: True
+  joint histogram: {(0, 0): 1, (1, 0): 1, (2, 2): 2, (3, 2): 2, (4, 0): 1, (5, 0): 1}
+  hull histogram: {0: 4, 2: 4}
+PASS: nontrivial compatible constacyclic validation
+basic incompatible-twist sanity diagnostic only:
+  q=4, n=5, lambda=omega, k=0
+  sigma Frobenius power k: 0
+  sigma field exponent p^k: 1
+  rho Frobenius power em-k: 2
+  rho field exponent p^(em-k): 4
+  sigma == inverse automorphism on F_4: True
+  direct dual from defining <c,x>_k: checked
+  direct equals principal reciprocal: True
+  direct equals p^k reciprocal alternative: True
+  lambda^(1+principal field exponent)= 3 != 1
+  predicted dual twist lambda^(-principal field exponent)= 3 != lambda
+  direct dual is predicted-twist constacyclic: True
+  direct dual is original-lambda constacyclic: False
+This F4,k=0 example cannot distinguish sigma from rho because both are the identity automorphism on F4.
+It validates incompatible-twist behavior, but not the principal Frobenius convention or the general extension-field reciprocal formula.
+No transfer-matrix enumeration was attempted because the original and dual constacyclic twists are incompatible.
+DIAGNOSTIC ONLY: basic incompatible twist correctly left outside the theorem
+N2-A extension-field convention validation:
+  K=F_16=F_(4^2), p=2, q=4, e=2, m_s=2, n=5, lambda=1, k=1
+  sigma Frobenius power k: 1
+  sigma field exponent p^k: 2
+  rho Frobenius power em_s-k: 3
+  rho field exponent p^(em_s-k): 8
+  principal reciprocal Frobenius power: 3
+  alternative reciprocal Frobenius power: 1
+  principal reciprocal permutation: [0, 2, 4, 1, 3]
+  alternative reciprocal permutation: [0, 3, 1, 4, 2]
+  direct dual from defining <c,x>_k equations: 32 of 32
+  direct equals principal reciprocal: 32 of 32
+  direct equals alternative p^k reciprocal: 8 of 32
+  example alternative discrepancies: [2, 3, 4]
+PASS: direct dual selects the principal inverse-Frobenius convention
+N2-B incompatible extension-field convention diagnostic:
+  p=2, e=2, m_s=2, q=4, K=F_16=F_(4^2), k=1, n=3
+  sigma Frobenius power k: 1
+  sigma field exponent p^k: 2
+  rho Frobenius power em_s-k: 3
+  rho field exponent p^(em_s-k): 8
+  sigma and rho differ as automorphisms: True
+  lambda=alpha^3 (order 5): 8
+  lambda^(1+principal field exponent): 15 != 1
+  lambda^(1+alternative field exponent p^k): 10 != 1
+  defining-inner-product direct dual checks: 8 of 8
+  principal reciprocal direct agreements: 8 of 8
+  alternative p^k reciprocal direct agreements: 2 of 8
+  example alternative discrepancy mask: 1
+  predicted principal dual twist lambda^(-principal field exponent): 12
+  predicted alternative dual twist lambda^(-p^k): 10
+  direct dual constacyclic under principal predicted twist: 8 of 8
+  direct dual constacyclic under alternative predicted twist: 2 of 8
+  proper nonzero direct duals failing original lambda twist: 6 of 6
+  example original-twist failure mask: 1
+No transfer-matrix enumeration was attempted because the original and dual constacyclic twists are incompatible.
+PASS: N2-B independently selects the finalized principal convention
+orbit-polynomial identity checked for lengths 1 through 12
+transfer trace checked for lengths 1 through 8 and weights 1, 2, 3
+support/boundary orientation checked for every binary word of lengths 1 through 12
+No combinatorial counterexample found in the tested finite range.
+This search is computational evidence only, not a general proof.
+F4 lambda=1 k=1: factors=3, orbit_lengths=[1, 2], selections=8, unique_codes=8, selection_collisions=0, reciprocal_checks=8, support_checks=8, inverse_orientation_differences=0, inverse_dimension_failures=0, total=8
+F4 lambda=1 k=1: direct_joint == transfer_joint: True
+F4 lambda=alpha k=1: factors=3, orbit_lengths=[1, 2], selections=8, unique_codes=8, selection_collisions=0, reciprocal_checks=8, support_checks=8, inverse_orientation_differences=0, inverse_dimension_failures=0, total=8
+F4 lambda=alpha k=1: direct_joint == transfer_joint: True
+F8 lambda=1 k=1: factors=7, orbit_lengths=[1, 6], selections=128, unique_codes=128, selection_collisions=0, reciprocal_checks=128, support_checks=128, inverse_orientation_differences=90, inverse_dimension_failures=0, total=128
+F8 lambda=1 k=1: direct_joint == transfer_joint: True
+F8 lambda=1 k=2: factors=7, orbit_lengths=[1, 6], selections=128, unique_codes=128, selection_collisions=0, reciprocal_checks=128, support_checks=128, inverse_orientation_differences=90, inverse_dimension_failures=0, total=128
+F8 lambda=1 k=2: direct_joint == transfer_joint: True
+F16 over F4 lambda=1 k=1: factors=5, orbit_lengths=[1, 4], selections=32, unique_codes=32, selection_collisions=0, reciprocal_checks=32, support_checks=32, inverse_orientation_differences=16, inverse_dimension_failures=0, total=32
+F16 over F4 lambda=1 k=1: direct_joint == transfer_joint: True
+F4 x F4 labeled product: component enumerators multiply, unique_product_codes=64, product_collisions=0
+literal candidate-first literature convention probe: sigma reciprocal matches and rho reciprocal differs on F8 n=7 selection
+incompatible F4 k=0 edge: predicted_twist differs from original and direct dual is not original-twist constacyclic
+PHASE3 INDEPENDENT ENUMERATOR CHECK: PASS (finite evidence only)
+F4 lambda=1 k=1: factors=3, selections=8, sigma_iter=1, rho_iter=1, dual_differences=0, hull_dimension_differences=0, lcd_criterion_differences=0, code_lcd_count=4, candidate_lcd_count=4, factor_support_differences=0, candidate_sigma_generator_agreements=8, code_rho_generator_agreements=8, candidate_twist=1, code_twist=1, candidate_twist_checks=8, code_twist_checks=8, relation_failures=0, source_displayed_rho_disagreements=0
+F4 lambda=1 k=1: sigma_perm=(0, 2, 1), rho_perm=(0, 2, 1)
+F8 lambda=1 k=1: factors=7, selections=128, sigma_iter=1, rho_iter=2, dual_differences=120, hull_dimension_differences=0, lcd_criterion_differences=0, code_lcd_count=4, candidate_lcd_count=4, factor_support_differences=90, candidate_sigma_generator_agreements=128, code_rho_generator_agreements=128, candidate_twist=1, code_twist=1, candidate_twist_checks=128, code_twist_checks=128, relation_failures=0, source_displayed_rho_disagreements=120
+F8 lambda=1 k=1: sigma_perm=(0, 6, 1, 2, 3, 4, 5), rho_perm=(0, 2, 3, 4, 5, 6, 1)
+F8 lambda=1 k=2: factors=7, selections=128, sigma_iter=2, rho_iter=1, dual_differences=120, hull_dimension_differences=0, lcd_criterion_differences=0, code_lcd_count=4, candidate_lcd_count=4, factor_support_differences=90, candidate_sigma_generator_agreements=128, code_rho_generator_agreements=128, candidate_twist=1, code_twist=1, candidate_twist_checks=128, code_twist_checks=128, relation_failures=0, source_displayed_rho_disagreements=120
+F8 lambda=1 k=2: sigma_perm=(0, 2, 3, 4, 5, 6, 1), rho_perm=(0, 6, 1, 2, 3, 4, 5)
+F16 over F4 lambda=1 k=1: factors=5, selections=32, sigma_iter=1, rho_iter=3, dual_differences=24, hull_dimension_differences=0, lcd_criterion_differences=0, code_lcd_count=4, candidate_lcd_count=4, factor_support_differences=16, candidate_sigma_generator_agreements=32, code_rho_generator_agreements=32, candidate_twist=1, code_twist=1, candidate_twist_checks=32, code_twist_checks=32, relation_failures=0, source_displayed_rho_disagreements=24
+F16 over F4 lambda=1 k=1: sigma_perm=(0, 2, 4, 1, 3), rho_perm=(0, 3, 1, 4, 2)
+F16 over F4 lambda=alpha^3 k=1: factors=3, selections=8, sigma_iter=1, rho_iter=3, dual_differences=6, hull_dimension_differences=0, lcd_criterion_differences=0, code_lcd_count=8, candidate_lcd_count=8, factor_support_differences=0, candidate_sigma_generator_agreements=8, code_rho_generator_agreements=8, candidate_twist=10, code_twist=12, candidate_twist_checks=8, code_twist_checks=8, relation_failures=0, source_displayed_rho_disagreements=6
+F16 over F4 lambda=alpha^3 k=1: sigma_perm=None, rho_perm=None
+PHASE4 CONVENTION EQUIVALENCE CHECK: PASS (finite evidence only)
+N1 repository search: current text-file anchor/context summary
+current_anchor_match_count=121
+anchor_source=README.md | count=4
+anchor_context=README.md:8 | 2. Read **validation/PHASE4_LITERATURE_CONVENTION_AUDIT.md** for the exact source-convention reconciliation, theorem-transfer audit, novelty boundary, and N1 decision.
+anchor_context=README.md:11 | 5. Read **validation/phase4_convention_equivalence.py** for the independent candidate-first/code-first comparison over F4, F8, and F16.
+anchor_context=README.md:39 | The conditional proofs and enumerator require the explicit square-free positive-degree affine relations, simple-root length `gcd(n,p)=1` (equivalently `gcd(n,q)=1`), finite-field components, componentwise Frobenius labels, compatible twi...
+anchor_source=code/validate_long_orbit_examples.py | count=2
+anchor_context=code/validate_long_orbit_examples.py:530 | F16 = BinaryField(4, 0b10011)
+anchor_context=code/validate_long_orbit_examples.py:533 | F=F16,
+anchor_source=new-paper-blueprint.md | count=23
+anchor_context=new-paper-blueprint.md:46 | where `u` records `F_q`-code dimension and `z` records `F_q`-hull dimension. Its specialization gives the exact hull-distribution polynomial, the total-code count, the LCD count, and closed mean and variance formulas, including the excep...
+anchor_context=new-paper-blueprint.md:1625 | ### 10.3 F16 extension component: `m_s=2` and orbit length `4`
+anchor_context=new-paper-blueprint.md:2685 | The exact executed commands are the pilot, long-orbit, compatible nontrivial-`\lambda`, basic incompatible diagnostic, N2-A, and N2-B validators, all run with `PYTHONDONTWRITEBYTECODE=1` and recorded in `validation/VALIDATION_REPORT.md`....
+anchor_source=validation/PHASE2_PROOF_AUDIT.md | count=10
+anchor_context=validation/PHASE2_PROOF_AUDIT.md:114 | These statuses mean that the displayed identities follow from the hypotheses in Section 2 and the derivations in Sections 4–12. They do not upgrade the separate literature-comparison records, N1, the incompatible-twist diagnostics, the o...
+anchor_context=validation/PHASE2_PROOF_AUDIT.md:665 | ## 13. Exact N1 identification and resolution
+anchor_context=validation/PHASE2_PROOF_AUDIT.md:717 | **Phase-2 verdict: `PASS WITH CONDITIONS`.** The requested general theory has a complete conditional proof audit, the frozen inverse-Frobenius convention and hull-support orientation are derived independently, N1 is identified without in...
+anchor_source=validation/PHASE3_ADVERSARIAL_AUDIT.md | count=28
+anchor_context=validation/PHASE3_ADVERSARIAL_AUDIT.md:7 | The audit covers the 19 mathematical claims, every stated hypothesis, the factor-selection counting model, the hull-support orientation, edge cases, literature-dependent statements, N1, manuscript-level scope, quantum/Burnside boundaries...
+anchor_context=validation/PHASE3_ADVERSARIAL_AUDIT.md:202 | **G. Counterexample search.** The independent checker explicitly tests both identities on F4, F8, and F16 factors. F8 supplies a non-involutory orbit.
+anchor_context=validation/PHASE3_ADVERSARIAL_AUDIT.md:930 | The conditional mathematical chain survives the adversarial audit, and no critical mathematical counterexample was found. The verdict remains `VERIFY`, not `PASS WITH CONDITIONS`, because N1 is not reconstructable, the source convention ...
+anchor_source=validation/PHASE4_LITERATURE_CONVENTION_AUDIT.md | count=28
+anchor_context=validation/PHASE4_LITERATURE_CONVENTION_AUDIT.md:5 | Phase 4 resolves the remaining Phase-3 publication-critical issues rather than repeating the general proof audit. It independently reads the accessible source record, derives the relation between candidate-first and code-first Galois dua...
+anchor_context=validation/PHASE4_LITERATURE_CONVENTION_AUDIT.md:174 | | F16 over F4, `lambda=1`, `k=1` | 24/32 | 0/32 | 0/32 | 4/4 | 16/32 | 24/32 |
+anchor_context=validation/PHASE4_LITERATURE_CONVENTION_AUDIT.md:456 | The present mathematical framework can be stated conservatively, but the literature theorem transfer and exact novelty boundary are not fully closed. The source convention mismatch is documented rather than hidden, and N1 remains optiona...
+anchor_source=validation/VALIDATION_REPORT.md | count=21
+anchor_context=validation/VALIDATION_REPORT.md:17 | | `code/validate_long_orbit_examples.py` | Yes | 0 | **PASS** | F8 orbit-length-6 and F16 extension orbit-length-4 examples; direct duals, orbit boundary, transfer matrix, and histograms. |
+anchor_context=validation/VALIDATION_REPORT.md:20 | | `code/validate_n2_extension_convention.py` | Yes | 0 | **PASS** | N2-A over F16; independent direct/principal/alternative reciprocal comparison for all 32 selections. |
+anchor_context=validation/VALIDATION_REPORT.md:663 | The existing Phase-1/Phase-2/Phase-3 captures remain unchanged. The Phase-4 checker passed its finite assertions; the N1 search exited 0 with unresolved metadata; and the package rebuild, clean extraction comparison, hash check, and extr...
+anchor_source=validation/phase3_independent_enumerator_check.py | count=2
+anchor_context=validation/phase3_independent_enumerator_check.py:575 | f16 = GF2m(4, 0b10011)
+anchor_context=validation/phase3_independent_enumerator_check.py:591 | evaluate_case("F16 over F4 lambda=1 k=1", f16, 2, 5, 1, 1)
+anchor_source=validation/phase4_convention_equivalence.py | count=3
+anchor_context=validation/phase4_convention_equivalence.py:463 | f16 = Field(4, 0b10011)
+anchor_context=validation/phase4_convention_equivalence.py:469 | evaluate_case("F16 over F4 lambda=1 k=1", f16, 5, 1, 1),
+related-term counts within files containing an N1 anchor:
+related_source=README.md | {'histogram': 0, 'factorization': 0, 'orbit': 0, 'lambda': 2, 'k': 9}
+related_source=code/validate_long_orbit_examples.py | {'histogram': 10, 'factorization': 0, 'orbit': 33, 'lambda': 3, 'k': 81}
+related_source=new-paper-blueprint.md | {'histogram': 19, 'factorization': 11, 'orbit': 131, 'lambda': 116, 'k': 787}
+related_source=validation/PHASE2_PROOF_AUDIT.md | {'histogram': 2, 'factorization': 4, 'orbit': 26, 'lambda': 33, 'k': 87}
+related_source=validation/PHASE3_ADVERSARIAL_AUDIT.md | {'histogram': 10, 'factorization': 3, 'orbit': 45, 'lambda': 31, 'k': 215}
+related_source=validation/PHASE4_LITERATURE_CONVENTION_AUDIT.md | {'histogram': 1, 'factorization': 2, 'orbit': 12, 'lambda': 25, 'k': 97}
+related_source=validation/VALIDATION_REPORT.md | {'histogram': 22, 'factorization': 4, 'orbit': 52, 'lambda': 40, 'k': 170}
+related_source=validation/phase3_independent_enumerator_check.py | {'histogram': 0, 'factorization': 1, 'orbit': 45, 'lambda': 7, 'k': 56}
+related_source=validation/phase4_convention_equivalence.py | {'histogram': 0, 'factorization': 1, 'orbit': 0, 'lambda': 5, 'k': 52}
+N1 repository search: Git history matches
+git_search_exit_code=128
+history=no matching Git commit message/patch metadata found
+git_stderr=fatal: not a git repository (or any of the parent directories): .git
+N1 known parameters explicitly recovered from repository evidence:
+  q=16
+  n=15
+  proposed selection count=32768=2^15
+N1 missing parameters (not inferred):
+  missing=lambda
+  missing=k
+  missing=factorization
+  missing=orbit decomposition
+  missing=expected histogram
+N1 status: UNSPECIFIED — CANNOT VALIDATE
+N1 remains unspecified and cannot be validated from repository evidence.
+No lambda, k, factorization, orbit decomposition, expected histogram, or output is fabricated.
+--- CLEAN EXTRACTED STDERR ---
