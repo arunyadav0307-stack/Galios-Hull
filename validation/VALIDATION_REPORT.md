@@ -1064,3 +1064,33 @@ The Phase-9 archive is rebuilt after the architecture files and validation captu
 - the acyclic dependency check, 13-section architecture, 19-result comparison, five-figure plan, and five-table plan.
 
 The archive remains a drafting handoff, not a submission-ready manuscript. No historical audit or capture is deleted or weakened.
+
+# Phase-10A full manuscript drafting
+
+**Date:** 2026-09-24
+**Base:** `e4548cfc3d7563a26bb1f3357b235e683e96d73c`
+**Decision:** `A. COMPLETE FIRST DRAFT — READY FOR MANUSCRIPT AUDIT`
+
+Phase 10A creates the first complete journal-style draft from the frozen Phase-9 architecture:
+
+- `manuscript/main.tex` contains the abstract, the 12 primary sections, six consequence subsections, proofs, literature discussion, computational validation, limitations, conclusion, five figure placeholders, and four verified-data tables;
+- `manuscript/references.bib` contains only cited records whose metadata and permitted use are recorded in the Phase-7/8 reference audits;
+- `validation/PHASE10A_MANUSCRIPT_DRAFT_AUDIT.md` records the theorem, formula, assumption, notation, citation, N1, unsupported-claim, and LaTeX-structure checks.
+
+The source contains no unsupported priority claim, no fabricated DOI or theorem number, no N1 evidence, no unverified numerical example, and no unconditional quantum conclusion. `pdflatex`, `bibtex`, and `latexmk` are unavailable in the validation environment, so structural LaTeX validation was performed and compilation is explicitly not claimed.
+
+## Phase-10A validation and manuscript package
+
+The Phase-10A full capture is `validation/phase10a_full_validation.out`.
+
+- the full 13-validator suite exits `0` with zero stderr lines;
+- citation-to-BibTeX consistency passes with 13 cited entries and no uncited entries;
+- LaTeX brace and environment structure passes;
+- the draft has 12 primary sections, six Section-9 subsections, five figure placeholders, and four verified-data tables;
+- the abstract contains no N1 reference or N1 numerical evidence;
+- unsupported priority terms are absent;
+- `pdflatex`, `bibtex`, and `latexmk` are unavailable, so no compilation success is claimed.
+
+The manuscript package was rebuilt with `manuscript/main.tex`, `manuscript/references.bib`, the Phase-10A audit, and the validation captures, then verified by clean extraction. The package remains a draft handoff and not a submission package.
+
+The package verification capture is `validation/phase10a_package_verification.out`. It records a clean unzip test, exact manifest match, source-PDF SHA-256 `0db90bfbeda69ad1af231b81d92f24be3589ed15ac2e0ade6605ba7ad0ddc039`, zero Git metadata in the extracted archive, one manuscript `.tex`, one manuscript `.bib`, zero validation-suite stderr lines, and a passing extracted manuscript structural check. The archive is a draft handoff, not a submission-ready package.

@@ -1,0 +1,783 @@
+\documentclass[11pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{microtype}
+\geometry{margin=1in}
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
+
+\newcommand{\F}{\mathbb F}
+\newcommand{\K}{\mathbb K}
+\newcommand{\A}{\mathcal A}
+\newcommand{\Fs}{\mathcal F_s}
+\newcommand{\Os}{\mathcal O_s}
+\newcommand{\Epoly}{\mathscr E}
+\newcommand{\Hull}{\operatorname{Hull}}
+\newcommand{\rank}{\operatorname{rank}}
+\newcommand{\wt}{\operatorname{wt}}
+\newcommand{\code}{\mathrm{code}}
+\newcommand{\cand}{\mathrm{candidate}}
+\newcommand{\perpE}{\perp_E}
+\newcommand{\CF}{\mathrm{code\text{-}first}}
+\newcommand{\Candidate}{\mathrm{candidate\text{-}first}}
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\newtheorem{example}[definition]{Example}
+\theoremstyle{plain}
+\newtheorem{proposition}[definition]{Proposition}
+\newtheorem{lemma}[definition]{Lemma}
+\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{corollary}[definition]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[definition]{Remark}
+
+\title{Exact Joint Enumeration of $k$-Galois Hull Dimensions for Labeled Constacyclic Codes over Square-Free Affine Algebras}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We study the joint distribution of code dimension and $k$-Galois hull dimension for a fixed labeled family of constacyclic codes over a square-free affine algebra. The square-free algebra is decomposed into finite-field components, and the condition $\gcd(n,p)=1$ makes the component constacyclic moduli simple-root. Consequently, each component code is represented by a binary selection of irreducible factors. We use the code-first second-slot pairing
+\[
+\langle x,y\rangle_{s,k}=\sum_i x_i y_i^{p^k}
+\]
+and derive the inverse-Frobenius reciprocal, its factor action, and the resulting hull-support formula. Under the compatible same-factor-set condition, the support becomes a weighted cyclic $1$-to-$0$ boundary statistic on reciprocal factor orbits. A weighted two-state transfer matrix and a cyclic trace then give the exact labeled joint generating polynomial
+\[
+\Epoly(u,z)=\prod_s\prod_{O\in\Os}\operatorname{tr}\bigl(T_{w_O}(u,z)^{a_O}\bigr),
+\qquad
+T_w(u,z)=\begin{pmatrix}u^w&1\\u^wz^w&1\end{pmatrix}.
+\]
+Here $u$ records global $\F_q$-code dimension and $z$ records global code-first $\F_q$-hull dimension. Specializations yield the total labeled-code count, code- and hull-dimension distributions, the LCD count, the mean, and the variance, including the short-orbit exception. The candidate-first comparison convention is treated separately, with $D_{\Candidate}(C)=\sigma_k^2(D_{\CF}(C))$. All results are conditional on the stated hypotheses; no priority claim is made.
+\end{abstract}
+
+\noindent\textbf{Keywords:} $k$-Galois hulls; constacyclic codes; square-free affine algebras; exact labeled enumeration; generating polynomials; transfer matrices; finite-field decomposition.
+
+\section{Introduction}
+
+Let $C$ be a linear code and let $C^\perp$ denote a dual code with respect to a specified pairing. The hull $C\cap C^\perp$ is a structural invariant that appears in the study of code intersections, complementary-dual codes, automorphism questions, and conditional quantum-code constructions. Galois hulls extend the Euclidean and Hermitian cases by applying a Frobenius automorphism in one slot of the pairing. For constacyclic codes, polynomial factorization makes duality and intersection questions amenable to algebraic analysis.
+
+Exact enumeration questions are already present in several narrower settings. Finite-field cyclic and negacyclic hulls, including fixed-dimension counts, have been treated through reciprocal factors and related polynomial descriptions \cite{sangwisut2015}. A finite-field constacyclic record reports Galois-hull formulas and restricted prescribed-dimension counts, together with a correction record; the complete corrected theorem text is not imported here \cite{debnathConstacyclic2023,debnathCorrection2023}. Related exact counts are available for cyclic serial codes over a finite chain ring \cite{talbi2021}, cyclic codes over $\mathbb Z_4$ \cite{jitmanZ4,pathakZ4}, double cyclic codes \cite{gao2023}, and double or four circulant codes \cite{aliabadi2026}. Average-dimension and small-dimension Galois-hull records provide additional neighboring context \cite{debnathAverage2025,debnathSmall2026}.
+
+The closest structural record for the present setting studies Galois hulls of constacyclic codes over an affine algebra and uses finite-field component decompositions \cite{debnathAffinePreprint,debnathAffine2026}. Its accessible theorem-bearing version and its final publisher record are kept separate in the source audit. In particular, the accessible source convention places the candidate in the opposite slot from the convention used below. We therefore state and prove the convention transformation rather than silently identifying the two dual codes. A restricted direct-product/non-chain record also supplies adjacent componentwise hull formulas, but it does not replace the labeled product proved here \cite{zhang2026}.
+
+\begin{table}[ht]
+\centering
+\scriptsize
+\begin{tabular}{@{}p{0.23\linewidth}p{0.34\linewidth}p{0.31\linewidth}@{}}
+\toprule
+Literature setting & Result used in this paper & Scope qualification \\
+\midrule
+Finite-field cyclic/negacyclic & Hull formulas and fixed-dimension counts \cite{sangwisut2015} & Narrower field and cyclic/negacyclic families. \\
+Finite-field constacyclic & Galois-hull formulas and restricted counts \cite{debnathConstacyclic2023,debnathCorrection2023} & Correction recorded; complete corrected text requires a pre-submission check. \\
+Chain-ring and $\mathbb Z_4$ & Fixed-hull or average-type enumeration \cite{talbi2021,jitmanZ4,pathakZ4} & Nilpotent/chain-ring hypotheses differ from the reduced affine product. \\
+Non-chain and generalized cyclic & Component hull formulas or prescribed-hull counts \cite{zhang2026,gao2023,aliabadi2026} & Different rings or code families; no target-product transfer. \\
+Average/small-dimension Galois hulls & Adjacent average and small-dimension records \cite{debnathAverage2025,debnathSmall2026} & Background only; not the complete labeled joint polynomial. \\
+\bottomrule
+\end{tabular}
+\caption{Literature comparison used for scoped background. The table does not assert an exhaustive priority result.}
+\label{tab:literature}
+\end{table}
+
+This paper addresses the following conditional question. Suppose that a fixed square-free affine algebra has labeled field components, that each component modulus $x^n-\lambda_s$ is simple-root, and that the inverse-Frobenius reciprocal preserves the same factor set. Can all distinct labeled factor selections be counted jointly by their global code dimension and their code-first $k$-Galois hull dimension? The answer is an exact product over reciprocal factor orbits.
+
+Our contribution is deliberately stated without a priority claim. Under explicit square-free, simple-root, compatible-twist, fixed-component, and labeled-factor hypotheses, we derive a self-contained exact joint generating polynomial for code dimension and code-first $k$-Galois hull dimension. The polynomial factors over factor orbits and is represented by a weighted two-state transfer matrix and cyclic trace. The transition statistic and transfer mechanism are standard combinatorial tools; the application is combined with the code-first hull-support calculation in the specified family.
+
+The paper is organized as follows. Section 2 fixes the algebraic notation and both dual conventions. Section 3 proves the labeled factor-selection parametrization. Section 4 derives code-first duality, the inverse-Frobenius reciprocal, the factor action, and the compatibility condition. Section 5 identifies hull support and the cyclic boundary statistic. Sections 6 and 7 treat the local orbit polynomial and its transfer-matrix representation. Section 8 states the global joint enumerator. Section 9 derives its corollaries, Section 10 records reproducible finite validation, and Section 11 states limitations and extensions.
+
+\begin{figure}[ht]
+\centering
+\fbox{\parbox{0.88\linewidth}{\centering
+Intended Figure 1 placeholder: $\A\to\prod_s K_s\to J_s\to\tau$-orbits\to b_O\to P_{a,w}\to T_w\to\Epoly(u,z)$.\\
+This workflow diagram will be prepared after mathematical review.}}
+\caption{Intended workflow from square-free component decomposition to the joint labeled generating polynomial.}
+\label{fig:workflow}
+\end{figure}
+
+\section{Algebraic and Coding-Theoretic Preliminaries}
+
+Throughout, $p$ is prime and
+\[
+q=p^e,\qquad e\geq 1.
+\]
+For each component index $s$, let
+\[
+K_s=\F_{q^{m_s}}=\F_{p^{d_s}},\qquad d_s=e m_s,\qquad m_s\geq 1.
+\]
+The component labels are fixed, and $\A$ is used consistently for the ambient affine algebra.
+
+\subsection{Square-free affine algebras}
+
+The affine algebra is presented as
+\[
+\A=\F_q[X_1,\ldots,X_\ell]
+ \big/\langle t_1(X_1),\ldots,t_\ell(X_\ell)\rangle,
+\]
+where $\ell\geq 1$ and each $t_i$ is monic, square-free, and of positive degree. The square-free assumption makes $\A$ reduced. Its fixed labeled decomposition is
+\[
+\A\cong \prod_{s=1}^{N}K_s.
+\]
+The global dimensions below are over $\F_q$, whereas component dimensions are over $K_s$.
+
+\subsection{Constacyclic codes and simple-root factors}
+
+Fix $n\geq 1$ with $\gcd(n,p)=1$ and choose $\lambda_s\in K_s^*$ for every component. Set
+\[
+M_s(x)=x^n-\lambda_s.
+\]
+Since $\gcd(n,p)=1$, $M_s$ is square-free. Let $\Fs$ be the set of distinct monic irreducible factors of $M_s$ over $K_s$. For a subset $J_s\subseteq\Fs$, define
+\[
+g_{J_s}(x)=\prod_{f\in J_s}f(x),
+\qquad
+h_{J_s}(x)=\frac{M_s(x)}{g_{J_s}(x)}.
+\]
+The component code is the principal ideal generated by $g_{J_s}$ in $K_s[x]/\langle M_s\rangle$. We use $\varepsilon=1$ for a factor selected in the generator; thus a selected factor contributes to codimension rather than directly to code dimension.
+
+\subsection{The code-first pairing and hull}
+
+For $x=(x_i)$ and $y=(y_i)$ in $K_s^n$, define
+\[
+\sigma_{s,k}(a)=a^{p^k},
+\qquad
+\rho_{s,k}(a)=a^{p^{d_s-k}}=\sigma_{s,k}^{-1},
+\qquad 0\leq k<e,
+\]
+When the component index is suppressed, these are the frozen maps
+\[
+\sigma(a)=a^{p^k},
+\qquad
+\rho(a)=a^{p^{d_s-k}}.
+\]
+The code-first second-slot pairing
+\[
+\langle x,y\rangle_{s,k}
+ =\sum_{i=0}^{n-1}x_i\sigma_{s,k}(y_i)
+ =\sum_{i=0}^{n-1}x_i y_i^{p^k}.
+\]
+Suppressing the component label, this is the frozen convention
+\[
+\langle x,y\rangle_k=\sum_i x_i y_i^{p^k}.
+\]
+The code-first dual is
+\[
+D_{\CF}(C)=\{y\in K_s^n:\langle c,y\rangle_{s,k}=0\text{ for every }c\in C\},
+\]
+and the code-first hull is
+\[
+\Hull_k(C)=C\cap D_{\CF}(C).
+\]
+The pairing is $K_s$-linear in its first argument and $\sigma_{s,k}$-semilinear in its second argument. The defining annihilator is nevertheless a $K_s$-linear subspace.
+
+
+\begin{proposition}[Code-first dual translation]
+For every $K_s$-linear code $C\subseteq K_s^n$,
+\[
+D_{\CF}(C)=\rho_{s,k}(C^{\perpE}),
+\]
+where $C^{\perpE}$ is the ordinary Euclidean dual and $\rho_{s,k}$ acts coordinatewise.
+\end{proposition}
+
+\begin{proof}
+The code-first condition is $\sum_i c_i\sigma_{s,k}(y_i)=0$ for every $c\in C$. Setting $z=\sigma_{s,k}(y)$ gives $z\in C^{\perpE}$, and applying the inverse coordinatewise map gives $y=\rho_{s,k}(z)$.
+\end{proof}
+
+\begin{table}[ht]
+\centering
+\small
+\begin{tabular}{@{}lll@{}}
+\toprule
+Symbol & Meaning & Scope \\
+\midrule
+$\F_q$ & base field of size $q=p^e$ & fixed \\
+$K_s$ & component field $\F_{q^{m_s}}$ & component $s$ \\
+$d_s$ & absolute component degree $e m_s$ & $d_s=e m_s$ \\
+$\sigma_{s,k}$ & Frobenius map & $a\mapsto a^{p^k}$ \\
+$\rho_{s,k}$ & inverse Frobenius & $a\mapsto a^{p^{d_s-k}}$ \\
+$\langle x,y\rangle_{s,k}$ & code-first pairing & second-slot $p^k$ map \\
+$\A$ & square-free affine algebra & labeled product \\
+$n$ & constacyclic length & $\gcd(n,p)=1$ \\
+$\lambda_s$ & component twist & $\lambda_s^{1+p^{d_s-k}}=1$ \\
+$k$ & Frobenius iteration & $0\leq k<e$ \\
+$\Fs$ & irreducible factor set of $M_s$ & component $s$ \\
+$J_s$ & selected generator factors & labeled selection \\
+$\tau_{s,k}$ & reciprocal factor permutation & compatible case \\
+$a_O,d_O$ & orbit length and factor degree & orbit $O$ \\
+$\varepsilon_i$ & selected-factor indicator & $\varepsilon_i=1$ in $J_s$ \\
+$b_O$ & cyclic $1$-to-$0$ count & orbit statistic \\
+$T_w(u,z)$ & weighted transfer matrix & rows source, columns destination \\
+$w_O$ & $\F_q$-weight $m_s d_O$ & orbit $O$ \\
+$\Epoly(u,z)$ & code/hull joint enumerator & labeled codes \\
+\bottomrule
+\end{tabular}
+\caption{Core notation and assumptions used in the draft.}
+\label{tab:notation}
+\end{table}
+
+\section{Square-Free Affine Decomposition and Factor-Selection Codes}
+
+\begin{proposition}[Square-free component decomposition]
+Under the hypotheses of Section 2, the affine algebra has a fixed labeled decomposition
+\[
+\A\cong\prod_{s=1}^{N}K_s,
+\]
+with finite fields $K_s=\F_{q^{m_s}}$.
+\end{proposition}
+
+\begin{proof}
+Factor each relation $t_i$ into pairwise coprime monic irreducibles over $\F_q$. Square-freeness gives pairwise comaximal factors. The Chinese remainder theorem first decomposes each one-variable quotient into finite fields and then decomposes their tensor product into a finite product of finite fields. The component labels are fixed by the chosen decomposition. The positive-degree hypothesis excludes the zero quotient case.\end{proof}
+
+\begin{lemma}[Factor-selection parametrization]
+For each $s$, the distinct constacyclic ideals in the simple-root quotient $K_s[x]/\langle M_s\rangle$ are in bijection with subsets $J_s\subseteq\Fs$. Their $K_s$-dimension is
+\[
+\dim_{K_s}C_s(J_s)=n-\sum_{f\in J_s}\deg(f).
+\]
+The global product code has $\F_q$-dimension
+\[
+\dim_{\F_q}C(J)=\sum_{s=1}^{N}m_s\dim_{K_s}C_s(J_s).
+\]
+\end{lemma}
+
+\begin{proof}
+The simple-root quotient is a product of fields indexed by the distinct irreducible factors of $M_s$. A principal ideal is obtained by choosing which factor components vanish, equivalently by choosing the product $g_{J_s}$. Unique factorization gives injectivity of the selection-to-ideal map, and every ideal is obtained in this way. The usual degree formula gives the component dimension. Since $[K_s:\F_q]=m_s$, the global dimension is the weighted sum displayed above.\end{proof}
+
+The global selection space is therefore
+\[
+\mathscr C=\prod_{s=1}^{N}\{J_s:J_s\subseteq\Fs\},
+\qquad
+|\mathscr C|=2^{\sum_s|\Fs|}.
+\]
+This is a labeled factor-selection count. No quotient by rotations, automorphisms, isometries, or code equivalence is taken.
+
+\begin{figure}[ht]
+\centering
+\fbox{\parbox{0.88\linewidth}{\centering
+Intended Figure 2 placeholder: the fixed labeled decomposition $\A\cong\prod_s K_s$, followed by the component moduli $M_s(x)$ and their factor sets $\Fs$.\\
+The final drawing will be prepared after mathematical review.}}
+\caption{Intended square-free affine decomposition and labeled component factor sets.}
+\label{fig:decomposition}
+\end{figure}
+
+\section{$k$-Galois Duality for Component Constacyclic Codes}
+
+\subsection{The inverse-Frobenius reciprocal}
+
+Let $f(x)=\sum_{i=0}^{r}f_i x^i$ be monic with $f_0\neq 0$. Define
+\[
+f^{\#_{s,k}}(x)
+ =\rho_{s,k}(f_0)^{-1}
+   \sum_{i=0}^{r}\rho_{s,k}(f_i)x^{r-i}.
+\]
+
+
+\begin{lemma}[Normalized inverse-Frobenius reciprocal]
+The map $f\mapsto f^{\#_{s,k}}$ is monic, preserves degree and irreducibility, is multiplicative on monic polynomials with nonzero constant term, and is inverted by the corresponding normalized reciprocal using $\sigma_{s,k}$.
+\end{lemma}
+
+\begin{proof}
+The leading coefficient after reversal is $\rho_{s,k}(f_0)$, so the displayed normalization makes the reciprocal monic. Reversal and the coefficient automorphism commute with products up to the scalar normalization, which proves multiplicativity. In a finite field the ordinary normalized reciprocal preserves irreducibility, and applying the field automorphism preserves it as well. Applying the inverse construction with $\sigma_{s,k}$ returns the original monic polynomial.
+\end{proof}
+
+\begin{lemma}[Root action]
+If $f(\alpha)=0$, then
+\[
+f^{\#_{s,k}}\bigl(\alpha^{-p^{d_s-k}}\bigr)=0.
+\]
+Thus the induced root map is
+\[
+\alpha\longmapsto \alpha^{-p^{d_s-k}}.
+\]
+\end{lemma}
+
+\begin{proof}
+Substitute $\alpha^{-p^{d_s-k}}$ into the definition of $f^{\#_{s,k}}$ and factor the inverse Frobenius through the coefficient sum. The resulting expression is a nonzero scalar multiple of
+\[
+\rho_{s,k}\left(\alpha^{-r}f(\alpha)\right)=0.
+\]
+\end{proof}
+
+\subsection{Compatibility and factor permutation}
+
+If $\alpha^n=\lambda_s$, then
+\[
+\bigl(\alpha^{-p^{d_s-k}}\bigr)^n=\lambda_s^{-p^{d_s-k}}.
+\]
+Consequently, the same factor set is preserved precisely under
+\[
+\boxed{\lambda_s^{1+p^{d_s-k}}=1.}
+\]
+Under this condition, define
+\[
+\tau_{s,k}:\Fs\longrightarrow\Fs,
+\qquad
+\tau_{s,k}(f)=f^{\#_{s,k}}.
+\]
+The map is a permutation. It need not be an involution; fixed points and cycles of arbitrary admissible length are allowed.
+
+
+\begin{proposition}[Compatible factor permutation]
+Under $\lambda_s^{1+p^{d_s-k}}=1$, the map $\tau_{s,k}$ is a permutation of $\Fs$ and preserves factor degrees. Its cycles therefore partition the labeled factor set into orbits with a common degree on each orbit.
+\end{proposition}
+
+\begin{proof}
+The root action sends roots of $M_s$ to roots of the same polynomial under the displayed compatibility condition. The normalized reciprocal preserves monicity, irreducibility, and degree, and its inverse is obtained with $\sigma_{s,k}$; hence it permutes $\Fs$.
+\end{proof}
+
+\begin{lemma}[Ordinary constacyclic reciprocal]
+Let $M(x)=x^n-a$, let $G\mid M$ be monic, and put $H=M/G$. If
+\[
+H^*(x)=H(0)^{-1}\sum_{i=0}^{\deg H}H_i x^{\deg H-i},
+\]
+then the Euclidean dual of the ideal $\langle G\rangle$ in $K[x]/\langle M\rangle$ is the ideal generated by $H^*$ in the $a^{-1}$-constacyclic quotient.
+\end{lemma}
+
+\begin{proof}
+The coefficient vectors of the shifts of $G$ and the shifts of $H^*$ are orthogonal: after reversing the coefficient order in $H$ and using $GH=M$, every coefficient pairing is a coefficient of a multiple of $x^n-a$ and hence vanishes in the Euclidean pairing. The shifts of $H^*$ span a space of dimension $\deg G$, which is the codimension of $\langle G\rangle$. Thus the orthogonal space is exactly $\langle H^*\rangle$. The boundary shift changes the scalar from $a$ to $a^{-1}$, giving the stated constacyclic quotient.\end{proof}
+
+\begin{theorem}[Code-first dual generator]
+Let $C_s(J_s)=\langle g_{J_s}\rangle$ be a component code and let $h_{J_s}=M_s/g_{J_s}$. Under the simple-root hypotheses, the code-first dual is generated by the normalized inverse-Frobenius reciprocal $h_{J_s}^{\#_{s,k}}$ and is constacyclic with twist
+\[
+\lambda_s^{-p^{d_s-k}}.
+\]
+If the compatibility condition holds, its factor support is
+\[
+\tau_{s,k}(\Fs\setminus J_s).
+\]
+\end{theorem}
+
+\begin{proof}
+First apply $\rho_{s,k}$ to the defining equations of the code-first dual. This changes them into ordinary Euclidean annihilation equations for the coordinatewise $\rho_{s,k}$-image of the code. The ordinary Euclidean dual of a simple-root $a$-constacyclic ideal generated by $g$ is generated by the normalized reciprocal of its check polynomial, with the inverse twist. Applying the coefficientwise inverse Frobenius and normalizing the leading coefficient yields $h_{J_s}^{\#_{s,k}}$ and the twist $\lambda_s^{-p^{d_s-k}}$. The root calculation above gives the factor support.\end{proof}
+
+\begin{proposition}[Same-twist compatibility criterion]
+The code-first dual twist equals the original twist precisely when
+\[
+\lambda_s^{-p^{d_s-k}}=\lambda_s,
+\qquad\text{equivalently}\qquad
+\lambda_s^{1+p^{d_s-k}}=1.
+\]
+If this condition fails, the code-first dual belongs to the transformed modulus
+\[
+x^n-\lambda_s^{-p^{d_s-k}},
+\]
+so the same-factor-set orbit product is not asserted.
+\end{proposition}
+
+\begin{proof}
+The first equality is the twist in the dual-generator theorem. Multiplying it by $\lambda_s^{p^{d_s-k}}$ gives the equivalent displayed power condition. If it fails, the root calculation places the dual in the transformed constacyclic modulus rather than the original same-factor-set quotient.\end{proof}
+
+\subsection{Candidate-first versus code-first}
+
+\begin{proposition}[Candidate-first/code-first convention transformation]
+For comparison, define
+\[
+D_{\Candidate}(C)=\left\{y:\sum_i y_i\sigma_{s,k}(c_i)=0\text{ for every }c\in C\right\}.
+\]
+For any $K_s$-linear code, without a constacyclic hypothesis,
+\[
+D_{\CF}(C)=\rho_{s,k}(C^{\perpE}),
+\qquad
+D_{\Candidate}(C)=\sigma_{s,k}(C^{\perpE}),
+\]
+and therefore
+\[
+\boxed{D_{\Candidate}(C)=\sigma_{s,k}^{2}\bigl(D_{\CF}(C)\bigr).}
+\]
+Suppressing the component index, the same transformation is stated as
+\[
+D_{\Candidate}(C)=\sigma_k^2\bigl(D_{\CF}(C)\bigr).
+\]
+The two dual subspaces are not generally equal.
+\end{proposition}
+
+\begin{proof}
+The first relation follows from the code-first translation proposition. For the candidate-first condition, setting $z=\rho_{s,k}(y)$ gives $z\in C^{\perpE}$ and hence $y=\sigma_{s,k}(z)$. Applying $\sigma_{s,k}$ twice to the first relation gives the boxed transformation. No equality of the two subspaces follows unless the square of the Frobenius happens to act trivially on the relevant subspace.
+\end{proof}
+
+\begin{proposition}[Same-code hull-dimension and LCD invariance]
+Let $B$ be a row basis of a finite-field-linear code $C$ and let
+\[
+G=B\,\sigma(B)^{\mathsf T}.
+\]
+Then both same-code hull dimensions are equal to
+\[
+\dim(C)-\rank(G).
+\]
+In particular, the code-first and candidate-first pairings have the same same-code hull dimension and the same LCD decision. This does not identify the dual codes, hull subspaces, factor supports, or generator supports.
+\end{proposition}
+
+\begin{proof}
+Writing a codeword as $vB$, the code-first hull equations become a homogeneous system with coefficient matrix $G$ after the invertible change of variables induced by $\sigma$. The candidate-first equations give the corresponding left-nullspace description with the same matrix rank. Rank-nullity yields the displayed dimension in both cases. The LCD assertion is the special case in which this dimension is zero.\end{proof}
+
+\section{Hull Support and Orbit Structure}
+
+\begin{theorem}[Component hull support]
+Let $C_s(J_s)$ be selected by $J_s\subseteq\Fs$. Under the compatible same-factor-set hypotheses, the code-first hull has factor support
+\[
+\begin{aligned}
+\operatorname{supp}\Hull_k(C_s(J_s))
+ &= (\Fs\setminus J_s)\cap\tau_{s,k}(J_s)\\
+ &= \tau_{s,k}(J_s)\setminus J_s.
+\end{aligned}
+\]
+The first line is the direct lcm/intersection form, and the second uses that $\tau_{s,k}$ is a permutation of $\Fs$.
+\end{theorem}
+
+\begin{proof}
+The code generator has support $J_s$, while the dual generator has support $\tau_{s,k}(\Fs\setminus J_s)$. The intersection of the two principal ideals in the square-free quotient is generated by the least common multiple, so its surviving factors are the complement of the union of these two supports. This gives
+$(\Fs\setminus J_s)\cap(\Fs\setminus\tau_{s,k}(\Fs\setminus J_s))$.
+Since $\tau_{s,k}$ is a permutation, the second complement is $\tau_{s,k}(J_s)$, giving the two displayed forms.
+\end{proof}
+
+\begin{proposition}[Weighted cyclic boundary statistic]
+Let $O\in\Os$ be a cycle of length $a_O$, indexed by
+\[
+\tau_{s,k}(f_i)=f_{i+1},\qquad i\pmod {a_O}.
+\]
+All factors in $O$ have a common degree $d_O$. Put
+\[
+w_O=m_s d_O,
+\qquad
+\varepsilon_i=\begin{cases}1,&f_i\in J_s,\\0,&f_i\notin J_s.\end{cases}
+\]
+Then
+\[
+b_O(\varepsilon)=\sum_{i=0}^{a_O-1}\varepsilon_i(1-\varepsilon_{i+1})
+\]
+and
+\[
+\dim_{\F_q}\Hull_k(C)
+ =\sum_{s=1}^{N}\sum_{O\in\Os}w_O b_O(\varepsilon_O).
+\]
+\end{proposition}
+
+\begin{proof}
+The orbit positions have equal factor degree because the reciprocal permutation preserves degree. The support formula identifies a hull factor at position $i+1$ exactly when $f_i$ is selected and $f_{i+1}$ is not. Each such factor contributes $m_s d_O=w_O$ to the global $\F_q$ dimension, and summing over the orbit partition gives the formula.
+\end{proof}
+
+
+\begin{proposition}[Cyclic boundary interpretation]
+For a nonconstant cyclic binary word, $b_O$ equals the number of one-runs and also the number of zero-runs. It is the number of directed $1$-to-$0$ transitions, with cyclic indexing modulo $a_O$.
+\end{proposition}
+
+\begin{proof}
+Each summand is one exactly when the directed edge from $i$ to $i+1$ is a $1$-to-$0$ transition. Every one-run has exactly one such exit and every zero-run has exactly one entry, so these counts agree. The two constant words have $b_O=0$.\end{proof}
+
+\begin{figure}[ht]
+\centering
+\fbox{\parbox{0.88\linewidth}{\centering
+Intended Figure 3 placeholder: an indexed orbit $f_0\to f_1\to\cdots\to f_{a-1}\to f_0$, a binary word $\varepsilon$, and marked $1\to0$ edges.\\
+The final drawing will be prepared after mathematical review.}}
+\caption{Intended factor-orbit and code-first hull-support mechanism.}
+\label{fig:orbit}
+\end{figure}
+
+\section{Exact Orbit Enumeration}
+
+\begin{proposition}[One-orbit polynomial]
+For an orbit of length $a$ and weight $w$, let $P_{a,w}(z)$ be the sum of $z^{wb(\varepsilon)}$ over all indexed cyclic binary words. Then
+\[
+N(a,r)=2\binom{a}{2r}
+ =\frac{a}{r}\binom{a-1}{2r-1}
+\]
+counts the words with $r$ one-runs, and
+\[
+\boxed{
+P_{a,w}(z)=2+
+ \sum_{r=1}^{\lfloor a/2\rfloor}
+ 2\binom{a}{2r}z^{rw}
+ =2+
+ \sum_{r=1}^{\lfloor a/2\rfloor}
+ \frac{a}{r}\binom{a-1}{2r-1}z^{rw}.
+}
+\]
+\end{proposition}
+
+\begin{proof}
+The two constant words contribute $2$. If a nonconstant word has $r$ one-runs, it has $2r$ transition edges. Choosing the $2r$ transition edges and one of the two starting values gives $2\binom{a}{2r}$. The equality with the composition form follows from
+$2\binom{a}{2r}=(a/r)\binom{a-1}{2r-1}$, so the second expression is integral because it equals the first.
+\end{proof}
+
+The second form is integral because it equals the first form. In particular,
+\[
+P_{1,w}(z)=2,\quad
+P_{2,w}(z)=2+2z^w,\quad
+P_{3,w}(z)=2+6z^w,
+\]
+\[
+P_{4,w}(z)=2+12z^w+2z^{2w},\qquad
+P_{5,w}(z)=2+20z^w+10z^{2w}.
+\]
+For example, at $a=4$ there are two constant words, twelve words with one one-run, and two alternating words with two one-runs.
+
+At $z=1$, the binomial identity gives $P_{a,w}(1)=2^a$, as required for the $2^a$ indexed factor selections in one orbit.
+
+\section{Transfer-Matrix Representation}
+
+\begin{proposition}[Weighted transfer matrix]
+For a transition from source state $r=\varepsilon_i$ to destination state $t=\varepsilon_{i+1}$, assign
+\[
+T_w(u,z)_{r,t}=u^{w(1-t)}z^{wr(1-t)}.
+\]
+With states ordered as $0,1$, this is
+\[
+\boxed{
+T_w(u,z)=\begin{pmatrix}u^w&1\\u^wz^w&1\end{pmatrix}.
+}
+\]
+The destination weight is deliberate: each factor is counted once as the destination of the preceding edge. Thus $u$ records code dimension, because a factor with destination state $t=0$ is not selected and contributes $w$ to the code dimension. The factor $z^w$ appears precisely on a $1$-to-$0$ edge.
+\end{proposition}
+
+\begin{proof}
+The four source/destination choices $(r,t)\in\{0,1\}^2$ receive the destination code-dimension weight $u^{w(1-t)}$ and the boundary weight $z^{wr(1-t)}$. This gives the displayed matrix in the state order $0,1$.
+\end{proof}
+
+\begin{proposition}[Local trace identity]
+For an orbit of length $a$ and weight $w$,
+\[
+\operatorname{tr}(T_w(u,z)^a)
+ =\sum_{\varepsilon\in\{0,1\}^a}
+ u^{w\sum_i(1-\varepsilon_i)}z^{w\sum_i\varepsilon_i(1-\varepsilon_{i+1})}.
+\]
+In particular,
+\[
+\operatorname{tr}(T_w(1,z)^a)=P_{a,w}(z).
+\]
+\end{proposition}
+
+\begin{proof}
+Expand a diagonal entry of $T_w^a$ as a sum over intermediate states. The diagonal condition identifies the terminal state with the initial state, thereby closing the cycle. Summing the two diagonal entries sums over every indexed binary word exactly once. The product of edge weights is
+\[
+\prod_i u^{w(1-\varepsilon_{i+1})}z^{w\varepsilon_i(1-\varepsilon_{i+1})},
+\]
+which is the displayed monomial after cyclic reindexing. This is the standard closed-walk trace mechanism; the hull-specific content is the preceding identification of the boundary statistic.\end{proof}
+
+\begin{figure}[ht]
+\centering
+\fbox{\parbox{0.88\linewidth}{\centering
+Intended Figure 4 placeholder: states $0$ and $1$ with transition labels $u^w$, $1$, $u^wz^w$, and $1$.\\
+The final drawing will be prepared after mathematical review.}}
+\caption{Intended two-state transfer matrix for one reciprocal factor orbit.}
+\label{fig:matrix}
+\end{figure}
+
+\section{Global Joint Generating Polynomial}
+
+\begin{theorem}[Exact labeled joint enumerator]\label{thm:central}
+Assume the hypotheses of Sections 2--5, including square-free affine decomposition, $\gcd(n,p)=1$, simple roots, fixed labeled components, finite-field-linear component codes, equal factor degree within each reciprocal orbit, code-first duality, and
+\[
+\lambda_s^{1+p^{d_s-k}}=1\qquad(1\leq s\leq N).
+\]
+For every orbit $O\in\Os$, let $a_O$ be its length and $w_O=m_s d_O$ its global weight. For a labeled factor selection $J=(J_s)_s$, let
+\[
+K(C(J))=\sum_{s,O,i}w_O(1-\varepsilon_{O,i}),
+\qquad
+H_k(C(J))=\sum_{s,O,i}w_O\varepsilon_{O,i}(1-\varepsilon_{O,i+1}).
+\]
+Then the exact joint generating polynomial is
+\[
+\begin{aligned}
+\Epoly(u,z)
+ &=\sum_{J\in\mathscr C}u^{K(C(J))}z^{H_k(C(J))}\\
+ &=\prod_{s=1}^{N}\prod_{O\in\Os}
+ \operatorname{tr}\bigl(T_{w_O}(u,z)^{a_O}\bigr).
+\end{aligned}
+\]
+For every pair $(K,H)$,
+\[
+[u^Kz^H]\Epoly(u,z)
+\]
+is the number of distinct labeled factor-selection codes with global $\F_q$-code dimension $K$ and global code-first $\F_q$-hull dimension $H$.
+\end{theorem}
+
+\begin{proof}
+The factor-selection lemma gives a Cartesian product of independent binary choices over the labeled factors. The hull-support theorem identifies the global hull dimension with the sum of the orbit contributions $w_Ob_O$. The local trace identity enumerates the choices on each orbit with their code-dimension and hull-dimension weights. Since different orbits and components are independent coordinates in the selection space and both dimensions are additive, multiplication of the local trace polynomials gives the first equality and the product formula. Coefficient extraction has the stated labeled interpretation.\end{proof}
+
+\begin{figure}[ht]
+\centering
+\fbox{\parbox{0.88\linewidth}{\centering
+Intended Figure 5 placeholder: local factors $\operatorname{tr}(T_{w_O}^{a_O})$ multiplying over $O$ and $s$, followed by $[u^Kz^H]$ extraction.\\
+The final drawing will be prepared after mathematical review.}}
+\caption{Intended local-to-global construction of the joint generating polynomial.}
+\label{fig:global}
+\end{figure}
+
+The result is a labeled enumeration. It does not quotient the selection space by rotations, automorphisms, isometries, or code equivalence.
+
+\section{Consequences}
+
+\subsection{Total Number of Codes}
+
+\begin{corollary}
+The total number of distinct labeled factor-selection codes is
+\[
+\Epoly(1,1)=2^{\sum_s|\Fs|}.
+\]
+\end{corollary}
+
+\begin{proof}
+At $u=z=1$, every local trace counts the $2^{a_O}$ indexed binary words on its orbit. Multiplying over the orbit partition gives $2^{\sum_s|\Fs|}$, which also follows directly from the factor-selection bijection.\end{proof}
+
+\subsection{Code-Dimension Distribution}
+
+\begin{corollary}[Code-dimension distribution]
+Setting $z=1$ removes the hull marking and yields
+\[
+\Epoly(u,1)=\prod_{s=1}^{N}\prod_{f\in\Fs}
+\left(1+u^{m_s\deg(f)}\right).
+\]
+Thus $[u^K]\Epoly(u,1)$ counts labeled codes of global code dimension $K$. This is a marginal distribution and does not identify a dual convention.
+\end{corollary}
+
+\begin{proof}
+Each factor is either unselected, contributing its full global dimension weight, or selected, contributing no code-dimension weight. The factor-selection bijection and independence give the product.
+\end{proof}
+
+\subsection{Hull-Dimension Distribution}
+
+\begin{corollary}[Hull-dimension distribution]
+The exact hull polynomial is
+\[
+H_{\A,n,\lambda,k}(z)=\Epoly(1,z)
+ =\prod_{s=1}^{N}\prod_{O\in\Os}P_{a_O,w_O}(z).
+\]
+Consequently,
+\[
+[z^H]H_{\A,n,\lambda,k}(z)
+\]
+counts labeled codes with code-first hull dimension $H$.
+\end{corollary}
+
+\begin{proof}
+Set $u=1$ in Theorem~\ref{thm:central} and use the local trace identity from Section 7.
+\end{proof}
+
+\subsection{LCD Count}
+
+\begin{corollary}[LCD count]
+All orbit weights are positive. Hence the hull dimension is zero exactly when every orbit has $b_O=0$. A cyclic binary word has no $1$-to-$0$ transition exactly when it is constant, so each orbit has two LCD selections. Therefore
+\[
+\#\{C:H_k(C)=0\}=2^{\sum_s|\Os|}.
+\]
+This is a labeled LCD count.
+\end{corollary}
+
+\begin{proof}
+The zero-boundary cyclic words are exactly the two constant words on each orbit. Independence over the orbit partition gives the displayed product.
+\end{proof}
+
+\subsection{Mean Hull Dimension}
+
+\begin{corollary}[Mean hull dimension]
+Use the uniform distribution on the finite labeled selection space. For an orbit of length $a\geq2$, the indicator $X_i=\varepsilon_i(1-\varepsilon_{i+1})$ has expectation $1/4$, while a length-one orbit contributes zero. Independence across orbits gives
+\[
+\mathbb E[H_k]
+ =\sum_{s,O:\,a_O\geq2}\frac{a_Ow_O}{4}.
+\]
+Equivalently, the same value is obtained by differentiating the normalized hull polynomial at $z=1$.
+\end{corollary}
+
+\begin{proof}
+Sum the expectations of the directed boundary indicators over every orbit and multiply by its weight. The length-one case has no directed boundary.
+\end{proof}
+
+\subsection{Variance of Hull Dimension}
+
+\begin{corollary}[Variance of hull dimension]
+For $a\geq3$, neighboring directed-edge indicators have covariance $-1/16$ and nonneighboring indicators have covariance zero. Thus an orbit of length $a\geq3$ contributes $aw^2/16$. For $a=2$, the two directed boundary indicators are mutually exclusive and the orbit contribution is Bernoulli with variance $w^2/4$. A length-one orbit contributes zero. Therefore
+\[
+\boxed{
+\operatorname{Var}(H_k)
+ =\sum_{s,O:\,a_O=2}\frac{w_O^2}{4}
+  +\sum_{s,O:\,a_O\geq3}\frac{a_Ow_O^2}{16}.
+}
+\]
+The separate $a=2$ term is essential.
+\end{corollary}
+
+\begin{proof}
+For $a\geq3$, the covariance calculation for the cyclic indicators gives $a/16$ after summing the variances and adjacent covariances. For $a=2$, the two directed edges are mutually exclusive, so the boundary count is $0$ or $1$ with probability $1/2$ and the weighted variance is $w^2/4$. Independent orbits add their variances.
+\end{proof}
+
+\section{Computational Validation and Reproducibility}
+
+The computations in this section are independent validation of finite instances, not proofs of the general statements. The repository separates direct construction, direct dual and hull calculation, Gram-matrix calculation, reciprocal/support calculation, local orbit enumeration, transfer-matrix evaluation, and global product comparison.
+
+The reproducible commands and complete outputs are retained in the repository. The listed cases are the fully specified cases approved by the prior manuscript specification:
+
+\begin{table}[ht]
+\centering
+\scriptsize
+\begin{tabular}{@{}p{0.18\linewidth}p{0.27\linewidth}p{0.10\linewidth}p{0.10\linewidth}p{0.25\linewidth}@{}}
+\toprule
+Case & Parameters & Selections & Scope & Evidence \\
+\midrule
+F4 pilot & $q=4$, $n=5$, $\lambda=1$, $k=1$, four labeled $\F_4$ components & $8^4=4096$ & Direct dual, reciprocal, hull, and enumerator checks & \texttt{validate\_pilot.py} and capture \\
+F8 long orbit & $q=8$, $n=7$, $\lambda=1$, $k=1$; orbit lengths $[1,6]$ & $2^7=128$ & Long-cycle support and generator checks & \texttt{validate\_long\_orbit\_examples.py} and capture \\
+F16 extension & $K=\F_{16}=\F_{4^2}$, $n=5$, $\lambda=1$, $k=1$; orbit lengths $[1,4]$ & $2^5=32$ & Extension exponent and principal convention & \texttt{validate\_long\_orbit\_examples.py} and capture \\
+Compatible twist & $q=4$, $n=5$, $\lambda=\omega$, $k=1$; orbit lengths $[1,2]$ & $2^3=8$ & Compatible nontrivial twist & \texttt{validate\_nontrivial\_constacyclic.py} and capture \\
+N2-A & Extension-convention data fixed in the capture & $32$ & Direct/principal convention comparison & \texttt{validate\_n2\_extension\_convention.py} and capture \\
+N2-B & Incompatible extension diagnostic data fixed in the capture & $8$ & Direct diagnostic only; no transfer enumeration & \texttt{diagnose\_n2\_incompatible\_twist.py} and capture \\
+\bottomrule
+\end{tabular}
+\caption{Fully specified or explicitly captured finite validation cases. These are validation records, not general proofs.}
+\label{tab:computations}
+\end{table}
+
+The independent end-to-end validator also checks the convention relation, reciprocal generators, support formulas, transfer products, injective selections, Gram/LCD calculations, and all 73 rank-two planes in $\F_8^3$ within its stated scope. The incompatible cases are diagnostics and are excluded from the compatible transfer theorem. The underspecified N1 artifact is not used.
+
+\section{Limitations and Extensions}
+
+The theorem is square-free and simple-root. Repeated-root cases are excluded because factor multiplicities and nilpotent structure require a different parametrization. The same-factor-set enumerator requires
+\[
+\lambda_s^{1+p^{d_s-k}}=1.
+\]
+When this fails, the code-first dual is constacyclic over the transformed modulus $x^n-\lambda_s^{-p^{d_s-k}}$; the present orbit product does not apply.
+
+The enumeration is over distinct labeled factor selections. It is not an enumeration of equivalence classes, isometry classes, automorphism orbits, or necklaces. Burnside/Pólya methods are future work and would require an explicitly defined group action and fixed-code calculation.
+
+The candidate-first and code-first dual codes and hull subspaces are not generally equal. The Gram argument establishes equality of same-code hull dimensions and LCD decisions, not equality of subspaces or factor supports. No quantum distance, QECC parameter, optimality assertion, or fault-tolerance conclusion follows from the hull enumerator alone. Hull data may provide input to a quantum construction only after additional independent hypotheses and proofs.
+
+The literature comparison is conservative. The accessible version of the closest affine source and the final publisher record are separate records, and the corrected full text of the finite-field constacyclic comparison remains to be checked before any stronger theorem-level attribution. The audit did not verify an exact prior theorem identical to the weighted bivariate product; this is not a universal absence claim.
+
+The internal validation artifact N1 remains `UNSPECIFIED — CANNOT VALIDATE` and is excluded from the manuscript. No missing twist, factorization, orbit decomposition, histogram, or numerical output is inferred.
+
+\begin{table}[ht]
+\centering
+\small
+\begin{tabular}{@{}p{0.25\linewidth}p{0.26\linewidth}p{0.39\linewidth}@{}}
+\toprule
+Topic & Status in this paper & Boundary \\
+\midrule
+Repeated roots & Excluded & Requires multiplicity-sensitive ideals and a different enumeration. \\
+Incompatible twists & Diagnostic only & Requires a two-modulus or bipartite theory. \\
+Equivalence classes & Not counted & Main polynomial counts labeled selections only. \\
+Burnside/Pólya & Future work & No group action or quotient count is proved. \\
+Quantum parameters & Conditional background only & No distance or performance claim is made. \\
+N1 & Excluded & Specification and expected output are incomplete. \\
+Final/corrected source transfer & Incomplete & Source-level comparison remains conditional. \\
+\bottomrule
+\end{tabular}
+\caption{Scope boundaries required for interpreting the manuscript.}
+\label{tab:scope}
+\end{table}
+
+\section{Conclusion}
+
+Under the stated square-free, simple-root, compatible-twist, fixed-component, and labeled-factor hypotheses, the component factor-selection model gives a self-contained route from code-first Galois duality to an exact joint generating polynomial. The inverse-Frobenius reciprocal determines the compatible factor action, the lcm intersection determines hull support, and the support becomes a weighted cyclic boundary statistic on each orbit.
+
+The local orbit polynomial and the two-state transfer matrix give equivalent descriptions of the same indexed selections. Their cyclic trace factors over independent labeled orbits, producing $\Epoly(u,z)$. Coefficient extraction yields the joint code/hull distribution, while specializations yield total counts, code-dimension distributions, hull distributions, LCD counts, means, and variances. The short-orbit variance case is handled separately.
+
+The finite computations validate the stated F4, F8, F16, compatible-twist, and N2 instances through independent routes. They do not replace the conditional proofs. The work does not address repeated roots, incompatible same-factor-set transfer, equivalence-class enumeration, Burnside/Pólya quotients, or unconditional quantum parameters. The literature review records narrower exact enumeration results and standard combinatorial tools, while retaining the unresolved final/corrected source checks and making no priority claim.
+
+\bibliographystyle{plain}
+\bibliography{references}
+
+\end{document}
