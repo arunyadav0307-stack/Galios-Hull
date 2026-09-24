@@ -98,7 +98,8 @@ The following are excluded from the central theorem and must be stated in the ma
 40. A finite validator is evidence for its listed instance only; it is not a general proof.
 41. Manuscript examples must specify the field, `n`, `k`, twist, factorization/orbit data, selection range, command, and captured output.
 42. The permitted examples are the fully specified F4, F8, F16, compatible nontrivial-twist, N2-A, and incompatible N2-B diagnostics already recorded in the Phase-7 specification and validator captures.
-43. N1 remains exactly `UNSPECIFIED — CANNOT VALIDATE`; its incomplete record is audit metadata only and must not appear as manuscript evidence. No N1 numerical value is used in the manuscript architecture.
+43. Phase-10C additionally permits the fully specified global-product bridge in `code/validate_global_product.py`, with its own captured output; this is finite validation evidence for the repaired global bridge, not a general proof.
+44. N1 remains exactly `UNSPECIFIED — CANNOT VALIDATE`; its incomplete record is audit metadata only and must not appear as manuscript evidence. No N1 numerical value is used in the manuscript architecture.
 
 ## H. Claim boundary
 

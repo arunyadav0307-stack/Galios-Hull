@@ -213,6 +213,7 @@ Only the following fully specified evidence may be summarized in the manuscript:
 | Compatible nontrivial twist | `q=4`, `n=5`, `lambda=omega`, `k=1`, compatible orbit lengths `[1,2]`, all `2^3=8` selections | The compatible nontrivial-twist formulas pass for the listed component. |
 | Extension convention comparison | N2-A data and all 32 selections | Direct dual agrees with the principal reciprocal; the alternative is retained only as a comparator. |
 | Incompatible extension diagnostic | N2-B data, all 8 selections, both candidate twists, no transfer enumeration | Incompatibility and convention behavior are diagnosed; this does not enlarge the main theorem. |
+| Global product bridge | `A=F_4 x F_{16}` over `F_4`, `n=5`, `lambda=(omega,1)`, `k=1`, component orbit data `[(1,1),(2,2)]` and `[(1,2),(4,2)]`, all `2^3*2^5=256` labeled selections | Direct global A-valued pairing/nullspace, product dual/hull, `F_4`-dimension additivity, orbit boundary, and transfer products agree for the repaired bridge. |
 
 For every example, cite the exact script and `.out` capture. State “finite computational validation,” not “proof.” Do not include a computational item whose parameters or expected output are incomplete.
 

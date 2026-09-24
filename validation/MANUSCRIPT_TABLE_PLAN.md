@@ -32,7 +32,7 @@
 - **Purpose:** document only fully specified finite validation cases.
 - **Location:** Section 10.
 - **Columns:** case, field/components, `n`, `k`, twist, orbit data, selection count, checks, script/capture.
-- **Cases:** F4 pilot, F8 long orbit, F16 extension component, compatible nontrivial twist, N2-A comparison, N2-B incompatible diagnostic.
+- **Cases:** F4 pilot, F8 long orbit, F16 extension component, compatible nontrivial twist, N2-A comparison, N2-B incompatible diagnostic, and the Phase-10C global product bridge.
 - **Source:** `MANUSCRIPT_DRAFT_SPECIFICATION.md` and the corresponding validator outputs.
 - **Guardrail:** label all rows “finite computational validation”; do not include N1.
 
@@ -50,3 +50,11 @@
 1. A compact orbit-polynomial table for `a=1,...,5` may be included in Section 6 because all entries are symbolic and verified by the binary-word derivation.
 2. A theorem-status table may be included in an appendix, but it must distinguish `PROVED WITH CONDITIONS` from computational evidence and literature transfer.
 3. No table may contain N1 values, guessed factorizations, unsupported histograms, quantum distances, equivalence counts, or journal outcomes.
+
+---
+
+# Phase-10C table-plan resolution
+
+**Date:** 2026-09-24
+
+The Phase-10A task explicitly required four manuscript tables: notation/assumptions, literature comparison, computational validation, and scope/exclusions. The Phase-10A draft follows that four-table requirement. The earlier Phase-9 dependency-map table design is retained as an architecture record rather than duplicated as a fifth data table: the dependency graph remains explicit in `THEOREM_DEPENDENCY_GRAPH.md`, and the repaired global bridge is stated as Lemmas 3.3–3.6 and Proposition 3.7 in `manuscript/main.tex`. No verified data or theorem dependency is removed by this resolution.

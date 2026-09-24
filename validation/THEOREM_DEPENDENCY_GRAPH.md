@@ -167,3 +167,51 @@ The following map records the statement purpose, hypotheses, conclusion, proof s
 - Literature comparison, figures, tables, and future work are non-proof material and are not graph prerequisites.
 
 A topological ordering is therefore `A,B,C,D,E,F,G,H,I,J,K,(L,M),N,O,P,Q,R,S`, together with the independent `CF` and `G` branches. No backward edge or circular dependency is authorized.
+
+---
+
+# Phase-10C global-product repair amendment
+
+**Date:** 2026-09-24
+**Base:** `92a7eb2ba6472b95fe9306fb76e762477c836c01`
+
+The Phase-10B audit identified that the component theorem chain did not explicitly connect the affine product code, global pairing, global dual, global hull, and global `F_q` dimensions to Theorem 8.1. The following acyclic bridge is now inserted before the component hull-support theorem is used globally:
+
+```text
+square-free affine decomposition (Proposition 3.1)
+        |
+        v
+component factor-selection classification (Lemma 3.2)
+        |
+        v
+Global CRT ambient module and code (Lemma 3.3)
+        |
+        v
+Global Frobenius and A-valued code-first pairing (Lemma 3.4)
+        |
+        v
+Global code-first dual decomposition (Lemma 3.5)
+        |
+        v
+Global hull decomposition (Lemma 3.6)
+        |
+        v
+Global F_q-dimension additivity (Proposition 3.7)
+        |
+        v
+component hull support (Theorem 5.1)
+        |
+        v
+weighted orbit boundary (Proposition 5.2)
+        |
+        v
+orbit polynomial and transfer trace
+        |
+        v
+Theorem 8.1 global labeled enumerator
+        |
+        v
+Section-9 corollaries
+```
+
+The convention-transformation and Gram-invariance branches remain separate. The new global lemmas do not alter the reciprocal, factor-orbit, orbit-polynomial, transfer-matrix, or variance formulas; they supply the missing product-code and dimension bridge only.
