@@ -1,6 +1,6 @@
 # Exact Enumeration of `k`-Galois Hull Dimensions of Constacyclic Codes over Square-Free Affine Algebras
 
-> **Blueprint status:** This is the corrected inverse-Frobenius blueprint. General statements are labeled as `THEOREM`, `LEMMA`, `PROPOSITION`, `PROOF TARGET`, or `FUTURE WORK`; finite runs are labeled `COMPUTATIONAL VALIDATION`; literature records carry an explicit verification category.
+> **Blueprint status:** This is the corrected inverse-Frobenius blueprint with a completed Phase-2 conditional proof audit. Theorems 1–19 carry the allowed Phase-2 statuses in the proof-status ledger; finite runs remain `COMPUTATIONAL VALIDATION`; literature records carry an explicit verification category.
 >
 > **Principal convention:**
 > \[
@@ -12,14 +12,14 @@
 > \]
 > The dual is defined by `\langle c,x\rangle_{s,k}=0` with the code in the first slot, so the principal reciprocal, root action, compatibility, dual generator, and incompatible twist use `\rho_{s,k}`.
 >
-> **Evidence categories:** `THEOREM`, `LEMMA`, and `PROPOSITION` identify claims to be proved in the manuscript; `PROOF TARGET` identifies a result whose proof is still required; `COMPUTATIONAL VALIDATION` identifies only a finite reproducible run; `FUTURE WORK` identifies material outside the main theorem; and `VERIFY BEFORE MANUSCRIPT FINALIZATION` identifies unresolved literature or example data.
+> **Evidence categories:** The Phase-2 theorem ledger uses only `PROVED`, `PROVED WITH CONDITIONS`, `PARTIALLY PROVED`, `PROOF GAP`, `FALSE / COUNTEREXAMPLE FOUND`, `COMPUTATIONALLY VERIFIED ONLY`, or `FUTURE WORK`. `COMPUTATIONAL VALIDATION` identifies only a finite reproducible run; `FUTURE WORK` identifies material outside the main theorem; and `VERIFY BEFORE MANUSCRIPT FINALIZATION` identifies unresolved literature or example data.
 >
 > **Scope:**
 > \[
 > A=\mathbb F_q[X_1,\ldots,X_\ell]/
 > \langle t_1(X_1),\ldots,t_\ell(X_\ell)\rangle
 > \]
-> with monic square-free `t_i`, `\gcd(n,p)=1`, and compatible component twists for the main enumerator. Repeated-root algebras and equivalence-class counts are not silently included.
+> with monic square-free positive-degree `t_i`, `\gcd(n,p)=1`, and compatible component twists for the main enumerator. Repeated-root algebras and equivalence-class counts are not silently included.
 >
 > **Positioning:** The proposed paper is an exact labeled-code enumerative study. It uses factor orbits and transfer matrices, not a Burnside/Pólya equivalence-class count, and makes no unsupported priority claim.
 >
@@ -35,7 +35,7 @@ We study the exact distribution of `k`-Galois hull dimensions of `lambda`-consta
 \rho_{s,k}(a)=a^{p^{e m_s-k}},
 \]
 
-and the dual defined by `\langle c,x\rangle_{s,k}=0`, we define the normalized inverse-Frobenius `k`-Galois reciprocal, its factor permutation, and the resulting hull-support statistic. Under the explicitly collected hypotheses of Section 3, the main proof target is the bivariate enumerator
+and the dual defined by `\langle c,x\rangle_{s,k}=0`, we define the normalized inverse-Frobenius `k`-Galois reciprocal, its factor permutation, and the resulting hull-support statistic. Under the explicitly collected hypotheses of Section 3, the main theorem is the bivariate enumerator
 
 \[
 \mathscr E(u,z)=\prod_s\prod_O\operatorname{tr}\bigl(T_{w_O}(u,z)^{a_O}\bigr),
@@ -484,7 +484,7 @@ The safe positioning sentence is: “The present work focuses on a proved, coeff
 
 ### 3.1 Affine algebra
 
-### PROPOSITION 3.1 — square-free affine decomposition
+### PROPOSITION 3.1 — square-free affine decomposition — PROVED WITH CONDITIONS
 
 Let
 
@@ -500,7 +500,7 @@ A=\mathbb F_q[X_1,\ldots,X_\ell]
  /\langle t_1(X_1),\ldots,t_\ell(X_\ell)\rangle,
 \]
 
-where each `t_i` is monic and square-free over `F_q`.
+where each `t_i` is monic, square-free, and of positive degree over `F_q`.
 
 Because the quotient is finite, commutative, and reduced, it decomposes as
 
@@ -687,13 +687,13 @@ In repeated-root cases, nilpotents and factor multiplicities appear. Ideals need
 
 ### 3.6 Collected hypotheses for the principal enumeration theorem
 
-No essential assumption is hidden in later sections. The principal theorem is a formal proof target under all of the following hypotheses:
+No essential assumption is hidden in later sections. The principal theorem is asserted under all of the following hypotheses; its Phase-2 derivation is recorded in `validation/PHASE2_PROOF_AUDIT.md`:
 
-(H1) `q=p^e` is a prime power and `0\le k<e`;
+(H1) `q=p^e` is a prime power with `e\ge1` and `0\le k<e`;
 
-(H2) `A=\mathbb F_q[X_1,\ldots,X_\ell]/\langle t_1(X_1),\ldots,t_\ell(X_\ell)\rangle`, with each `t_i` monic and square-free;
+(H2) `\ell\ge1` and `A=\mathbb F_q[X_1,\ldots,X_\ell]/\langle t_1(X_1),\ldots,t_\ell(X_\ell)\rangle`, with each `t_i` monic, square-free, and of positive degree;
 
-(H3) the square-free affine algebra decomposes as `A\cong\prod_{s=1}^N K_s`, where `K_s=\mathbb F_{q^{m_s}}`;
+(H3) the square-free affine algebra decomposes as `A\cong\prod_{s=1}^N K_s` with `N\ge1`, where `K_s=\mathbb F_{q^{m_s}}` and `m_s\ge1`;
 
 (H4) `n\ge1` and `\gcd(n,p)=1`;
 
@@ -874,7 +874,7 @@ M_s(x)=\prod_{f\in\mathcal F_s}f(x),
 
 All these factors are monic. Since `M_s` is square-free, the factor supports are unambiguous and the ideal generated by a divisor of `M_s` has `K_s`-dimension `n-\deg_{K_s}` of that divisor.
 
-### LEMMA 5.1 — inverse-Frobenius dual generator
+### LEMMA 5.1 — inverse-Frobenius dual generator — PROVED WITH CONDITIONS
 
 Under
 
@@ -930,7 +930,7 @@ By multiplicativity of the normalized reciprocal,
 \tag{5.3}
 \]
 
-### LEMMA 5.2 — intersection and lcm support
+### LEMMA 5.2 — intersection and lcm support — PROVED WITH CONDITIONS
 
 In the square-free quotient `K_s[x]/\langle M_s\rangle`,
 
@@ -966,7 +966,7 @@ Therefore the factors omitted from the lcm are
 
 where the second equality uses that `\tau_{s,k}` is a bijection of `\mathcal F_s`.
 
-### THEOREM 5.3 — component and global hull dimensions
+### THEOREM 5.3 — component and global hull dimensions — PROVED WITH CONDITIONS
 
 For every `J_s\subseteq\mathcal F_s`,
 
@@ -1142,9 +1142,9 @@ The matrix product `(T_w^a)_{r,r}` sums all length-`a` walks that start at state
 
 Without the trace, the edge from `epsilon_{a-1}` back to `epsilon_0` would be omitted, so open binary strings would be counted instead of cyclic selections.
 
-### PROOF TARGET — THEOREM 7.1: transfer-matrix joint enumerator and total count
+### THEOREM 7.1 — transfer-matrix joint enumerator and total count — PROVED WITH CONDITIONS
 
-The principal theorem is a formal proof target under (H1)–(H9), not an already established general theorem. Define
+Under (H1)–(H9), define
 
 \[
 \mathscr E(u,z)
@@ -1168,7 +1168,7 @@ The trace identity (7.4) must be proved first. It follows by expanding matrix pr
 
 Here `T_w` is exactly the matrix in (7.1), with rows and columns indexed by the binary selection state. The formula counts labeled factor-selection codes, not equivalence classes.
 
-#### PROPOSITION 7.2 — total labeled-code count
+#### PROPOSITION 7.2 — total labeled-code count — PROVED WITH CONDITIONS
 
 Under (H1)–(H9), the map from the tuple of subsets `(J_1,\ldots,J_N)` to the corresponding component/product ideal is a bijection. Hence
 
@@ -1252,7 +1252,7 @@ Directly listing all binary words gives:
 
 The coefficient sums are `2,4,8,16,32`, respectively. These cases are also checked by the transfer matrix and by direct enumeration in the validation methodology.
 
-### PROOF TARGET — THEOREM 8.1: exact hull-dimension distribution
+### THEOREM 8.1 — exact hull-dimension distribution — PROVED WITH CONDITIONS
 
 Under the square-free and compatible-twist hypotheses, define
 
@@ -1294,7 +1294,7 @@ Unless otherwise stated, a random `\lambda`-constacyclic code is selected unifor
 
 All expectations and variances below refer to this uniform code-selection model. The notation `\dim_q` means `\dim_{\mathbb F_q}`; component dimensions are written `\dim_{K_s}`.
 
-### 9.2 — PROPOSITION 9.1: LCD count as a corollary
+### 9.2 — PROPOSITION 9.1: LCD count as a corollary — PROVED WITH CONDITIONS
 
 All weights `w_O` are positive. Hence (6.3) gives
 
@@ -1395,7 +1395,7 @@ For non-neighboring edges, the involved bits are disjoint and the covariance is 
 \tag{9.5}
 \]
 
-### 9.4 — PROPOSITION 9.2: global moments
+### 9.4 — PROPOSITION 9.2: global moments — PROVED WITH CONDITIONS
 
 Under the square-free and compatible-twist hypotheses, different factor orbits use independent selection bits. Therefore:
 
@@ -1822,21 +1822,23 @@ DIAGNOSTIC ONLY: basic incompatible twist correctly left outside the theorem
 
 The extension-field N2-B diagnostic below is the required convention-resolution test.
 
-### 10.6 N1 status: do not invent an output
+### 10.6 N1 status: exact identification and resolution
 
-N1 is retained as a required exhaustive test with
+N1 is retained as an unresolved validation-specification item with only the following verified record:
 
 \[
 q=16,
 \qquad n=15,
-\qquad 2^{15}=32,768\text{ factor selections}.
+\qquad 2^{15}=32,768\text{ proposed factor selections}.
 \]
 
-Its complete `k`, twist, factorization, orbit data, histogram, and direct-dual output are not available in the current verified record. The manuscript must mark this item exactly:
+A repository-wide search found no N1 implementation or output, and the current record does not specify `k`, the twist `\lambda`, the component-field interpretation, the factorization, the orbit permutation, or the expected histogram. The number `2^{15}` is not enough to infer those missing choices. N1 therefore is not executed and must not be given a fabricated interpretation.
+
+The exact status is:
 
 > **VERIFY BEFORE MANUSCRIPT FINALIZATION**
 
-No numerical N1 conclusion, histogram, or PASS claim is made here.
+Before implementation, record all missing parameters, the factor labels and orbit data, the direct-inner-product convention, the expected total, and the complete output format. No numerical N1 conclusion, histogram, or PASS claim is made here.
 
 ### 10.7 N2-A: compatible extension-field convention comparison
 
@@ -2011,6 +2013,7 @@ This is a finite **COMPUTATIONAL VALIDATION** and **DIAGNOSTIC** outside the com
 | N1 | `q=16`, `n=15`, 32,768 selections | `2^{15}` | **VERIFY BEFORE MANUSCRIPT FINALIZATION** |
 | N2-A | `K=F_{16}=F_{4^2}`, `k=1`; sigma field exponent `2`, rho iteration `3` and field exponent `8`, `n=5`, `\lambda=1` | all `32` selections and direct/principal/alternative comparison | **COMPUTATIONAL VALIDATION**: PASS; direct/principal 32/32, alternative 8/32 |
 | N2-B | `K=F_{16}=F_{4^2}`, `k=1`; sigma field exponent `2`, rho iteration `3` and field exponent `8`, `n=3`, `\lambda=\alpha^3`; incompatible | all `8` selections; both reciprocal candidates; six proper nonzero original-twist checks; no transfer enumeration | **COMPUTATIONAL VALIDATION**: PASS; principal 8/8, alternative 2/8; **DIAGNOSTIC** outside theorem |
+| Phase-2 combinatorial search | independent binary-word checks, lengths `1\ldots12`; transfer weights `1,2,3` for lengths `1\ldots8` | all words in stated ranges | **COMPUTATIONALLY VERIFIED ONLY**: no counterexample found; not a general proof |
 
 Computational validation is evidence for the listed finite instances only. It never substitutes for theorem-level proofs, and the incompatible rows do not enlarge the compatible same-factor-set theorem.
 
@@ -2025,7 +2028,17 @@ The current audited branch stores the complete clean-environment captures for th
 - `validation/validate_n2_extension_convention.out`;
 - `validation/diagnose_n2_incompatible_twist.out`.
 
-`validation/VALIDATION_REPORT.md` records the command, UTC execution time, Python version, exit code, complete stdout/stderr, finite mathematical purpose, and limitation of each run. These files are reproducibility evidence for the listed computational instances only. They do not prove the general reciprocal, hull-support, orbit-boundary, transfer-matrix, moment, LCD, or quantum results.
+Phase-2 rerun captures and the independent bounded search are also stored:
+
+- `validation/phase2_validate_pilot.out`;
+- `validation/phase2_validate_long_orbit_examples.out`;
+- `validation/phase2_validate_nontrivial_constacyclic.out`;
+- `validation/phase2_diagnose_incompatible_twist.out`;
+- `validation/phase2_validate_n2_extension_convention.out`;
+- `validation/phase2_diagnose_n2_incompatible_twist.out`;
+- `validation/phase2_counterexample_search.py` and `validation/phase2_counterexample_search.out`.
+
+`validation/VALIDATION_REPORT.md` records the command, UTC execution time, Python version, exit code, complete stdout/stderr, finite mathematical purpose, and limitation of each run. Phase 2 additionally stores rerun captures named `validation/phase2_*.out` and the independent `validation/phase2_counterexample_search.out`; the original Phase-1 captures remain unchanged. These files are reproducibility evidence for the listed computational instances only. They do not prove the general reciprocal, hull-support, orbit-boundary, transfer-matrix, moment, LCD, or quantum results.
 
 ### 10.11 Manuscript source availability
 
@@ -2384,7 +2397,7 @@ No later formula should be used before the definition and lemma on which it depe
 
 ### 17.1 Proof-completeness ledger
 
-Every item below requires a manuscript proof or a precise standard citation. A finite validator can check an instance but cannot discharge any item.
+Every item below has a conditional first-principles proof in `validation/PHASE2_PROOF_AUDIT.md` and must be reproduced or precisely cited in the manuscript. A finite validator can check an instance but cannot discharge any item.
 
 | Result | Required proof content | What computation may and may not do |
 |---|---|---|
@@ -2402,6 +2415,35 @@ Every item below requires a manuscript proof or a precise standard citation. A f
 The manuscript must state which results are imported, which are reproved under the principal convention, and which are computational validations. No table or code output may be cited as a proof of a general theorem.
 
 ---
+
+
+## Phase 2 theorem-status ledger
+
+The following ledger is the blueprint-level status update for the 19 requested claims. Every result is conditional on (H1)–(H9), with the explicit positive-degree affine-relation condition added in Phase 2. Full derivations are in `validation/PHASE2_PROOF_AUDIT.md`; finite validators remain evidence only.
+
+| Theorem | Claim | Status |
+|---:|---|---|
+| 1 | Affine decomposition into finite-field components | **PROVED WITH CONDITIONS** |
+| 2 | Component constacyclic decomposition and factor-selection classification | **PROVED WITH CONDITIONS** |
+| 3 | Second-slot `k`-Galois inner product and code-first dual translation | **PROVED WITH CONDITIONS** |
+| 4 | Inverse-Frobenius normalized reciprocal | **PROVED WITH CONDITIONS** |
+| 5 | Root action | **PROVED WITH CONDITIONS** |
+| 6 | Compatible factor permutation | **PROVED WITH CONDITIONS** |
+| 7 | Dual generator | **PROVED WITH CONDITIONS** |
+| 8 | Compatibility and same-twist criterion | **PROVED WITH CONDITIONS** |
+| 9 | Hull support | **PROVED WITH CONDITIONS** |
+| 10 | Cyclic `1\to0` boundary statistic | **PROVED WITH CONDITIONS** |
+| 11 | Orbit polynomial | **PROVED WITH CONDITIONS** |
+| 12 | Transfer matrix | **PROVED WITH CONDITIONS** |
+| 13 | Closed-walk trace identity | **PROVED WITH CONDITIONS** |
+| 14 | Global joint enumerator | **PROVED WITH CONDITIONS** |
+| 15 | Total labeled-code count | **PROVED WITH CONDITIONS** |
+| 16 | Exact hull-dimension distribution | **PROVED WITH CONDITIONS** |
+| 17 | LCD count | **PROVED WITH CONDITIONS** |
+| 18 | Mean hull dimension | **PROVED WITH CONDITIONS** |
+| 19 | Hull-dimension variance | **PROVED WITH CONDITIONS** |
+
+These statuses do not upgrade N1, literature theorem comparisons, incompatible-twist cases, Burnside/Pólya equivalence counts, or quantum applications. They also do not change the frozen principal convention or convert labeled-code counts into equivalence-class counts.
 
 ## 18. Risk register and mathematically safe fallbacks
 
@@ -2528,13 +2570,13 @@ The supplied local PDF remains a source input, but its text is not locally extra
 ## 21. Immediate next actions
 
 1. Keep `code/validate_pilot.py`, `code/validate_long_orbit_examples.py`, `code/validate_nontrivial_constacyclic.py`, `code/diagnose_incompatible_twist.py`, `code/validate_n2_extension_convention.py`, and `code/diagnose_n2_incompatible_twist.py` under version control together with the captured `validation/*.out` files and `validation/VALIDATION_REPORT.md`.
-2. Prove and implement the `K_s` version with the declared code-first dual slot: `p^k` remains in the inner product and `rho_{s,k}` is principal for the reciprocal and dual generator.
+2. **Completed in Phase 2:** audit the `K_s` version with the declared code-first dual slot; `p^k` remains in the inner product and `rho_{s,k}` is principal for the reciprocal and dual generator.
 3. Retain Example A as the genuine long-orbit test; do not infer long-cycle behavior from the `F_4`, Hermitian, 2-cycle pilot.
-4. Prove Lemma 5.1 and Theorem 5.3 in full before writing the transfer-matrix section.
-5. Derive the `a=1,...,5` orbit polynomials in the paper or an appendix.
+4. **Completed in Phase 2:** Lemma 5.1 and Theorem 5.3 are proved in the Phase-2 audit before the transfer-matrix conclusions are used.
+5. **Completed in Phase 2:** derive the orbit polynomial and record the independent bounded search; reproduce the derivation in the manuscript or appendix.
 6. Keep Burnside and quantum applications explicitly optional until their hypotheses are checked.
 7. Complete the publisher-level literature audit, verify all references/DOIs, and resolve every `VERIFY BEFORE MANUSCRIPT FINALIZATION` marker before submission.
-8. Report N2-A's direct/principal/alternative comparison and N2-B's incompatible principal/alternative twist checks; keep N1 marked `VERIFY BEFORE MANUSCRIPT FINALIZATION` until its parameters and output exist.
+8. **Completed in Phase 2:** report N2-A's direct/principal/alternative comparison and N2-B's incompatible principal/alternative twist checks; keep N1 marked `VERIFY BEFORE MANUSCRIPT FINALIZATION` until its parameters and output exist.
 9. Run a final global search for any stale `p^k` principal reciprocal, root action, compatibility, dual-generator, or incompatible-twist formula.
 
 ## 22. Global proof and notation quality-control checklist
@@ -2571,7 +2613,7 @@ The paper is mathematically ready only when:
 - the pilot and additional small cases pass exact brute-force checks;
 - every optional claim is either proved with hypotheses or clearly marked as future work.
 
-Current status must be reported conservatively: the general formulas are mathematical proof targets/results to be written rigorously; the scripts provide exhaustive computational validation for the listed finite instances; the final literature audit remains submission-dependent; Burnside/equivalence enumeration and quantum constructions remain optional unless their hypotheses are fully established.
+Current Phase-2 status is reported conservatively: Theorems 1–19 have conditional first-principles proofs in `validation/PHASE2_PROOF_AUDIT.md`; the scripts provide exhaustive computational validation only for their listed finite instances; N1 remains an underspecified validation obligation; the final literature/source audit remains submission-dependent; Burnside/equivalence enumeration and quantum constructions remain optional unless their hypotheses are fully established.
 
 ## CHANGELOG
 
@@ -2582,6 +2624,8 @@ Current status must be reported conservatively: the general formulas are mathema
 - **Validation corrections:** Rebuilt the validators so A is computed from the defining inner product, B is the finalized principal reciprocal, and C is an explicit alternative comparator; verified N2-A at 32/32 principal and 8/32 alternative, added checked N2-B at 8/8 principal and 2/8 alternative with both twist checks, labeled the old `F_4`, `k=0` case `DIAGNOSTIC ONLY`, and retained N1 as unverified.
 - **Frobenius audit corrections:** Made every Frobenius API argument an explicit iteration number, separated sigma/rho field exponents in code and output, renamed the direct APIs around `k`, and reran all six validators with `PYTHONDONTWRITEBYTECODE=1` before recording PASS statuses.
 - **Reproducibility corrections:** Added complete per-validator stdout/stderr captures and `validation/VALIDATION_REPORT.md`, explicitly recorded the finite scope and limitations of each run, and documented that no manuscript `.tex` or BibTeX `.bib` source exists in the audited branch.
+- **Phase-2 proof audit:** Added `validation/PHASE2_PROOF_AUDIT.md`, supplied conditional first-principles proofs for Theorems 1–19, made positive-degree affine relations explicit, and recorded the independent hull-support orientation derivation.
+- **Phase-2 status and N1 corrections:** Added the 19-item theorem-status ledger, replaced the unresolved N1 placeholder with its exact known record and missing specification, and added an independent bounded counterexample-search program and Phase-2 regression-capture references.
 
 ## Final Consistency Status
 

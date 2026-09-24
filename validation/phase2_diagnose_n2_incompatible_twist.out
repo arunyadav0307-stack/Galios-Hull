@@ -1,0 +1,32 @@
+COMMAND: env -i PATH="$PATH" HOME="$HOME" LANG=C.UTF-8 LC_ALL=C PYTHONDONTWRITEBYTECODE=1 PYTHONPATH="" python code/diagnose_n2_incompatible_twist.py
+UTC_DATE: 2026-09-24T09:02:18+00:00
+PYTHON_VERSION: Python 3.11.2
+
+--- STDOUT ---
+N2-B incompatible extension-field convention diagnostic:
+  p=2, e=2, m_s=2, q=4, K=F_16=F_(4^2), k=1, n=3
+  sigma Frobenius power k: 1
+  sigma field exponent p^k: 2
+  rho Frobenius power em_s-k: 3
+  rho field exponent p^(em_s-k): 8
+  sigma and rho differ as automorphisms: True
+  lambda=alpha^3 (order 5): 8
+  lambda^(1+principal field exponent): 15 != 1
+  lambda^(1+alternative field exponent p^k): 10 != 1
+  defining-inner-product direct dual checks: 8 of 8
+  principal reciprocal direct agreements: 8 of 8
+  alternative p^k reciprocal direct agreements: 2 of 8
+  example alternative discrepancy mask: 1
+  predicted principal dual twist lambda^(-principal field exponent): 12
+  predicted alternative dual twist lambda^(-p^k): 10
+  direct dual constacyclic under principal predicted twist: 8 of 8
+  direct dual constacyclic under alternative predicted twist: 2 of 8
+  proper nonzero direct duals failing original lambda twist: 6 of 6
+  example original-twist failure mask: 1
+No transfer-matrix enumeration was attempted because the original and dual constacyclic twists are incompatible.
+PASS: N2-B independently selects the finalized principal convention
+
+--- STDERR ---
+
+--- EXIT CODE ---
+0
