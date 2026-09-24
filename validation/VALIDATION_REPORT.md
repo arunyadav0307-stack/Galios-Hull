@@ -905,3 +905,71 @@ The outstanding issues are publication-critical literature theorem transfer/sour
 `Galios-Hull-main-files.zip` is rebuilt after the Phase-6 files and captures are finalized. The clean-extraction/package regression, manifest comparison, source-PDF hash, Git-metadata exclusion, and extracted validation-suite run are captured in `validation/phase3_package_verification.out`. The package contains the Phase-6 audit, transfer matrix, standalone validator/output, updated blueprint/report, all historical audits/captures, and the source PDF. No fake `.tex` or `.bib` file is added.
 
 **Phase-6 status: `NOT READY — MATERIAL GAPS REMAIN`.**
+
+---
+
+# Phase 7 final literature and manuscript preparation validation
+
+**Date:** 2026-09-24
+**Branch:** `arena/01a0c9d2-galios-hull`
+**Base:** `3c064a06a7fa32a402b3dd965bc239967c912c62`
+
+## Scope and verdict
+
+Phase 7 adds the final source/reference audit, final literature claim ledger, final transfer matrix, conservative novelty boundary, manuscript draft specification, and N1 exclusion policy. The Phase-1–6 evidence and frozen mathematics are preserved. No `.tex` or `.bib` file is fabricated.
+
+> **Phase-7 manuscript-readiness verdict: `NOT READY — MATERIAL GAPS REMAIN`.**
+
+The publisher identity and broad scope of the primary article are verified, but complete final/corrected theorem transfer remains inaccessible and the exact external novelty boundary is not established. N1 remains `UNSPECIFIED — CANNOT VALIDATE` and is excluded from manuscript evidence.
+
+## Final source checks
+
+- Primary publisher record: title, authors, venue, volume/issue, date, article number, DOI, abstract, introduction, and section snippets checked at the ScienceDirect record listed in `validation/FINAL_REFERENCE_AUDIT.md`.
+- Readable source: arXiv:2412.08512 HTML checked for the candidate-first pairing, displayed rho formulas, affine theorem family, and conditional quantum section.
+- Local PDF: `validation/source_pdf_theorem_check.py` and `.out`; SHA-256 `0db90bfbeda69ad1af231b81d92f24be3589ed15ac2e0ade6605ba7ad0ddc039`.
+- Related publisher records: finite-field article/correction, cyclic/negacyclic article, Hermitian average article, general Galois-hull article, 2025 average article, and non-chain Hermitian article checked as recorded in `validation/FINAL_REFERENCE_AUDIT.md`.
+
+The source's candidate-first definition is not silently identified with the code-first definition. The final ledger records the source formula as `CONVENTION MISMATCH` for literal non-involutory candidate-first transfer and records the transformed structural use separately.
+
+## New Phase-7 artifacts
+
+- `validation/PHASE7_FINAL_LITERATURE_AND_MANUSCRIPT_AUDIT.md`
+- `validation/FINAL_REFERENCE_AUDIT.md`
+- `validation/NOVELTY_BOUNDARY.md`
+- `validation/MANUSCRIPT_DRAFT_SPECIFICATION.md`
+- Phase-7 final sections of `validation/LITERATURE_CLAIM_LEDGER.md` and `validation/LITERATURE_TRANSFER_MATRIX.md`
+- Phase-7 manuscript-facing closure appended to `new-paper-blueprint.md`
+
+The manuscript specification contains a conservative abstract, introduction/literature-review policy, fixed preliminaries, the 19-result theorem architecture, separate convention/invariance propositions, an acyclic dependency graph, fully specified examples, limitations, and conclusion requirements. It contains no N1 evidence.
+
+## Root regression
+
+The complete clean-environment command was rerun with `env -i`, `PYTHONDONTWRITEBYTECODE=1`, and the standard-library-only suite:
+
+```text
+env -i PATH="$PATH" HOME="$HOME" LANG=C.UTF-8 LC_ALL=C PYTHONDONTWRITEBYTECODE=1 PYTHONPATH="" bash -c 'python code/validate_pilot.py; python code/validate_long_orbit_examples.py; python code/validate_nontrivial_constacyclic.py; python code/diagnose_incompatible_twist.py; python code/validate_n2_extension_convention.py; python code/diagnose_n2_incompatible_twist.py; python validation/phase2_counterexample_search.py; python validation/phase3_independent_enumerator_check.py; python validation/phase4_convention_equivalence.py; python validation/phase5_convention_counterexamples.py; python validation/phase6_end_to_end_check.py; python validation/source_pdf_theorem_check.py; python validation/search_n1_specification.py'
+```
+
+**Exit code:** `0`
+**Result:** all listed finite validators and the Phase-6 independent end-to-end check passed. The final line of the independent capture remains `PHASE6 END-TO-END CHECK: PASS`.
+
+## Phase-7 status summary
+
+| Item | Status |
+|---|---|
+| Frozen convention and formulas | `RESOLVED` |
+| Candidate-first/code-first separation | `RESOLVED` |
+| Publisher metadata | `RESOLVED WITH CONDITIONS` |
+| Final/corrected central theorem transfer | `UNRESOLVED` |
+| Exact novelty boundary | `UNRESOLVED` |
+| N1 manuscript evidence | `EXCLUDED` |
+| Fully specified computations | `RESOLVED WITH CONDITIONS` |
+| Manuscript specification | `RESOLVED WITH CONDITIONS` |
+| Repeated-root/Burnside/unconditional quantum extensions | `FUTURE WORK` |
+| Final package verification | `RESOLVED WITH CONDITIONS` |
+
+The status values in the table are restricted to the Phase-7 vocabulary required by the audit.
+
+## Final Phase-7 package verification
+
+The final archive was rebuilt after all Phase-7 files and the package capture were present. It passed `unzip -t`, exact manifest/content comparison, Git-metadata exclusion, required-file checks, manuscript-specification N1 exclusion, and a clean extracted validation-suite run with zero stderr lines. The extracted suite ended with the preserved `PHASE6 END-TO-END CHECK: PASS` and the internal artifact status `N1 UNSPECIFIED — CANNOT VALIDATE`. The final archive contains 53 manifest files; its SHA-256 is reported with the final deliverable.

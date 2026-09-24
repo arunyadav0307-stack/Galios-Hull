@@ -22,3 +22,32 @@ Transfer statuses use only: `DIRECT`, `DIRECT AFTER CONVENTION TRANSFORMATION`, 
 ## Closure conclusion
 
 The central enumerator is not presented as an imported literature theorem. The accessible source is used for subject context and convention reconciliation. Its displayed candidate-first dual formulas are not transferred as printed. The source-PDF limitation remains exactly recorded in the Phase-6 audit and claim ledger.
+
+---
+
+# Literature Transfer Matrix — Phase 7 final manuscript classification
+
+The Phase-6 matrix above is preserved. This table is the final Phase-7 transfer record for manuscript preparation and supersedes earlier rows when their status is repeated.
+
+Transfer statuses use only: `DIRECT`, `DIRECT AFTER CONVENTION TRANSFORMATION`, `PARTIAL`, `NOT TRANSFERABLE`, and `UNVERIFIED`.
+
+| ID | Source result or claim | Present statement | Required conditions/transformation | Final transfer status |
+|---|---|---|---|---|
+| T7-01 | Primary square-free affine decomposition and component/idempotent setting (R1/R2). | Fixed labeled product `A ~= prod_s K_s` and componentwise factor-selection model. | Identify the source's components with the fixed labeled components; retain the present simple-root and dimension hypotheses. | `PARTIAL` |
+| T7-02 | Source candidate-first pairing and dual definition (R2). | Frozen code-first pairing `sum c_i sigma(x_i)` and code-first dual. | Apply `D_candidate(C)=sigma_k^2(D_code-first(C))`; do not identify subspaces. | `DIRECT AFTER CONVENTION TRANSFORMATION` |
+| T7-03 | Source displayed rho-based reciprocal and twist attached to its candidate-first display. | Code-first rho reciprocal and twist `lambda^{-p^{d_s-k}}`. | Convert the slot convention and replace the source base-field exponent by `d_s=e m_s` on extension components. | `NOT TRANSFERABLE` |
+| T7-04 | Source affine component dual/hull generator structure (R2). | Component code-first dual generator and lcm hull. | Reprove using the transformed dual and present normalized reciprocal; match simple-root hypotheses explicitly. | `PARTIAL` |
+| T7-05 | Source affine specialized hull-dimension/LCD statements (R2). | Present weighted support and all-selection product. | Source assumptions, factor order, and displayed convention do not give a complete hypothesis match. | `UNVERIFIED` |
+| T7-06 | Finite-field constacyclic formula and restricted counts (R3/R4). | Component-level background for hull formulas and fixed-dimension counts. | Read the corrected full text before importing a theorem or theorem number; no product transfer is assumed. | `PARTIAL` |
+| T7-07 | Cyclic/negacyclic finite-field hull and fixed-dimension enumeration (R5). | Classical factor and lcm ingredients in the simple-root labeled setting. | Restrict the citation to its cyclic/negacyclic finite-field hypotheses; do not infer affine extension or Galois product scope. | `PARTIAL` |
+| T7-08 | Hermitian constacyclic average dimension (R6). | Average-dimension context only. | Hermitian square-order setting does not match the general code-first weighted joint enumerator. | `PARTIAL` |
+| T7-09 | General Galois-hull generator-matrix/invariance methods (R7). | Separate Gram-matrix proposition and LCD/hull-dimension comparison. | Use only the finite-field linear algebra actually checked; no constacyclic enumerator is imported. | `PARTIAL` |
+| T7-10 | Average Galois hull dimensions over finite fields and `R_{m,q}` (R8). | Motivation and comparison for mean values. | Average formulas are not the present exact all-code bivariate product. | `PARTIAL` |
+| T7-11 | Hermitian hulls and quantum applications over a specific non-chain ring (R9). | No central quantum theorem; optional conditional context only. | Verify a separate Gray-map/construction/distance theorem before any application. | `NOT TRANSFERABLE` |
+| T7-12 | Any external theorem exactly equal to `prod_s prod_O tr(T_{w_O}^{a_O})`. | Present weighted bivariate labeled enumerator. | No exact source theorem was verified; the present proof and validators stand independently. | `UNVERIFIED` |
+| T7-13 | Any external equivalence-class/Burnside/Pólya enumeration. | No quotient count in the main theorem. | Requires a separately defined group action and stabilizer analysis. | `NOT TRANSFERABLE` |
+| T7-14 | Any repeated-root result. | No repeated-root claim. | Main theorem assumes `gcd(n,p)=1` and simple-root factors. | `NOT TRANSFERABLE` |
+
+## Phase-7 transfer conclusion
+
+The only direct literature-to-manuscript transfer is the explicitly transformed comparison of the two dual-slot conventions. Structural and background results transfer only partially. The weighted bivariate enumerator, exact moments, and labeled-code product are not replaced by an external theorem; their status is `UNVERIFIED` as an external literature match and conditional/proved independently in the internal theorem audits.
