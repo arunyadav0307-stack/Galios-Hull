@@ -2643,7 +2643,7 @@ Current Phase-2 status is reported conservatively: Theorems 1–19 have conditio
 
 ## Phase 3 adversarial audit status
 
-`validation/PHASE3_ADVERSARIAL_AUDIT.md` records the hostile manuscript-level review. The conditional mathematics survived the independent hull-support, dimension, duplicate-code, edge-case, and transfer checks, but the overall status remains **VERIFY — MATERIAL AUDIT GAPS REMAIN** because N1 is not reconstructable, exact literature/source verification remains open, and the actual checkout did not contain the historical Phase-2 commit object named in the handoff.
+`validation/PHASE3_ADVERSARIAL_AUDIT.md` records the hostile manuscript-level review. The conditional mathematics survived the independent hull-support, dimension, duplicate-code, edge-case, and transfer checks, but the overall status remains **VERIFY — MATERIAL AUDIT GAPS REMAIN** because N1 is not reconstructable and exact literature/source verification remains open. The initial shallow-checkout provenance discrepancy was resolved by fetching the remote Phase-2 history and merging it into final commit `4ec522b`.
 
 The independent Phase-3 checker is `validation/phase3_independent_enumerator_check.py`, with its complete capture in `validation/phase3_independent_enumerator_check.out`. It is finite evidence only and does not replace the proofs.
 

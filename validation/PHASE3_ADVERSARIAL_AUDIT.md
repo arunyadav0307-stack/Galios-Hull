@@ -10,15 +10,15 @@ No general result is accepted merely because a prior validator passed or because
 
 ## 2. Repository State
 
-The Phase-3 prompt identifies `5e4ea83 — Add rigorous Phase-2 proof audit` as the current Phase-2 commit. The actual checkout at audit start was different:
+The Phase-3 prompt identifies `5e4ea83 — Add rigorous Phase-2 proof audit` as the current Phase-2 commit. The checkout at audit start was different:
 
 - branch: `arena/01a0c9d2-galios-hull`;
 - actual `HEAD`: `5f064ca — Delete Corrections_Request_for_Arena_Galois_Hull_Blueprint.docx`;
-- the object IDs `5e4ea83` and `7e4fbbb` were not present in the local Git object database;
+- the object IDs `5e4ea83` and `7e4fbbb` were not present in the local Git object database at that time;
 - the Phase-1/Phase-2 research files were present as untracked working-tree files rather than as the claimed Phase-2 commit;
 - the only tracked file at audit start was the source PDF.
 
-This is a reproducibility and provenance problem, not evidence that the mathematics is false. The existing Phase-2 files were not deleted or silently rewritten. The Phase-3 commit will track the relevant current artifacts and will report the actual parent state; it will not fabricate the missing historical commit.
+This was a reproducibility and provenance discrepancy, not evidence that the mathematics was false. The remote branch was fetched before publication; it revealed the claimed Phase-2 history, including `5e4ea83` and `7e4fbbb`. The Phase-3 commit `96752c7` was then merged with that history in `4ec522b`, and the fixed branch was pushed successfully. The final repository therefore preserves the historical Phase-2 commit and the Phase-3 artifacts without fabricating history.
 
 The available materials inspected were:
 
@@ -858,9 +858,9 @@ Before a manuscript is submitted, every numerical table should be generated from
 
 ## 37. Critical Problems Found
 
-### HIGH — repository provenance mismatch
+### HIGH — initial repository provenance mismatch, resolved
 
-The prompt's Phase-2 commit `5e4ea83` is not present in the actual checkout; Phase-2 artifacts were untracked. This prevents an exact historical commit verification. Correction: track all relevant Phase-2 and Phase-3 artifacts in the Phase-3 commit and report the actual parent hash without fabricating history.
+At audit start, the prompt's Phase-2 commit `5e4ea83` was not present in the shallow local checkout and Phase-2 artifacts were untracked. Fetching the fixed remote branch revealed the claimed history; the final merge commit `4ec522b` has `5e4ea83` as its remote-history parent and `96752c7` as the Phase-3 artifact parent. The discrepancy is preserved in this record and is resolved for the pushed branch.
 
 ### HIGH — source convention mismatch requires explicit warning
 
@@ -899,7 +899,7 @@ No mathematical convention was changed.
 
 - N1 remains unvalidated until its complete specification is supplied.
 - Exact theorem-level comparison with the final published source and all literature records remains open.
-- The current checkout's missing historical Phase-2 Git objects prevent exact verification of the claimed Phase-2 commit lineage.
+- The initial shallow checkout lacked the historical Phase-2 objects; the final fetched-and-merged branch now preserves and verifies the claimed Phase-2 lineage.
 - Repeated-root affine/constacyclic cases remain outside the theorem.
 - Incompatible twists need a separate two-modulus theory.
 - Labeled enumeration is not inequivalent-code enumeration.
@@ -922,9 +922,9 @@ No mathematical convention was changed.
 | Independent computational cross-check | **PASS WITH CONDITIONS** | New checker exit 0; complete output captured | Treat as finite evidence only |
 | Quantum applications | **FUTURE WORK** | Blueprint's own conditional limitation | Do not claim parameters or distance |
 | Burnside/Pólya equivalence counting | **FUTURE WORK** | No group action/fixed-code proof | Keep outside the main theorem |
-| Repository provenance and package lineage | **VERIFY** | Claimed Phase-2 commit absent from actual checkout | Preserve/report actual Git history |
-| Manuscript-level readiness | **VERIFY** | N1, literature, source, and provenance gaps remain | Complete those audits before submission |
+| Repository provenance and package lineage | **PASS WITH CONDITIONS** | Remote Phase-2 history fetched and merged; final branch is `4ec522b` | Preserve the initial discrepancy record and merged history |
+| Manuscript-level readiness | **VERIFY** | N1 and literature/source gaps remain; repository provenance is resolved | Complete those audits before submission |
 
 **Final Phase-3 verdict: `VERIFY — MATERIAL AUDIT GAPS REMAIN`.**
 
-The conditional mathematical chain survives the adversarial audit, and no critical mathematical counterexample was found. The verdict is nevertheless `VERIFY`, not `PASS WITH CONDITIONS`, because N1 is not reconstructable, the source convention requires explicit reconciliation, exact literature verification remains incomplete, and the actual repository lacks the claimed Phase-2 commit object.
+The conditional mathematical chain survives the adversarial audit, and no critical mathematical counterexample was found. The verdict remains `VERIFY`, not `PASS WITH CONDITIONS`, because N1 is not reconstructable, the source convention requires explicit reconciliation, and exact literature verification remains incomplete. The initial repository discrepancy was resolved by fetching and merging the claimed Phase-2 history.

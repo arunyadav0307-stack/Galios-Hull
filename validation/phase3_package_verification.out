@@ -1,18 +1,18 @@
 Phase-3 package rebuild and verification record
-UTC timestamp: 2026-09-24T09:46:07+00:00
+UTC timestamp: 2026-09-24T09:48:20+00:00
 
 Archive build:
   staging tree: /tmp/galios-hull-package/Galios-Hull-main-files
   command: zip -X -q -r Galios-Hull-main-files.zip Galios-Hull-main-files
   archive: Galios-Hull-main-files.zip
-  archive sha256: 89817db7292cc301573d48c8270ca823c47c8d1981787a3657604961bd97a553
+  archive sha256: 0e372629e2c839009dc1f58813b0780706e5fb080ca5ce6f9dcefe9eb1bced74
   zip entry test: No errors detected in compressed data of Galios-Hull-main-files.zip.
   archive listing: 38 entries, 32 regular files
 
 Clean extraction comparison:
   command: unzip -q Galios-Hull-main-files.zip -d /tmp/galios-hull-extracted-final
   clean extraction comparison: PASS (32 files, byte-identical)
-  staged-tree-sha256: 0a6404d717fc27653e7c8f79dc4027e6941ea9455096df5f05e8583556c2f513
+  staged-tree-sha256: c34297bd4dc81123051852e3cbed7e43ece29caab3d55e92651b1195688d096a
 
 Extracted validation suite:
   command: env -i PATH="$PATH" HOME="$HOME" LANG=C.UTF-8 LC_ALL=C PYTHONDONTWRITEBYTECODE=1 PYTHONPATH="" bash -c 'cd /tmp/galios-hull-extracted-final/Galios-Hull-main-files && bash run_all_validations.sh'

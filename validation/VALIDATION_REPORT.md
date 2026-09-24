@@ -536,7 +536,7 @@ The required status labels are used conservatively:
 | Novelty boundary | **VERIFY** |
 | Quantum applications | **FUTURE WORK** |
 | Burnside/Pólya equivalence enumeration | **FUTURE WORK** |
-| Repository Phase-2 commit provenance | **VERIFY** |
+| Repository Phase-2 commit provenance | **PASS WITH CONDITIONS** |
 
 The exact overall Phase-3 verdict is:
 
