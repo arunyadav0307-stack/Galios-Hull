@@ -68,7 +68,7 @@ Let $C$ be a linear code and let $C^\perp$ denote a dual code with respect to a 
 
 Exact enumeration questions are already present in several narrower settings. Finite-field cyclic and negacyclic hulls, including fixed-dimension counts, have been treated through reciprocal factors and related polynomial descriptions \cite{sangwisut2015}. A finite-field constacyclic record reports Galois-hull formulas and restricted prescribed-dimension counts, together with a correction record; the complete corrected theorem text is not imported here \cite{debnathConstacyclic2023,debnathCorrection2023}. Related exact counts are available for cyclic serial codes over a finite chain ring \cite{talbi2021}, cyclic codes over $\mathbb Z_4$ \cite{jitmanZ4,pathakZ4}, double cyclic codes \cite{gao2023}, and double or four circulant codes \cite{aliabadi2026}. Average-dimension and small-dimension Galois-hull records provide additional neighboring context \cite{debnathAverage2025,debnathSmall2026}.
 
-The closest structural record for the present setting studies Galois hulls of constacyclic codes over an affine algebra and uses finite-field component decompositions \cite{debnathAffinePreprint,debnathAffine2026}. Its accessible theorem-bearing version and its final publisher record are kept separate in the source audit. In particular, the accessible source convention places the candidate in the opposite slot from the convention used below. We therefore state and prove the convention transformation rather than silently identifying the two dual codes. A restricted direct-product/non-chain record also supplies adjacent componentwise hull formulas, but it does not replace the labeled product proved here \cite{zhang2026}.
+The closest structural record for the present setting studies Galois hulls of constacyclic codes over an affine algebra and uses finite-field component decompositions \cite{debnathAffinePreprint,debnathAffine2026}. Its accessible theorem-bearing version and its final publisher record are kept separate in the source audit. In particular, the accessible source convention places the candidate in the opposite slot from the convention used below. We therefore state and prove the convention transformation rather than silently identifying the two dual codes. A restricted direct-product/non-chain record also supplies adjacent componentwise hull formulas, but it does not replace the labeled product proved here \cite{zhang2026}. Table~\ref{tab:literature} summarizes this scoped comparison.
 
 \begin{table}[ht]
 \centering
@@ -92,7 +92,9 @@ This paper addresses the following conditional question. Suppose that a fixed sq
 
 Our contribution is deliberately stated without a priority claim. Under explicit square-free, simple-root, compatible-twist, fixed-component, and labeled-factor hypotheses, we derive a self-contained exact joint generating polynomial for code dimension and code-first $k$-Galois hull dimension. The polynomial factors over factor orbits and is represented by a weighted two-state transfer matrix and cyclic trace. The transition statistic and transfer mechanism are proved directly below; the application is combined with the code-first hull-support calculation in the specified family.
 
-The paper is organized as follows. Section 2 fixes the algebraic notation and both dual conventions. Section 3 proves the labeled factor-selection parametrization. Section 4 derives code-first duality, the inverse-Frobenius reciprocal, the factor action, and the compatibility condition. Section 5 identifies hull support and the cyclic boundary statistic. Sections 6 and 7 treat the local orbit polynomial and its transfer-matrix representation. Section 8 states the global joint enumerator. Section 9 derives its corollaries, Section 10 records reproducible finite validation, and Section 11 states limitations and extensions.
+The paper is organized as follows. Section 2 fixes the algebraic notation and both dual conventions. Section 3 proves the labeled factor-selection parametrization. Section 4 derives code-first duality, the inverse-Frobenius reciprocal, the factor action, and the compatibility condition. Section 5 identifies hull support and the cyclic boundary statistic. Sections 6 and 7 treat the local orbit polynomial and its transfer-matrix representation. Section 8 states the global joint enumerator. Section 9 derives its corollaries, Section 10 records reproducible finite validation, Section 11 states limitations and extensions, and Section 12 concludes.
+
+The workflow summarized in Figure~\ref{fig:workflow} runs from the square-free component decomposition to the labeled joint polynomial.
 
 \begin{figure}[ht]
 \centering
@@ -189,6 +191,8 @@ where $C^{\perpE}$ is the ordinary Euclidean dual and $\rho_{s,k}$ acts coordina
 \begin{proof}
 The code-first condition is $\sum_i c_i\sigma_{s,k}(y_i)=0$ for every $c\in C$. Setting $z=\sigma_{s,k}(y)$ gives $z\in C^{\perpE}$, and applying the inverse coordinatewise map gives $y=\rho_{s,k}(z)$.
 \end{proof}
+
+Table~\ref{tab:notation} collects the notation and standing assumptions used in the component and global constructions.
 
 \begin{table}[ht]
 \centering
@@ -353,7 +357,7 @@ For a labeled selection define its generator-factor support and its surviving CR
 \operatorname{Supp}_{\mathrm{CRT}}(C(J))
  =\{(s,f):f\in\Fs\setminus J_s\}.
 \]
-For any component or global ideal, $\operatorname{Supp}_{\mathrm{CRT}}$ denotes the set of factor components on which the ideal is nonzero. The global hull support is the union of the component hull supports from the preceding lemma, and its $\F_q$ dimension is the sum in Proposition~\ref{prop:global-dimensions}.
+For any component or global ideal, $\operatorname{Supp}_{\mathrm{CRT}}$ denotes the set of factor components on which the ideal is nonzero. The global hull support is the union of the component hull supports from the preceding lemma, and its $\F_q$ dimension is the sum in Proposition~\ref{prop:global-dimensions}. Figure~\ref{fig:decomposition} is the intended visual summary of this fixed labeled decomposition.
 
 \begin{figure}[ht]
 \centering
@@ -543,7 +547,7 @@ Since $\tau_{s,k}$ is a permutation, the second complement is $\tau_{s,k}(J_s)$,
 \end{proof}
 
 \begin{proposition}[Weighted cyclic boundary statistic]
-Let $O\in\Os$ be a cycle of length $a_O$, indexed by
+For a labeled selection $J=(J_s)_s$ and its global code $C(J)$, let $O\in\Os$ be a cycle of length $a_O$, indexed by
 \[
 \tau_{s,k}(f_i)=f_{i+1},\qquad i\pmod {a_O}.
 \]
@@ -559,7 +563,7 @@ b_O(\varepsilon)=\sum_{i=0}^{a_O-1}\varepsilon_i(1-\varepsilon_{i+1})
 \]
 and
 \[
-\dim_{\F_q}\Hull_k(C)
+\dim_{\F_q}\Hull_{\A,k}(C(J))
  =\sum_{s=1}^{N}\sum_{O\in\Os}w_O b_O(\varepsilon_O).
 \]
 \end{proposition}
@@ -575,6 +579,8 @@ For a nonconstant cyclic binary word, $b_O$ equals the number of one-runs and al
 
 \begin{proof}
 Each summand is one exactly when the directed edge from $i$ to $i+1$ is a $1$-to-$0$ transition. Every one-run has exactly one such exit and every zero-run has exactly one entry, so these counts agree. The two constant words have $b_O=0$.\end{proof}
+
+Figure~\ref{fig:orbit} is the intended visual summary of the indexed reciprocal orbit and its marked hull-support boundaries.
 
 \begin{figure}[ht]
 \centering
@@ -665,6 +671,8 @@ Expand a diagonal entry of $T_w^a$ as a sum over intermediate states. The diagon
 \]
 which is the displayed monomial after cyclic reindexing. The closed-walk expansion is proved here directly; the hull-specific content is the preceding identification of the boundary statistic.\end{proof}
 
+Figure~\ref{fig:matrix} is the intended visual summary of the two-state transition weights.
+
 \begin{figure}[ht]
 \centering
 \fbox{\parbox{0.88\linewidth}{\centering
@@ -729,7 +737,9 @@ is the number of distinct labeled factor-selection codes with global $\F_q$-code
 \end{theorem}
 
 \begin{proof}
-The global CRT code lemma gives a Cartesian product of independent labeled component choices, while the global dual and hull lemmas identify the global hull with the product of the component hulls. Proposition~\ref{prop:global-dimensions} converts component dimensions to global $\F_q$ dimensions and identifies the orbit weights. The component hull-support theorem and weighted boundary proposition then give the sum $w_Ob_O$. The local trace identity enumerates each orbit choice with its code-dimension and hull-dimension weights. Since different orbits and components are independent coordinates and both dimensions are additive, multiplication of the local trace polynomials gives the product formula. The injectivity lemma and coefficient extraction give the stated distinct labeled-code interpretation.\end{proof}
+Lemma~\ref{lem:global-code} gives a Cartesian product of independent labeled component choices, while Lemmas~\ref{lem:global-dual} and~\ref{lem:global-hull} identify the global hull with the product of the component hulls. Proposition~\ref{prop:global-dimensions} converts component dimensions to global $\F_q$ dimensions and identifies the orbit weights. The component hull-support theorem and weighted boundary proposition then give the sum $w_Ob_O$. The local trace identity enumerates each orbit choice with its code-dimension and hull-dimension weights. Since different orbits and components are independent coordinates and both dimensions are additive, multiplication of the local trace polynomials gives the product formula. The injectivity lemma and coefficient extraction give the stated distinct labeled-code interpretation.\end{proof}
+
+The intended local-to-global construction is summarized in Figure~\ref{fig:global}.
 
 \begin{figure}[ht]
 \centering
@@ -849,7 +859,7 @@ For $a\geq3$, the covariance calculation for the cyclic indicators gives $a/16$ 
 
 The computations in this section are independent validation of finite instances, not proofs of the general statements. The repository separates direct construction, direct dual and hull calculation, Gram-matrix calculation, reciprocal/support calculation, local orbit enumeration, transfer-matrix evaluation, and global product comparison.
 
-The reproducible commands and complete outputs are retained in the repository. The listed cases comprise the fully specified cases approved by the prior manuscript specification plus the Phase-10C global-product bridge:
+The reproducible commands and complete outputs are retained in the repository. The listed cases comprise the fully specified cases approved by the prior manuscript specification plus the Phase-10C global-product bridge. Table~\ref{tab:computations} lists their parameters and validation scope:
 
 \begin{table}[ht]
 \centering
@@ -887,7 +897,7 @@ The candidate-first and code-first dual codes and hull subspaces are not general
 
 The literature comparison is conservative. The accessible version of the closest affine source and the final publisher record are separate records, and the corrected full text of the finite-field constacyclic comparison remains to be checked before any stronger theorem-level attribution. The audit did not verify an exact prior theorem identical to the weighted bivariate product; this is not a universal absence claim.
 
-The internal validation artifact N1 remains `UNSPECIFIED — CANNOT VALIDATE` and is excluded from the manuscript. No missing twist, factorization, orbit decomposition, histogram, or numerical output is inferred.
+The internal validation artifact N1 remains \texttt{UNSPECIFIED --- CANNOT VALIDATE}; it is excluded as a computational case from the manuscript. No missing twist, factorization, orbit decomposition, histogram, or numerical output is inferred. Table~\ref{tab:scope} summarizes these scope boundaries.
 
 \begin{table}[ht]
 \centering
