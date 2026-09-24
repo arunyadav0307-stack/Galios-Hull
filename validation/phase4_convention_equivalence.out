@@ -1,0 +1,17 @@
+Command: env -i PATH="$PATH" HOME="$HOME" LANG=C.UTF-8 LC_ALL=C PYTHONDONTWRITEBYTECODE=1 PYTHONPATH="" python validation/phase4_convention_equivalence.py
+UTC timestamp: 2026-09-24T10:07:33+00:00
+Python version: Python 3.11.2
+Exit code: 0
+--- STDOUT ---
+F4 lambda=1 k=1: factors=3, selections=8, sigma_iter=1, rho_iter=1, dual_differences=0, hull_dimension_differences=0, lcd_criterion_differences=0, code_lcd_count=4, candidate_lcd_count=4, factor_support_differences=0, candidate_sigma_generator_agreements=8, code_rho_generator_agreements=8, candidate_twist=1, code_twist=1, candidate_twist_checks=8, code_twist_checks=8, relation_failures=0, source_displayed_rho_disagreements=0
+F4 lambda=1 k=1: sigma_perm=(0, 2, 1), rho_perm=(0, 2, 1)
+F8 lambda=1 k=1: factors=7, selections=128, sigma_iter=1, rho_iter=2, dual_differences=120, hull_dimension_differences=0, lcd_criterion_differences=0, code_lcd_count=4, candidate_lcd_count=4, factor_support_differences=90, candidate_sigma_generator_agreements=128, code_rho_generator_agreements=128, candidate_twist=1, code_twist=1, candidate_twist_checks=128, code_twist_checks=128, relation_failures=0, source_displayed_rho_disagreements=120
+F8 lambda=1 k=1: sigma_perm=(0, 6, 1, 2, 3, 4, 5), rho_perm=(0, 2, 3, 4, 5, 6, 1)
+F8 lambda=1 k=2: factors=7, selections=128, sigma_iter=2, rho_iter=1, dual_differences=120, hull_dimension_differences=0, lcd_criterion_differences=0, code_lcd_count=4, candidate_lcd_count=4, factor_support_differences=90, candidate_sigma_generator_agreements=128, code_rho_generator_agreements=128, candidate_twist=1, code_twist=1, candidate_twist_checks=128, code_twist_checks=128, relation_failures=0, source_displayed_rho_disagreements=120
+F8 lambda=1 k=2: sigma_perm=(0, 2, 3, 4, 5, 6, 1), rho_perm=(0, 6, 1, 2, 3, 4, 5)
+F16 over F4 lambda=1 k=1: factors=5, selections=32, sigma_iter=1, rho_iter=3, dual_differences=24, hull_dimension_differences=0, lcd_criterion_differences=0, code_lcd_count=4, candidate_lcd_count=4, factor_support_differences=16, candidate_sigma_generator_agreements=32, code_rho_generator_agreements=32, candidate_twist=1, code_twist=1, candidate_twist_checks=32, code_twist_checks=32, relation_failures=0, source_displayed_rho_disagreements=24
+F16 over F4 lambda=1 k=1: sigma_perm=(0, 2, 4, 1, 3), rho_perm=(0, 3, 1, 4, 2)
+F16 over F4 lambda=alpha^3 k=1: factors=3, selections=8, sigma_iter=1, rho_iter=3, dual_differences=6, hull_dimension_differences=0, lcd_criterion_differences=0, code_lcd_count=8, candidate_lcd_count=8, factor_support_differences=0, candidate_sigma_generator_agreements=8, code_rho_generator_agreements=8, candidate_twist=10, code_twist=12, candidate_twist_checks=8, code_twist_checks=8, relation_failures=0, source_displayed_rho_disagreements=6
+F16 over F4 lambda=alpha^3 k=1: sigma_perm=None, rho_perm=None
+PHASE4 CONVENTION EQUIVALENCE CHECK: PASS (finite evidence only)
+--- STDERR ---

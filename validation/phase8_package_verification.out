@@ -1,0 +1,18 @@
+Phase-8 package verification
+Date: 2026-09-24
+Archive: Galios-Hull-main-files.zip
+archive_member_count=65
+unzip_test=0
+manifest_exact_match=1
+clean_extracted_source_pdf_sha256=0db90bfbeda69ad1af231b81d92f24be3589ed15ac2e0ade6605ba7ad0ddc039
+expected_source_pdf_sha256=0db90bfbeda69ad1af231b81d92f24be3589ed15ac2e0ade6605ba7ad0ddc039
+clean_extracted_git_metadata_count=0
+required_phase8_files=1
+central_comparison_result_rows=19
+phase8_audit_numbered_sections=17
+manuscript_n1_numeric_evidence=0
+clean_extracted_validation_suite_exit_code=0
+clean_extracted_validation_suite_stderr_lines=0
+clean_extracted_validation_suite_final_line=No lambda, k, factorization, orbit decomposition, expected histogram, or output is fabricated.
+clean_extracted_validation_suite_n1=N1 status: UNSPECIFIED — CANNOT VALIDATE
+No Git metadata was included; the copied archive used only to exercise the N1 ZIP search is not a package member.

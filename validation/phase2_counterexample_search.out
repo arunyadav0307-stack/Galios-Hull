@@ -1,0 +1,15 @@
+COMMAND: env -i PATH="$PATH" HOME="$HOME" LANG=C.UTF-8 LC_ALL=C PYTHONDONTWRITEBYTECODE=1 PYTHONPATH="" python validation/phase2_counterexample_search.py
+UTC_DATE: 2026-09-24T09:02:18+00:00
+PYTHON_VERSION: Python 3.11.2
+
+--- STDOUT ---
+orbit-polynomial identity checked for lengths 1 through 12
+transfer trace checked for lengths 1 through 8 and weights 1, 2, 3
+support/boundary orientation checked for every binary word of lengths 1 through 12
+No combinatorial counterexample found in the tested finite range.
+This search is computational evidence only, not a general proof.
+
+--- STDERR ---
+
+--- EXIT CODE ---
+0

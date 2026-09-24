@@ -1,0 +1,16 @@
+Phase-7 package verification
+Date: 2026-09-24
+Archive: Galios-Hull-main-files.zip
+
+unzip -t exit code: 0
+manifest/content/source-hash/N1-exclusion checks: PASS
+clean extracted source PDF SHA-256: 0db90bfbeda69ad1af231b81d92f24be3589ed15ac2e0ade6605ba7ad0ddc039
+clean extracted Git metadata: absent
+clean extracted required Phase-7 files: present
+clean extracted manuscript-specification N1 exclusion: PASS
+clean extracted validation-suite exit code: 0
+clean extracted validation-suite stderr lines: 0
+clean extracted validation-suite final internal status: N1 UNSPECIFIED — CANNOT VALIDATE; excluded from manuscript evidence
+clean extracted validation-suite final Phase-6 status: PHASE6 END-TO-END CHECK: PASS
+
+The final archive SHA-256 is computed after this capture is included and is reported by the final package command and response. This capture intentionally does not contain a self-referential archive hash.

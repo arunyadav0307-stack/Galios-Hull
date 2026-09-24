@@ -1,0 +1,151 @@
+Phase-10C full validation capture
+2026-09-24T13:41:03+00:00
+Python 3.11.2
+--- global product ---
+component 1: factors=3, tau=[0, 2, 1], orbit-data=[(1, 1), (2, 2)], histogram={(0, 0): 1, (1, 0): 1, (2, 2): 2, (3, 2): 2, (4, 0): 1, (5, 0): 1}
+component 2: factors=5, tau=[0, 2, 4, 1, 3], orbit-data=[(1, 2), (4, 2)], histogram={(0, 0): 1, (2, 0): 1, (2, 2): 4, (4, 2): 8, (4, 4): 2, (6, 2): 8, (6, 4): 2, (8, 0): 1, (8, 2): 4, (10, 0): 1}
+global product:
+  A = F_4 x F_16 over F_4; n=5; lambda=(omega,1); k=1
+  labeled selections: 256
+  distinct canonical global code spaces: 256
+  global dual nullspace checks: 256
+  global F_4 dimension/hull checks: 256
+  global shift checks on component bases: 1280
+  direct == component product: True
+  direct == orbit boundary: True
+  orbit boundary == transfer: True
+  joint histogram: {(0, 0): 1, (1, 0): 1, (2, 0): 1, (2, 2): 6, (3, 0): 1, (3, 2): 6, (4, 0): 1, (4, 2): 10, (4, 4): 10, (5, 0): 1, (5, 2): 10, (5, 4): 10, (6, 0): 1, (6, 2): 12, (6, 4): 18, (6, 6): 4, (7, 0): 1, (7, 2): 12, (7, 4): 18, (7, 6): 4, (8, 0): 1, (8, 2): 12, (8, 4): 18, (8, 6): 4, (9, 0): 1, (9, 2): 12, (9, 4): 18, (9, 6): 4, (10, 0): 1, (10, 2): 10, (10, 4): 10, (11, 0): 1, (11, 2): 10, (11, 4): 10, (12, 0): 1, (12, 2): 6, (13, 0): 1, (13, 2): 6, (14, 0): 1, (15, 0): 1}
+  uniform mean: 3.0
+  uniform variance: 2.0
+PASS: exhaustive global-product and global-enumerator validation
+--- F4 pilot ---
+F4 pilot parameters: q=4, n=5, lambda=1, k=1
+  sigma Frobenius power k: 1
+  sigma field exponent p^k: 2
+  rho Frobenius power em-k: 1
+  rho field exponent p^(em-k): 2
+  principal reciprocal Frobenius power: 1
+orbit polynomial checks: a=1,...,5 PASS
+factorisation: x + 1 * x^2 + (a)x + 1 * x^2 + (a+1)x + 1
+Hermitian factor action: fixed linear factor; quadratic factors swapped
+direct dual-generator checks: 8 of 8
+component joint histogram: {(0, 0): 1, (1, 0): 1, (2, 2): 2, (3, 2): 2, (4, 0): 1, (5, 0): 1}
+ring joint histogram terms: 65
+ring hull histogram: {0: 256, 2: 1024, 4: 1536, 6: 1024, 8: 256}
+PASS: direct hulls, factor action, orbit formula, and enumerator agree
+--- long orbit examples ---
+Example A (m_s=1, orbit length 6):
+  q=8, e=3, m_s=1, k=1, n=7
+  sigma Frobenius power k=1; field exponent p^k=2
+  rho Frobenius power em-k=2; field exponent p^(em-k)=4
+  principal reciprocal Frobenius power=2; direct k=1
+  tau permutation on root indices: [0, 3, 6, 2, 5, 1, 4]
+  orbit lengths: [1, 6]
+  orbit-boundary == transfer: True
+  direct dual-generator checks: 128 of 128
+  direct == theory: True
+  joint histogram: {(0, 0): 1, (1, 0): 1, (1, 1): 6, (2, 1): 12, (2, 2): 9, (3, 1): 12, (3, 2): 21, (3, 3): 2, (4, 1): 12, (4, 2): 21, (4, 3): 2, (5, 1): 12, (5, 2): 9, (6, 0): 1, (6, 1): 6, (7, 0): 1}
+  hull histogram: {0: 4, 1: 60, 2: 60, 3: 4}
+  PASS
+Example B (m_s=2, orbit length 4):
+  q=4, e=2, m_s=2, k=1, n=5
+  sigma Frobenius power k=1; field exponent p^k=2
+  rho Frobenius power em-k=3; field exponent p^(em-k)=8
+  principal reciprocal Frobenius power=3; direct k=1
+  tau permutation on root indices: [0, 2, 4, 1, 3]
+  orbit lengths: [1, 4]
+  orbit-boundary == transfer: True
+  direct dual-generator checks: 32 of 32
+  direct == theory: True
+  joint histogram: {(0, 0): 1, (2, 0): 1, (2, 2): 4, (4, 2): 8, (4, 4): 2, (6, 2): 8, (6, 4): 2, (8, 0): 1, (8, 2): 4, (10, 0): 1}
+  hull histogram: {0: 4, 2: 24, 4: 4}
+  PASS
+ALL LONG-ORBIT AND m_s>1 VALIDATIONS PASS
+--- compatible nontrivial twist ---
+nontrivial compatible constacyclic example:
+  q=4, n=5, lambda=omega != 1, k=1
+  sigma Frobenius power k=1; field exponent p^k=2
+  rho Frobenius power em-k=1; field exponent p^(em-k)=2
+  factorisation: x + omega+1 * x^2 + x + omega * x^2 + (omega)x + omega
+  square-free: True
+  lambda^(1+principal field exponent)= 1 = 1
+  tau permutation: [0, 2, 1]
+  orbit lengths: [1, 2]
+  direct dual-generator checks: 8 of 8
+  direct == orbit-boundary: True
+  orbit-boundary == transfer: True
+  joint histogram: {(0, 0): 1, (1, 0): 1, (2, 2): 2, (3, 2): 2, (4, 0): 1, (5, 0): 1}
+  hull histogram: {0: 4, 2: 4}
+PASS: nontrivial compatible constacyclic validation
+--- N2-A extension convention ---
+N2-A extension-field convention validation:
+  K=F_16=F_(4^2), p=2, q=4, e=2, m_s=2, n=5, lambda=1, k=1
+  sigma Frobenius power k: 1
+  sigma field exponent p^k: 2
+  rho Frobenius power em_s-k: 3
+  rho field exponent p^(em_s-k): 8
+  principal reciprocal Frobenius power: 3
+  alternative reciprocal Frobenius power: 1
+  principal reciprocal permutation: [0, 2, 4, 1, 3]
+  alternative reciprocal permutation: [0, 3, 1, 4, 2]
+  direct dual from defining <c,x>_k equations: 32 of 32
+  direct equals principal reciprocal: 32 of 32
+  direct equals alternative p^k reciprocal: 8 of 32
+  example alternative discrepancies: [2, 3, 4]
+PASS: direct dual selects the principal inverse-Frobenius convention
+--- incompatible twist diagnostic ---
+basic incompatible-twist sanity diagnostic only:
+  q=4, n=5, lambda=omega, k=0
+  sigma Frobenius power k: 0
+  sigma field exponent p^k: 1
+  rho Frobenius power em-k: 2
+  rho field exponent p^(em-k): 4
+  sigma == inverse automorphism on F_4: True
+  direct dual from defining <c,x>_k: checked
+  direct equals principal reciprocal: True
+  direct equals p^k reciprocal alternative: True
+  lambda^(1+principal field exponent)= 3 != 1
+  predicted dual twist lambda^(-principal field exponent)= 3 != lambda
+  direct dual is predicted-twist constacyclic: True
+  direct dual is original-lambda constacyclic: False
+This F4,k=0 example cannot distinguish sigma from rho because both are the identity automorphism on F4.
+It validates incompatible-twist behavior, but not the principal Frobenius convention or the general extension-field reciprocal formula.
+No transfer-matrix enumeration was attempted because the original and dual constacyclic twists are incompatible.
+DIAGNOSTIC ONLY: basic incompatible twist correctly left outside the theorem
+--- N2-B incompatible extension diagnostic ---
+N2-B incompatible extension-field convention diagnostic:
+  p=2, e=2, m_s=2, q=4, K=F_16=F_(4^2), k=1, n=3
+  sigma Frobenius power k: 1
+  sigma field exponent p^k: 2
+  rho Frobenius power em_s-k: 3
+  rho field exponent p^(em_s-k): 8
+  sigma and rho differ as automorphisms: True
+  lambda=alpha^3 (order 5): 8
+  lambda^(1+principal field exponent): 15 != 1
+  lambda^(1+alternative field exponent p^k): 10 != 1
+  defining-inner-product direct dual checks: 8 of 8
+  principal reciprocal direct agreements: 8 of 8
+  alternative p^k reciprocal direct agreements: 2 of 8
+  example alternative discrepancy mask: 1
+  predicted principal dual twist lambda^(-principal field exponent): 12
+  predicted alternative dual twist lambda^(-p^k): 10
+  direct dual constacyclic under principal predicted twist: 8 of 8
+  direct dual constacyclic under alternative predicted twist: 2 of 8
+  proper nonzero direct duals failing original lambda twist: 6 of 6
+  example original-twist failure mask: 1
+No transfer-matrix enumeration was attempted because the original and dual constacyclic twists are incompatible.
+PASS: N2-B independently selects the finalized principal convention
+--- Python compile ---
+PY_COMPILE_PASS
+--- LaTeX availability ---
+pdflatex: unavailable; compilation not performed
+bibtex: unavailable; compilation not performed
+--- manuscript static checks ---
+environment_difference Counter() Counter()
+brace_balance 0
+duplicate_labels []
+undefined_refs []
+citation_keys_checked 13 missing []
+tables 4 figures 5
+MANUSCRIPT_STATIC_CHECK_PASS
+STATIC_AND_DIFF_CHECK_PASS
