@@ -767,3 +767,141 @@ Results:
 The finite output is evidence for the implementation; the Gram-matrix derivation is the proof of hull-dimension/LCD invariance.
 
 **Phase-5 status: `PASS WITH CONDITIONS — INVARIANCE PROVED UNDER EXPLICIT CONDITIONS`.**
+
+# PHASE 6 — FINAL CONSOLIDATION AND PUBLICATION-SAFETY AUDIT
+
+This section is appended after the preserved Phase-1 through Phase-5 evidence. It does not rewrite historical captures. The full final audit is `validation/PHASE6_FINAL_CONSOLIDATION_AUDIT.md`; the current literature transfer record is `validation/LITERATURE_TRANSFER_MATRIX.md`.
+
+## Phase-6 consolidated chain
+
+The final publication-safe dependency order is:
+
+```text
+square-free affine decomposition
+        |
+        v
+finite-field component constacyclic quotients
+        |
+        v
+labeled irreducible factor selections and injectivity
+        |
+        v
+code-first second-slot k-Galois dual
+        |
+        v
+inverse-Frobenius change of variables and normalized reciprocal
+        |
+        v
+root action, compatible twist, and factor permutation
+        |
+        v
+lcm/intersection hull support
+        |
+        v
+cyclic boundary statistic with orbit weights
+        |
+        v
+orbit polynomial and transfer matrix
+        |
+        v
+global labeled joint enumerator
+        |
+        v
+distributions, LCD count, mean, and variance
+```
+
+The main result is conditional on the consolidated square-free, finite-field, simple-root, compatibility, fixed-label, and labeled-selection hypotheses. Repeated roots, incompatible two-modulus transfer, Burnside/Pólya equivalence counts, and unconditional quantum-distance claims remain outside the main theorem.
+
+## Formal convention transformation and separate invariants
+
+For `sigma(a)=a^(p^k)` and `rho=sigma^(-1)=a^(p^(e*m_s-k))`, the two defining annihilators are implemented independently:
+
+```text
+D_code(C) = {x : sum_i c_i sigma(x_i)=0 for every c in C}
+D_cand(C) = {y : sum_i y_i sigma(c_i)=0 for every c in C}
+D_code(C) = rho(C^(perp_E))
+D_cand(C) = sigma(C^(perp_E))
+D_cand(C) = sigma^2(D_code(C)).
+```
+
+The dual codes and factor-labelled supports are not generally equal. For a basis matrix `B`, the restricted Gram matrix `G=B sigma(B)^T` gives both same-code hull coefficient nullities as `rank-nullity` (right versus left nullspace), hence
+
+```text
+dim(C intersect D_code(C)) = dim(C intersect D_cand(C))
+```
+
+for every finite-field-linear code. The resulting LCD decision and same-code dimension/hull enumerator agree; this does not assert equality of hull subspaces or support sets. The exact subspace identity retained is
+
+```text
+sigma^2(C intersect D_code(C))
+  = sigma^2(C) intersect D_cand(C),
+```
+
+and `sigma^2(C)=C` is not silently assumed.
+
+## Support, boundary, and enumerator closure
+
+The code-first support is
+
+```text
+(F_s minus J_s) intersect tau_rho(J_s)
+  = tau_rho(J_s) minus J_s,
+```
+
+with `tau_sigma=tau_rho^(-1)` under compatibility. On an orbit of length `a` the statistic is `sum_i epsilon_i(1-epsilon_(i+1))`, cyclically, with weight `w_O=m_s*d_O`. Reversal preserves the statistic because a Frobenius orbit has equal factor degrees and hence equal weights at all positions; arbitrary unequal weights within one cycle are not claimed invariant. Unequal weights across separate orbits remain allowed because the product enumerator factors orbitwise.
+
+The matrix is
+
+```text
+T_w(u,z) = [[u^w, 1], [u^w z^w, 1]],
+E(u,z) = product_s product_O trace(T_(w_O)(u,z)^(a_O)).
+```
+
+The lcm support proof, factor/ideal injectivity proof, trace/closed-walk argument, and moment derivations are consolidated in `PHASE6_FINAL_CONSOLIDATION_AUDIT.md` and the blueprint.
+
+## Final source-PDF and literature record
+
+A final local source-PDF check was made against the available `arXiv:2412.08512v1` PDF record. The standard-library structural extraction is `validation/source_pdf_theorem_check.py`, with capture `validation/source_pdf_theorem_check.out`. It confirmed the displayed candidate-first inner product/dual definition, the source displayed reciprocal/twist, component lcm/hull results, and the later Gray-map material. This confirms the convention mismatch that must be transformed; it does not make the external theorem directly transferable. The final/corrected source applicability and exact novelty boundary remain `VERIFY`. The exact source-PDF limitation and hash are recorded in the Phase-6 audit; historical Phase-4 records remain preserved.
+
+`validation/LITERATURE_TRANSFER_MATRIX.md` uses only the required transfer statuses: `DIRECT`, `DIRECT AFTER CONVENTION TRANSFORMATION`, `PARTIAL`, `NOT TRANSFERABLE`, and `UNVERIFIED`.
+
+## Final N1 search
+
+`validation/search_n1_specification.py` now searches current files and filenames, generated captures, ZIP members and text, available PDF bytes/filenames, Git patch history, and Git-history filenames. It recovers only `q=16`, `n=15`, and the proposed count `32768=2^15`. It does not recover `lambda`, `k`, a factorization, orbit data, an expected histogram, or an executable output.
+
+> **N1: `UNSPECIFIED — CANNOT VALIDATE`.**
+
+No N1 value is inferred or fabricated, and no N1 result is used in the main theorem evidence.
+
+## Independent Phase-6 end-to-end evidence
+
+`validation/phase6_end_to_end_check.py` is standalone and imports no earlier checker. Its capture is `validation/phase6_end_to_end_check.out`. It checks F4, F8, and F16 with `k=0` and every admissible nonzero `k`, compatible and incompatible nontrivial twists where available, direct annihilators, direct intersections, restricted Gram dimensions, inverse-Frobenius reciprocal generators, support/boundary weights, factor-selection injectivity, and orbit-transfer enumerators. It also checks all 73 rank-two planes in `F8^3` and explicitly demonstrates that unequal within-orbit weights cannot be given an unconditional reversal-invariance claim.
+
+The independent capture ends with:
+
+```text
+PHASE6 END-TO-END CHECK: PASS
+```
+
+This is finite computational evidence only. It does not replace the conditional proofs.
+
+## Conservative scope and publication status
+
+- Novelty/priority: no priority claim; exact boundary remains `VERIFY`.
+- Quantum: conditional/future work; no distance or quantum parameter is inferred.
+- Burnside/Pólya: future work; no equivalence-class count is claimed.
+- Repeated-root: future work; excluded by `gcd(n,p)=1`.
+- Incompatible twists: direct diagnostics only; no same-family transfer enumeration.
+- Abstract/conclusion/examples: conditional language and N1/source limitations are explicit.
+
+The final status is:
+
+> **Phase-6 manuscript-readiness verdict: `NOT READY — MATERIAL GAPS REMAIN`.**
+
+The outstanding issues are publication-critical literature theorem transfer/source verification, the exact novelty boundary, and the absent N1 artifact; they are not hidden by the passing finite regression.
+
+## Phase-6 package closure
+
+`Galios-Hull-main-files.zip` is rebuilt after the Phase-6 files and captures are finalized. The clean-extraction/package regression, manifest comparison, source-PDF hash, Git-metadata exclusion, and extracted validation-suite run are captured in `validation/phase3_package_verification.out`. The package contains the Phase-6 audit, transfer matrix, standalone validator/output, updated blueprint/report, all historical audits/captures, and the source PDF. No fake `.tex` or `.bib` file is added.
+
+**Phase-6 status: `NOT READY — MATERIAL GAPS REMAIN`.**

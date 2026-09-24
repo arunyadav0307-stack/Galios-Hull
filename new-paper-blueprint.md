@@ -115,6 +115,37 @@ The principal normalized reciprocal, dual-generator identity, root action, and c
 
 ---
 
+## Standing Assumptions for the Main Enumeration Theorem
+
+### GLOBAL ASSUMPTIONS
+
+The main square-free labeled factor-selection theorem is stated under all of the following:
+
+1. `q=p^e` is a prime power with `e\ge1`, and each component is `K_s=\mathbb F_{q^{m_s}}=\mathbb F_{p^{e m_s}}` with `m_s\ge1`.
+2. The affine algebra is `A=\mathbb F_q[X_1,\ldots,X_\ell]/\langle t_1,\ldots,t_\ell\rangle`, with `\ell\ge1`, each `t_i` monic, square-free, and of positive degree.
+3. The resulting finite reduced algebra is decomposed into finitely many labeled field components `A\cong\prod_s K_s` with fixed primitive-idempotent labels.
+4. `n\ge1` and `\gcd(n,p)=1` (equivalently `\gcd(n,q)=1`), so every nonzero-root component modulus is simple-root.
+5. `\lambda\in A^\times` and each component `\lambda_s\in K_s^\times`.
+6. `0\le k<e` is the declared Galois iteration parameter; componentwise Frobenius is `a\mapsto a^{p^k}` and does not permute the fixed component labels.
+7. Codes are the distinct labeled factor-selection ideals obtained from subsets `J_s\subseteq\mathcal F_s`; no quotient by rotation, automorphism, isomorphism, or code equivalence is taken.
+8. Component dimensions are over `K_s` and global dimensions are over `\mathbb F_q`, with orbit weight `w_O=m_s d_O`.
+
+### ADDITIONAL ASSUMPTIONS FOR SPECIFIC RESULTS
+
+1. **Same-factor-set orbit, transfer, distribution, LCD, mean, and variance results:** every component satisfies the compatibility condition
+   `\lambda_s^{1+p^{e m_s-k}}=1`. This is equivalent to the candidate-first condition `\lambda_s^{1+p^k}=1` and makes the reciprocal factor action a permutation of the same `\mathcal F_s`.
+2. **Binary factor-selection and hull-support formulas:** square-free moduli and the simple-root condition above are required; repeated-root multiplicities are excluded.
+3. **Global product enumerator:** component selections are independent under the fixed idempotent decomposition, and the global code is their direct product.
+4. **Convention-transformation theorem:** only finite-field-linear component codes and the explicitly defined two pairings are required; constacyclicity is not needed for the dual transformation or Gram-matrix hull-dimension result.
+5. **Frobenius-conjugate same-family comparison:** compatibility is required to keep `\sigma_{s,k}^2(\lambda_s)=\lambda_s`; an individual selected factor set need not be Frobenius-invariant.
+6. **Incompatible twists:** these are diagnostics only. A dual in a different constacyclic modulus is not entered into the same-factor-set transfer matrix.
+7. **Quantum statements:** any Gray-map, QECC, entanglement, or distance claim is conditional on a separately verified construction theorem and is not a consequence of the hull enumerator alone.
+8. **Equivalence-class enumeration:** no Burnside/Pólya or automorphism quotient is included; that is future work.
+
+Repeated-root cases, incompatible two-modulus enumeration, equivalence classes, and unconditional quantum-distance claims are outside the main theorem.
+
+---
+
 ## 0. Audit findings — what was corrected and why
 
 The previous framework had the right research direction, but several statements needed to be made conditional or proved more carefully.
@@ -2713,6 +2744,34 @@ The dual codes are generally different but semilinearly isomorphic. `T` maps a `
 for every finite-field-linear code, so LCD decisions and the same-code dimension/hull enumerator, total count, dimension distribution, hull distribution, mean, and variance are invariant. The actual hull subspaces and factor-labelled supports are not generally equal; the present theorem retains the frozen code-first inverse-Frobenius support formula.
 
 **Phase-5 status: `PASS WITH CONDITIONS — INVARIANCE PROVED UNDER EXPLICIT CONDITIONS`.**
+
+## Phase 6 consolidated theorem chain
+
+The publication-safe logical chain is:
+
+1. square-free affine decomposition into fixed finite-field components;
+2. component constacyclic quotient and distinct irreducible factor selections;
+3. code-first second-slot `k`-Galois pairing;
+4. direct semilinear dual and independent inverse-Frobenius change of variables;
+5. principal reciprocal and predicted dual twist;
+6. root action and compatible factor permutation;
+7. lcm/intersection hull support;
+8. cyclic binary boundary statistic with orbit-preserved factor weights;
+9. closed orbit polynomial and trace transfer matrix;
+10. global labeled-code joint enumerator;
+11. total count, code-dimension distribution, hull distribution, LCD count, mean, and variance.
+
+The candidate-first literature pairing is integrated as a separate convention-transformation theorem: its dual is `\\sigma_{s,k}^2`-conjugate to the code-first dual, not generally equal. The Gram-matrix argument proves equality of hull dimensions and LCD decisions for the same finite-field-linear code; the inverse factor orientations can still give different dual and hull supports. The main theorem uses only the frozen code-first convention and the standing assumptions above.
+
+**Phase-6 manuscript-readiness status: `NOT READY — MATERIAL GAPS REMAIN`.** The central mathematics is consolidated, but final/corrected literature theorem transfer, the exact novelty boundary, and the N1 artifact remain unresolved. N1 is excluded from the main numerical evidence.
+
+## Phase 6 publication-safety closure
+
+- `validation/LITERATURE_TRANSFER_MATRIX.md` is the current literature-transfer record; historical Phase-4 records remain unchanged.
+- `validation/phase6_end_to_end_check.py` independently checks direct annihilators, direct intersections, the restricted Gram route, reciprocal/support route, and orbit-transfer enumerators over `F4`, `F8`, and `F16`, including all admissible `k` values and compatible/incompatible twist diagnostics.
+- `validation/PHASE6_FINAL_CONSOLIDATION_AUDIT.md` records the formal convention-transformation theorem, global versus subtheorem assumptions, equal-orbit-weight boundary restriction, source-PDF spot check, N1 closure, novelty/quantum/Burnside/repeated-root scope, and the final status table.
+- `validation/source_pdf_theorem_check.py` and its capture confirm the accessible preprint's displayed candidate-first definition and inverse-Frobenius formula at the local PDF-record level, but do not upgrade final/corrected theorem transfer; the exact conservative literature gap remains visible.
+- No priority claim, quantum distance, Burnside/Pólya equivalence count, repeated-root result, incompatible two-modulus enumerator, N1 parameter, or N1 histogram is asserted.
 
 ## Final Consistency Status
 

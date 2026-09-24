@@ -34,3 +34,5 @@ Status values in this ledger are restricted to the project's literature labels: 
 ## Ledger conclusion
 
 The literature supports the broad subject and several component ingredients. It does not directly transfer the source's candidate-first displayed dual-generator theorem to the frozen code-first framework because the displayed source dual twist/reciprocal uses the complementary exponent. The present paper must cite the source with an explicit convention-mismatch warning and rely on its self-contained derivations for the frozen theorem.
+
+Phase 4 status labels in this historical ledger are preserved. The current Phase-6 transfer classifications are in `validation/LITERATURE_TRANSFER_MATRIX.md`, whose transfer-status vocabulary is intentionally separate from the historical claim-status vocabulary.
