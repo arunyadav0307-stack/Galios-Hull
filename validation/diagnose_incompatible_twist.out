@@ -1,0 +1,28 @@
+COMMAND: env -i PATH="$PATH" HOME="$HOME" LANG=C.UTF-8 LC_ALL=C PYTHONDONTWRITEBYTECODE=1 PYTHONPATH="" python code/diagnose_incompatible_twist.py
+UTC_DATE: 2026-09-24T08:49:48+00:00
+PYTHON_VERSION: Python 3.11.2
+
+--- STDOUT ---
+basic incompatible-twist sanity diagnostic only:
+  q=4, n=5, lambda=omega, k=0
+  sigma Frobenius power k: 0
+  sigma field exponent p^k: 1
+  rho Frobenius power em-k: 2
+  rho field exponent p^(em-k): 4
+  sigma == inverse automorphism on F_4: True
+  direct dual from defining <c,x>_k: checked
+  direct equals principal reciprocal: True
+  direct equals p^k reciprocal alternative: True
+  lambda^(1+principal field exponent)= 3 != 1
+  predicted dual twist lambda^(-principal field exponent)= 3 != lambda
+  direct dual is predicted-twist constacyclic: True
+  direct dual is original-lambda constacyclic: False
+This F4,k=0 example cannot distinguish sigma from rho because both are the identity automorphism on F4.
+It validates incompatible-twist behavior, but not the principal Frobenius convention or the general extension-field reciprocal formula.
+No transfer-matrix enumeration was attempted because the original and dual constacyclic twists are incompatible.
+DIAGNOSTIC ONLY: basic incompatible twist correctly left outside the theorem
+
+--- STDERR ---
+
+--- EXIT CODE ---
+0
