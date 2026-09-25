@@ -103,7 +103,7 @@ Reference: `Galios hulls of constacclic codes over affine algebra rings'.pdf`
 | Examples | none | Example 1 (F4 pilot), Example 2 (F8 long orbit), using recorded capture data only |
 | Validation | Section 10 prose + table | Section 5.2 prose + table (same data) + recorded mean/variance sentence |
 | Limitations | separate Section 11 | folded into Section 6 with scope table (same content) |
-| Bibliography | `plain` (alphabetical) | `unsrt` (citation order, reference style); `.bib` content unchanged |
+| Bibliography | `plain` (alphabetical) | `unsrt` (citation order, reference style); 13 original entries unchanged, 17 verified entries added (30 total, all cited; see CHANGELOG) |
 | Prose | passive/defensive, jargon ("frozen", "Phase-10C", "N1", "audit") | active journal "we", de-jargonized; all conservative qualifiers kept |
 | Preamble | article 11pt, 1in margins | identical, plus section-number periods and new theorem counters |
 
@@ -115,7 +115,7 @@ Reference: `Galios hulls of constacclic codes over affine algebra rings'.pdf`
    (`\[...\]`/`\boxed` → `equation`) changes.
 3. All four tables keep their data/captions' meaning; only rule/caption style
    changes.
-4. All 13 references keep their content and remain cited.
+4. All 30 references (13 original + 17 verified additions) keep their content and remain cited.
 5. No quantum-code, priority, or literature-absence claim beyond the source's
    own conservative statements.
 6. The two new examples use only numbers recorded in the source validation

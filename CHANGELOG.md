@@ -1,5 +1,31 @@
 # Changelog: Source-Paper Restyling (Phase 10F → Reference-Style Revision)
 
+## Bibliography expansion (2026-09-26): 13 → 30 references
+
+- **17 verified entries added** to `manuscript/references.bib` (13
+  original entries byte-unchanged; 30 total, all cited). Every addition
+  was independently verified (authors, title, venue, year, volume,
+  pages; DOI only where confirmed); no reference, DOI, page range, or
+  author detail was fabricated.
+- **Introduction-only citation edits** (9 prose insertions; no theorem,
+  proof, equation, table, example, or notation touched). New unsrt order:
+  [1] massey1992, [2] sendrier2004, [3] sendrier1997, [4] brun2006,
+  [5] wildeBrun2008, [6] fanZhang2017, [7] huffmanPless2003,
+  [8] sangwisut2015, [9] yangMassey1994, [10] debnathConstacyclic2023,
+  [11] debnathCorrection2023, [12] liuPan2020, [13] fuLiu2022,
+  [14] debnathAverage2025, [15] debnathSmall2026, [16] skersys2003,
+  [17] jitmanSangwisut2018, [18] cao2020, [19] dinhLopezPermouth2004,
+  [20] nortonSalagean2000, [21] talbi2021, [22] jitmanZ4,
+  [23] pathakZ4, [24] gao2023, [25] aliabadi2026, [26] zhang2026,
+  [27] dinh2010, [28] debnathAffinePreprint, [29] debnathAffine2026,
+  [30] vanLintWilson2001.
+- **Mirrors updated:** `manuscript/main.typ` citations renumbered and
+  bibliography rewritten to the same 30 entries in the same order;
+  `tools/check_pdf.py` bibliography/citation range updated [1]–[13] →
+  [1]–[30]; `manuscript/main.pdf` rebuilt (18 pages).
+- **Validators re-run, all PASS:** `check_manuscript.py` (30/30 cited),
+  `check_math_preservation.py`, `check_pdf.py`.
+
 Revision of `manuscript/main.tex` (source: `Galios-Hull-Submission-Phase10F.zip`,
 `Galios-Hull-kGalois-Phase10F/manuscript/main.tex`) to match the presentation
 and organization of the reference coding-theory article, without changing the
@@ -105,5 +131,6 @@ against the source (`tools/check_math_preservation.py` PASS), and
 PDF content-closure plus full page-by-page visual review
 (`tools/check_pdf.py` PASS). Rebuilding with
 `pdflatex → bibtex → pdflatex ×3` on any TeX Live system is expected
-to succeed cleanly; the unsrt bibliography order is [1]–[13] as listed
-in `CONSISTENCY_CHECK.md` §6.
+to succeed cleanly; the unsrt bibliography order is [1]–[30] (see the
+Bibliography expansion entry above; the original 13-entry order is in
+`CONSISTENCY_CHECK.md` §4).

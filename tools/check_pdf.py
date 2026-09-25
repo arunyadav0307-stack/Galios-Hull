@@ -9,7 +9,7 @@ Extracts text with PyMuPDF and checks:
      Corollary 4.N, Example N, Equation (N), Table N, Section N[.M],
      Corollaries/Propositions/Lemmas/Sections/Examples lists, [NN])
      refers to an existing number; no '??' anywhere.
-  3. Every bibliography entry [1]-[13] is cited at least once.
+  3. Every bibliography entry [1]-[30] is cited at least once.
   4. No leftover figure/placeholder/box jargon.
 
 Exit 0 on success, 1 on failure.
@@ -120,11 +120,11 @@ def main() -> int:
     flat: set[str] = set()
     for grp in cited:
         flat.update(x.strip() for x in grp.split(","))
-    for n in [str(i) for i in range(1, 14)]:
+    for n in [str(i) for i in range(1, 31)]:
         if n not in flat:
             fail(f"citation [{n}] never appears in PDF")
     # bibliography entries present
-    for n in range(1, 14):
+    for n in range(1, 31):
         if f"[{n}]" not in text:
             fail(f"bibliography entry [{n}] missing")
 

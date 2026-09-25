@@ -49,11 +49,11 @@ We study the joint distribution of code dimension and $k$-Galois hull dimension 
 // ---------- 1. Introduction ----------
 = Introduction
 
-Let $C$ be a linear code with dual $C^perp$; the hull $C inter C^perp$ is a structural invariant of the code. Hulls appear in the study of code intersections, complementary-dual codes, automorphism questions, and conditional quantum-code constructions. The $k$-Galois hull generalizes the Euclidean and Hermitian cases by applying a Frobenius automorphism in one slot of the pairing. For constacyclic codes, the ambient polynomial factorization makes duality and intersection questions amenable to algebraic analysis.
+Let $C$ be a linear code with dual $C^perp$; the hull $C inter C^perp$ is a structural invariant of the code. Hulls appear in the study of code intersections, complementary-dual codes \[1, 2\], automorphism questions \[3\], and conditional quantum-code constructions \[4, 5\]. The $k$-Galois hull generalizes the Euclidean and Hermitian cases by applying a Frobenius automorphism in one slot of the pairing \[6\]. For constacyclic codes, the ambient polynomial factorization makes duality and intersection questions amenable to algebraic analysis. Standard background on cyclic and constacyclic codes over finite fields is covered in \[7\].
 
-Exact enumeration questions have been studied in several narrower settings. Hulls of cyclic and negacyclic codes over finite fields, including fixed-dimension counts, were treated through reciprocal factors and related polynomial descriptions \[1\]. For constacyclic codes over finite fields, Galois-hull formulas and restricted prescribed-dimension counts were reported together with a correction record; the complete corrected theorem text is not imported here \[2, 3\]. Average-dimension and small-dimension Galois-hull records provide further neighboring context \[4, 5\].
+Exact enumeration questions have been studied in several narrower settings. Hulls of cyclic and negacyclic codes over finite fields, including fixed-dimension counts, were treated through reciprocal factors and related polynomial descriptions \[8\]; the complementary-dual case for cyclic codes was characterized separately \[9\]. For constacyclic codes over finite fields, Galois-hull formulas and restricted prescribed-dimension counts were reported together with a correction record; the complete corrected theorem text is not imported here \[10, 11\]. Galois hulls of general linear codes, including LCD characterizations and matrix-product constructions, were studied in \[12\], and Galois self-orthogonal constacyclic codes in \[13\]. Average-dimension and small-dimension Galois-hull records provide further neighboring context \[14, 15\]; average hull dimensions were also studied for cyclic codes \[16\], for Hermitian hulls of constacyclic codes \[17\], and for MDS codes with Galois hulls of arbitrary dimensions \[18\].
 
-Related exact counts are available for cyclic serial codes over a finite chain ring \[6\], for cyclic codes over $bb(Z)_4$ \[7, 8\], for double cyclic codes \[9\], and for double or four circulant codes \[10\]. A restricted direct-product and non-chain record also supplies adjacent componentwise hull formulas \[11\]. The closest structural record for the present setting studies Galois hulls of constacyclic codes over an affine algebra through finite-field component decompositions \[12, 13\]. Its accessible theorem-bearing version and its final publisher record are distinct records, and its convention places the candidate in the opposite slot from the convention used below; we therefore state and prove the convention transformation rather than silently identifying the two dual codes. #Tab(<tab:literature>) summarizes this scoped comparison.
+Cyclic and negacyclic codes over finite chain rings were studied structurally in \[19\], with Hamming-distance foundations in \[20\]. Related exact counts are available for cyclic serial codes over a finite chain ring \[21\], for cyclic codes over $bb(Z)_4$ \[22, 23\], for double cyclic codes \[24\], and for double or four circulant codes \[25\]. A restricted direct-product and non-chain record also supplies adjacent componentwise hull formulas \[26\]. Constacyclic codes of length $p^s$ over $F_(p^m)+u F_(p^m)$ were classified in \[27\], a repeated-root setting with different hypotheses from the simple-root family studied here. The closest structural record for the present setting studies Galois hulls of constacyclic codes over an affine algebra through finite-field component decompositions \[28, 29\]. Its accessible theorem-bearing version and its final publisher record are distinct records, and its convention places the candidate in the opposite slot from the convention used below; we therefore state and prove the convention transformation rather than silently identifying the two dual codes. #Tab(<tab:literature>) summarizes this scoped comparison.
 
 #align(center)[
 #show table.cell: set text(size: 8pt)
@@ -61,11 +61,11 @@ Related exact counts are available for cyclic serial codes over a finite chain r
 #figure(
 table(columns: (23fr, 34fr, 31fr), stroke: 0.5pt, align: left,
 [*Literature setting*], [*Result used in this paper*], [*Scope qualification*],
-[Finite-field cyclic/negacyclic], [Hull formulas and fixed-dimension counts \[1\]], [Narrower field and cyclic/negacyclic families.],
-[Finite-field constacyclic], [Galois-hull formulas and restricted counts \[2, 3\]], [Correction recorded; complete corrected text requires a pre-submission check.],
-[Chain-ring and $bb(Z)_4$], [Fixed-hull or average-type enumeration \[6, 7, 8\]], [Nilpotent/chain-ring hypotheses differ from the reduced affine product.],
-[Non-chain and generalized cyclic], [Component hull formulas or prescribed-hull counts \[11, 9, 10\]], [Different rings or code families; no target-product transfer.],
-[Average/small-dimension Galois hulls], [Adjacent average and small-dimension records \[4, 5\]], [Background only; not the complete labeled joint polynomial.],
+[Finite-field cyclic/negacyclic], [Hull formulas and fixed-dimension counts \[8\]], [Narrower field and cyclic/negacyclic families.],
+[Finite-field constacyclic], [Galois-hull formulas and restricted counts \[10, 11\]], [Correction recorded; complete corrected text requires a pre-submission check.],
+[Chain-ring and $bb(Z)_4$], [Fixed-hull or average-type enumeration \[21, 22, 23\]], [Nilpotent/chain-ring hypotheses differ from the reduced affine product.],
+[Non-chain and generalized cyclic], [Component hull formulas or prescribed-hull counts \[26, 24, 25\]], [Different rings or code families; no target-product transfer.],
+[Average/small-dimension Galois hulls], [Adjacent average and small-dimension records \[14, 15\]], [Background only; not the complete labeled joint polynomial.],
 ),
 caption: [Literature comparison used for scoped background. The table does not assert an exhaustive priority result.],
 ) <tab:literature>
@@ -73,7 +73,7 @@ caption: [Literature comparison used for scoped background. The table does not a
 
 #h(1.5em)An exact joint enumeration of labeled constacyclic codes over a square-free affine algebra by code dimension and hull dimension together, in the form of a complete bivariate generating polynomial, is not established in the scoped literature above. This paper addresses the following conditional question. Suppose that a fixed square-free affine algebra has labeled field components, that each component modulus $x^n - lambda_s$ is simple-root, and that the inverse-Frobenius reciprocal preserves the same factor set. Can all distinct labeled factor selections be counted jointly by their global code dimension and their code-first $k$-Galois hull dimension? The answer is an exact product over reciprocal factor orbits.
 
-Our contribution, stated without any priority claim, is a self-contained exact joint generating polynomial for code dimension and code-first $k$-Galois hull dimension under explicit square-free, simple-root, compatible-twist, fixed-component, and labeled-factor hypotheses. The polynomial factors over reciprocal factor orbits and is expressed through a weighted two-state transfer matrix and a cyclic trace. We derive the inverse-Frobenius reciprocal and its factor action, the code-first dual generator and hull-support formula, the cyclic boundary statistic, the one-orbit polynomial and its transfer-matrix form, and the global joint enumerator with its total-count, distribution, LCD-count, mean, and variance consequences. The candidate-first comparison convention is treated separately, and finite instances are validated computationally through independent routes. We did not find in the scoped literature an exact prior theorem identical to the weighted bivariate product proved here; this is not a universal absence claim.
+Our contribution, stated without any priority claim, is a self-contained exact joint generating polynomial for code dimension and code-first $k$-Galois hull dimension under explicit square-free, simple-root, compatible-twist, fixed-component, and labeled-factor hypotheses. The polynomial factors over reciprocal factor orbits and is expressed through a weighted two-state transfer matrix and a cyclic trace. We derive the inverse-Frobenius reciprocal and its factor action, the code-first dual generator and hull-support formula, the cyclic boundary statistic, the one-orbit polynomial and its transfer-matrix form, and the global joint enumerator with its total-count, distribution, LCD-count, mean, and variance consequences. The candidate-first comparison convention is treated separately, and finite instances are validated computationally through independent routes. We did not find in the scoped literature an exact prior theorem identical to the weighted bivariate product proved here; this is not a universal absence claim. Quotient enumeration under group actions (Burnside--P\'olya methods) is left as future work; see \[30\] for standard background.
 
 The joint enumerator determines, by coefficient extraction, how many labeled codes realize each pair of code and hull dimensions; its specializations give the LCD count and the mean and variance of the hull dimension over the labeled family. Hull-dimension data of this kind may provide input to a quantum-code construction only after additional independent hypotheses and proofs: no quantum distance, parameter, optimality, or fault-tolerance conclusion follows from the enumerator alone.
 
@@ -513,25 +513,42 @@ caption: [Scope boundaries required for interpreting the manuscript.],
 ) <tab:scope>
 ]
 
-#h(1.5em)The literature comparison remains conservative: the accessible theorem-bearing version of the closest affine source and its final publisher record are distinct records \[12, 13\], and the complete corrected text of the finite-field constacyclic comparison remains to be checked before any stronger theorem-level attribution \[2, 3\]; we state no priority claim. One validation artifact (labeled N1 in the accompanying package) remains underspecified and is excluded. Future work includes Burnside--Pólya quotient counts under an explicitly defined group action with fixed-code calculations, repeated-root and multiplicity-sensitive ideals, and a two-modulus theory for incompatible twists.
+#h(1.5em)The literature comparison remains conservative: the accessible theorem-bearing version of the closest affine source and its final publisher record are distinct records \[28, 29\], and the complete corrected text of the finite-field constacyclic comparison remains to be checked before any stronger theorem-level attribution \[10, 11\]; we state no priority claim. One validation artifact (labeled N1 in the accompanying package) remains underspecified and is excluded. Future work includes Burnside--Pólya quotient counts under an explicitly defined group action with fixed-code calculations, repeated-root and multiplicity-sensitive ideals, and a two-modulus theory for incompatible twists.
 
 // ---------- References ----------
 #heading(level: 1, numbering: none)[References]
 #[
 #set par(first-line-indent: 0pt)
 #grid(columns: (auto, 1fr), column-gutter: 0.7em, row-gutter: 0.45em,
-[\[1\]], [E. Sangwisut, S. Jitman, S. Ling, and P. Udomkavanich. Hulls of cyclic and negacyclic codes over finite fields. _Finite Fields and Their Applications_, 33:232–257, 2015.],
-[\[2\]], [I. Debnath, O. Prakash, and H. Islam. Galois hulls of constacyclic codes over finite fields. _Cryptography and Communications_, 15:111–127, 2023.],
-[\[3\]], [I. Debnath, O. Prakash, and H. Islam. Correction to: galois hulls of constacyclic codes over finite fields. _Cryptography and Communications_, 15:129–130, 2023.],
-[\[4\]], [I. Debnath and O. Prakash. Average dimensions of galois hulls of constacyclic codes. _Advances in Mathematics of Communications_, 19(6):1569–1604, 2025.],
-[\[5\]], [I. Debnath, H. Islam, Yadav, and O. Prakash. Study of small galois hull dimensions of constacyclic codes. _Advances in Mathematics of Communications_, 22, 2026.],
-[\[6\]], [Talbi, Batoul, Fotue Tabue, and E. Martínez-Moro. Galois hulls of cyclic serial codes over a finite chain ring. 2021.],
-[\[7\]], [S. Jitman, S. Sangwisut, and P. Udomkavanich. Hulls of cyclic codes over Z4. _Discrete Mathematics_, 343, 2020. Article 111621.],
-[\[8\]], [Pathak and Sharma. On the hulls of cyclic codes of oddly even length over Z4. _Discrete Mathematics_, 347, 2024. Article 113796.],
-[\[9\]], [Gao, Wu, and Fu. Hulls of double cyclic codes. _Finite Fields and Their Applications_, 88, 2023. Article 102189.],
-[\[10\]], [Aliabadi, Kalaycı, and Zadehdabbagh. Asymptotic performance of double circulant and four circulant codes with small hull dimension. _Cryptography and Communications_, 18:525–546, 2026.],
-[\[11\]], [E. Zhang, B. Kong, and X. Zheng. Quantum codes from galois hulls of constacyclic codes over a finite non-chain ring. _Entropy_, 28, 2026. Article 407.],
-[\[12\]], [I. Debnath, H. Islam, E. Martínez-Moro, and O. Prakash. Galois hulls of constacyclic codes over affine algebra rings. 2024. Version 1, 11 December 2024.],
-[\[13\]], [I. Debnath, H. Islam, E. Martínez-Moro, and O. Prakash. Galois hulls of constacyclic codes over affine algebra rings. _Discrete Mathematics_, 349(2), 2026. Article 114750.],
+[\[1\]], [J. L. Massey. Linear codes with complementary duals. _Discrete Mathematics_, 106/107:337–342, 1992.],
+[\[2\]], [N. Sendrier. Linear codes with complementary duals meet the Gilbert–Varshamov bound. _Discrete Mathematics_, 285(1–3):345–347, 2004.],
+[\[3\]], [N. Sendrier. On the dimension of the hull. _SIAM Journal on Discrete Mathematics_, 10(2):282–293, 1997.],
+[\[4\]], [T. A. Brun, I. Devetak, and M.-H. Hsieh. Correcting quantum errors with entanglement. _Science_, 314(5798):436–439, 2006.],
+[\[5\]], [M. M. Wilde and T. A. Brun. Optimal entanglement formulas for entanglement-assisted quantum coding. _Physical Review A_, 77, 064302, 2008.],
+[\[6\]], [Y. Fan and L. Zhang. Galois self-dual constacyclic codes. _Designs, Codes and Cryptography_, 84(3):473–492, 2017.],
+[\[7\]], [W. C. Huffman and V. Pless. _Fundamentals of Error-Correcting Codes_. Cambridge University Press, 2003.],
+[\[8\]], [E. Sangwisut, S. Jitman, S. Ling, and P. Udomkavanich. Hulls of cyclic and negacyclic codes over finite fields. _Finite Fields and Their Applications_, 33:232–257, 2015.],
+[\[9\]], [X. Yang and J. L. Massey. The condition for a cyclic code to have a complementary dual. _Discrete Mathematics_, 126:391–393, 1994.],
+[\[10\]], [I. Debnath, O. Prakash, and H. Islam. Galois hulls of constacyclic codes over finite fields. _Cryptography and Communications_, 15:111–127, 2023.],
+[\[11\]], [I. Debnath, O. Prakash, and H. Islam. Correction to: galois hulls of constacyclic codes over finite fields. _Cryptography and Communications_, 15:129–130, 2023.],
+[\[12\]], [H. Liu and X. Pan. Galois hulls of linear codes over finite fields. _Designs, Codes and Cryptography_, 88(2):241–255, 2020.],
+[\[13\]], [Y. Fu and H. Liu. Galois self-orthogonal constacyclic codes over finite fields. _Designs, Codes and Cryptography_, 90:2703–2733, 2022.],
+[\[14\]], [I. Debnath and O. Prakash. Average dimensions of galois hulls of constacyclic codes. _Advances in Mathematics of Communications_, 19(6):1569–1604, 2025.],
+[\[15\]], [I. Debnath, H. Islam, Yadav, and O. Prakash. Study of small galois hull dimensions of constacyclic codes. _Advances in Mathematics of Communications_, 22, 2026.],
+[\[16\]], [G. Skersys. The average dimension of the hull of cyclic codes. _Discrete Applied Mathematics_, 128(1):275–292, 2003.],
+[\[17\]], [S. Jitman and E. Sangwisut. The average dimension of the Hermitian hull of constacyclic codes over finite fields of square order. _Advances in Mathematics of Communications_, 12(3):451–463, 2018.],
+[\[18\]], [M. Cao. Galois hulls of MDS codes and their quantum error correction. arXiv:2002.12892, 2020.],
+[\[19\]], [H. Q. Dinh and S. R. López-Permouth. Cyclic and negacyclic codes over finite chain rings. _IEEE Transactions on Information Theory_, 50(8):1728–1744, 2004.],
+[\[20\]], [G. H. Norton and A. M. Salagean. On the Hamming distance of linear codes over a finite chain ring. _IEEE Transactions on Information Theory_, 46(3):1060–1067, 2000.],
+[\[21\]], [Talbi, Batoul, Fotue Tabue, and E. Martínez-Moro. Galois hulls of cyclic serial codes over a finite chain ring. 2021.],
+[\[22\]], [S. Jitman, S. Sangwisut, and P. Udomkavanich. Hulls of cyclic codes over Z4. _Discrete Mathematics_, 343, 2020. Article 111621.],
+[\[23\]], [Pathak and Sharma. On the hulls of cyclic codes of oddly even length over Z4. _Discrete Mathematics_, 347, 2024. Article 113796.],
+[\[24\]], [Gao, Wu, and Fu. Hulls of double cyclic codes. _Finite Fields and Their Applications_, 88, 2023. Article 102189.],
+[\[25\]], [Aliabadi, Kalaycı, and Zadehdabbagh. Asymptotic performance of double circulant and four circulant codes with small hull dimension. _Cryptography and Communications_, 18:525–546, 2026.],
+[\[26\]], [E. Zhang, B. Kong, and X. Zheng. Quantum codes from galois hulls of constacyclic codes over a finite non-chain ring. _Entropy_, 28, 2026. Article 407.],
+[\[27\]], [H. Q. Dinh. Constacyclic codes of length $p^s$ over $F_(p^m)+u F_(p^m)$. _Journal of Algebra_, 324:940–950, 2010.],
+[\[28\]], [I. Debnath, H. Islam, E. Martínez-Moro, and O. Prakash. Galois hulls of constacyclic codes over affine algebra rings. 2024. Version 1, 11 December 2024.],
+[\[29\]], [I. Debnath, H. Islam, E. Martínez-Moro, and O. Prakash. Galois hulls of constacyclic codes over affine algebra rings. _Discrete Mathematics_, 349(2), 2026. Article 114750.],
+[\[30\]], [J. H. van Lint and R. M. Wilson. _A Course in Combinatorics_, 2nd edition. Cambridge University Press, 2001.],
 )
 ]

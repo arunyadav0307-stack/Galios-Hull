@@ -99,6 +99,19 @@ unwrapping:
   [4] debnathAverage2025, [5] debnathSmall2026, [6] talbi2021,
   [7] jitmanZ4, [8] pathakZ4, [9] gao2023, [10] aliabadi2026,
   [11] zhang2026, [12] debnathAffinePreprint, [13] debnathAffine2026.
+  2026-09-26 expansion: the 13 original entries are unchanged and 17
+  independently verified entries were added (30 total, all cited). New
+  unsrt order: [1] massey1992, [2] sendrier2004, [3] sendrier1997,
+  [4] brun2006, [5] wildeBrun2008, [6] fanZhang2017,
+  [7] huffmanPless2003, [8] sangwisut2015, [9] yangMassey1994,
+  [10] debnathConstacyclic2023, [11] debnathCorrection2023,
+  [12] liuPan2020, [13] fuLiu2022, [14] debnathAverage2025,
+  [15] debnathSmall2026, [16] skersys2003, [17] jitmanSangwisut2018,
+  [18] cao2020, [19] dinhLopezPermouth2004, [20] nortonSalagean2000,
+  [21] talbi2021, [22] jitmanZ4, [23] pathakZ4, [24] gao2023,
+  [25] aliabadi2026, [26] zhang2026, [27] dinh2010,
+  [28] debnathAffinePreprint, [29] debnathAffine2026,
+  [30] vanLintWilson2001.
 - Placeholders removed (5 figures) carried no data; nothing scientific
   deleted. The notation-table caption "in the draft" → "in this paper"
   is the only table-text fix.
