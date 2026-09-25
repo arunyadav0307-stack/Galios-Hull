@@ -1,0 +1,491 @@
+% =====================================================================
+%  FINAL BLUEPRINT (LaTeX) -- PART 16 of the audited blueprint.
+%  A BLUEPRINT, not the paper: every statement carries its epistemic
+%  status.  Compile with pdflatex; no external figures required.
+%  Repository: github.com/arunyadav0307-stack/Galios-Hull
+%  Branch: arena/01a0d5c4-galios-hull
+% =====================================================================
+\documentclass[11pt]{article}
+
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{bm}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage[hidelinks]{hyperref}
+\usepackage[margin=1in]{geometry}
+
+% ---------------- theorem environments ----------------
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\theoremstyle{plain}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{openproblem}[theorem]{Open Problem}
+
+% ---------------- notation macros ----------------
+\newcommand{\Fq}{\mathbb{F}_q}
+\newcommand{\Fp}{\mathbb{F}_p}
+\newcommand{\Fqi}{\mathbb{F}_{q^{d_i}}}
+\newcommand{\Aalg}{\mathcal{A}}
+\newcommand{\Rlam}{R_{\lambda}}
+\newcommand{\hull}{\operatorname{hull}}
+\newcommand{\ord}{\operatorname{ord}}
+\newcommand{\lcm}{\operatorname{lcm}}
+\newcommand{\perpsig}{^{\perp_{\sigma_\kappa}}}
+\newcommand{\perpH}{^{\perp_{\mathrm{H}}}}
+\newcommand{\Sig}{\sigma_\kappa}
+\newcommand{\EAQSC}{\mathrm{EA\text{-}QSC}}
+\newcommand{\Tol}{T}
+\newcommand{\Th}{\Theta}
+\newcommand{\Syn}{\mathsf{Syn}}
+\newcommand{\status}[1]{\textnormal{\footnotesize[#1]}}
+
+\title{\textbf{Tolerance beyond the block length:\\ constacyclic quantum synchronizable codes with exact window syndromes}\\[4pt]
+\large PROVISIONAL TITLE (four alternatives in the blueprint, PART 15)}
+\author{[AUTHORS TO BE DETERMINED]}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent
+PROVISIONAL ABSTRACT (see the blueprint, PART 15).
+Quantum synchronizable codes (QSCs) correct block misalignment together with quantum noise.
+Their tolerance is governed by the order of a shift operator, and in every published family the
+padded block satisfies $\Tol/L<1/2$, because cyclic chains force the shift order to divide the
+block length. We show that this ceiling is an artefact of the cyclic weight $\lambda=1$. For a
+$\lambda$-constacyclic chain $C\subseteq D$ over $\Fq$ with $\lambda^{p^\kappa+1}=1$, we first
+prove that a $\lambda^{-1}$-periodic padding makes the receiver's window syndrome equal to
+$x^{-a}$ exactly and independently of the transmitted codeword; we then prove that the shift
+order satisfies $\ord_f(x)=r\cdot h$ with $h\mid n$, $r=\ord(\lambda)\mid p^\kappa+1$, so that
+the tolerance obeys $\Tol/L<(p^\kappa+1)/(p^\kappa+2)$ and exceeds the block-length ceiling
+whenever $\lambda\ne1$. Verified instances include $[[54,2,3]]_2$ ($\Tol/L=0.741$) and
+$[[164,1,3]]_4$ ($\Tol/L=0.829$). Because the syndrome map is independent of the inner product,
+$\kappa$-Galois self-orthogonality decouples from synchronization, which yields an
+entanglement-assisted QSC with $c=\dim\hull_{\Sig}$ and unchanged tolerance. All structural
+claims are accompanied by two independent machine verifications, including counterexamples to
+two plausible but false criteria.
+\end{abstract}
+
+\noindent\textbf{Keywords.} Quantum synchronizable codes; block synchronization; constacyclic
+codes; Galois hull; Hermitian dual; entanglement-assisted quantum error correction; semisimple
+algebras; tolerance; finite fields; reproducible computation.
+
+% =====================================================================
+\section{Introduction}\label{sec:intro}
+% (i) synchronization vs. error correction; (ii) the same-object assumption;
+% (iii) contributions C1--C5 (blueprint PART 14); (iv) the ceiling picture (Fig. 3).
+% Statements about prior work restrict to the references of PART 3 of the blueprint;
+% no novelty claim is made before the systematic search protocol (PART 3.1) is completed.
+
+\section{Related work}\label{sec:related}
+% Prior-art map of blueprint PART 3.2, plus the explicit NON-novelty paragraph:
+% the kappa-Galois hull machinery, the h^tau criterion, EA-CSS bookkeeping,
+% the (1-2v)/(u+v|u-v) decompositions, BCH/QR cyclic tolerance attainment and the
+% definition of a QSC are all known.  Cite: [REF] Fujiwara 2013; [REF] Fujiwara--
+% Tonchev--Wong 2013; [REF] Xie--Yuan--Fujiwara; [REF] Luo--Ma--Lin 2019;
+% [REF] Du--Ma--Luo--Huang--Wang 2020; [REF] Liu--Liu 2021; [REF] ring QSCs 2024;
+% [REF] Li--Zhu 2022; [REF] Hu--Liu 2025 / Zhang--Kong--Zheng 2026;
+% [REF] affine-algebra Galois hulls; [REF] Tansuwannont--Nemec 2024;
+% [REF] Lai--Brun 2012; [REF] Brun--Devetak--Hsieh 2006.
+% ---------------------------------------------------------------- %
+\section{Algebraic preliminaries}\label{sec:prelim}
+
+\begin{definition}[semisimple algebra]\label{def:A}
+$\Aalg=\Fq[X_1,\dots,X_\ell]/\langle t_1(X_1),\dots,t_\ell(X_\ell)\rangle$ with each $t_i$
+squarefree; then $\Aalg\cong\prod_{i=1}^{m}\Aalg_i$, $\Aalg_i=\Fqi$, with primitive
+idempotents $e_i$, $\sum_ie_i=1$, $N=\sum_i d_i=\dim_{\Fq}\Aalg$.
+\end{definition}
+
+\begin{definition}[componentwise Frobenius]\label{def:frob}
+$\Sig^{\Aalg}\big(\sum_i a_ie_i\big)=\sum_i a_i^{p^\kappa}e_i$, $\kappa\in\{0,\dots,e-1\}$.
+\textbf{Convention bridge.} With the source paper's exponent $p^{e-k_{\mathrm{src}}}$ one has
+$\kappa=e-k_{\mathrm{src}}$; $\kappa=0$ is the Euclidean product, and $q=p^{2t}$, $\kappa=t$ the
+Hermitian product of $\mathbb{F}_{p^{2t}}/\mathbb{F}_{p^t}$.
+\end{definition}
+
+\begin{definition}[$\kappa$-Galois inner product]\label{def:ip}
+$\langle u,v\rangle_{\Sig}=\sum_{j=0}^{n-1}u_j\,\Sig^{\Aalg}(v_j)\in\Aalg$ for
+$u,v\in\Aalg^n$.
+\end{definition}
+
+\begin{definition}[$\lambda$-constacyclic code and chain]\label{def:code}
+A code $C\le\Aalg^n$ closed under
+$\tau_\lambda(c_0,\dots,c_{n-1})=(\lambda c_{n-1},c_0,\dots,c_{n-2})$; equivalently a left ideal
+$C\trianglelefteq\Rlam(\Aalg):=\Aalg[x]/\langle x^n-\lambda\rangle$. A \emph{chain} is
+$C=\langle g_C\rangle\subseteq D=\langle g_D\rangle$ (so $g_D\mid g_C\mid x^n-\lambda$).
+$\perpsig$ and $\hull_{\Sig}(C)=C\cap C\perpsig$ are the $\kappa$-Galois dual and hull.
+\end{definition}
+
+\begin{definition}[length bookkeeping]\label{def:length}
+A length-$L$ block over $\Aalg$ has $L$ \emph{$\Aalg$-symbols} and $N\cdot L$
+$\Fq$-coordinates. Quantum parameters are stated in the alphabet actually used
+($\Fq$ for $\kappa$-CSS; $\mathbb{F}_{p^\kappa}$ for Hermitian codes over
+$\mathbb{F}_{p^{2\kappa}}$). Logical counts are never mixed across alphabets.
+\end{definition}
+
+\begin{definition}[$\lambda^{-1}$-periodic padding and window]\label{def:pad}
+For $w\in\Aalg^n$ and $j\in\mathbb{Z}$ write $s_w(j)=\lambda^{-\lfloor j/n\rfloor}w_{j\bmod n}$
+(equivalently $s_w(j+n)=\lambda^{-1}s_w(j)$). The transmitted block is
+$B_{a_l,a_r}(w)=\big(s_w(j)\big)_{j=-a_l}^{n+a_r-1}$ and the window at misalignment
+$a\in\mathbb{Z}$ is $W_a(w)=\big(s_w(a),\dots,s_w(a+n-1)\big)$. The tolerance is
+$\Tol=a_l+a_r$.
+\end{definition}
+
+\begin{definition}[syndrome and order invariants]\label{def:syn}
+For a chain $C=\langle g_C\rangle\subseteq D=\langle g_D\rangle$ with $f=g_C/g_D$,
+$\deg f>0$, and a window $W$, put $J=W/g_D\in\Rlam(\Aalg)$ (polynomial division, legitimate
+because $g_D\mid x^n-\lambda$) and $\Syn(W)=J\bmod f\in\Rlam/\langle f\rangle$. For each
+component, $\ord_{f_i}(x)=\min\{d\ge1:x^d\equiv1\bmod f_i\}$ and
+$\Th=\lcm_i\ord_{f_i}(x)$.
+\end{definition}
+
+\begin{remark}[channel models]\label{rem:models}
+\textbf{Model A} (all claims): insertions/deletions shift the block by whole $\Aalg$-symbols;
+the received object is $B_{a_l,a_r}(w)$ of Definition~\ref{def:pad}.
+\textbf{Model B}: a shift may reach component $i$ with offset $a+\delta_i$; the observation is
+the tuple $(x^{-(a+\delta_i)}\bmod f_i)_i$ (Theorem~\ref{thm:jitter}, and Open
+Problem~\ref{op:framing}).
+\textbf{Model C}: coordinate-level QSC on the Gray image; not used for claims.
+\end{remark}
+
+% ---------------------------------------------------------------- %
+\section{Duality and hull characterization}\label{sec:duality}
+
+\begin{theorem}[CRT structure]\label{thm:struct}
+Assume $\gcd(n,q)=1$, the moduli $t_i$ squarefree, and $\lambda_i\ne0$ for all $i$. Then
+$\Rlam(\Aalg)\cong\prod_iR_{\lambda_i}(\Aalg_i)$; every $\lambda$-constacyclic code is
+$C=\bigoplus_ie_iC_i$ with $C_i$ $\lambda_i$-constacyclic over $\Aalg_i$; $C=\langle g\rangle$
+with $g=\sum_ie_ig_i$, $g_i\mid x^n-\lambda_i$; and
+$\dim_{\Fq}C=\sum_i d_i\,(n-\deg g_i)$.
+\status{PROVED-HERE; verified computationally}
+\end{theorem}
+
+\begin{theorem}[twist condition and twisted dual]\label{thm:twist}
+Let $C$ be a nontrivial $\lambda$-constacyclic code over $\Fq$ with $\gcd(n,q)=1$. Then
+$C\perpsig$ is again $\lambda$-constacyclic \emph{if and only if} $\lambda^{p^\kappa+1}=1$; in
+that case $C\perpsig=\langle h^\tau\rangle$ with $h=(x^n-\lambda)/g$ and
+$h^\tau=x^{\deg h}h(1/x)^{\Sig}$.
+\status{THEOREM TO BE PROVED; VERIFIED-COMPUTATIONALLY 1010/1010 (all $q\in\{3,4,5,7,8,9\}$,
+$n\in[3,7]$, all $\lambda$, all $\kappa$) and 488/488 generator comparisons}
+\end{theorem}
+
+\begin{remark}[a false strengthening, recorded as a counterexample]\label{rem:false}
+``$\lambda^{p^\kappa+1}=1$ implies $C\perpsig\subseteq C$ for every $\lambda$-constacyclic
+$C$'' is \textbf{false}: $q=8$, $n=7$, $\lambda=1$, $p^\kappa=4$, $\deg g\in\{6,7\}$. Only
+Theorems~\ref{thm:twist} and~\ref{thm:contain} may be used.
+\end{remark}
+
+\begin{theorem}[self-orthogonality criterion, necessary and sufficient]\label{thm:contain}
+With the hypotheses of Theorem~\ref{thm:twist} and $\lambda^{p^\kappa+1}=1$,
+\[
+C\perpsig\subseteq C
+\quad\Longleftrightarrow\quad
+h^\tau\equiv0\ (\mathrm{mod}\ g)
+\quad\Longleftrightarrow\quad
+h^\tau\in\langle g\rangle_{\Rlam}.
+\]
+\status{THEOREM TO BE PROVED; VERIFIED-COMPUTATIONALLY (span form 1010/1010; span vs.\ divisor
+form 742/742)}
+\end{theorem}
+
+\begin{remark}[two rejected criteria]\label{rem:rejected}
+$\gcd\big(g,\mathrm{rev}(g^{p^{e-\kappa}})\big)=1$ is \emph{not} equivalent to
+$C\perpsig\subseteq C$ (fails in $268/1010$ cases), and the ``both-degrees-$n$'' divisibility
+$x^n-\lambda\equiv0\ (\mathrm{mod}\ g\,h^\tau)$ is equivalent to the \emph{reverse} containment
+(disagrees in $344/742$ cases). Both are quoted in the paper only as counterexamples.
+\end{remark}
+
+% ---------------------------------------------------------------- %
+\section{Synchronization theory}\label{sec:sync}
+
+\begin{lemma}[window = shifted word]\label{lem:window}
+For every $w\in\Aalg^n$ and every $a$, $W_a(w)=x^{-a}\cdot w$ in $\Rlam(\Aalg)$; in particular
+$W_a(v)\in D$ for every $v\in D$.
+\status{PROVED-HERE (one line: $s_w$ is $\lambda^{-1}$-periodic) and
+VERIFIED-COMPUTATIONALLY 9192/9192}
+\end{lemma}
+
+\begin{theorem}[exact, content-free window syndrome]\label{thm:synd}
+Let $C=\langle g_C\rangle\subseteq D=\langle g_D\rangle$, $f=g_C/g_D$ with $\deg f>0$, and let
+$w=c+g_D$ with $c\in C$ (so $w/g_D\equiv1\bmod f$). Then with the padding of
+Definition~\ref{def:pad},
+\[
+\Syn\big(W_a(w)\big)=x^{-a}\quad\text{in }\Rlam/\langle f\rangle,
+\]
+independently of $c$; more generally, for $v\in D$,
+$\Syn(W_a(v))=x^{-a}\cdot\big((v/g_D)\bmod f\big)$.
+\status{PROVED-HERE (proof sketch: Lemma~\ref{lem:window}, then divide by $g_D$ and reduce
+mod $f$) and VERIFIED-COMPUTATIONALLY 166\,528/166\,528 exact identities over all chains with
+$\Aalg$-symbol arithmetic}
+\end{theorem}
+
+\begin{corollary}[decoder]\label{cor:decoder}
+Since $\Syn$ depends only on $a$, the receiver identifies the shift by the table
+$a\mapsto x^{-a}\bmod f$ before error decoding; shift-corrected decoding then inherits the
+distance of $C$.
+\status{PROVED-HERE (consequence of Theorem~\ref{thm:synd})}
+\end{corollary}
+
+\begin{theorem}[order structure]\label{thm:order}
+Let $f\mid x^n-\lambda$, $f\ne1$, $r=\ord(\lambda)$, and $\ord_f(x)$ as in
+Definition~\ref{def:syn}. Then $\ord_f(x)=r\,h$ for some $h\mid n$, and
+$\gcd(r,n/h)=1$. Consequently $\ord_f(x)\mid r\,n$, and $\ord_f(x)=r\,n$ is attainable.
+\status{THEOREM TO BE PROVED (standard torsion argument); VERIFIED-COMPUTATIONALLY 2000/2000}
+\end{theorem}
+
+\begin{theorem}[tolerance law]\label{thm:tolerance}
+With $o_i=\ord_{f_i}(x)$ and $\Th=\lcm_i o_i$: $\Syn_a=\Syn_{a'}$ if and only if
+$\Th\mid(a'-a)$. Hence the shifts in $[-a_l,a_r]$ are pairwise distinguishable if and only if
+$a_l+a_r<\Th$, i.e.\ $\Tol_{\max}=\Th-1$; for one component $\Th=\ord_f(x)$.
+\status{THEOREM TO BE PROVED (CRT); VERIFIED-COMPUTATIONALLY (abstract order sweep; CRT case
+$(o_1,o_2)=(21,7)$ with 21 distinct syndrome pairs and a collision exactly at $a=\Th$)}
+\end{theorem}
+
+\begin{theorem}[tolerance ceiling]\label{thm:ceiling}
+Assume $\lambda_i^{p^\kappa+1}=1$ for all $i$, so that $r_i=\ord(\lambda_i)\mid p^\kappa+1$.
+Then
+\[
+o_i=r_ih_i,\quad h_i\mid n,
+\qquad\text{hence}\qquad
+\Th\ \Big|\ \lcm_i(r_i)\cdot n\ \Big|\ (p^\kappa+1)\,n,
+\]
+and therefore $\Tol\le(p^\kappa+1)n-1$ with
+\[
+\frac{\Tol}{L}<\frac{p^\kappa+1}{p^\kappa+2},\qquad L=n+\Tol\ \ (\Aalg\text{-symbols}).
+\]
+If $\lambda=1$ then $\Th\mid n$, so $\Tol\le n-1$ and $\Tol/L<1/2$: the \emph{cyclic ceiling}
+satisfied by every audited construction. The bound $(p^\kappa+1)/(p^\kappa+2)$ is attained.
+\status{PROVED-HERE from Theorems~\ref{thm:order}--\ref{thm:tolerance}; attainability
+VERIFIED-COMPUTATIONALLY (see Table~\ref{tab:qcodes})}
+\end{theorem}
+
+\begin{theorem}[jitter: exact recovery and its exact limit]\label{thm:jitter}
+In Model B the observation for physical shift $\theta_i=a+\delta_i$ is the tuple
+$(x^{-\theta_i}\bmod f_i)_i$. For a fixed jitter vector $\delta$ the map $a\mapsto$ tuple is
+injective on every window of length $\Th$. A genuine ambiguity --- a shift difference
+$\Delta\ne0$ with a non-constant jitter difference $\varepsilon_i$ such that
+$\Delta+\varepsilon_i\equiv0\pmod{o_i}$ for all $i$ --- exists if and only if
+$\varepsilon_i\equiv\varepsilon_j\pmod{\gcd(o_i,o_j)}$ for all $i\ne j$. Consequently, if
+$\gcd(o_i,o_j)>2\,\Delta_{\max}$ for all $i\ne j$ no ambiguity arises within $\Th$; the
+flagship orders $(21,7)$ are robust for jitter $\le3$, whereas pairwise coprime orders admit a
+spurious shift-plus-jitter reading of every shift.
+\status{PROVED-HERE (subgroup analysis of $\prod_i\mathbb{Z}/o_i$); VERIFIED-COMPUTATIONALLY for
+eight order patterns}
+\end{theorem}
+
+\begin{theorem}[decoupling]\label{thm:decouple}
+$\Tol_{\max}=\Th(g_C,g_D,\lambda)-1$ is independent of the inner-product parameter $\kappa$, of
+$\hull_{\Sig}(C)$ and of the entanglement budget $c$, while the quantum parameters depend only
+on the pair $(\psi(C),\psi(C)\perpsig)$. Hence (i) entanglement assistance does not reduce
+$\Tol$; (ii) per-component twists $(\kappa_i)$ are free design parameters for the quantum
+layer; (iii) a chain that is not dual-containing may still be used with unchanged
+synchronization guarantee.
+\status{THEOREM TO BE PROVED (short); structural reason verified for the flagship}
+\end{theorem}
+
+% ---------------------------------------------------------------- %
+\section{Quantum constructions}\label{sec:quantum}
+
+\begin{theorem}[QSC parameters]\label{thm:qsc}
+Let $C=\langle g_C\rangle$ satisfy $C\perpsig\subseteq C$ with $\lambda^{p^\kappa+1}=1$, and let
+$\psi$ be the juxtaposition Gray map. Then for every $0\le\Tol\le\Th-1$ there is an
+$(a_l,a_r)$-QSC with
+\[
+K=n-2\dim_{\Fq}\psi(C)\perpsig
+\qquad\text{(in the alphabet of the construction)},\qquad
+d\ge\min\big\{d(\psi(C)\setminus\psi(C)\perpsig),\ d(\psi(C)\perpsig\setminus\psi(C))\big\},
+\]
+of length $N(n+\Tol)$ coordinates.
+\status{THEOREM TO BE PROVED; instances exact (Table~\ref{tab:qcodes})}
+\end{theorem}
+
+\begin{theorem}[entanglement-assisted QSC]\label{thm:eaqsc}
+If $C\perpsig\not\subseteq C$, then the same chain supports an $(a_l,a_r)$-$\EAQSC$ with
+$c=\dim_{\Fq}\hull_{\Sig}(\psi(C))$, $K=2\dim_{\Fq}\psi(C)-Nn+2c$, and \emph{unchanged}
+tolerance $\Tol\le\Th-1$.
+\status{THEOREM TO BE PROVED; object absent from the searched literature
+(INSUFFICIENT EVIDENCE for any ``first'' claim until the systematic search of blueprint
+PART 3.1 is completed)}
+\end{theorem}
+
+\begin{theorem}[asymmetric Galois twists]\label{thm:asym}
+Per-component twists $(\kappa_1,\dots,\kappa_m)$ are admissible if and only if
+$\lambda_i^{p^{\kappa_i}+1}=1$ for all $i$; the tolerance $\Th$ is unaffected, whereas $K$ or
+$c$ may improve. \status{THEOREM TO BE PROVED (componentwise application of
+Theorems~\ref{thm:contain}, \ref{thm:tolerance}, \ref{thm:eaqsc})}
+\end{theorem}
+
+\begin{theorem}[designed distance]\label{thm:bch}
+If each $g_{i,C}$ is a product of coset minimal polynomials with a designed set of consecutive
+zeros, then $d\ge\min_i\delta^{\mathrm{BCH}}_i$, and the tolerant quantum code inherits this
+bound up to the CSS correction. \status{THEOREM TO BE PROVED}
+\end{theorem}
+
+\begin{conjecture}[tolerant Singleton and synchronization defect]\label{con:singleton}
+With $\Delta_{\mathrm{S}}:=N(n+\Tol)-2\log_QK-2(d-1)-2c$ (the synchronization defect) one has
+$\Delta_{\mathrm{S}}\ge0$, i.e.\ the tolerance consumes no Singleton budget:
+$K\le Q^{\,N(n+\Tol)-2(d-1)-2c}$.
+\status{CONJECTURE --- not to be printed as a theorem; the non-negativity part is the target}
+\end{conjecture}
+
+\begin{conjecture}[tolerant quantum Hamming / EA-Gilbert--Varshamov]\label{con:hamming}
+The tolerant Hamming bound coincides with the plain Hamming bound on the padded block, and at
+fixed $\Tol/n$ random mixed-weight chains approach the EA-Singleton rate as $q\to\infty$.
+\status{CONJECTURE}
+\end{conjecture}
+
+\begin{openproblem}[framing]\label{op:framing}
+Can a labeling/framing code on $\psi$ decide whether an insertion fell \emph{inside} an
+$\Aalg$-symbol (Model B/C)?
+\end{openproblem}
+
+\begin{openproblem}[skew constacyclic windows]\label{op:skew}
+For skew constacyclic chains the padding is $\pi$-semilinear; the syndrome algebra then changes
+(twisted module structure). Not attempted here.
+\end{openproblem}
+
+\begin{openproblem}[heterogeneity amplification]\label{op:ha}
+Do dual-containing chains with $\mathrm{HA}=\Th/\max_i\ord_{f_i}(x)>1$ exist for $q\le25$,
+$n\le11$? (Search T14 of the blueprint.)
+\end{openproblem}
+
+\begin{openproblem}[repeated roots and counting]\label{op:repeated}
+Does Theorem~\ref{thm:synd} survive $p\mid n$; and can one count chains with prescribed $\Th$
+and prescribed $\kappa$-Galois hull dimension?
+\end{openproblem}
+
+% ---------------------------------------------------------------- %
+\section{Examples, computations and comparison}\label{sec:examples}
+
+\begin{table}[t]\centering
+\caption{Component code data (blueprint Tab.~3). [PARAMETER TABLE]}
+\begin{tabular}{@{}llllllll@{}}\toprule
+$q$ & $n$ & $\lambda$ & $r=\ord(\lambda)$ & $\deg g$ & $\ord_f=r h$ & $[n,k,d]$ & $C\perpsig\subseteq C$\\\midrule
+$4$ & $7$ & $\omega$ & $3$ & $3$ & $21=3\cdot7$ & $[7,4,3]_4$ & yes\\
+$16$ & $7$ & $\zeta_5$ & $5$ & $3$ & $35=5\cdot7$ & $[7,4,3]_{16}$ & yes\\
+\multicolumn{8}{c}{[rows to be added from the search T11--T14]}\\\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]\centering
+\caption{Quantum codes with tolerance (blueprint Tab.~5). [PARAMETER TABLE]}
+\label{tab:qcodes}
+\begin{tabular}{@{}lllllll@{}}\toprule
+instance & unpadded code & $\Th$ & $\Tol_{\max}$ & padded code (max $\Tol$) & $\Tol/L$ & distance method\\\midrule
+$q=4,n=7,\lambda=\omega,\kappa=1$ & $[[7,1,3]]_2$ & 21 & 20 & $[[54,2,3]]_2$ & $0.741$ & exhaustive\\
+$q=16,n=7,\lambda=\zeta_5,\kappa=2$ & $[[7,1,3]]_4$ & 35 & 34 & $[[164,1,3]]_4$ & $0.829$ & exhaustive\\
+\multicolumn{7}{c}{[rows to be added; EA-QSC rows with $c>0$ are targets of task T13]}\\\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]\centering
+\caption{Valid parameter sets and ceilings (blueprint Tab.~4). [PARAMETER TABLE]}
+\begin{tabular}{@{}lllll@{}}\toprule
+$p,\kappa$ & $p^\kappa+1$ & ceiling $\Tol/L<$ & attainable? & verified instance\\\midrule
+$p=2,\kappa=1$ & 3 & $3/4$ & yes & $q=4$, $T/L=0.741$\\
+$p=2,\kappa=2$ & 5 & $5/6$ & yes & $q=16$, $T/L=0.829$\\
+any, $\lambda=1$ & --- & $1/2$ & yes & cyclic chains (audited literature)\\\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]\centering
+\caption{Literature comparison (blueprint Tab.~2; twelve columns as listed in the blueprint).
+[PARAMETER TABLE]}
+\end{table}
+
+\begin{table}[t]\centering
+\caption{Notation (blueprint Tab.~1). [PARAMETER TABLE]}
+\end{table}
+
+\begin{table}[t]\centering
+\caption{Bounds and defect (blueprint Tab.~6), with conjectural rows marked.
+[PARAMETER TABLE]}
+\end{table}
+
+\begin{figure}[t]\centering
+\fbox{\parbox{0.92\textwidth}{\centering [FIGURE] Fig.~1: algebra/CRT decomposition with orders
+$r_i,h_i$ and the lcm arrow giving $\Th$; annotate the ceiling $\Tol/L<\Th/(n+\Th)$.}}
+\caption{Algebraic decomposition (blueprint Fig.~1).}
+\end{figure}
+
+\begin{figure}[t]\centering
+\fbox{\parbox{0.92\textwidth}{\centering [FIGURE] Fig.~2: pipeline
+finite algebra $\to$ $\lambda$-constacyclic chain $\to$ $\Sig$-dual and hull $\to$
+(containment $|$ entanglement) $\to$ padding and window syndrome $\to$ CSS/EA-CSS $\to$
+$[[N(n+\Tol),K,d(;c)]]$, with two independent rails converging at the end.}}
+\caption{Construction pipeline (blueprint Fig.~2).}
+\end{figure}
+
+\begin{figure}[t]\centering
+\fbox{\parbox{0.92\textwidth}{\centering [FIGURE] Fig.~3: $\Tol/L$ versus $\ord_f/n$; the
+cyclic ceiling $\Tol/L=1/2$; the audited families below it; the two verified points above it
+($0.741$ and $0.829$); the asymptote $(p^\kappa+1)/(p^\kappa+2)$.}}
+\caption{Tolerance map (blueprint Fig.~3).}
+\end{figure}
+
+\begin{figure}[t]\centering
+\fbox{\parbox{0.92\textwidth}{\centering [FIGURE] Fig.~4: computational workflow T1--T17 with
+theorem labels and the MAGMA replication block.}}
+\caption{Computational workflow (blueprint Fig.~4).}
+\end{figure}
+
+\begin{algorithm}[t]
+\caption{Tolerance invariant $\Th$ and maximal window (exact arithmetic).}
+\begin{algorithmic}[1]
+\Require component divisors $f_1,\dots,f_m$; weights $\lambda_1,\dots,\lambda_m$; length $n$
+\State $\Th\gets1$
+\For{$i=1$ to $m$}
+  \State $o_i\gets1$; $y\gets x\bmod f_i$
+  \While{$y\ne1\bmod f_i$} \Comment{multiplication in $R_{\lambda_i}$}
+     \State $y\gets y\cdot x\bmod f_i$; $o_i\gets o_i+1$
+  \EndWhile
+  \State $\Th\gets\lcm(\Th,o_i)$
+\EndFor
+\State \Return $\Th$, $\Tol_{\max}=\Th-1$
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[t]
+\caption{Window syndrome identity check (verification task T7).}
+\begin{algorithmic}[1]
+\Require chain $g_D\mid g_C\mid x^n-\lambda$; test words $w=c+g_D$, $c\in C$; shifts $a$
+\For{all $a$ in the tested range}
+  \State build $W_a(w)$ by the $\lambda^{-1}$-periodic rule
+  \State $J\gets W_a(w)/g_D$ in $R_\lambda$; \quad $\Syn\gets J\bmod f$
+  \State \textbf{assert} $\Syn=x^{-a}\bmod f$ \Comment{independent operator for $x^{-a}$}
+\EndFor
+\end{algorithmic}
+\end{algorithm}
+
+% ---------------------------------------------------------------- %
+\section{Conclusion, limitations and open problems}\label{sec:conclusion}
+% What is new (C1--C5), what is NOT (the known machinery), the limits of Model A,
+% Open Problems 1--4, and the pre-submission checklist of blueprint PART 17.
+
+\appendix
+\section{Proofs}\label{app:proofs}
+% Lemma L4 (dual generator), Theorems 2, 3, 4, 9 in full; the two rejected criteria
+% with their counterexample counts.
+\section{Reproducibility}\label{app:repro}
+% Scripts, versions, commands, raw outputs (blueprint PART 10); manual-check list;
+% the two independent implementations for every headline number.
+\section{Full tables}\label{app:tables}
+% Search output for Tables 3--6.
+
+\begin{thebibliography}{99}
+% No entry may be invented.  Fill from blueprint PART 3 (verified groups) and
+% blueprint PART 3.6 (to be verified); every item must be checked against the
+% published version before submission.
+\bibitem{placeholder} [REFERENCES: see the blueprint, PART 3 --- verified and to-be-verified lists]
+\end{thebibliography}
+
+\end{document}
