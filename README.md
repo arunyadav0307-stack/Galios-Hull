@@ -14,7 +14,7 @@ as a structural/stylistic model only; none of its content was imported.
 | Path | Description |
 |---|---|
 | `manuscript/main.tex` | **Revised LaTeX source** (authoritative manuscript) |
-| `manuscript/references.bib` | Bibliography (unchanged from source) |
+| `manuscript/references.bib` | Bibliography: 13 source entries + 17 verified additions = 30, all cited |
 | `manuscript/main.pdf` | Compiled 18-page PDF (see build note) |
 | `manuscript/main.typ` | Typst port used only to render the PDF here |
 | `manuscript/build_pdf_typst.py` | PDF build script (fallback chain) |
