@@ -767,7 +767,7 @@ At $u=z=1$, every local trace \eqref{eq:trace} counts the $2^{a_O}$ indexed bina
 
 \begin{corollary}[Code-dimension distribution]\label{cor:code-dist}
 Setting $z=1$ removes the hull marking and yields
-\begin{equation}\label{eq:code-dist}
+\begin{equation}
 \Epoly(u,1)=\prod_{s=1}^{N}\prod_{f\in\Fs}
 \left(1+u^{m_s\deg(f)}\right).
 \end{equation}
@@ -797,7 +797,7 @@ Set $u=1$ in Theorem~\ref{thm:central} and use Propositions~\ref{prop:orbit-poly
 
 \begin{corollary}[LCD count]\label{cor:lcd}
 All orbit weights are positive. Hence the hull dimension is zero exactly when every orbit has $b_O=0$. A cyclic binary word has no $1$-to-$0$ transition exactly when it is constant, so each orbit has two LCD selections. Therefore
-\begin{equation}\label{eq:lcd}
+\begin{equation}
 \#\{C:H_k(C)=0\}=2^{\sum_s|\Os|}.
 \end{equation}
 This is a labeled LCD count.
@@ -817,7 +817,7 @@ Thus every distinct labeled factor-selection code has equal probability.
 
 \begin{corollary}[Mean hull dimension]\label{cor:mean}
 Under this uniform measure, for an orbit of length $a\geq2$, the indicator $X_i=\varepsilon_i(1-\varepsilon_{i+1})$ has expectation $1/4$, while a length-one orbit contributes zero. Independence across orbits gives
-\begin{equation}\label{eq:mean}
+\begin{equation}
 \mathbb E[H_k]
  =\sum_{s,O:\,a_O\geq2}\frac{a_Ow_O}{4}.
 \end{equation}
@@ -830,7 +830,7 @@ Sum the expectations of the directed boundary indicators over every orbit and mu
 
 \begin{corollary}[Variance of hull dimension]\label{cor:variance}
 Under the same uniform measure, for $a\geq3$, neighboring directed-edge indicators have covariance $-1/16$ and nonneighboring indicators have covariance zero. Thus an orbit of length $a\geq3$ contributes $aw^2/16$. For $a=2$, the two directed boundary indicators are mutually exclusive and the orbit contribution is Bernoulli with variance $w^2/4$. A length-one orbit contributes zero. Therefore
-\begin{equation}\label{eq:var}
+\begin{equation}
 \operatorname{Var}(H_k)
  =\sum_{s,O:\,a_O=2}\frac{w_O^2}{4}
   +\sum_{s,O:\,a_O\geq3}\frac{a_Ow_O^2}{16}.
