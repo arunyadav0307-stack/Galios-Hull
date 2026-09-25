@@ -49,7 +49,7 @@ We study the joint distribution of code dimension and $k$-Galois hull dimension 
 // ---------- 1. Introduction ----------
 = Introduction
 
-The intersection of a linear code with its dual, its hull, is a structural invariant of the code. Hulls appear in the study of code intersections, complementary-dual codes, automorphism questions, and conditional quantum-code constructions. The $k$-Galois hull generalizes the Euclidean and Hermitian cases by applying a Frobenius automorphism in one slot of the pairing. For constacyclic codes, the ambient polynomial factorization makes duality and intersection questions amenable to algebraic analysis.
+Let $C$ be a linear code with dual $C^perp$; the hull $C inter C^perp$ is a structural invariant of the code. Hulls appear in the study of code intersections, complementary-dual codes, automorphism questions, and conditional quantum-code constructions. The $k$-Galois hull generalizes the Euclidean and Hermitian cases by applying a Frobenius automorphism in one slot of the pairing. For constacyclic codes, the ambient polynomial factorization makes duality and intersection questions amenable to algebraic analysis.
 
 Exact enumeration questions have been studied in several narrower settings. Hulls of cyclic and negacyclic codes over finite fields, including fixed-dimension counts, were treated through reciprocal factors and related polynomial descriptions \[1\]. For constacyclic codes over finite fields, Galois-hull formulas and restricted prescribed-dimension counts were reported together with a correction record; the complete corrected theorem text is not imported here \[2, 3\]. Average-dimension and small-dimension Galois-hull records provide further neighboring context \[4, 5\].
 
