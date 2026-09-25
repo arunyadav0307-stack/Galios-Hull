@@ -1,0 +1,322 @@
+% =====================================================================
+%  PART O --- LaTeX blueprint for the proposed paper.
+%  This is a BLUEPRINT, not the paper: every statement is a placeholder
+%  tagged with its epistemic status (see BLUEPRINT.md, PART E ledger).
+%  Compile with pdflatex (no external figures required).
+% =====================================================================
+\documentclass[11pt]{article}
+
+\usepackage{amsmath,amssymb,amsthm,mathtools,bm}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage[hidelinks]{hyperref}
+\usepackage[margin=1in]{geometry}
+
+% ---- theorem environments required by the brief ----
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+% auxiliary environments for conjectures / open problems (keep them visibly
+% distinct from theorems in the final paper)
+\theoremstyle{plain}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newtheorem{openproblem}[theorem]{Open Problem}
+
+% ---- notation macros ----
+\newcommand{\Fq}{\mathbb{F}_q}
+\newcommand{\Fqi}{\mathbb{F}_{q^{d_i}}}
+\newcommand{\Aalg}{A}
+\newcommand{\Rlam}{R_{\lambda}}
+\newcommand{\hull}{\operatorname{hull}}
+\newcommand{\ord}{\operatorname{ord}}
+\newcommand{\lcm}{\operatorname{lcm}}
+\newcommand{\perpsig}{^{\perp_{\sigma_\kappa}}}
+\newcommand{\EAQSC}{\mathrm{EA\text{-}QSC}}
+\newcommand{\amax}{a_{\mathrm{max}}}
+\newcommand{\Tol}{T}
+\newcommand{\Th}{\Theta}
+
+\title{\textbf{Synchronization is independent of self-orthogonality:\\
+Galois-hull quantum synchronizable codes over semisimple algebras}\\[4pt]
+\large PROVISIONAL TITLE (four alternatives in the blueprint, PART N)}
+\author{[AUTHORS TO BE DETERMINED]}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent
+PROVISIONAL ABSTRACT (189 words; see \texttt{BLUEPRINT.md}, PART N.2).
+Block synchronization and quantum error correction are usually built from the same
+algebraic object, a dual-containing cyclic code. We show that the two requirements are
+logically independent and exploit this separation inside the semisimple-algebra framework
+of Galois-hull theory. For a unit $\lambda=\sum_i\lambda_ie_i$ of a semisimple
+$\Fq$-algebra $\Aalg=\prod_i\Fqi$ and a chain $C\subseteq D$ of $\lambda$-constacyclic
+$\Aalg$-linear codes, we prove that the receiver's window syndrome equals $x^{-a}$ in
+$\Rlam/\langle f\rangle$ exactly, independently of the transmitted codeword, and that the
+tolerance against misalignment is $\lcm_i\ord_{f_i}(x)-1$. This invariant is strictly
+larger than any single component order and can exceed the block length, so the cyclic
+ceiling $\Tol<n$ disappears. We characterize $\kappa$-Galois self-orthogonality by the
+divisibility criterion $h^\tau\equiv0\bmod g$, which decouples tolerance from the hull and
+yields entanglement-assisted quantum synchronizable codes $[[N+\Tol,K,d;c]]_Q$ with
+$c=\dim\hull_\kappa$ and asymmetric twists per component. We add a tolerant Singleton bound
+and a synchronization-defect functional, and accompany every structural claim with an
+exhaustive, reproducible verification suite, including a computed family
+$[[14+\Tol,2,3]]_2$ with $\Tol\le20>n=7$.
+\end{abstract}
+
+% =====================================================================
+\section{Introduction}\label{sec:intro}
+% PART M, section 1.  Structure to be written:
+%  (i) the synchronization problem; (ii) the same-object assumption and why it was
+%  never questioned; (iii) contributions C1--C4 of the blueprint (PART M);
+%  (iv) relation to ring-based QSCs [REFERENCE: Liu--Liu 2021] and to
+%  Galois-hull EAQECCs [REFERENCE: source paper], with the differentiation
+%  stated in PART P (closest competitor: [REFERENCE: Zhang--Kong--Zheng, to verify]).
+
+\section{Preliminaries}\label{sec:prelim}
+% semisimple algebras and CRT; primitive idempotents; the convention bridge
+% kappa_ours = e - kappa_source; the sigma_kappa-Galois inner product; lambda-constacyclic
+% codes over A; hulls; Gray maps; the two channel models (H.2.1 / H.2.2).
+
+\begin{definition}[componentwise Frobenius]\label{def:frob}
+$\sigma_\kappa^{\Aalg}\colon\sum_i a_ie_i\longmapsto\sum_i a_i^{p^\kappa}e_i$.
+\textnormal{[PROVED-HERE: well-defined $\Fq$-algebra automorphism; Lemma F.1]}
+\end{definition}
+
+\begin{definition}[$\kappa$-Galois inner product]\label{def:ip}
+$\langle u,v\rangle_{\sigma_\kappa}:=\sum_{j}u_j\,\sigma_\kappa^{\Aalg}(v_j)\in\Aalg$.
+\end{definition}
+
+\begin{definition}[$\lambda$-constacyclic code over $\Aalg$]\label{def:constacyc}
+A left ideal $C\trianglelefteq \Aalg[x]/\langle x^n-\lambda\rangle$.
+\end{definition}
+
+\begin{definition}[$\lambda$-periodic continuation and window]\label{def:pad}
+$s_v(j):=\lambda^{-\lfloor j/n\rfloor}v_{j\bmod n}$;
+$B_{a_l,a_r}(v):=(s_v(j))_{j=-a_l}^{n+a_r-1}$;
+$W_a(v):=(s_v(a),\dots,s_v(a+n-1))$;
+$\Tol:=a_l+a_r$.
+\end{definition}
+
+\section{Codes and Duality over $\Aalg$}\label{sec:duality}
+
+\begin{theorem}[structure/decomposition]\label{thm:struct}
+$\Rlam(\Aalg)\cong\prod_i R_{\lambda_i}(\Fqi)$, $C=\bigoplus_ie_iC_i$,
+$\dim_{\Fq}C=\sum_id_i(n-\deg g_i)$.
+\textnormal{[PROVED-HERE, write out; verified computationally]}
+\end{theorem}
+
+\begin{theorem}[twist condition]\label{thm:twist}
+For a nontrivial $\lambda$-constacyclic code $C$ over $\Fq$: $C\perpsig$ is again
+$\lambda$-constacyclic if and only if $\lambda^{p^\kappa+1}=1$.
+\textnormal{[THEOREM TO BE PROVED; VERIFIED-COMPUTATIONALLY: 1010/1010]}
+\end{theorem}
+
+\begin{remark}[a false strengthening to avoid]\label{rem:nofalse}
+``$\lambda^{p^\kappa+1}=1$ implies $C\perpsig\subseteq C$ for every $\lambda$-constacyclic
+$C$'' is \emph{false} (counterexample: $q=8$, $n=7$, $\lambda=1$, $p^\kappa=4$,
+$\deg g\in\{6,7\}$). Only Theorems~\ref{thm:twist} and~\ref{thm:contain} may be used.
+\end{remark}
+
+\begin{theorem}[generator of the twisted dual]\label{thm:dualgen}
+With $h:=(x^n-\lambda)/g$ and $h^\tau:=x^{\deg h}h(1/x)^{\sigma_\kappa}$:
+$C\perpsig=\langle h^\tau\rangle$.
+\textnormal{[THEOREM TO BE PROVED; VERIFIED-COMPUTATIONALLY: 1010/1010 and 488/488]}
+\end{theorem}
+
+\begin{theorem}[self-orthogonality criterion, necessary and sufficient]\label{thm:contain}
+Assume $\lambda^{p^\kappa+1}=1$. Then
+$C\perpsig\subseteq C\iff h^\tau\equiv0\ (\mathrm{mod}\ g)
+\iff h^\tau\in\langle g\rangle_{\Rlam}$.
+\textnormal{[THEOREM TO BE PROVED; VERIFIED-COMPUTATIONALLY: 742/742 equivalent forms,
+1010/1010 span form.  The rejected variants --- $\gcd(g,\mathrm{rev}(g^{p^{e-\kappa}}))=1$
+and the both-degrees-$n$ divisibility --- are documented in the paper as counterexamples.]}
+\end{theorem}
+
+\begin{corollary}[rank/hull dimension]\label{cor:hull}
+Closed-form expression for $\dim_{\Fq}\hull_{\sigma_\kappa}(C)$ in the mixed-weight CRT
+case. \textnormal{[THEOREM TO BE PROVED; target formula in PART F, Corollary F.6]}
+\end{corollary}
+
+\section{Synchronization Theory}\label{sec:sync}
+
+\begin{lemma}[window = shifted codeword]\label{lem:window}
+$W_a(v)=\mu_a\,\tau_\lambda^{-a}(v)$ with $\mu_a\in\Aalg^\times$ known to the receiver;
+hence $W_a(v)\in D$ whenever $v\in D$.
+\textnormal{[VERIFIED-COMPUTATIONALLY: 1262/1262]}
+\end{lemma}
+
+\begin{theorem}[window-syndrome identity]\label{thm:syndrome}
+Let $C=\langle g_C\rangle\subseteq D=\langle g_D\rangle$ be $\lambda$-constacyclic
+$\Aalg$-linear codes, $f=g_C/g_D$ with $\deg f>0$, and $J_a:=W_a(v)/g_D\in\Rlam$.
+Then $J_a\bmod f=x^{-a}$ in $\Rlam/\langle f\rangle$, independently of $v\in D$;
+the syndrome is content-free and needs no scalar correction.
+\textnormal{[VERIFIED-COMPUTATIONALLY: 1262/1262 with an independent operator
+$x^{-a}=T^{(-a)\bmod\ord_f}(1)$, $T=$ multiplication by $x$.}
+\end{theorem}
+
+\begin{theorem}[$\lcm$ tolerance law]\label{thm:lcm}
+The syndromes are pairwise distinct on $[-a_l,a_r]$ iff
+$a_l+a_r<\Th$, where $\Th:=\lcm_i\ord_{f_i}(x)$. Hence
+(i) heterogeneity amplifies tolerance ($\Th>\max_i\ord_{f_i}$ possible),
+(ii) $\Tol=\Th-1>n$ is possible, and (iii) $\Tol/L>1/2$ is attainable, whereas cyclic
+$\mathrm{QSC}$s satisfy $\Tol<n=L-\Tol$.
+\textnormal{[VERIFIED-COMPUTATIONALLY: ring case orders $(21,7)$ give $\Th=21$ with
+21 distinct syndrome pairs and 0 collisions; $T/L=0.588$ at $L=34$.}
+\end{theorem}
+
+\begin{theorem}[jitter-tolerant synchronization]\label{thm:jitter}
+If the misalignment reaches component $i$ with offset $a+\delta_i$,
+$\delta_i\in\{0,\dots,\Delta\}$, then for every fixed offset vector the syndrome tuple is
+still injective on windows of length $\Th$; the receiver recovers the global shift
+$a\bmod\Th$ (not the individual $\delta_i$).
+\textnormal{[partly VERIFIED-COMPUTATIONALLY: all offset vectors with $\Delta=1$; full
+statement THEOREM TO BE PROVED.]}
+\end{theorem}
+
+\begin{theorem}[decoupling of synchronization and self-orthogonality]\label{thm:decouple}
+Tolerance is a function of $(g_C,g_D,\lambda)$ alone; the quantum parameters are a function
+of the Gram/hull data alone. Consequently entanglement assistance repairs the quantum layer
+without changing $\Tol$.
+\textnormal{[THEOREM TO BE PROVED; short.]}
+\end{theorem}
+
+\section{Quantum Constructions}\label{sec:quantum}
+
+\begin{theorem}[QSC parameters]\label{thm:qsc}
+$[[N+\Tol,K,d]]_Q$ with $K=2\dim\psi(C)-N$ and
+$d\ge\min\{d(\psi(C)\setminus\psi(C)^{\perp_\kappa}),
+d(\psi(C)^{\perp_\kappa}\setminus\psi(C))\}$.
+\textnormal{[THEOREM TO BE PROVED; instances COMPUTATIONAL RESULT]}.
+\end{theorem}
+
+\begin{theorem}[entanglement-assisted QSC]\label{thm:eaqsc}
+If $C\perpsig\not\subseteq C$ there is an $(a_l,a_r)$-$\EAQSC$
+$[[N+\Tol,K,d;c]]_Q$ with $c=\dim_{\Fq}\hull_{\sigma_\kappa}(\psi(C))$ and $\Tol$ unchanged.
+\textnormal{[THEOREM TO BE PROVED.]}
+\end{theorem}
+
+\begin{theorem}[asymmetric Galois twists]\label{thm:asym}
+Per-component twists $(\kappa_1,\dots,\kappa_m)$ are admissible iff
+$\lambda_i^{p^{\kappa_i}+1}=1$ for all $i$; tolerance is unaffected, whereas $K$ or $c$ can
+improve. \textnormal{[THEOREM TO BE PROVED; corollary of Theorems~\ref{thm:contain},
+\ref{thm:lcm}, \ref{thm:eaqsc}.]}
+\end{theorem}
+
+\begin{theorem}[designed distance]\label{thm:bch}
+For BCH-type component generators, $d\ge\min_i\delta_i^{\mathrm{BCH}}$ up to the CSS
+correction. \textnormal{[THEOREM TO BE PROVED.]}
+\end{theorem}
+
+\section{Bounds and Defect}\label{sec:bounds}
+
+\begin{theorem}[tolerant Singleton bound and synchronization defect]\label{thm:singleton}
+$K\le Q^{N+\Tol-2(d-1)-2c}$ and
+$\delta_{\mathrm{sync}}:=N+\Tol-2\log_QK-2(d-1)\ge0$, additive over component chains.
+\textnormal{[partly THEOREM TO BE PROVED, partly CONJECTURE --- flagged in the paper.]}
+\end{theorem}
+
+\begin{conjecture}[tolerant quantum Hamming]
+The tolerant Hamming bound coincides with the plain Hamming bound on the padded block.
+\end{conjecture}
+
+\begin{conjecture}[entanglement-assisted Gilbert--Varshamov]
+At fixed $\Tol/N$ and $q\to\infty$, random mixed-weight chains produce $\EAQSC$s approaching
+the EA-Singleton rate.
+\end{conjecture}
+
+\begin{openproblem}[framing recovery]
+Can a label/framing code on $\psi$ decide whether an insertion fell \emph{inside} an
+$\Aalg$-symbol (the jitter problem of Theorem~\ref{thm:jitter})?
+\end{openproblem}
+
+\begin{openproblem}[repeated-root lengths]
+Does the syndrome identity survive $p\mid n$?
+\end{openproblem}
+
+\section{Examples and Parameters}\label{sec:examples}
+% Flagship (COMPUTATIONAL RESULT, exhaustive):
+%   F_4, n = 7, lambda = (omega,1), kappa = 1 (Hermitian twist);
+%   component codes [7,4,3]_4 containing their Hermitian duals;
+%   psi(C) subset F_4^14, dim 8, Hermitian dual-containing, [[14,2,3]]_2;
+%   lcm(ord_{f_1}, ord_{f_2}) = lcm(21,7) = 21 => T <= 20 > n = 7;
+%   maximal length 34 qubits, T/L = 0.588.
+\begin{table}[t]\centering
+\caption{[PARAMETER TABLE] Code parameters per component (blueprint Table 3).}
+\begin{tabular}{@{}lllll@{}}\toprule
+component & $\lambda_i$ & factorization degrees / orders & $[n,k,d]_{q^{d_i}}$ &
+dual-containing\\\midrule
+\multicolumn{5}{c}{[to be filled from \texttt{verify/verify\_params.py} output]}\\\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]\centering
+\caption{[PARAMETER TABLE] Valid parameter sets and maximal $\Th$ (blueprint Table 4).}
+\begin{tabular}{@{}lllll@{}}\toprule
+$q$ & $n$ & admissible $\lambda$ & maximal $\Th$ & non-empty chains\\\midrule
+\multicolumn{5}{c}{[to be filled]}\\\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[t]\centering
+\caption{[PARAMETER TABLE] Quantum codes with tolerance (blueprint Table 5).}
+\begin{tabular}{@{}lllll@{}}\toprule
+$[[N+\Tol,K,d;c]]_Q$ & $\Tol$ & $(a_l,a_r)$ & $\Tol/L$ & method for $d$\\\midrule
+\multicolumn{5}{c}{[to be filled]}\\\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[t]\centering
+\fbox{\parbox{0.9\textwidth}{\centering [FIGURE] Fig.\ 1: ring/algebra decomposition, the
+idempotents $e_i$, the components $C_i$ and the orders $\ord_{f_i}$ joined by the lcm arrow.}}
+\caption{Ring decomposition (blueprint Fig.~1).}
+\end{figure}
+
+\begin{figure}[t]\centering
+\fbox{\parbox{0.9\textwidth}{\centering [FIGURE] Fig.\ 2: pipeline Finite ring/algebra
+$\to$ classical $\lambda$-constacyclic chain $\to$ $\sigma_\kappa$-dual and hull $\to$
+self-orthogonality/entanglement $\to$ tolerant block + CSS $\to$ $[[N+\Tol,K,d;c]]_Q$, with
+the two independent rails (tolerance vs.\ quantum data) converging only at the end.}}
+\caption{Construction pipeline (blueprint Fig.~2).}
+\end{figure}
+
+\begin{figure}[t]\centering
+\fbox{\parbox{0.9\textwidth}{\centering [FIGURE] Fig.\ 3: computational workflow T1--T16
+(blueprint PART I), each node annotated with the theorem it verifies.}}
+\caption{Computational workflow (blueprint Fig.~3).}
+\end{figure}
+
+\begin{figure}[t]\centering
+\fbox{\parbox{0.9\textwidth}{\centering [FIGURE] Fig.\ 4: $\Tol/L$ versus physical length for
+cyclic QSCs, the $(\lambda(u+v)\mid u-v)$ family, and the mixed-weight family of this paper
+(including $N=34$, $\Tol=20$, $\Tol/L=0.588$); second panel: heterogeneity amplification
+$\mathrm{HA}=\Th/\max_i\ord_{f_i}$ versus $m$.}}
+\caption{Parameter comparison (blueprint Fig.~4).}
+\end{figure}
+
+\section{Conclusion and Open Problems}\label{sec:conclusion}
+% open problems 1--4 of the blueprint (PART G.14), plus the pre-submission checklist
+% (PART Q item 23).
+
+\appendix
+\section{Proofs}\label{app:proofs}
+\section{Reproducibility}\label{app:repro}
+% commands, versions, raw outputs, manual-check list (blueprint PART I, I.4/I.5).
+\section{Full Tables}\label{app:tables}
+
+\begin{thebibliography}{99}
+% No entry may be invented.  Group A/B of the blueprint PART P may be pasted here after
+% the bibliographic details of group C are verified.
+\bibitem{placeholder} [REFERENCES: see blueprint PART P --- groups A, B, C]
+\end{thebibliography}
+
+\end{document}
