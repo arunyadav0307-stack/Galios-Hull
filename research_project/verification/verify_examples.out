@@ -1,0 +1,30 @@
+### verify_examples.py
+Tue Oct 20 07:50:01 UTC 2026
+Python 3.11.2
+==============================================================================
+EXAMPLE 2  (paper: Section 4.2)   q=9, p=3, e=2, k=1 (Hermitian), n=7, N=2
+==============================================================================
+  w^2 = 4   ord(w) = 8
+  x^7-1   irreducible factor degrees: [(1, 1), (3, 1), (3, 1)]
+  x^7-w^2 irreducible factor degrees: [(1, 1), (3, 1), (3, 1)]
+  g1 | x^7-1  : True
+  g2 | x^7-w^2: True
+  dim C1 = 4  dim C2 = 6
+  dim hull_1(C1) = 0  dim hull_1(C2) = 0   TOTAL = 0   (paper: 0)
+  M (M^(3))^T = gamma I : True  gamma = 1
+  psi(C) = [14, 10, 4]_9   (paper: [14,10,4])
+  EAQECC = [[14, 10-0, 4; 4]]_9   (paper: [[14,10,4;4]]_9)
+
+==============================================================================
+EXAMPLE 3  (paper: Section 4.2)   q=25, p=5, e=2, k=1 (Hermitian), n=13, N=2
+==============================================================================
+  w^2 = 8   ord(w) = 24
+  x^13-1   irreducible factor degrees: [(1, 1), (2, 1), (2, 1), (2, 1), (2, 1), (2, 1), (2, 1)]
+  x^13-w^8 irreducible factor degrees: [(1, 1), (2, 1), (2, 1), (2, 1), (2, 1), (2, 1), (2, 1)]
+  g1 | x^13-1   : True
+  g2 | x^13-w^8 : True
+  dim C1 = 10  dim C2 = 12
+  dim hull_1(C1) = 2  dim hull_1(C2) = 0   TOTAL = 2   (paper: 2)
+  M (M^(5))^T = gamma I : True  gamma = 1
+  psi(C) = [26, 22, 4]_25   (paper: [26,22,4])
+  EAQECC = [[26, 22-2, 4; 2]]_25   (paper: [[26,20,4;2]]_25)

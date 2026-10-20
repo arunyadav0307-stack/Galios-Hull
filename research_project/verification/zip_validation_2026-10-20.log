@@ -1,0 +1,54 @@
+FINAL VALIDATION OF THE DELIVERED ARCHIVE   2026-10-20 12:12:36 UTC
+archive : /home/user/Galios-Hull/research_project/FINAL_F11_EVIDENCE_DOSSIER.zip
+sha256  : 8bb77b518671e08db56e014d71f22c01605896475744e3b6fe0c11f1ca767232
+bytes   : 107868
+entries : 23
+python  : Python 3.11.2
+clean dir: /tmp/final_validate2  (nothing else present)
+
+--- 1. manifest verification: sha256 + size of every member ---
+  OK   b9ef7c4842a83873    44106  FINAL_F11_EVIDENCE_DOSSIER.md
+  OK   7aaabda365072b48    14577  FINAL_F11_VERIFICATION_LOG.md
+  OK   398b36cb19c5ea83    24810  FINAL_GO_NO_GO_DECISION.md
+  OK   433c4124d509496c    29558  code/f11_source_audit.py
+  OK   4e13e8a98e77b12f    15392  code/final_check_A.py
+  OK   4cee6242b56657e1    18208  code/final_check_B.py
+  OK   1547539a33432cd1    13517  code/gf.py
+  OK   5d9a696eacb14abc     8600  code/isometry_hull_screening.py
+  OK   665e6f3fbd6f1daf     9428  code/table1_audit.py
+  OK   848ac72ad01e22df    30091  code/table1_forensics.py
+  OK   bbcabc4a1b9b6b3f    14087  verification/VERBATIM_LOCI_v1.md
+  OK   fe1e862025bfa687    11173  verification/VOR_INSPECTION_2026-10-20.md
+  OK   6ef58c961d22b636     3367  verification/cleanroom_run_2026-10-20.log
+  OK   e4d3b064c446ff85     9012  verification/f11_source_audit.out
+  OK   23d27e059d14779a     5916  verification/final_check_A.out
+  OK   91cbe978753a3697     5870  verification/final_check_B.out
+  OK   49a3cf2f70c1e461     2239  verification/isometry_hull_screening.out
+  OK   8c2d11d485f8723c     4642  verification/table1_audit.out
+  OK   cc6c25d5facf0466    15309  verification/table1_forensics.out
+  => 19 members, ALL MATCH
+
+--- 2. execute every script from the unzipped archive ---
+  f11_source_audit.py  exit=0
+  table1_audit.py  exit=0
+  table1_forensics.py  exit=0
+  final_check_A.py  exit=0
+  final_check_B.py  exit=0
+  isometry_hull_screening.py  exit=0
+
+--- 3. audit logs regenerated here vs logs shipped in the archive ---
+  verification/table1_audit.out : IDENTICAL
+  verification/table1_forensics.out : IDENTICAL
+
+--- 4. key results, restated from the regenerated logs ---
+  C2  k_printed = sum_S (n - deg g_S)        : 13/13
+  C3  printed length = 2n = nN with N = 2    : 13/13
+  C5  2k > 2n (impossible)                   : rows [1, 3, 6, 7, 10, 11, 12, 13]  (8)
+  C6  Theorem 10: c = 2n - k - h, h = k - k'  : 13/13
+  C7  Diff = (n' - k' + c) - 2(d-1)          : 13/13
+  C8  decoration: * iff Diff=0, dagger iff 2 : 13/13
+  C9  d agrees between [len,k,d] and [[..]]  : 13/13
+  C10 n' = len in the two columns            : 13/13
+
+--- 5. source PDF integrity (must be unchanged) ---
+0db90bfbeda69ad1af231b81d92f24be3589ed15ac2e0ade6605ba7ad0ddc039  /home/user/Galios-Hull/Galios hulls of constacclic codes over affine algebra rings'.pdf

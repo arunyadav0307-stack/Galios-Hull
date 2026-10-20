@@ -1,0 +1,6 @@
+### verify_example1.py
+Tue Oct 20 07:52:58 UTC 2026
+parsed: 6
+e_i^2 == e_i       : [True, True, True, True, True, True]
+e_i e_j == 0 (i!=j): [True, True, True, True, True, True]
+sum e_i == 1       : True

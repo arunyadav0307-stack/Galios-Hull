@@ -1,0 +1,30 @@
+### verify_corollary_3_5.py
+Tue Oct 20 07:49:49 UTC 2026
+Python 3.11.2
+==============================================================================
+TEST 1 -- Corollary 3.5(1): p odd, n'=1, n=p^e', q=p^e, k arbitrary
+==============================================================================
+  q=9 n=9 k=1 lambda=1: attainable set D_1 = [0, 1, 2, 3, 4]
+      counts {0: 2, 1: 2, 2: 2, 3: 2, 4: 2}
+  q=9 n=9 k=1 lambda=-1: attainable set D_1 = [0, 1, 2, 3, 4]
+      counts {0: 2, 1: 2, 2: 2, 3: 2, 4: 2}
+  ring A=F9[x]/<x^2-1>, N=2, lambda=e1+e2 : D = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+  predicted |D| = N(n-1)/2 + 1 = 9 ; observed = 9  -> PASS
+
+==============================================================================
+TEST 2 -- Corollary 3.5(2): p=2, e even, k=e/2, ord(lam)n' | 2^e-1
+==============================================================================
+  ord(lambda) = 3
+  q=4 n=4 k=1 lambda=w : attainable set D_1 = [0, 1, 2]
+      counts {0: 2, 1: 2, 2: 1}
+  ring A=F4[x]/<x^2+x+w>, N=2, lambda=e1+w e2 : D = [0, 1, 2, 3, 4]
+  predicted |D| = N n/2 + 1 = 5 ; observed = 5  -> PASS
+
+==============================================================================
+TEST 3 -- product factorization of the joint hull-dimension distribution
+==============================================================================
+  local distributions : {0: 2, 1: 2, 2: 1} {0: 2, 1: 2, 2: 1}
+  convolution         : {0: 4, 1: 8, 2: 8, 3: 4, 4: 1}
+  direct over A       : {0: 4, 1: 8, 2: 8, 3: 4, 4: 1}
+  -> PASS (factorization holds exactly)
+  total number of codes: product of locals = 25, direct = 25

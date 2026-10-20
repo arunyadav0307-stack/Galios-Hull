@@ -1,0 +1,124 @@
+### final_check_B.py
+Tue Oct 20 12:12:07 UTC 2026
+Python 3.11.2
+
+==============================================================================
+EXAMPLE 2  (p.18-20):  R = F_9[x1,x2]/<t1,t2>
+==============================================================================
+  F_9 = F_3(w), w^2 + 2w + 2 = 0;  w = 7
+  t1 = [7, 1, 1]  (x^2 + x + w)
+  t2 = [2, 5, 1]  (x^2 + w^5 x + 2)
+  t1 irreducible over F_9: True
+  t2 irreducible over F_9: True
+  dim_F9 A = deg t1 * deg t2 = 2 * 2 = 4
+  |A| = 9^4 = 6561
+  idempotents of A: 4   primitive: 2
+  => |S-hat| = N = 2
+
+  Each component contains a root of t1, which has degree 2 over F_9,
+  so each component has F_9-degree >= 2.  Sum of degrees = dim_F9 A = 4,
+  and there are 2 components => each has degree exactly 2.
+  A ~= F_81 x F_81.   |F_9^N| = 9^2 = 81
+
+  CONTRADICTION CHECK:  |A| = 6561  vs  |F_9^N| = 81
+  psi : A -> F_9^2 cannot be injective, hence not bijective.
+
+  Factorisation of the constacyclic moduli (checked against p.19):
+    x^7 - 1  factors (deg, multiplicity): [(1, 1), (3, 1), (3, 1)]
+    x^7 - w^2 factors (deg, multiplicity): [(1, 1), (3, 1), (3, 1)]
+    g1 = x^3 + w^3 x^2 + w^5 x + 2 divides x^7-1 : True
+    g2 = x + w^2 divides x^7 - w^2                : True
+    deg g1 = 3, deg g2 = 1
+
+  Theorem 8 as printed gives   sum_S (n - deg g_S)      = 10
+  With |S(nu)| = 2 per component: sum_S |S| (n - deg g_S) = 20
+  => the printed hull dimension 0 is unaffected (each term is 0),
+     but the CODE dimension is 20, not 10.
+
+  direct computation of dim_F9(A*g) by rank: 20   (primitive idem: 2)
+  claimed code length nN = 7*2 = 14
+  dim_F9 C = 20  >  nN = 14 ? True
+
+==============================================================================
+EXAMPLE 3  (p.20-21):  R = F_25[x1,x2]/<t1,t2>
+==============================================================================
+  F_25 = F_5(w), w^2 + 4w + 2 = 0;  w = 21
+  t1 = x^2 + x + w^13 irreducible: True
+  t2 = x^2 + w^3 x + 1 irreducible: False
+  dim_F25 A = 4;  |A| = 25^4 = 390625
+  two components, each of degree >= 2, summing to 4 => A ~= F_625 x F_625
+  N = |S-hat| = 2 ;  |F_25^2| = 625  vs  |A| = 390625
+
+    x^13 - 1  factor degrees: [1, 2, 2, 2, 2, 2, 2]
+    x^13 - w^8 factor degrees: [1, 2, 2, 2, 2, 2, 2]
+    deg g1 = 3, deg g2 = 1
+    g1 divides x^13-1 : True
+    g2 divides x^13-w^8: True
+
+  printed formula: 22 ; correct: 44
+  direct computation of dim_F25(A*g) by rank: 44
+  claimed length nN = 26 ; dim_F25 C = 44 > 26 ? True
+
+==============================================================================
+EXAMPLE 1  (p.5):  A1 = F_2[x1,x2]/<t1,t2>
+==============================================================================
+  t1 = x^5+x^4+1 : irreducible factors of degrees [2, 3]
+  t2 = x^4+x^2+x : irreducible factors of degrees [1, 3]
+  (paper p.5 writes t2 = x2(x2^2+x2+1); that product is x^3+x^2+x,
+   not x^4+x^2+x.  Correct: t2 = x2(x2^3+x2+1).  Minor slip.)
+  prod deg t_i = 5 * 4 = 20
+  number of classes |S-hat| = sum over factor pairs of gcd(d1,d2) = 6
+    (paper p.5 says six -- agrees)
+  sum of |S(nu)| over classes = sum over factor pairs of d1*d2 = 20
+    and prod deg t_i = 20  ->  equal: True
+  => dim_2 A1 = 20, but |S-hat| = 6.  Even Example 1 is
+     not the split case: class sizes are 2,6,3,3,3,3, not all 1.
+
+==============================================================================
+COMPONENT-LEVEL CHECK: each C_S lives in A_S^n, not in F_q^n
+==============================================================================
+  component   dim_{A_S}  hull_{A_S} |S|  dim_q   hull_q
+  Ex2 comp 1  4          0          2    8       0
+  Ex2 comp 2  6          0          2    12      0
+  Ex3 comp 1  10         2          2    20      4
+  Ex3 comp 2  12         0          2    24      0
+
+  Ex 2: sum of A_S-dimensions = 4+6 = 10  (the paper's printed value)
+        weighted by |S|=2      = 20  (the true F_9-dimension)
+        hull: 0+0 = 0 either way -- Ex 2's hull value is unaffected
+  Ex 3: sum of A_S-dimensions = 10+12 = 22 (paper)
+        weighted by |S|=2      = 44 (true F_25-dimension)
+        hull: 2+0 = 2 (paper)  vs  4+0 = 4 (true F_25-dimension)
+
+  This also confirms the diagnosis: the paper's own arithmetic is
+  internally consistent, and reproduces exactly, when every dimension
+  is read as an A_S-dimension.  The missing step is the factor |S| = 2.
+
+==============================================================================
+GENERAL STATEMENT (derived, not quoted)
+==============================================================================
+  A = F_q[X_1,..,X_l]/<t_1(X_1),..,t_l(X_l)> with the t_i squarefree.
+  CRT (paper p.5):  A ~= (+)_S F_q(nu_1,..,nu_l), and each summand is a
+  field of degree |S(nu)| over F_q.  Hence
+      dim_q A = sum_S |S(nu)| = prod_i deg t_i.
+  Writing a = sum_S a_S e_S therefore requires a_S in F_{q^|S(nu)|},
+  NOT in F_q, unless every |S(nu)| = 1 (i.e. every t_i splits).
+
+  Paper's own numbers, three rings:
+    Example 1 (q=2):  |S-hat| = 6, dim_q A = 20
+    Example 2 (q=9):  |S-hat| = 2, dim_q A = 4
+    Example 3 (q=25): |S-hat| = 2, dim_q A = 4
+    In every case dim_q A exceeds N, and they differ whenever some
+    t_i has degree > 1 -- which holds in all three examples.
+
+  Consequences (all arithmetic, no interpretation):
+    Ex 2: claimed [14,10,4]_9.  dim_F9 C = 20 > 14 = nN.
+    Ex 3: claimed [26,22,4]_25. dim_F25 C = 44 > 26 = nN.
+    No injective F_9-linear (resp. F_25-linear) map from such a module
+    into F_q^{nN} exists, so psi in eq.(10) is not the claimed bijection.
+
+  Repair R1 (add 'every t_i splits'): consistent, but all three of the
+    paper's rings fail it, so every example and Table 1 would be void.
+  Repair R2 (psi : A -> F_q^{dim_q A} via F_q-bases): length becomes
+    n*dim_q A (28 and 52), and psi is only F_q-linear, so Lemma 9
+    (psi(hull) = hull(psi(C))) no longer follows from an isometry.

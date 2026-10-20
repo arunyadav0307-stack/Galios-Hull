@@ -1,0 +1,44 @@
+### isometry_hull_screening.py
+Tue Oct 20 09:58:47 UTC 2026
+Python 3.11.2
+==============================================================================
+
+PART A -- explicit counterexample (brute force over all q^n vectors)
+------------------------------------------------------------------------------
+  q=4 n=3; C = <1+x>; |C| = 16, dim = 2
+  phi = f(x) -> f(w*x), i.e. diag(1, w, w^2); Hamming isometry: True
+  phi(C) is cyclic: True
+  k=0:  dim hull_k(C) = 0   dim hull_k(phi C) = 1   DIFFERENT
+  k=1:  dim hull_k(C) = 0   dim hull_k(phi C) = 0   same
+  same weight enumerator: True
+
+PART B -- group sizes (how much of M is a form-similarity?)
+------------------------------------------------------------------------------
+  q=4 n=3: |M| = n! (q-1)^n = 6 * 27 = 162
+  k=0: #diagonals with a_i^(1+q^k) constant = 3; |Sim_0| = n! * 3 = 18 (index 9)
+  k=1: #diagonals with a_i^(1+q^k) constant = 3; |Sim_1| = n! * 3 = 18 (index 9)
+
+PART C -- exhaustive invariance check inside Sim_k
+------------------------------------------------------------------------------
+  constacyclic codes enumerated: 12
+  (code, similarity, k) triples checked: 432
+  invariance failures: 0   OK as proved
+
+  note: 48 diagonal choices are Hamming isometries but NOT
+        similarities of the tested Galois forms -- these are exactly
+        the maps that may (and in Part A, do) change the hull.
+
+==============================================================================
+VERDICT
+  The GALOIS hull dimension is not a class function on isometry classes.
+  Explicit witness: q=4, n=3, C=<1+x>, phi=diag(1,w,w^2); Euclidean hull
+  0 -> 1, both codes cyclic with the same weight enumerator.
+  CORRECTION (2026-10-20): the Hermitian (k=1) hull is 0 -> 0 here.  Over
+  F_4 a^3 = 1 for every nonzero a, so every monomial map is a Hermitian
+  similarity.  A Hermitian counterexample exists over F_9 (hull 2 -> 0);
+  see final_check_A.py and FINAL_INDEPENDENT_MATHEMATICAL_CHECK.md.
+
+  Therefore direction C1, as stated, is ILL-POSED and must be reformulated
+  in terms of the similarity group Sim_k of the Galois form (where invariance
+  holds, by the proposition verified in Part C).
+==============================================================================

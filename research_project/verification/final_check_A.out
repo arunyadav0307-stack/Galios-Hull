@@ -1,0 +1,143 @@
+### final_check_A.py
+Tue Oct 20 12:12:06 UTC 2026
+Python 3.11.2
+
+==============================================================================
+PART A1 -- the field, stated explicitly
+==============================================================================
+  F_4 = F_2[w]/(w^2 + w + 1);  w^2 = w + 1;  w^3 = 1
+  encoding: a0 + a1*w  ->  a0 + 2*a1
+      0=0  1=1  w=2  w^2=3
+  addition table (^):
+      0  1  2  3
+      1  0  3  2
+      2  3  0  1
+      3  2  1  0
+  multiplication table:
+      0  0  0  0
+      0  1  2  3
+      0  2  3  1
+      0  3  1  2
+  multiplicative order of each unit: 1:1, w:3, w^2:3
+
+==============================================================================
+PART A2 -- the code C = <1+x> in F_4[x]/(x^3 - 1)
+==============================================================================
+  g(x) = 1 + x  (degree 1)
+  |C| = 16   dim_F4 C = 2
+  C is 1-constacyclic (closed under T_1): True
+  C is w-constacyclic: False ;  w^2-constacyclic: False
+  all codewords (weight in brackets):
+     ('0', '0', '0')  [0]
+     ('0', '1', '1')  [2]
+     ('0', 'w', 'w')  [2]
+     ('0', 'w^2', 'w^2')  [2]
+     ('1', '0', '1')  [2]
+     ('1', '1', '0')  [2]
+     ('1', 'w', 'w^2')  [3]
+     ('1', 'w^2', 'w')  [3]
+     ('w', '0', 'w')  [2]
+     ('w', '1', 'w^2')  [3]
+     ('w', 'w', '0')  [2]
+     ('w', 'w^2', '1')  [3]
+     ('w^2', '0', 'w^2')  [2]
+     ('w^2', '1', 'w')  [3]
+     ('w^2', 'w', '1')  [3]
+     ('w^2', 'w^2', '0')  [2]
+  weight distribution of C: {0: 1, 2: 9, 3: 6}
+
+==============================================================================
+PART A3 -- the monomial map phi = diag(1, w, w^2), i.e. f(x) -> f(w x)
+==============================================================================
+  diag(1,w,w^2) equals f(x) -> f(wx) on every element of the ring: True
+  phi is diagonal with nonzero entries => preserves every Hamming weight
+  |phi(C)| = 16   dim_F4 = 2
+  phi(C) is 1-constacyclic (closed under T_1): True
+  phi(C) is w-constacyclic: False
+  all codewords of phi(C):
+     ('0', '0', '0')  [0]
+     ('0', '1', 'w')  [2]
+     ('0', 'w', 'w^2')  [2]
+     ('0', 'w^2', '1')  [2]
+     ('1', '0', 'w^2')  [2]
+     ('1', '1', '1')  [3]
+     ('1', 'w', '0')  [2]
+     ('1', 'w^2', 'w')  [3]
+     ('w', '0', '1')  [2]
+     ('w', '1', 'w^2')  [3]
+     ('w', 'w', 'w')  [3]
+     ('w', 'w^2', '0')  [2]
+     ('w^2', '0', 'w')  [2]
+     ('w^2', '1', '0')  [2]
+     ('w^2', 'w', '1')  [3]
+     ('w^2', 'w^2', 'w^2')  [3]
+  weight distribution of phi(C): {0: 1, 2: 9, 3: 6}
+  identical weight distributions: True
+  C == phi(C) as sets: False
+
+==============================================================================
+PART A4 -- hull dimensions, brute force over all 4^3 = 64 vectors
+==============================================================================
+  k  form        dim hull_k(C)   dim hull_k(phiC)  changed?
+  0  Euclidean   0               1                 YES
+  1  Hermitian   0               0                 no
+
+  hull_0 of C (as vectors): [('0', '0', '0')]
+  hull_0 of phi(C) (as vectors): [('0', '0', '0'), ('1', 'w^2', 'w'), ('w', '1', 'w^2'), ('w^2', 'w', '1')]
+
+==============================================================================
+PART A5 -- the criterion a_i^(1+p^k) constant, checked on this phi
+==============================================================================
+  a = (a_0,a_1,a_2) = ('1', 'w', 'w^2')
+  k=0: a_i^(1+2^0) = ('1', 'w^2', 'w')   constant: False   => phi is NOT a similarity of the k-Galois form
+  k=1: a_i^(1+2^1) = ('1', '1', '1')   constant: True   => phi IS a similarity of the k-Galois form
+
+  prediction: hull_0 may change (phi not a similarity),
+              hull_1 must NOT change (phi IS a similarity).
+  observed:    hull_0 0 -> 1;  hull_1 0 -> 0
+
+==============================================================================
+PART A6 -- verification of the criterion identity on random data
+==============================================================================
+  <phi u, phi v>_k  ==  sum_i a_i^(1+p^k) u_i v_i^(p^k)
+  trials: 300;  mismatches: 0
+
+==============================================================================
+PART B -- a k=1 (Hermitian) counterexample over F_9
+==============================================================================
+  Why F_4 cannot give one: for q=4, k=1, a^(1+p) = a^3 = 1 for every
+  nonzero a, so a_i^(1+p) is always constant and EVERY monomial map is a
+  Hermitian similarity.  Over F_9, a^(1+3) = Norm(a) is a nontrivial
+  character F_9^* -> F_3^*, so non-constant diagonals exist.
+
+  F_9 = F_3(w) with w^2 + 2w + 2 = 0; elements encoded 0..8
+  Norm(a) = a^(1+3) = a^4 in F_3: 1:1, 2:1, 3:2, 4:1, 5:2, 6:2, 7:2, 8:1
+
+  n = 5; units mod n = [1, 2, 3, 4]
+  (b, s, code) triples checked: 256
+  Hermitian hull changes      : 32
+
+  FIRST WITNESS
+    source ring R_a = F_9[x]/(x^5 - 4)   [a = b^s with b = 3, s = 2]
+    generator g = [2, 6, 1]   dim = 3
+    map psi_s: f(x) -> f(x^2),  diagonal scalings b^floor(si/n)
+    image is a 3-constacyclic code, same dimension
+    dim_F9 hull_1 :  2  ->  0
+    diagonal scalings a_i = [1, 1, 1, 3, 3]
+    a_i^(1+3) = [1, 1, 1, 2, 2]  (non-constant -> not a similarity)
+
+==============================================================================
+SUMMARY OF TASK A
+==============================================================================
+  C = <1+x> in F_4[x]/(x^3-1):            dim 2, |C| = 16
+  phi = diag(1,w,w^2) = f(x)->f(wx):      phi(C) cyclic, dim 2, |phi(C)| = 16
+  weight distributions identical:         True
+  hull_0 (Euclidean):  0 -> 1   CHANGED
+  hull_1 (Hermitian):  0 -> 0   NOT changed
+
+  The Euclidean counterexample stands.
+  The Hermitian case is NOT a counterexample at q=4, and cannot be:
+  over F_4 every nonzero a has a^3 = 1, so a_i^(1+p) = 1 for all a_i and
+  EVERY monomial map is a similarity of the Hermitian form.
+  Hermitian counterexamples found over F_9: 32.
+

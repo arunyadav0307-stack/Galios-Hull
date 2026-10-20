@@ -1,0 +1,63 @@
+CLEAN-ROOM RE-RUN  2026-10-20 12:09:59 UTC
+python:     Python 3.11.2
+clean dir:  /tmp/cleanroom_2026-10-20   (fresh unzip of FINAL_F11_EVIDENCE_DOSSIER.zip; nothing else present)
+zip sha256: c692a7a198b3d132f0a32f6267c6383da0a924d9c1b3743c9b0081b19f44cf5d
+zip bytes:  91388
+
+=== 1. manifest verification (sha256 + size of every member) ===
+  OK   5437a13b4d04b62c  FINAL_F11_EVIDENCE_DOSSIER.md
+  OK   3f00c40312a77935  FINAL_GO_NO_GO_DECISION.md
+  OK   433c4124d509496c  code/f11_source_audit.py
+  OK   4e13e8a98e77b12f  code/final_check_A.py
+  OK   4cee6242b56657e1  code/final_check_B.py
+  OK   1547539a33432cd1  code/gf.py
+  OK   5d9a696eacb14abc  code/isometry_hull_screening.py
+  OK   665e6f3fbd6f1daf  code/table1_audit.py
+  OK   848ac72ad01e22df  code/table1_forensics.py
+  OK   fe1e862025bfa687  verification/VOR_INSPECTION_2026-10-20.md
+  OK   e4d3b064c446ff85  verification/f11_source_audit.out
+  OK   35d8349b186a2153  verification/final_check_A.out
+  OK   6140cea82c7b27b5  verification/final_check_B.out
+  OK   49a3cf2f70c1e461  verification/isometry_hull_screening.out
+  OK   8c2d11d485f8723c  verification/table1_audit.out
+  OK   cc6c25d5facf0466  verification/table1_forensics.out
+  => 16 members, ALL MATCH
+
+=== 2. table1_audit.py (clean directory) ===
+exit code: 0
+  C0  g_S | x^n - lambda_S (transcription) : 13/13, naming-free
+  C1  deg g_S < n in every component       : True
+  C2  k_printed = sum_S (n - deg g_S)       : 13/13
+  C3  length = 2n                           : 13/13
+  C4  true dim_q = 2 * k_printed            : by construction (|S|=2)
+  C5  2k <= 2n                              : violated in 8 rows [1, 3, 6, 7, 10, 11, 12, 13]; degenerate in 3 rows [2, 4, 8]
+  C6  Theorem 10 arithmetic                  : 13/13 consistent
+  C7  'Diff' column identity                 : 13/13 consistent
+
+=== 3. table1_forensics.py (clean directory) ===
+exit code: 0
+  => rows whose every printed tuple occurs verbatim in the raw text: 13/13
+  => transcription VALIDATED under every naming
+  C2  k_printed = sum_S (n - deg g_S)        : 13/13
+  C3  printed length = 2n = nN with N = 2    : 13/13
+  C5  2k > 2n (impossible)                   : rows [1, 3, 6, 7, 10, 11, 12, 13]  (8)
+      2k = 2n (image is everything, d = 1)   : rows [2, 4, 8]  (3)
+      2k < 2n (dimensionally feasible)       : rows [5, 9]  (2)
+  C6  Theorem 10: c = 2n - k - h, h = k - k'  : 13/13
+  C7  Diff = (n' - k' + c) - 2(d-1)          : 13/13
+  C8  decoration: * iff Diff=0, dagger iff 2 : 13/13
+  C9  d agrees between [len,k,d] and [[..]]  : 13/13
+  C10 n' = len in the two columns            : 13/13
+
+=== 4. standardised diff: regenerated console log vs log shipped in archive ===
+  table1_audit.out : IDENTICAL (excluding timestamp and output-path lines)
+  table1_forensics.out : IDENTICAL (excluding timestamp and output-path lines)
+
+=== 5. independent cross-check: the two scripts must agree row-set by row-set ===
+  check                       table1_audit   table1_forensics
+  C2                                  13             13
+  C3                                  13             13
+  C6                                  13             13
+  C7                                  13             13
+  2k>2n rows                 [1, 3, 6, 7, 10, 11, 12, 13]   [1, 3, 6, 7, 10, 11, 12, 13]   AGREE
+  2k=2n rows                    [2, 4, 8]      [2, 4, 8]   AGREE

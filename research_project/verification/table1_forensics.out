@@ -1,0 +1,235 @@
+### table1_forensics.py
+Tue Oct 20 11:58:52 UTC 2026
+Python 3.11.2
+
+============================================================================================
+PART 1 -- the three algebras: number of components, component degrees
+============================================================================================
+Each table row uses the algebra of p.21 (q=4), Example 2 (q=9) or Example 3
+(q=25).  Both defining polynomials are quadratic, so dim_Fq A = 4 always.
+The component degrees |S(nu)| are the sizes of the Galois orbits of the
+root pairs (nu_1,nu_2);  this is computed explicitly, not assumed.
+
+q = 4   F_4 = F_2[z]/(1 + 1x^1 + 1x^2)   (w = z = element 2; the two roots of the modulus are (2, 3))
+   t1 = 2 + 1x^1 + 1x^2   t2 = 2 + 2x^1 + 1x^2
+   square-free: t1 True, t2 True
+   roots of t1 in F_16: [(0, 1), (1, 1)]   -> irreducible over F_q
+   roots of t2 in F_16: [(1, 2), (3, 2)]   -> irreducible over F_q
+   Galois orbits on root pairs: 2  of sizes [2, 2]
+   => N = number of components = 2;  component degrees |S(nu)| = [2, 2]
+   => dim_Fq A = sum_S |S(nu)| = 4   (= prod deg t_i = 4):  CONSISTENT
+
+q = 9   F_9 = F_3[z]/(2 + 2x^1 + 1x^2)   (w = z = element 3; the two roots of the modulus are (3, 7))
+   t1 = 3 + 1x^1 + 1x^2   t2 = 2 + 6x^1 + 1x^2
+   square-free: t1 True, t2 True
+   roots of t1 in F_81: [(1, 5), (1, 7)]   -> irreducible over F_q
+   roots of t2 in F_81: [(6, 3), (6, 6)]   -> irreducible over F_q
+   Galois orbits on root pairs: 2  of sizes [2, 2]
+   => N = number of components = 2;  component degrees |S(nu)| = [2, 2]
+   => dim_Fq A = sum_S |S(nu)| = 4   (= prod deg t_i = 4):  CONSISTENT
+
+q = 25   F_25 = F_5[z]/(2 + 4x^1 + 1x^2)   (w = z = element 5; the two roots of the modulus are (5, 21))
+   t1 = 20 + 1x^1 + 1x^2   t2 = 1 + 23x^1 + 1x^2
+   square-free: t1 True, t2 True
+   roots of t1 in F_625: [(2, 8), (2, 22)]   -> irreducible over F_q
+   roots of t2 in F_625: [(14, 0), (23, 0)]   -> splits over F_q
+   Galois orbits on root pairs: 2  of sizes [2, 2]
+   => N = number of components = 2;  component degrees |S(nu)| = [2, 2]
+   => dim_Fq A = sum_S |S(nu)| = 4   (= prod deg t_i = 4):  CONSISTENT
+
+============================================================================================
+PART 2 -- transcription: structured rows vs the raw text of p.22
+============================================================================================
+  row  1: g1 (w,1,1)                in raw   g2 (1,w,1)                    in raw   [10,6,3]     in raw   [10,2,3;0]         in raw
+  row  2: g1 (w2,w7,1)              in raw   g2 (w6,w,1)                   in raw   [8,4,4]      in raw   [8,4,4;4]          in raw
+  row  3: g1 (2,w5,1)               in raw   g2 (w6,1)                     in raw   [10,7,4]     in raw   [10,5,4;1]         in raw
+  row  4: g1 (w2,w5,w7,1)           in raw   g2 (2,w3,1)                   in raw   [10,5,6]     in raw   [10,1,6;1]         in raw
+  row  5: g1 (1,2,1,2,1)            in raw   g2 (2,w3,w7,1)                in raw   [10,3,8]     in raw   [10,1,8;5]         in raw
+  row  6: g1 (2,2,0,1,1)            in raw   g2 (2,1)                      in raw   [12,7,4]     in raw   [12,5,4;3]         in raw
+  row  7: g1 (2,w5,w3,1)            in raw   g2 (w2,1)                     in raw   [14,10,4]    in raw   [14,10,4;4]        in raw
+  row  8: g1 (1,w7,2,w5,1)          in raw   g2 (1,w7,w5,1)                in raw   [14,7,6]     in raw   [14,7,6;7]         in raw
+  row  9: g1 (1,w7,2,w5,1)          in raw   g2 (1,2,1,2,1,2,1)            in raw   [14,4,10]    in raw   [14,4,10;10]       in raw
+  row 10: g1 (4,w5,w17,1)           in raw   g2 (w20,1)                    in raw   [26,22,4]    in raw   [26,20,4;2]        in raw
+  row 11: g1 (w5,w11,1)             in raw   g2 (w21,1)                    in raw   [32,29,3]    in raw   [32,27,3;1]        in raw
+  row 12: g1 (w8,w10,1)             in raw   g2 (1,1)                      in raw   [40,37,3]    in raw   [40,35,3;1]        in raw
+  row 13: g1 (2,1,1,0,1)            in raw   g2 (1,1)                      in raw   [52,47,3]    in raw   [52,44,3;2]        in raw
+
+  => rows whose every printed tuple occurs verbatim in the raw text: 13/13
+
+  Note. This compares two independent transcriptions of the same page.
+  It catches a slip in the structured row, not a slip in both.  The
+  algebraic check C0 (g_S | x^n - lambda_S, in table1_audit.py) is the
+  independent test of the numbers themselves; it passes 13/13.
+
+============================================================================================
+PART 2b -- the numbers themselves: does g_S divide x^n - lambda_S ?
+============================================================================================
+This is the decisive test of the transcription.  Each row says that g_S
+generates a lambda_S-constacyclic code, so g_S must divide x^n - lambda_S
+in F_q[x].  The test is run for EVERY admissible naming of omega, i.e. for
+each choice of omega as one of the two roots of its defining quadratic
+((2, 3) for F_4, (3, 7) for F_9, (5, 21) for F_25): 2*2*2 = 8
+combinations, which is the complete set, not a sample.
+
+  omega = (2, 3, 5):  13/13 rows divisible   ALL
+  omega = (2, 3, 21):  13/13 rows divisible   ALL
+  omega = (2, 7, 5):  13/13 rows divisible   ALL
+  omega = (2, 7, 21):  13/13 rows divisible   ALL
+  omega = (3, 3, 5):  13/13 rows divisible   ALL
+  omega = (3, 3, 21):  13/13 rows divisible   ALL
+  omega = (3, 7, 5):  13/13 rows divisible   ALL
+  omega = (3, 7, 21):  13/13 rows divisible   ALL
+
+  => transcription VALIDATED under every naming
+     (13/13 in all 8 namings; the structured table agrees with the PDF, and
+      the two independent transcriptions of Part 2 agree with each other)
+
+============================================================================================
+PART 3 -- dimension identity, row by row, with the arithmetic written out
+============================================================================================
+For each row:  k_printed should be sum_S (n - deg g_S)  [C2],
+and since the printed length is 2n, N = 2, so the two component degrees
+must satisfy |S1|+|S2| = 4 with |Si| <= 2, hence |S1| = |S2| = 2 and
+                        dim_Fq C = 2*(n - deg g1) + 2*(n - deg g2) = 2*k.
+
+#  q   n   d1 d2 k = (n-d1)+(n-d2)                 k_pr  2k   len  verdict                   Diff chk
+--------------------------------------------------------------------------------------------
+1  4   5   2  2  (5-2)+(5-2) = 6                 6     12   10   IMPOSSIBLE (2k > 2n)      4 ok
+2  9   4   2  2  (4-2)+(4-2) = 4                 4     8    8    WHOLE SPACE -> d = 1      2 ok
+3  9   5   2  1  (5-2)+(5-1) = 7                 7     14   10   IMPOSSIBLE (2k > 2n)      0 ok
+4  9   5   3  2  (5-3)+(5-2) = 5                 5     10   10   WHOLE SPACE -> d = 1      0 ok
+5  9   5   4  3  (5-4)+(5-3) = 3                 3     6    10   dimensionally feasible    0 ok
+6  9   6   4  1  (6-4)+(6-1) = 7                 7     14   12   IMPOSSIBLE (2k > 2n)      4 ok
+7  9   7   3  1  (7-3)+(7-1) = 10                10    20   14   IMPOSSIBLE (2k > 2n)      2 ok
+8  9   7   4  3  (7-4)+(7-3) = 7                 7     14   14   WHOLE SPACE -> d = 1      4 ok
+9  9   7   4  6  (7-4)+(7-6) = 4                 4     8    14   dimensionally feasible    2 ok
+10 25  13  3  1  (13-3)+(13-1) = 22                22    44   26   IMPOSSIBLE (2k > 2n)      2 ok
+11 25  16  2  1  (16-2)+(16-1) = 29                29    58   32   IMPOSSIBLE (2k > 2n)      2 ok
+12 25  20  2  1  (20-2)+(20-1) = 37                37    74   40   IMPOSSIBLE (2k > 2n)      2 ok
+13 9   26  4  1  (26-4)+(26-1) = 47                47    94   52   IMPOSSIBLE (2k > 2n)      6 ok
+--------------------------------------------------------------------------------------------
+
+  C2  k_printed = sum_S (n - deg g_S)        : 13/13
+  C3  printed length = 2n = nN with N = 2    : 13/13
+  C5  2k > 2n (impossible)                   : rows [1, 3, 6, 7, 10, 11, 12, 13]  (8)
+      2k = 2n (image is everything, d = 1)   : rows [2, 4, 8]  (3)
+      2k < 2n (dimensionally feasible)       : rows [5, 9]  (2)
+  C6  Theorem 10: c = 2n - k - h, h = k - k'  : 13/13
+  C7  Diff = (n' - k' + c) - 2(d-1)          : 13/13
+  C8  decoration: * iff Diff=0, dagger iff 2 : 13/13
+  C9  d agrees between [len,k,d] and [[..]]  : 13/13
+  C10 n' = len in the two columns            : 13/13
+
+============================================================================================
+PART 4 -- why the two printed numbers cannot both be right, in every row
+============================================================================================
+Let A = F_q[X1,X2]/<t1,t2> with deg t1 = deg t2 = 2.  Then
+   (1) dim_Fq A = 4                                [monomial basis]
+   (2) every root nu_i of t_i lies in F_{q^2}, so F_q(nu1,nu2) is a
+       subfield of F_{q^2} and |S(nu)| = [F_q(nu1,nu2):F_q] <= 2.
+
+The table prints length nN = 2n for psi(C), and eq. (10) on p.17 gives
+psi : A -> F_q^N with N = |S-hat|.  Hence the printed length asserts N = 2.
+But 4 = dim_Fq A = sum_S |S(nu)| over the N components, and each term is
+at most 2; with N = 2 that forces |S(nu)| = 2 for BOTH components.
+Therefore
+   dim_Fq C = sum_S |S(nu)| dim_{A_S} C_S = 2*[(n-d1) + (n-d2)] = 2k,
+and the printed dimension k is wrong by a factor of 2 -- in every row,
+because k = (n-d1)+(n-d2) > 0 always.
+
+Equivalently: the printed length and the printed dimension are mutually
+inconsistent, whatever the splitting behaviour of t1 and t2:
+   - if some t_i is non-split then N = 2, the length 2n is right and the
+     dimension should be 2k;
+   - if both t_i split then N = 4, the dimension k is right and the length
+     should be 4n.
+There is no algebra in the table for which [2n, k, d] is correct.
+
+Verified against the computed structures:
+   q =  4: N = 2, |S| = [2, 2], dim A = 4, both non-split  -> printed length 2n is consistent with N
+   q =  9: N = 2, |S| = [2, 2], dim A = 4, both non-split  -> printed length 2n is consistent with N
+   q = 25: N = 2, |S| = [2, 2], dim A = 4, at least one splits  -> printed length 2n is consistent with N
+
+============================================================================================
+PART 5 -- EAQECC arithmetic, separately from the dimension argument
+============================================================================================
+Theorem 10 (p.18) reads, for D = psi(C) an [nN, k, d] code over F_q,
+    [[ nN, k - dim_q(hull_k C), d ; nN - k - dim_q(hull_k C) ]].
+Write h = dim_q(hull_k C).  Then k' = k - h and c = nN - k - h = 2n - k - h.
+We solve the first for h and PREDICT c and Diff from the printed k, k' only.
+
+#  h = k-k2  c pred  c pr  ok  n-k+c   2(d-1)  Diff pr  ok  d <= (n+2)/2  
+--------------------------------------------------------------------------------------------
+1  4         0       0     ok  8       4       4        ok  True          
+2  0         4       4     ok  8       6       2        ok  True          
+3  2         1       1     ok  6       6       0        ok  True          
+4  4         1       1     ok  10      10      0        ok  True          
+5  2         5       5     ok  14      14      0        ok  False         
+6  2         3       3     ok  10      6       4        ok  True          
+7  0         4       4     ok  8       6       2        ok  True          
+8  0         7       7     ok  14      10      4        ok  True          
+9  0         10      10    ok  20      18      2        ok  False         
+10 2         2       2     ok  8       6       2        ok  True          
+11 2         1       1     ok  6       4       2        ok  True          
+12 2         1       1     ok  6       4       2        ok  True          
+13 3         2       2     ok  10      4       6        ok  True          
+--------------------------------------------------------------------------------------------
+
+  Every row is arithmetically self-consistent: the entanglement c printed
+  is exactly what Theorem 10 gives from the printed k and k'.
+
+  IMPORTANT SEPARATION.  This is a check of the ARITHMETIC of Theorem 10,
+  not of its applicability.  Theorem 10 is applied to D = psi(C) with the
+  printed k as dim D.  Part 3 shows dim D is 2k, not k.  So the arithmetic
+  is right and the INPUT to it is wrong: the printed EAQECC parameters are
+  the correct output of Theorem 10 applied to incorrect code parameters.
+
+  Observation (reading-dependent).  Lemma 8 is quoted as requiring
+  "d <= n+2 over 2"; the extracted text reads 'd <= n+22', which is only
+  sensible as (n+2)/2.  Rows [5, 9] violate that hypothesis, so their
+  Diff entry is a comparison outside the lemma's stated domain.  This does
+  not affect the dimension argument and is recorded only for completeness.
+
+============================================================================================
+PART 6 -- assumptions behind 2k <= 2n and behind d = 1
+============================================================================================
+A1  psi is F_q-linear.            [paper, p.17: 'linear']
+A2  psi is injective.             [paper, p.17: 'bijective']
+A3  codomain of psi is F_q^{nN}.   [paper, eq. (10) extended componentwise]
+A4  C is an A-submodule of A^n, and A = (+)_S A_S, so C = (+)_S C_S and
+    dim_Fq C = sum_S [A_S:F_q] dim_{A_S} C_S.        [CRT, p.5]
+A5  dim_{A_S} C_S = n - deg g_S for the constacyclic generator g_S.
+    [standard, and forced here by C2 holding 13/13]
+A6  |S(nu)| = 2 for both components.  [derived in Part 4]
+
+Under A1-A6, dim_Fq psi(C) = dim_Fq C = 2k.  Since a subspace of F_q^{2n}
+has dimension at most 2n, 2k <= 2n follows.  It is not an extra assumption.
+
+  - If 2k > 2n: the pair (length, dimension) is not realisable at all.
+    This is an INVALID INPUT: no code has those two parameters.  Nothing
+    is claimed here about the distance, which is then irrelevant.
+  - If 2k = 2n: the subspace is all of F_q^{2n}, which contains a vector
+    of Hamming weight 1, so d = 1.  The DIMENSION is realisable and the
+    printed DISTANCE is false.  These are different failures and are
+    reported separately below.
+  - If 2k < 2n: neither failure applies; but the printed k still
+    understates the dimension by a factor of 2.
+
+  Rows with 2k > 2n   (invalid input parameters) : [1, 3, 6, 7, 10, 11, 12, 13]
+  Rows with 2k = 2n   (incorrect distance, d=1)  : [2, 4, 8]
+  Rows with 2k < 2n   (dimension understated)    : [5, 9]
+
+============================================================================================
+PART 7 -- what this audit does NOT establish
+============================================================================================
+  * The printed distances d were not verified and no corrected distance
+    was computed.  A dimension argument says nothing about the true d of
+    the (different) code that the construction actually produces.
+  * No corrected parameters are asserted.  The dimension 2k is proved;
+    the distance of the code of dimension 2k is not.
+  * Whether the printed g_S generate the codes the authors had in mind is
+    not verified; only that each g_S divides x^n - lambda_S and that the
+    printed k equals the unweighted sum of the n - deg g_S.
+  * Nothing is claimed about the published version of record.
+
+END

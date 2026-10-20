@@ -1,0 +1,96 @@
+### independent_verification.py
+Tue Oct 20 08:12:31 UTC 2026
+Python 3.11.2
+source PDF SHA-256: 0db90bfbeda69ad1af231b81d92f24be3589ed15ac2e0ade6605ba7ad0ddc039
+==============================================================================
+
+==============================================================================
+PART A -- Example 2 (p.18-20): the ring A and the components
+==============================================================================
+  F_9 = F_3(w), w^2 + 2w + 2 = 0;  w^2 = 4 = [1, 1] digits
+  t1 = x^2 + x + w      : root in F_9? no -> irreducible = True
+  t2 = x^2 + w^5 x + 2  : root in F_9? no -> irreducible = True
+  [PASS] t1 irreducible over F_9: got True, expected True
+  [PASS] t2 irreducible over F_9: got True, expected True
+  [PASS] dim_{F_9} A = deg t1 * deg t2: got 4, expected 4
+  idempotents found: 4  (primitive: 2)
+  [PASS] number of primitive idempotents = N: got 2, expected 2
+  dim_F9(e1 A) = 2,  dim_F9(e2 A) = 2
+  [PASS] each component is F_81  (dim 2 over F_9): got (2, 2), expected (2, 2)
+  [PASS] sum of component dims = dim A: got 4, expected 4
+  |A| = 9^4 = 6561;  |F_q^N| = 9^2 = 81
+  [PASS] psi: A -> F_q^N can be bijective?: got False, expected False   |A| exceeds |F_q^N|
+  [PASS] g1 | x^7 - 1: got True, expected True
+  [PASS] g2 | x^7 - w^2: got True, expected True
+  dim_F9(<g>) by pairing: {'paper (g1 with lam=1)': 20, 'swapped (g1 with lam=w^2)': 28}
+  A-module C = <g>, g = e1 g1 + e2 g2, n = 7
+    deg g1 = 3, deg g2 = 1
+    dim_F9(C) computed over A            = 20
+    sum_S (n - deg g_S)  (paper's k)     = 10
+  [PASS] dim_F9(C) equals the weighted sum: got 20, expected 20
+  [PASS] dim_F9(C) <= length of psi(C) = n*N: got False, expected False   dim 20 > 14: psi cannot be injective on C
+  [PASS] paper's k for [14,k,4]_9: got 10, expected 10
+
+==============================================================================
+PART B -- Example 3 (p.20-21)
+==============================================================================
+  F_25 = F_5(w), w^2 + 4w + 2 = 0;  w^2 = [3, 1]
+  t1 = x^2 + x + w^13 : irreducible over F_25 = True
+  t2 = x^2 + w^3 x + 1: has root in F_25 = True
+  [PASS] t1 irreducible over F_25: got True, expected True
+  [PASS] t2 split over F_25: got False, expected False
+  [PASS] dim_{F_25} A: got 4, expected 4
+  idempotents: 4, primitive: 2
+  [PASS] N = #primitive idempotents: got 2, expected 2
+  dim_F25(e1 A) = 2, dim_F25(e2 A) = 2
+  [PASS] components are F_625: got (2, 2), expected (2, 2)
+  [PASS] psi: A -> F_q^N bijective?: got False, expected False
+  g1 coefficients [4, 21, 9, 1]  (Table 1 prints 4, w^5, w^17, 1)
+  [PASS] g1 | x^13 - 1: got True, expected True
+  [PASS] g2 | x^13 - w^8: got True, expected True
+  dim_F25(<g>) by pairing: {'paper (g1 with lam=1)': 44, 'swapped': 52}
+  [PASS] dim_F25(C) = sum_S 2*(n-deg g_S): got 44, expected 44
+  [PASS] dim_F25(C) <= n*N: got False, expected False   dim 44 > 26
+
+==============================================================================
+PART C -- the q = 4 ring of Table 1 (p.21)
+==============================================================================
+  t1 = x^2 + x + w    : irreducible over F_4 = True
+  t2 = x^2 + w x + w  : irreducible over F_4 = True
+  [PASS] t1 irreducible over F_4: got True, expected True
+  [PASS] t2 irreducible over F_4: got True, expected True
+  [PASS] dim_{F_4} A: got 4, expected 4
+  [PASS] psi: A -> F_4^2 bijective?: got False, expected False
+
+==============================================================================
+PART D -- Corollary 3.5(2) at e' = 0 (boundary case, audit F3)
+==============================================================================
+  q=4, n=3 (=n' with e'=0), lambda=1, k=e/2=1
+  hypothesis ord(lambda)*n' | (2^e-1):  1*3 | 3  -> True
+  claimed |D| = N*n/2 + 1 = 4
+  but D is contained in {0,...,1} by p.14, so |D| <= 2
+  [PASS] claimed count is attainable: got False, expected False
+  [PASS] N*n/2 is an integer for n odd, N=2: got 0, expected 0   (it is not, for odd N)
+
+==============================================================================
+PART F -- the code the paper actually reports (F_q-component model)
+==============================================================================
+  Example 2:  M = [[w, w^3], [w^7, w^5]] on F_9
+    dim = 10, d = 4   (paper: [14,10,4]_9)
+  [PASS] F_9 model dimension: got 10, expected 10
+  [PASS] F_9 model minimum distance: got 4, expected 4
+  Example 3:  M = [[w, w^2], [2, w^13]] on F_25
+    dim = 22   (paper: [26,22,4]_25)
+  [PASS] F_25 model dimension: got 22, expected 22
+
+==============================================================================
+PART E -- summary of the two independent dimension formulas
+==============================================================================
+  case         q   n  degg1  degg2  d_S  dim_q(A-mod)  paper k
+  Example 2    9   7      3      1    2            20       10
+  Example 3   25  13      3      1    2            44       22
+
+==============================================================================
+OVERALL: ALL CHECKS PASS
+==============================================================================
+EXIT=0

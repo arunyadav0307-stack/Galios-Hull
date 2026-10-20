@@ -1,0 +1,180 @@
+### f11_source_audit.py
+Tue Oct 20 10:36:01 UTC 2026
+Python 3.11.2
+self-contained: no project imports
+
+==============================================================================
+PART 1 -- the fields, verified against their defining relations
+==============================================================================
+  F_2: q = 2, generator z = 1 (code), z^2 = 1 equals 1: True
+  F_9: q = 9, generator z = 3 (code), z^2 = 4 equals 4: True
+  F_25: q = 25, generator z = 5 (code), z^2 = 8 equals 8: True
+  F_9  units and orders: 1:1, 2:2, 3:8, 4:4, 5:8, 6:8, 7:8, 8:4
+  F_25 units of order dividing 3: [1, 11, 18]
+
+==============================================================================
+PART 2 -- Example 1 (p.5): A_1 = F_2[x1,x2]/<t1,t2>
+==============================================================================
+  t1 = x^5 + x^4 + 1, irreducible factor degrees: [2, 3]
+  t2 = x^4 + x^2 + x, irreducible factor degrees: [1, 3]
+  (paper p.5 writes t2 = x2(x2^2+x2+1); that product is x^3+x^2+x.  The degrees that match the paper's own count of six are [1, 3].)
+  #components  N = sum gcd(d_i,e_j) = 6   (paper p.5: six)
+  dim_2 A      = sum d_i*e_j = 20 = deg t1 * deg t2 = 5*4
+  class sizes |S(nu)| = [2, 3, 3, 3, 3, 6]; sum = 20
+  |A| = 2^20 = 1048576   vs   |F_2^N| = 2^6 = 64
+  => A -> F_2^N injective would need 1048576 <= 64: False
+  => Example 1 is NOT the split case: class sizes are not all 1.
+
+==============================================================================
+PART 3 -- Example 2 (p.18-20): A = F_9[x1,x2]/<t1,t2>
+==============================================================================
+  roots of z^2 + 2z + 2 in F_9: [3, 7]  (the naming of omega)
+   omega = 3: t1 = x^2+x+w irreducible: True,  t2 = x^2+w^5 x+2 irreducible: True
+   omega = 7: t1 = x^2+x+w irreducible: True,  t2 = x^2+w^5 x+2 irreducible: True
+  using omega = 7 (the two choices give the same verdicts)
+  dim_F9 A = 2*2 = 4;   |A| = 9^4 = 6561
+  idempotents of A: 4;  primitive: 2  =>  N = 2
+  dim_F9 of each component e_S A: [2, 2]  (predicted |S(nu)| = 2 each)
+  sum of component degrees = 4 = dim_F9 A = 4
+  => A ~= F_81 x F_81, not F_9 x F_9
+  |F_9^N| = 9^2 = 81   vs   |A| = 6561
+  => psi: A -> F_9^2 cannot be injective (pigeonhole), so not the 'bijection' of p.17
+
+  x^7 - 1: irreducible factor degrees [1, 3, 3], multiplicities all 1: True
+  x^7 - w^2: irreducible factor degrees [1, 3, 3], multiplicities all 1: True
+  g1 = x^3 + w^3 x^2 + w^5 x + 2 divides x^7-1 : True
+  g2 = x + w^2 divides x^7 - w^2                : True
+  deg g1 = 3, deg g2 = 1
+
+  A-module C = <g>: rank over F_9 of {b*x^i*g} = 20
+    (= sum_S |S| (n - deg g_S) = 2*4 + 2*6 = 20)
+  paper prints dim = sum_S (n - deg g_S) = 10
+  claimed Gray-image length nN = 7*2 = 14
+  dim_F9 C = 20 > nN = 14 ? True
+  => no injective F_9-linear map C -> F_9^14 exists;
+     the claimed [14, 10, 4]_9 is impossible.
+
+==============================================================================
+PART 4 -- Example 3 (p.20-21): A = F_25[x1,x2]/<t1,t2>
+==============================================================================
+  roots of z^2 + 4z + 2 in F_25: [5, 21]
+   omega = 5: t1 = x^2+x+w^13 irreducible: True;  t2 = x^2+w^3 x+1 irreducible: False
+   omega = 21: t1 = x^2+x+w^13 irreducible: True;  t2 = x^2+w^3 x+1 irreducible: False
+  using omega = 21
+  t1 factor degrees: [2];  t2 factor degrees: [1, 1]
+  => N = sum gcd = 2;  dim_F25 A = 4;  class sizes = [2, 2]
+  |A| = 25^4 = 390625   vs   |F_25^N| = 25^2 = 625
+
+  x^13 - 1: irreducible factor degrees [1, 2, 2, 2, 2, 2, 2]
+  x^13 - w^8: irreducible factor degrees [1, 2, 2, 2, 2, 2, 2]
+  g1 = (x+4)(x^2+w x+1) = [4, 5, 20, 1], deg 3; divides x^13-1: True
+  g2 = x + w^20, deg 1; divides x^13-w^8: True
+
+  primitive idempotents computed by brute force over 390625 elements...
+  primitive idempotents: 2  (matches N = 2)
+  dim_F25 of each component e_S A: [2, 2]  (predicted |S(nu)| = 2 each)
+  sum of component degrees = 4 = dim_F25 A = 4
+  => A ~= F_625 x F_625, not F_25 x F_25
+  A-module C = <g>: rank over F_25 = 44
+    (= sum_S |S| (n - deg g_S) = 2*10 + 2*12 = 44)
+  paper prints 22;  claimed length nN = 13*2 = 26
+  dim_F25 C = 44 > 26 ? True
+
+==============================================================================
+PART 5 -- the Gray map of p.17: what it can and cannot be
+==============================================================================
+  eq.(10):  psi : A -> F_q^N,  a |-> (a_{S(nu_1)},...,a_{S(nu_N)}) M,
+            with M in GL_N(F_q) and N = |S-hat|.
+  p.17:     'the map psi is bijective linear isometry from A^n to F_q^{nN}'
+
+  A bijection A -> F_q^N requires |A| = q^N, i.e. dim_q A = N.
+  ring      dim_q A   N     |A|         |F_q^N|     injective?
+  Ex 1      20        6     1048576     64          NO
+  Ex 2      4         2     6561        81          NO
+  Ex 3      4         2     390625      625         NO
+
+  Even the *codomain length* is forced: psi(C) is a code of length nN,
+  so dim_q psi(C) <= nN.  But psi is claimed linear and bijective, so
+  dim_q psi(C) = dim_q C.  The two computed dim_q C (20, 44) exceed the
+  claimed nN (14, 26) for BOTH examples, independently of distances.
+
+  What the paper's own arithmetic computes: sum_S dim_{A_S}, i.e. the
+  dimension with the factor |S(nu)| suppressed.  Reproduced exactly by
+  code/final_check_B.py (component-level table).
+
+==============================================================================
+PART 6 -- independent verification of the reported F_9 isometry witness
+==============================================================================
+  field: F_9 = F_3[z]/(z^2+2z+2); codes 0..8 mean a0 + a1*z.
+  z = 3, z^2 = 4, z^4 = 2 (= 2, the norm, lying in F_3)
+  roots of z^2+2z+2 (candidate names for omega): [3, 7]
+  --- naming omega = 3 (A) ---
+    source ring R_a = F_9[x]/(x^5 - 4) with a = omega^2 = 4
+    target ring R_b = F_9[x]/(x^5 - 3) with b = omega   = 3
+    check a = b^2 : True
+    g = 2 + 6x + x^2 ;  g | x^5 - a : True
+    dim C = 3, |C| = 729;  dim image = 3, |image| = 729
+    C is 4-constacyclic : True
+    image is 3-constacyclic: True
+    |hull_1(C)| = 81  -> dim = 2
+    |hull_1(image)| = 1 -> dim = 0
+    weight distributions equal: True
+    monomial scalings a_i = [1, 1, 1, 3, 3];  norms a_i^4 = [1, 1, 1, 2, 2] (constant? False)
+    ==> HULL DIMENSION CHANGES: 2 -> 0
+
+  --- naming omega = 7 (B) ---
+    source ring R_a = F_9[x]/(x^5 - 8) with a = omega^2 = 8
+    target ring R_b = F_9[x]/(x^5 - 7) with b = omega   = 7
+    check a = b^2 : True
+    g = 2 + 6x + x^2 ;  g | x^5 - a : False
+    dim C = 3, |C| = 729;  dim image = 3, |image| = 729
+    C is 8-constacyclic : False
+    image is 7-constacyclic: False
+    |hull_1(C)| = 81  -> dim = 2
+    |hull_1(image)| = 1 -> dim = 0
+    weight distributions equal: True
+    monomial scalings a_i = [1, 1, 1, 7, 7];  norms a_i^4 = [1, 1, 1, 2, 2] (constant? False)
+    ==> HULL DIMENSION CHANGES: 2 -> 0
+
+  Independence note: the script does not read the earlier outputs; it
+  rebuilds the field, the rings, both codes, the Hermitian dual and the
+  hull from scratch, and it tests BOTH conjugate namings of omega.
+
+==============================================================================
+PART 7 -- the q = 4 ring of Table 1, and the table's lengths
+==============================================================================
+  F_4 = F_2[z]/(z^2+z+1), z = 2 (primitive: order 3)
+  t1 = x^2 + x + w  irreducible over F_4: True
+  t2 = x^2 + w x + w irreducible over F_4: True
+  => dim_4 A = 2*2 = 4 and N = gcd(2,2) = 2 for the q = 4 ring too
+
+  Table 1 (p.22) as printed: n and the length of psi(C)
+    n = 5   length = 10    2n = 10   ok
+    n = 4   length = 8     2n = 8    ok
+    n = 5   length = 10    2n = 10   ok
+    n = 5   length = 10    2n = 10   ok
+    n = 5   length = 10    2n = 10   ok
+    n = 6   length = 12    2n = 12   ok
+    n = 7   length = 14    2n = 14   ok
+    n = 7   length = 14    2n = 14   ok
+    n = 7   length = 14    2n = 14   ok
+    n = 13  length = 26    2n = 26   ok
+    n = 16  length = 32    2n = 32   ok
+    n = 20  length = 40    2n = 40   ok
+    n = 26  length = 52    2n = 52   ok
+  all 13 rows have length exactly 2n: True
+  Since dim_q A = 4 for every ring used in the table, A^n has F_q-dimension
+  4n; a bijective linear Gray map would therefore have to land in F_q^{4n}.
+  Every printed length is 2n, i.e. a factor 2 short -- the same factor
+  |S(nu)| = 2 that is missing from the dimensions.
+
+==============================================================================
+SUMMARY
+==============================================================================
+  Example 1: N = 6, dim_q A = 20, class sizes [2, 3, 3, 3, 3, 6]
+  Example 2: N = 2, dim_q A = 4, dim_q C = 20 (paper 10), nN = 14
+  Example 3: N = 2, dim_q A = 4, dim_q C = 44 (paper 22), nN = 26
+  F_9 isometry witness: Hermitian hull 2 -> 0
+
+  Every number above is derived in this file from the paper's
+  definitions; none is copied from an earlier project output.

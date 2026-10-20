@@ -1,0 +1,74 @@
+### table1_audit.py
+Tue Oct 20 11:19:26 UTC 2026
+Python 3.11.2
+
+====================================================================================================
+TABLE 1 (p.22) -- all 13 rows
+Every ring used has dim_q A = 4 and N = |S-hat| = 2 (checked in
+f11_source_audit.py), so |S(nu)| = 2 for both components and the true
+F_q-dimension of each code is twice the printed k.
+====================================================================================================
+
+CHECK C0 -- transcription: does g_S divide x^n - lambda_S ?
+----------------------------------------------------------------------------------------------------
+  omega = (2, 3, 5):  13/13 rows satisfy g_S | x^n - lambda_S   ALL
+  omega = (2, 3, 21):  13/13 rows satisfy g_S | x^n - lambda_S   ALL
+  omega = (2, 7, 5):  13/13 rows satisfy g_S | x^n - lambda_S   ALL
+  omega = (2, 7, 21):  13/13 rows satisfy g_S | x^n - lambda_S   ALL
+  omega = (3, 3, 5):  13/13 rows satisfy g_S | x^n - lambda_S   ALL
+  omega = (3, 3, 21):  13/13 rows satisfy g_S | x^n - lambda_S   ALL
+  omega = (3, 7, 5):  13/13 rows satisfy g_S | x^n - lambda_S   ALL
+  omega = (3, 7, 21):  13/13 rows satisfy g_S | x^n - lambda_S   ALL
+  => transcription VALIDATED in every naming
+
+#  n   deg g1  deg g2  sum(n-d)  k_pr  C2  len  2n   2k   C5                   h   C6  C7
+----------------------------------------------------------------------------------------------------
+1  5   2       2       6         6     ok  10   10   12   IMPOSSIBLE           4   ok  ok
+2  4   2       2       4         4     ok  8    8    8    whole space, d=1     0   ok  ok
+3  5   2       1       7         7     ok  10   10   14   IMPOSSIBLE           2   ok  ok
+4  5   3       2       5         5     ok  10   10   10   whole space, d=1     4   ok  ok
+5  5   4       3       3         3     ok  10   10   6    ok                   2   ok  ok
+6  6   4       1       7         7     ok  12   12   14   IMPOSSIBLE           2   ok  ok
+7  7   3       1       10        10    ok  14   14   20   IMPOSSIBLE           0   ok  ok
+8  7   4       3       7         7     ok  14   14   14   whole space, d=1     0   ok  ok
+9  7   4       6       4         4     ok  14   14   8    ok                   0   ok  ok
+10 13  3       1       22        22    ok  26   26   44   IMPOSSIBLE           2   ok  ok
+11 16  2       1       29        29    ok  32   32   58   IMPOSSIBLE           2   ok  ok
+12 20  2       1       37        37    ok  40   40   74   IMPOSSIBLE           2   ok  ok
+13 26  4       1       47        47    ok  52   52   94   IMPOSSIBLE           3   ok  ok
+----------------------------------------------------------------------------------------------------
+
+CHECK RESULTS
+  C0  g_S | x^n - lambda_S (transcription) : 13/13, naming-free
+  C1  deg g_S < n in every component       : True
+  C2  k_printed = sum_S (n - deg g_S)       : 13/13
+  C3  length = 2n                           : 13/13
+  C4  true dim_q = 2 * k_printed            : by construction (|S|=2)
+  C5  2k <= 2n                              : violated in 8 rows [1, 3, 6, 7, 10, 11, 12, 13]; degenerate in 3 rows [2, 4, 8]
+  C6  Theorem 10 arithmetic                  : 13/13 consistent
+  C7  'Diff' column identity                 : 13/13 consistent
+
+====================================================================================================
+WHAT THIS MEANS
+====================================================================================================
+  1. C0 validates the transcription: all 13 rows are self-consistent with the
+     paper's own definition of a constacyclic generator, under every conjugate
+     naming of omega.  The table data was read correctly.
+
+  2. C2 holds in all 13 rows.  Every printed code dimension is the sum of the
+     COMPONENT dimensions with no factor |S(nu)| = 2.  The defect found in
+     Examples 2-3 is uniform across the whole table, not local to them.
+
+  3. In 8 of 13 rows the true dimension 2k exceeds the printed length 2n,
+     so those printed Gray images cannot exist as subspaces of F_q^{2n}.
+     In 3 more rows (2, 4, 8) 2k equals 2n, so the image would be the
+     whole space and d = 1, contradicting the printed d.
+     Only rows 5 and 9 escape the dimension argument entirely.
+
+  4. C6 and C7 hold in all 13 rows: the EAQECC arithmetic is internally
+     consistent.  The error is upstream, in the inputs -- a confirmation of
+     the diagnosis, not a new defect.
+
+  LIMITATION. Dimensional/arithmetic audit only.  The printed minimum
+  distances were NOT verified, and corrected parameters were NOT computed
+  (FINAL_F11_EVIDENCE_DOSSIER.md section 4.3, item c1).
