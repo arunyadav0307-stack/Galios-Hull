@@ -713,3 +713,16 @@ The frozen blueprint defines the pairing `⟨x,y⟩ = Σ_i x_i σ(y_i)` but neve
 ### Resolution required
 
 A single future approval command should decide PC-1...PC-6 together, with any blueprint edit made as a dated correction note, never silently. Until then the proof package (P1-04) must state the A2 order verbatim in its own text.
+
+
+---
+
+### P1-04 outcome (21 Oct 2026) — CONDITIONAL GO; T1–T4 proved (single component)
+
+`P1_04_PROOFS_T1_T4.md` delivers complete, self-contained proofs of RR-1 (divisor/exponent/dimension correspondence), RR-2 (coefficientwise-`ρ` automorphism; `#` multiplicative; root transport via the Frobenius automorphism of the algebraic closure; `τ` a degree-preserving permutation of `F`; the two compatibility forms equivalent), RR-3 (Euclidean dual `C^⊥ = ⟨h^♮⟩` from `gh = x^n − λ` alone — coefficient-of-`x^{n-1}` identity plus dimension count; **no** separability, `gcd(n,p)=1`, `P`-structure, or compatibility used; conditions on `g, h, n, λ` listed exhaustively), RR-4 in the command's naming (= blueprint RR-4 twist transport `D(C) = ρ(C^⊥)` + blueprint RR-5 PID/quotient lcm lemma, with its same-modulus applicability condition stated), and hence T1, T2, T3 (generator `⟨h_a#⟩`, exponents `β_i = P − α_{i−1}`, twist `λ^{−p^{d−k}}`, equal to `λ` under compatibility), T4 (hull generator `lcm(g_a, h_a#)` and the `min(P − α_i, α_{i−1})` dimension identity). The code-first dual-order sentence (S7) is stated verbatim in the proof file; `D(C)`, `C^⊥`, and the candidate-first reading are distinguished, and the exact step using the order is flagged in Proposition 4.2.
+
+**Counterexamples:** none — no lemma fails under the locked hypotheses A1–A10. Three necessity witnesses are recorded instead (not counterexamples): `#` undefined when the constant term vanishes (PC-3 hypothesis is necessary; such factors never divide `S` here); compatibility is necessary for the same-modulus T4 step (order-8 `λ ∈ GF(9)`, `k = 1` example, where `λ^{1+3} = λ^4 = −1 ≠ 1`); reversing the dual order swaps `ρ`/`σ` (PC-2). T3 is proved in a stronger two-modulus form, so only T4's lcm step consumes compatibility.
+
+**Verification (executed, supporting only):** `code/validate_p1_03.py` rerun — exit 0, output byte-identical to the saved file, all checks passed; plus 619 assignments in which `⟨h^♮⟩ = C^⊥` was verified directly (inclusion by orthogonality, equality by dimension). No frozen file edited; PC-1…PC-6 still unapproved; Gate G1 untouched (open for novelty only).
+
+**The single recommended next command is now P1-05** (formal proof package for T5–T6 and corollaries C1–C4: transfer trace, global joint enumerator, `P = 1` recovery, multi-component assembly).

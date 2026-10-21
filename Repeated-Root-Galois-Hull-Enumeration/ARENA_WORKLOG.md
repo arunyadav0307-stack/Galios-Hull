@@ -122,3 +122,13 @@
 - **Files banayi:** `P1_03_MATHEMATICAL_PROOF_PLAN.md`, `code/validate_p1_03.py`, `code/validation_p1_03_output.txt`. **Files update:** `04_BLUEPRINT_GAP_REGISTER.md` (GAP-01/03/05/06/07/09 P1-03 updates, GAP-16 status/outcome, naya GAP-17), ye worklog. Frozen blueprint aur purani files untouched.
 - **Overall verdict:** **CONDITIONAL GO.** Gate G1 novelty ke liye khula; RR-3 ka formal write-up aur C6 baki; koi novelty claim authorized nahi.
 - **Agle sujhaye command (sirf ek):** `P1-04` — T1-T4 ka formal proof package (`P1_04_PROOFS_T1_T4.md`): RR-1...RR-5 ke pure proofs, A2 dual-order sentence ke saath, har lemma validation cases se cross-checked. Frozen blueprint ab bhi edit nahi hoga.
+
+
+## 2026-10-21 — P1-04 Formal Proof Package (T1–T4, single component)
+
+- **Deliverable:** `P1_04_PROOFS_T1_T4.md` — RR-1, RR-2, RR-3, RR-4 (command naming = blueprint RR-4 + RR-5), RR-5 aur T1–T4 ke complete self-contained proofs, hypothesis lock A1–A10 ke andar. Dual-order sentence (S7) verbatim likhi gayi; `D(C) = ρ(C^⊥)` ka derivation aur `ρ`/`σ` swap ka risk explicit hai. RR-3 sirf `gh = x^n − λ`, `λ ∈ K*` par chalta hai — separability, `gcd(n,p)=1`, compatibility kuch bhi use nahi hua; conditions ki puri list di gayi hai. T3 do-modulus form me proved hai; compatibility sirf T4 ke same-quotient lcm step me khapat hoti hai.
+- **Counterexamples:** koi lemma locked hypotheses ke andar fail nahi hua. Teen necessity witnesses दर्ज hain (counterexample nahi): `f(0)=0` par `#` undefined (PC-3 zaroori hai); incompatible twist par T4 ka lcm step nahi lagta (`GF(9)`, order-8 `λ` example); dual order ulta padhne par `ρ`/`σ` swap (PC-2). Frozen blueprint untouched; PC-1…PC-6 ab bhi unapproved.
+- **Validation (asal me chalayi gayi):** `code/validate_p1_03.py` dobara chalaya — exit 0, output saved file se byte-identical, sab pass. Iske alawa 619 assignments me `⟨h^♮⟩ = C^⊥` seedha verify (orthogonality + dimension), `ALL RR-3 DIRECT CHECKS PASSED`. Ye sirf supporting evidence hai, proof ka hissa nahi.
+- **Files banayi:** `P1_04_PROOFS_T1_T4.md`. **Files update:** ye worklog, `04_BLUEPRINT_GAP_REGISTER.md` (P1-04 outcome GAP-17 ke baad). Frozen blueprint aur purani code/output files untouched.
+- **Overall verdict:** **CONDITIONAL GO.** T1–T4 (single component) proved; T5–T6 ka formal write-up, corollaries C1–C4, PC approvals aur Gate G1 (novelty) ab bhi baki — koi novelty claim authorized nahi, manuscript drafting ab bhi nahi hogi.
+- **Agle sujhaye command (sirf ek):** `P1-05` — T5–T6 aur corollaries C1–C4 ka formal proof package (`P1_05_PROOFS_T5_T6_COROLLARIES.md`): transfer-trace identity, global joint enumerator (multi-component CRT assembly), `P = 1` recovery, aur C1–C4 ke formal derivations T6 se.
