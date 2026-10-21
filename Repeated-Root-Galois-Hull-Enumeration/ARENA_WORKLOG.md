@@ -132,3 +132,9 @@
 - **Files banayi:** `P1_04_PROOFS_T1_T4.md`. **Files update:** ye worklog, `04_BLUEPRINT_GAP_REGISTER.md` (P1-04 outcome GAP-17 ke baad). Frozen blueprint aur purani code/output files untouched.
 - **Overall verdict:** **CONDITIONAL GO.** T1–T4 (single component) proved; T5–T6 ka formal write-up, corollaries C1–C4, PC approvals aur Gate G1 (novelty) ab bhi baki — koi novelty claim authorized nahi, manuscript drafting ab bhi nahi hogi.
 - **Agle sujhaye command (sirf ek):** `P1-05` — T5–T6 aur corollaries C1–C4 ka formal proof package (`P1_05_PROOFS_T5_T6_COROLLARIES.md`): transfer-trace identity, global joint enumerator (multi-component CRT assembly), `P = 1` recovery, aur C1–C4 ke formal derivations T6 se.
+
+
+## 2026-10-21 — Boss ki standing preference + P1-04 PDF
+
+- **Boss ka nirdesh:** deliverables side mein sirf **PDF** ke roop mein dikhaye jayein; baaki saari cheezein (markdown sources, scripts, register, logs) workspace/git mein save hoti rahein. Aage ke har command me main deliverable ka PDF banakar side mein present kiya jayega.
+- **Is baar:** `P1_04_PROOFS_T1_T4.pdf` (8 pages) banaya gaya naye converter `code/md_to_pdf.py` se (fpdf2 + DejaVu fonts; markdown source untouched). Visual QA: pages 1, 5, 8 render karke dekhe — headings, bold/italics, code blocks, saare math symbols (ρ, σ, λ, Σ, ⟨⟩, ♮) sahi render hue; koi `**`/`__` marker leak nahi.
