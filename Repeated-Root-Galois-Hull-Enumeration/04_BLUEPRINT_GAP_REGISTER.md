@@ -852,3 +852,16 @@ Full audit: `P1_16_INDEPENDENT_AUDIT.md`. **No mathematical error found** in T1-
 - GAP-16-07 (presentation, micro): T4 component/global shorthand clause.
 - GAP-16-08 (bibliographic note): DIMP2026/ES2026 characterizations verified from arXiv texts only; keep as is.
 Blueprint SHA-256 re-verified ec2fd8d58f8d2a986314f83997d750d689f7c88e98ec8f87753ab4c9cf438cff; manuscript, proof packages and blueprint deliberately unchanged.
+
+
+## P1-17 outcome (2026-10-21, audit corrections applied to manuscript)
+
+All P1-16 items addressed in `P1_15_MANUSCRIPT_DRAFT.tex`/`.md`; details and primary-source verification record in `P1_17_CORRECTION_LOG.md`.
+- GAP-16-01 CLOSED: Lemma 4.1 boundary cases r=0/s=0 verified from definitions and inserted.
+- GAP-16-02 CLOSED: lambda-constacyclic code over A defined (shift-closed submodule = ideal of A[x]/(x^n-lambda), no separability/compatibility needed); T1 closing sentence corrected.
+- GAP-16-03 CLOSED: remarks unnumbered in .tex; P=1 recovery is Proposition 6.4 in both versions (counter simulation confirms no other number moved).
+- GAP-16-04 CLOSED: EAQECC remark now proves c = rank(Pi rho(Pi)^T) = (n-K)-H (kernel argument), cites Galois form [DIMP2026] + framework [BDS2006], distance renamed d_EA and explicitly independent; BDS DOI verified (Science page) and added.
+- GAP-16-05 CLOSED: Fan & Zhang 2017 (Des. Codes Cryptogr. 84, 473-492, DOI 10.1007/s10623-016-0282-8; Springer record inspected) added as [FZ2017] and cited in Sec.1/Sec.2.
+- GAP-16-06 CLOSED: titles/initials completed from primary records (Crossref/ScienceDirect/Springer/AIMS/arXiv); Eldin resolved: publisher "Ramy Taki Eldin" + arXiv submitter "Ramy Taki Eldin F." => R. F. Taki Eldin (no change needed); intro narrowed to chain ring; ZKZ2026 initials added (MDPI record).
+- GAP-16-07 CLOSED: T4 shorthand clause added. GAP-16-08: recorded no-action note (unchanged).
+Structural checks passed (braces/environments/33 labels/16 bibitems all cited); validate_p1_14.py rerun byte-identical. No LaTeX compiler in environment: .tex structurally verified, NOT compiled (author-side compile remains). Blueprint SHA ec2fd8d58f8d2a986314f83997d750d689f7c88e98ec8f87753ab4c9cf438cff unchanged; proof packages and optional corollaries untouched.

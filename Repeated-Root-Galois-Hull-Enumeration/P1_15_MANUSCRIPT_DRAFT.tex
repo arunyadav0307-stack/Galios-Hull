@@ -5,6 +5,8 @@
 % corollaries N1-N3 of P1-14 are NOT used here; they are collected in
 % P1_15_OPTIONAL_COROLLARIES.md pending author approval.
 % No novelty or priority claim is made anywhere in this draft.
+% P1-17 (21 Oct 2026): audit corrections of P1_16_INDEPENDENT_AUDIT.md
+% applied; see P1_17_CORRECTION_LOG.md. Core statements unchanged.
 % Compilation: pdflatex P1_15_MANUSCRIPT_DRAFT.tex (twice).  Only
 % standard packages (amsmath, amssymb, amsthm, geometry) are required.
 % =====================================================================
@@ -21,7 +23,7 @@
 \newtheorem{definition}[theorem]{Definition}
 \newtheorem{example}[theorem]{Example}
 \theoremstyle{remark}
-\newtheorem{remark}[theorem]{Remark}
+\newtheorem*{remark}{Remark}
 
 \newcommand{\Fq}{\mathbb{F}_q}
 \newcommand{\Fp}{\mathbb{F}_p}
@@ -78,7 +80,7 @@ For a linear code \(C\) over a finite field, the hull --- the intersection
 of \(C\) with its dual --- controls several constructions, including the
 amount of entanglement needed in entanglement-assisted quantum codes and
 the behaviour of LCD (linear complementary dual) codes. Replacing the
-Euclidean inner product by a Galois inner product leads to the
+Euclidean inner product by a Galois inner product~\cite{FZ2017} leads to the
 \(k\)-Galois hull \(\Hull_k(C) = C \cap D(C)\), where \(D(C)\) is the dual
 with respect to a Frobenius-twisted pairing. Galois hulls of constacyclic
 codes have been determined, at the level of hull dimensions and hull
@@ -95,7 +97,7 @@ mainly in a simple-root (idempotent) framework with a repeated-root case
 under additional hypotheses on the order of the twist. Eldin and Sol\'e
 developed generator polynomial matrices for the Galois hulls of
 multi-twisted codes, of which constacyclic codes are the index-one case
-\cite{ES2026}. Galois hulls over chain and serial rings appear in
+\cite{ES2026}. Galois hulls of cyclic serial codes over a finite chain ring are studied in
 \cite{Talbi2021}, and Galois hulls have likewise been used for quantum-code
 constructions over a finite non-chain ring \cite{ZKZ2026}; repeated-root constacyclic codes and their (Euclidean)
 duals, including LCD and self-dual enumerations in special lengths, have
@@ -163,7 +165,8 @@ and the \(k\)-Galois hull is \(\Hull_k(C) = C \cap D(C)\).
 The Euclidean dual is denoted \(C^\perp\).
 \end{definition}
 
-The slot order is part of the definition: the candidate \(y\) occupies
+This is the \(k\)-Galois inner product introduced by Fan and
+Zhang~\cite{FZ2017}. The slot order is part of the definition: the candidate \(y\) occupies
 the \(\sigma\)-twisted slot, and this is what makes
 \(D(C) = \rho(C^\perp)\) (coordinatewise \(\rho\);
 Proposition~\ref{prop:transport}) rather than the analogous statement
@@ -186,6 +189,17 @@ An \emph{exponent assignment} on component \(s\) is a tuple
 \(a = (a_f)_{f \in \mathcal{F}_s}\) with \(a_f \in \{0, \dots, P\}\); put
 \(g_a = \prod_f f^{a_f}\) and \(C_s(a) = \langle g_a \rangle \subseteq
 K_s[x]/(M_s)\). A global assignment is a tuple of component assignments.
+
+A \emph{\(\lambda\)-constacyclic code} over \(A\) is an \(A\)-submodule of
+\(A^n\) closed under the componentwise \(\lambda\)-constacyclic shift
+\((c_0,\dots,c_{n-1}) \mapsto (\lambda c_{n-1}, c_0, \dots, c_{n-2})\).
+Under the coefficient identification \(A^n \cong A[x]/(x^n-\lambda)\), this
+shift is multiplication by \(x\); hence the \(\lambda\)-constacyclic codes
+over \(A\) are exactly the ideals of \(A[x]/(x^n-\lambda)\), an equivalence
+that needs no separability or compatibility hypothesis. From now on,
+``code over \(A\)'' means a \(\lambda\)-constacyclic code over \(A\);
+componentwise these are tuples of \(\lambda_s\)-constacyclic codes
+(Proposition~\ref{prop:assembly}).
 
 For a monic polynomial \(f(x) = \sum_{i=0}^{r} c_i x^i\) with
 \(f(0) = c_0 \ne 0\), define the (Frobenius-twisted) reciprocal
@@ -223,8 +237,8 @@ The map \(a \mapsto C_s(a) = \langle g_a \rangle\) is a bijection from
 codes of length \(n\) over \(K_s\), and
 \(\dim_{K_s} C_s(a) = n - \sum_{f} a_f \deg f\).
 Consequently there are \((P+1)^{\sum_s |\mathcal{F}_s|}\) labeled global
-assignments, and global codes (as \(A\)-submodules) correspond to tuples
-of component assignments.
+assignments, and \(\lambda\)-constacyclic codes over \(A\) correspond to tuples
+of component assignments (Proposition~\ref{prop:assembly}).
 \end{theorem}
 
 \begin{proof}
@@ -298,8 +312,13 @@ code.
 From \(gh = x^n - \lambda\), \(g_0 h_0 = -\lambda \ne 0\). Both
 \(\langle h^{\natural} \rangle\) and \(C^\perp\) have dimension \(r\):
 the first by the divisor dimension count of Theorem~\ref{thm:T1}
-(applied to any modulus), the second by rank--nullity. We show
-orthogonality. For polynomials \(a, d\) of degree \(< n\), write
+(applied to any modulus), the second by rank--nullity. The boundary
+cases are immediate from the definitions: if \(r = 0\), then \(g = 1\),
+\(C = K^n\) and \(C^\perp = \{0\}\), while \(h^{\natural}\) has degree
+\(n\) and hence no nonzero multiple of degree \(< n\); if \(s = 0\), then
+\(h = 1\), \(C = \{0\}\) and \(C^\perp = K^n\), while
+\(h^{\natural} = 1\). Assume \(r, s \ge 1\) below, so that \(V\) is
+defined (and \(v = 0\) gives \(d = 0\)). We show orthogonality. For polynomials \(a, d\) of degree \(< n\), write
 \(\operatorname{rev}_n(d) = x^{n-1} d(1/x)\); then
 \(\sum_i a_i d_i = [x^{n-1}]\big(a(x) \operatorname{rev}_n(d)(x)\big)\).
 Take \(a = gu\), \(\deg u < s\), and \(d = h^{\natural} v\),
@@ -400,7 +419,8 @@ Moreover
 \dim_{\Fq} \Hull_k(C(a)) \;=\; \sum_{s} \sum_{O} w_O \sum_i
 \min(P-\alpha_i,\, \alpha_{i-1}),
 \]
-the inner sums over orbit positions (indices mod \(L_O\)).
+the inner sums over orbit positions (indices mod \(L_O\)); here and
+below, \(\alpha_i\) refers to the orbit \((s,O)\) under discussion.
 \end{theorem}
 
 \begin{proof}
@@ -858,15 +878,22 @@ here, rather than inferred from the enumerator.
 \end{itemize}
 
 \begin{remark}[conditional quantum remark]
-In the finite-field case (\(N=1\), \(m_1=1\)), a code \(C\) with
-parameters \([n, K]\) and \(\dim \Hull_k(C) = H\) whose minimum distance
-\(d\) is known independently gives, by the standard
-entanglement-assisted construction \cite{BDS2006}, an
-\([[n, K-H, d;\, n-K-H]]\) entanglement-assisted quantum code. The
-enumerator of Theorem~\ref{thm:T6} determines the joint distribution of
-\((K, H)\) only; it yields no distance information, and no quantum
-parameter should be claimed from it alone. The affine case requires, in
-addition, control of distances under the product decomposition.
+In the finite-field case (\(N=1\), \(m_1=1\)), let \(C\) be a code with
+parameters \([n, K]\) over \(\Fq\) and let \(H = \dim \Hull_k(C)\). Let
+\(\Pi\) be a parity-check matrix of \(C\) (rows a basis of \(C^\perp\)) and
+put \(c = \mathrm{rank}\big(\Pi\, \rho(\Pi)^{\mathsf T}\big)\), with
+\(\rho\) applied entrywise. The kernel of the pairing map
+\(D(C) \to (C^\perp)^*\), \(y \mapsto \big(z \mapsto \sum_i z_i y_i\big)\),
+is exactly \(C \cap D(C)\); hence \(c = (n-K) - H\). Therefore, when the
+entanglement-assisted construction is used in its Galois form
+\cite{DIMP2026} (the framework of \cite{BDS2006}), \(C\) yields an
+\([[n, K-H, d_{\mathrm{EA}};\, n-K-H]]\) entanglement-assisted quantum
+code, where \(d_{\mathrm{EA}}\) is the distance furnished by that
+construction and must be determined independently. The enumerator of
+Theorem~\ref{thm:T6} determines the joint distribution of \((K, H)\)
+only; it yields no distance information, and no quantum parameter is
+claimed from it alone. The affine case requires, in addition, control of
+distances under the product decomposition.
 \end{remark}
 
 % =====================================================================
@@ -895,11 +922,12 @@ and distance questions, which the enumerator alone does not address.
 \bibitem{BDS2006}
 T.~Brun, I.~Devetak, and M.-H.~Hsieh,
 Correcting quantum errors with entanglement,
-\emph{Science} 314 (2006), 436--439.
+\emph{Science} 314 (2006), 436--439. doi:10.1126/science.1131563.
 
 \bibitem{CDL2015}
 B.~Chen, H.~Q. Dinh, and H.~Liu,
-Finite Fields and Their Applications 33 (2015), 137--159.
+Repeated-root constacyclic codes of length \(2\ell^m p^n\),
+\emph{Finite Fields and Their Applications} 33 (2015), 137--159.
 doi:10.1016/j.ffa.2014.11.006.
 
 \bibitem{DP2025}
@@ -938,6 +966,12 @@ Generator polynomial matrices of the Galois hulls of multi-twisted codes,
 \emph{Finite Fields and Their Applications} 109 (2026), Article 102712.
 doi:10.1016/j.ffa.2025.102712; arXiv:2305.15237.
 
+\bibitem{FZ2017}
+Y.~Fan and L.~Zhang,
+Galois self-dual constacyclic codes,
+\emph{Designs, Codes and Cryptography} 84 (2017), 473--492.
+doi:10.1007/s10623-016-0282-8.
+
 \bibitem{HP2003}
 W.~C. Huffman and V.~Pless,
 \emph{Fundamentals of Error-Correcting Codes},
@@ -950,27 +984,32 @@ North-Holland, 1977.
 
 \bibitem{Sharma2015}
 A.~Sharma,
+Repeated-root constacyclic codes of length \(\ell^t p^s\) and their
+dual codes,
 \emph{Cryptography and Communications} 7 (2015), 229--255.
 doi:10.1007/s12095-014-0106-5.
 
 \bibitem{Talbi2021}
-Talbi, Batoul, Fotue Tabue, and Mart\'inez-Moro,
+S.~Talbi, A.~Batoul, A.~Fotue Tabue, and E.~Mart\'inez-Moro,
 Galois hulls of cyclic serial codes over a finite chain ring,
 arXiv:2102.06995 (2021).
 
 \bibitem{WZLL2023}
-Wu, Zhu, Liu, and Li,
+T.~Wu, S.~Zhu, L.~Liu, and L.~Li,
+Repeated-root constacyclic codes of length \(6\ell^m p^n\),
 \emph{Advances in Mathematics of Communications} 17(5) (2023),
 1154--1180. doi:10.3934/amc.2021044.
 
 \bibitem{ZKZ2026}
-Zhang, Kong, and Zheng,
+E.~Zhang, B.~Kong, and X.~Zheng,
 Quantum codes from Galois hulls of constacyclic codes over a finite
 non-chain ring,
 \emph{Entropy} 28 (2026), 407. doi:10.3390/e28040407.
 
 \bibitem{ZWLL2025}
-Zhang, Wang, Luo, and Li,
+Q.~Zhang, W.~Wang, S.~Luo, and Y.~Li,
+Repeated-root constacyclic codes of length \(k^s\ell^m p^n\) over
+finite fields,
 \emph{Finite Fields and Their Applications} 101 (2025), Article 102542.
 doi:10.1016/j.ffa.2024.102542.
 
