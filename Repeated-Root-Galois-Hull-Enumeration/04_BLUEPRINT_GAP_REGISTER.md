@@ -138,6 +138,14 @@ P1-02 (`P1_02_LITERATURE_CLOSURE.md` §4) recorded the length-1 identity exactly
 **Decision:** GAP-01 remains **Open**. Status (f) of P1-02: derived and recorded; not approved, not applied.
 
 ---
+
+### P1-03 update (21 Oct 2026) — formal derivation recorded; PC-1 proposed; still not applied
+
+P1-03 (`P1_03_MATHEMATICAL_PROOF_PLAN.md` section 4) gives the formal derivation: for `L_O = 1`, `E[min(P-A,A)] = floor(P^2/4)/(P+1) = nu_P` (parity argument on `sum_a min(P-a,a)`); for `L_O >= 2`, each edge has mean `mu_P = P(2P+1)/(6(P+1))` (distinct independent uniforms; linearity only). The candidate split formula is now registered as **proposed correction PC-1** (P1-03 section 6). Vector-level counterexamples to the frozen display were reproduced by direct Gram-rank brute force: `GF(2), n0=7, P=2`: brute `11/3` vs frozen `35/9`; `GF(3)`/`GF(9)`, `lambda=1, P=3`: brute `2` vs frozen `7/2`; `GF(8), k=1, P=2`: brute `11/3` vs frozen `35/9`; in `L>=2`-only cases (`lambda=-1`) frozen = corrected = brute (`7/2`), confirming the error is exactly the `L=1` term. The frozen C5 code-dimension mean `(n/2) * sum_s m_s` was re-derived and is **correct**. Frozen blueprint unchanged.
+
+**Decision:** GAP-01 remains **Open**. PC-1 awaits a separate approval decision; variance obligations are in GAP-06.
+
+---
 ## GAP-02 — L4 affine-algebra paper overlaps repeated-root hull dimensions
 
 **Severity:** Critical (novelty positioning)  
@@ -255,6 +263,14 @@ P1-02 searched lawful routes for the repo L1 full text (exact queries in `P1_02_
 **Decision:** GAP-03 remains a **Gate G1 blocker**. Status (a) of P1-02: **Unresolved / partial overlap (potentially critical)**. Closure now requires a Boss-supplied lawful copy (P1-03).
 
 ---
+
+### P1-03 update (21 Oct 2026) — correction verified editorial; theorem text still unresolved
+
+P1-03 (section 1) obtained new lawful evidence: OpenAlex (`W4283360609`) records repo L1 as `oa_status: closed`, `any_repository_has_fulltext: false`; Semantic Scholar (`4d023fda033d10a80723f94c8ac1a9c10469f6a5`) records `isOpenAccess: false` with an empty `openAccessPdf.url`. The Springer correction page (DOI `10.1007/s12095-022-00602-6`) is lawfully readable in full and lists exactly 10 items: two missing references added; "the/a primitive element"; a font-size display of the `B_i` sets (whose definitions, involving `p^{e l_1} +/- p^{i(e-k)}`, are now verified notation of repo L1); grammar repairs (some->a/an, unit->units); an `F_8` example listing; `i_1 <= i_2` -> `i_1 < i_2` in the proof sentence on distinct `#`-images; two reference-title repairs. **No listed item restates a theorem, hypothesis, or counting formula** — the correction is editorial/typographical in character (L1-Q7 narrowed). L1-Q1-Q6 and L1-Q8 remain unresolved; no theorem was inferred.
+
+**Decision:** GAP-03 remains a **Gate G1 blocker for novelty purposes only**. Per P1-03, mathematical work proceeds without any novelty claim; Gate G1 re-vote still requires the theorem text or an explicit waiver.
+
+---
 ## GAP-04 — Multi-twisted GPM theory may cover the hull generator
 
 **Severity:** High  
@@ -330,6 +346,13 @@ A later proof command must write RR-3 as a standalone lemma, with the pitfalls l
 
 ---
 
+### P1-03 update (21 Oct 2026) — RR-3 proof route fixed in detail; formal write-up is the next command
+
+P1-03 section 3 fixes the RR-3 route precisely: (a) dimension count `dim <h^*> = deg g`; (b) orthogonality by the coefficient-of-`x^{n-1}` identity using only `g h = x^n - lambda` and degree bounds — no roots, idempotents, or separability. RR-4 (twist transport `lambda^{-p^{d-k}} = lambda` under compatibility, generator `rho(h^*) = h#`) was verified algebraically and computationally, including the `GF(8), k=1` case where `sigma != rho`, so the Frobenius placement is genuinely tested. P1-03 also identified that the blueprint never states the dual-order sentence `D(C) = {y : <c,y> = 0 for all c in C}`; without it, `rho`/`sigma` swap. That lock is registered as proposed correction **PC-2** and as GAP-17.
+
+**Decision:** GAP-05 remains **Open**; its write-up is exactly the recommended next command P1-04.
+
+---
 ## GAP-06 — C6 variance has no closed form yet
 
 **Severity:** High for Phase 4; Medium for the main paper  
@@ -352,6 +375,13 @@ Phase 4 must derive rational closed forms in \(P\), then test them against brute
 
 ---
 
+### P1-03 update (21 Oct 2026) — exact moment obligations recorded; closed forms still open
+
+P1-03 section 4.3 reduces the variance problem to explicit finite sums: the edge second moment `E[min(X,Y)^2]`; the `L=1` second moment `(1/(P+1)) sum_a min(P-a,a)^2`; the adjacent-edge covariance for `L>=3`, via `F(s) = s(2P-s+1)/(2(P+1))`, as `(1/(P+1)) sum_b F(P-b)F(b) - mu_P^2`; and the `L=2` opposite-edge covariance `E[min(P-A,B) min(P-B,A)] - mu_P^2`. Orbits are independent, so the global variance is the `w_O^2`-weighted sum over orbits. None of the simplifications to closed forms in `P` has been carried out.
+
+**Decision:** GAP-06 remains **Open** (RR-8). C6 must be marked "to be proved" wherever summarized (proposed correction PC-6).
+
+---
 ## GAP-07 — Prototype coverage is too narrow for the frozen hypotheses
 
 **Severity:** High before manuscript drafting  
@@ -380,6 +410,13 @@ A later Prototype-2 command must satisfy the acceptance matrix in `04_PAPER_BLUE
 
 ---
 
+### P1-03 update (21 Oct 2026) — coverage extended and executed; limitations recorded
+
+New dependency-free script `code/validate_p1_03.py` (output `code/validation_p1_03_output.txt`, final line "ALL P1-03 EXTENDED CHECKS PASSED") adds vector-level Gram-rank brute force over `GF(2)` (k=0, P=2, n0=7), `GF(3)` (k=0, P=3, lambda=+1/-1, n0=4), `GF(9)` (k=1, P=3, lambda=+1/-1, n0=4), and `GF(8)` (k=1, P=2, n0=7; `sigma != rho`; orbit lengths 1 and **6**) — 2,806 new assignments, all matching the exponent formula and transfer trace, with LCD/self-orthogonal/dual-containing counts matching `2^#orbits` / `tr(B^L)` / `tr((B')^L)`. Orbit-statistics checks cover 31 `(P,L)` pairs (`P in {2,3,4,5,8,9}`, `L<=6`). The old prototype was rerun and passed, output identical to `code/validation_output.txt`. Limitations: single-component only; `lambda in {1,-1}`; vector-level `P = p` (rho=2 only via the old `GF(4), P=4` case); Gram method presupposes the A2 pairing order; finite checks are not a proof.
+
+**Decision:** GAP-07 remains **Open** for the multi-component vector test and broader twists, but coverage is materially extended.
+
+---
 ## GAP-08 — Global code definition and labeled decomposition need an explicit lock
 
 **Severity:** Medium  
@@ -437,6 +474,14 @@ Close these in Phase 1. Until then, use no “first,” “new enumeration,” o
 Check D was executed on 21 October 2026 and is recorded with platforms, exact queries, results, and limitations in `P1_02_LITERATURE_CLOSURE.md` section 3. Platforms: general web discovery; SpringerLink/ScienceDirect/AIMS/ACM records; arXiv search (three exact phrase queries, all "produced no results"); zbMATH Open (fielded queries: 5 known documents for `ti:"Galois hulls" & any:constacyclic`; "No Documents Found" for repeated-root/Galois-hull and transfer-matrix/hull/enumeration combinations). **Not searched:** MathSciNet, Scopus, Web of Science, ILL catalogues — coverage is documented but non-exhaustive, and non-discovery is not novelty. No exact duplicate of the joint enumerator/transfer trace was found; the closest neighbours remain repo L1 (unresolved), repo L4 (dimension values only), repo L2 (mean), and Euclidean/circulant/serial enumerations in different models.
 
 **Decision:** GAP-09 remains **Open** (Check A theorem bodies unresolved; Check D non-exhaustive). Gate G1 remains open.
+
+---
+
+### P1-03 update (21 Oct 2026) — Check A narrowed via the correction; still unresolved at theorem level
+
+P1-03 section 1 records the new Check-A evidence (OpenAlex/Semantic Scholar closed-access confirmations; full Springer correction text with its 10 editorial items; verified `B_i` notation fragment). Check D remains as recorded in P1-02 (documented, non-exhaustive; MathSciNet/Scopus/Web of Science not searched). No exact duplicate of T5/T6 has been found in any inspected text or record, and novelty remains **not approved**.
+
+**Decision:** GAP-09 remains **Open** on Check A theorem bodies. Gate G1 remains open for novelty purposes; mathematical proof work proceeds per P1-03.
 
 ---
 ## GAP-10 — Accessible and publisher versions must not be conflated
@@ -611,7 +656,7 @@ P1-01 was executed and delivered `P1_01_FULL_TEXT_THEOREM_EXTRACTION.md` with pe
 ## GAP-16 — P1-01 outcome: Gate G1 closure requires repo L1 full text, publisher verification, and Check D
 
 **Severity:** Gate decision  
-**Status:** Executed as P1-02 on 21 October 2026 — CONDITIONAL GO; Gate G1 remains open; superseded by the single P1-03 recommendation in `P1_02_LITERATURE_CLOSURE.md` section 7
+**Status:** Executed as P1-03 on 21 October 2026 — CONDITIONAL GO; Gate G1 remains open (novelty only); superseded by the single P1-04 recommendation in `P1_03_MATHEMATICAL_PROOF_PLAN.md` section 8
 
 ### What P1-01 settled
 
@@ -638,3 +683,33 @@ Until P1-02 (or an equivalent Boss-approved closure) is done: no manuscript draf
 P1-02 delivered `P1_02_LITERATURE_CLOSURE.md` with separate statuses (a)-(f). Summary: (a) repo L1 finite-field counting **unresolved / potentially critical** — lawful full text not obtained, exact questions L1-Q1...L1-Q8 recorded, search stopped as commanded; (b) repo L4 **partial overlap (strong)** at arXiv level, publisher metadata verified (DM 349(2), Art. 114750, 18 p., Zbl 1582.94185), publisher theorem equivalence unresolved; (c) repo L8 publisher metadata verified (FFA 109, Art. 102712, 25 p., Zbl 1576.94064) but numbering demonstrably differs from arXiv (Theorem 18 vs 28), so full equivalence is unresolved; (d) T5/T6: no counterpart found in inspected texts or Check-D records — **novelty not approved**; (e) Check D documented but non-exhaustive (MathSciNet/Scopus/Web of Science not searched); (f) C5: `E[min(P-A,A)] = floor(P^2/4)/(P+1)` recorded exactly, first moments resolved for all orbit lengths, correction still **not approved and not applied**, variance unproved.
 
 **The single recommended next command is now P1-03** (Boss-enabled repo L1 full-text closure and Gate-G1 re-vote), as stated in `P1_02_LITERATURE_CLOSURE.md` section 7. Until then: no manuscript drafting, no "first/new enumeration/priority" wording, no edit to frozen C5, and no novelty claim for T5/T6 beyond "no counterpart found in the text/records inspected so far".
+
+### P1-03 outcome (21 Oct 2026) — CONDITIONAL GO; proof plan delivered; Gate G1 open for novelty only
+
+P1-03 delivered `P1_03_MATHEMATICAL_PROOF_PLAN.md` and `code/validate_p1_03.py` (+ output). Summary: (i) repo L1 correction verified as 10 editorial items from the lawful Springer page; OpenAlex/Semantic Scholar confirm closed access; L1-Q1-Q6/Q8 unresolved and recorded — mathematical work proceeds with **no novelty claim**. (ii) Independent proof plan for T1-T6 under convention lock A1-A10; T5 proved at plan level by closed-walk expansion; T3's RR-3 route fixed (coefficient identity + dimension count, no separability); the blueprint's missing dual-order sentence identified (PC-2 / GAP-17). (iii) `nu_P = floor(P^2/4)/(P+1)` formally derived for `L=1`; `mu_P` per edge for `L>=2`; candidate split registered as PC-1, **not applied**; frozen C5 hull mean confirmed incorrect exactly on `L=1` orbits by vector-level counterexamples; C5 code-dimension mean re-derived correct. (iv) Review verdicts: T1, T2 (with PC-3), T4, T5, T6 proof-ready/route-complete; C1-C4 correct (C4 completed by PC-4); C6 unproved (exact obligations recorded); C7 conditional only. (v) Extended validation executed: 6 vector cases (2,806 assignments, incl. `GF(8)` orbit length 6, `lambda=-1` twists, `sigma != rho`) and 31 `(P,L)` orbit pairs — all passed; old prototype rerun identical.
+
+**The single recommended next command is now P1-04** (formal proof package for T1-T4), as stated in `P1_03_MATHEMATICAL_PROOF_PLAN.md` section 8. Until further commands: no manuscript drafting, no novelty/priority wording, no edit to frozen C5 or any frozen statement, and PC-1...PC-6 remain unapproved proposals.
+
+---
+
+## GAP-17 — Dual-order convention (rho vs sigma) is not frozen in the blueprint; proposed corrections register
+
+**Severity:** Proof blocker (convention)  
+**Status:** Open; identified in P1-03
+
+### Issue
+
+The frozen blueprint defines the pairing `⟨x,y⟩ = Σ_i x_i σ(y_i)` but never writes the dual set with its argument order. If `D(C) = {y : ⟨c, y⟩ = 0 ∀ c ∈ C}` (code first), then `D(C) = ρ(C^⊥)` and the dual generator is `h_a#` as frozen. If the opposite order were read, `σ` and `ρ` would interchange and `h_a#` would be wrong. The old `GF(4), k=1` prototype cannot distinguish the two readings (`σ = ρ` there); the new `GF(8), k=1` validation (`σ = a²`, `ρ = a⁴`) supports the code-first reading computationally, but the freeze itself is ambiguous on paper.
+
+### Proposed corrections register (all unapproved; frozen file untouched)
+
+- **PC-1** (C5): replace the hull-mean display/proof key by the split formula `mu_P * Σ_{L>=2} w_O L_O + nu_P * Σ_{L=1} w_O`. Verified; awaiting approval.
+- **PC-2** (T3 freeze): add the sentence `D(C) = {y : ⟨c, y⟩_{s,k} = 0 for all c ∈ C}` to the convention freeze.
+- **PC-3** (T2): add the hypothesis `f(0) ≠ 0` to the definition range of `#`.
+- **PC-4** (C4): add the dual-containing count `∏_O tr((B'_P)^{L_O})`, `(B'_P)_{a,b} = 1` iff `a + b ≤ P`. Verified computationally.
+- **PC-5** (T1): state explicitly that codes are `A`-submodules (component `K_s`-linear codes) with fixed component/factor labels.
+- **PC-6** (C6): mark the variance corollary "to be proved (RR-8)" wherever it is summarized.
+
+### Resolution required
+
+A single future approval command should decide PC-1...PC-6 together, with any blueprint edit made as a dated correction note, never silently. Until then the proof package (P1-04) must state the A2 order verbatim in its own text.
