@@ -865,3 +865,11 @@ All P1-16 items addressed in `P1_15_MANUSCRIPT_DRAFT.tex`/`.md`; details and pri
 - GAP-16-06 CLOSED: titles/initials completed from primary records (Crossref/ScienceDirect/Springer/AIMS/arXiv); Eldin resolved: publisher "Ramy Taki Eldin" + arXiv submitter "Ramy Taki Eldin F." => R. F. Taki Eldin (no change needed); intro narrowed to chain ring; ZKZ2026 initials added (MDPI record).
 - GAP-16-07 CLOSED: T4 shorthand clause added. GAP-16-08: recorded no-action note (unchanged).
 Structural checks passed (braces/environments/33 labels/16 bibitems all cited); validate_p1_14.py rerun byte-identical. No LaTeX compiler in environment: .tex structurally verified, NOT compiled (author-side compile remains). Blueprint SHA ec2fd8d58f8d2a986314f83997d750d689f7c88e98ec8f87753ab4c9cf438cff unchanged; proof packages and optional corollaries untouched.
+
+
+## P1-18 outcome (2026-10-21, readiness audit)
+
+Readiness report: `P1_18_READINESS_AND_RESEARCH_PRIORITIES.md`. Repository verified synchronized at 1d3242e before work; complete P1-16->P1-17 diff inspected: only manuscript .tex/.md, correction log, register, worklog changed; all claimed corrections present; no theorem/corollary statement changed in substance; blueprint hash unchanged.
+Assessment: correctness STRONG (proof packages + P1-14/P1-16 audits + validators validate_p1_05/p1_06/p1_14 all exit 0 this phase, P1-14 byte-identical); novelty UNRESOLVED (Gate G1/L1 theorem-level overlap still open; "no counterpart in inspected text" is not a novelty proof); significance moderate/specialized and defensible if honestly positioned; presentation good draft but NOT submission-ready (author placeholder, never compiled — no TeX in environment, compile instructions supplied in report Sec.5).
+Bibliography: all 16 entries tabulated against the claims they support and the evidence level actually inspected (P1-17 primary records; repo full-text for DIMP2026/ES2026 arXiv; L1 abstract-only). N1-N3 remain unadopted candidates, recorded separately.
+Priority order recorded: (1) lawful L1 full text + L1-Q1-Q6 (most consequential), (2) author compile/proofread + placeholders, (3) N1-N3 adoption decision, (4) positioning/venue after (1), (5) optional extensions later. No manuscript/blueprint/proof changes this phase.
