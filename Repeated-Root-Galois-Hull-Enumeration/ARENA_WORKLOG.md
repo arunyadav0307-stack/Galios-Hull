@@ -138,3 +138,14 @@
 
 - **Boss ka nirdesh:** deliverables side mein sirf **PDF** ke roop mein dikhaye jayein; baaki saari cheezein (markdown sources, scripts, register, logs) workspace/git mein save hoti rahein. Aage ke har command me main deliverable ka PDF banakar side mein present kiya jayega.
 - **Is baar:** `P1_04_PROOFS_T1_T4.pdf` (8 pages) banaya gaya naye converter `code/md_to_pdf.py` se (fpdf2 + DejaVu fonts; markdown source untouched). Visual QA: pages 1, 5, 8 render karke dekhe — headings, bold/italics, code blocks, saare math symbols (ρ, σ, λ, Σ, ⟨⟩, ♮) sahi render hue; koi `**`/`__` marker leak nahi.
+
+
+## 2026-10-21 — P1-05 Formal Proof Package (T5–T6, C1–C4)
+
+- **Deliverable:** `P1_05_PROOFS_T5_T6_COROLLARIES.md` + side-PDF `P1_05_PROOFS_T5_T6_COROLLARIES.pdf` (7 pages, visual QA pass). T5 (closed-walk trace, RR-6 discharged), T6 (CRT/product assembly Proposition 3.1 + finite distributive law, RR-7 discharged), C1–C4 frozen statements pehle transcribe karke phir derive kiye. C4 ka dual-containing **count** sirf PC-4 proposal ke roop me prove kiya — frozen C4 me characterization hi hai, PC ab bhi unapproved. `P=1` recovery algebraic roop se prove ki (`T^{(1)}_w` 2×2 matrix, `1→0` transition indicator); C5 ki galat "`1/4`" remark recovery se explicit bahar rakhi.
+- **Convention jaanch:** P1-04 ke RR-2/RR-3/RR-4 har use-point par dobara check — `h^♮` (ordinary reciprocal, bina separability) aur `h_a#` (`ρ`-reciprocal) ka farq, second-slot code-first order se `D(C) = ρ(C^⊥)` aur `β_i = P − α_{i−1}`, ye sab §1 ki table me likha.
+- **Counterexample:** T5/T6/C1–C4 me koi nahi (locked hypotheses G1–G6 ke andar). Baki khula: C5 mean (PC-1), C6 variance (RR-8), C7 (RR-9), PC approvals, Gate G1.
+- **Validation (asal me chalayi gayi):** `code/validate_p1_03.py` dobara — exit 0, output saved file se byte-identical. Nayi `code/validate_p1_05.py`: pehli multi-component jaanch `A = GF(2) × GF(4)`, 729 labeled global assignments — convolution, T6 trace-product, C1–C4 counts sab match (`ALL P1-05 MULTI-COMPONENT ASSEMBLY CHECKS PASSED`, output `code/validation_p1_05_output.txt`). Ye sirf ek example ki supporting evidence hai, proof nahi.
+- **Files banayi:** `P1_05_PROOFS_T5_T6_COROLLARIES.md`, `P1_05_PROOFS_T5_T6_COROLLARIES.pdf`, `code/validate_p1_05.py`, `code/validation_p1_05_output.txt`. **Files update:** ye worklog, `04_BLUEPRINT_GAP_REGISTER.md` (P1-05 outcome). Frozen blueprint, purani validation files/scripts untouched.
+- **Overall verdict:** **CONDITIONAL GO.** T1–T6 aur C1–C4 proved; moments (C5/C6), PC faisle aur Gate G1 baki — manuscript drafting ab bhi nahi.
+- **Agle sujhaye command (sirf ek):** `P1-06` — Moments package: C5 mean-split ka formal proof (ganit ke roop me; blueprint-change PC-1 approval par nirbhar rahega) aur C6 variance ke band sutra (RR-8) `L=1, L=2, L≥3` cases ke liye.
