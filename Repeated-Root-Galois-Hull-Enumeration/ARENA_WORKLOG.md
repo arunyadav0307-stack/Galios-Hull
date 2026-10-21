@@ -168,3 +168,13 @@
 - **Files banayi:** `P1_07_PC_DECISION_DOSSIER.md`, `P1_07_PC_DECISION_DOSSIER.pdf`. **Files update:** ye worklog, `04_BLUEPRINT_GAP_REGISTER.md` (P1-07 outcome).
 - **Overall verdict:** **CONDITIONAL GO.** Dossier taiyaar hai; ab faisla Boss/Commander ka hai. Manuscript drafting ab bhi nahi.
 - **Agle sujhaye command (sirf ek):** `P1-08` — PC-1…PC-6 par APPROVE/REJECT/DEFER दर्ज karke accepted changes ko dated correction notes ke roop me ek hi blueprint edit me lagana aur nayi frozen state record karna.
+
+
+## 2026-10-21 — P1-08 Integration (PC-1..PC-6 ke faisle lage; blueprint re-freeze)
+
+- **Faisle (Commander ke, bilkul vaise hi):** PC-1 **APPROVE**, PC-2 **APPROVE**, PC-3 **APPROVE**, PC-4 **APPROVE**, PC-5 **APPROVE**, PC-6 **REJECT** ("to be proved" label purana pad gaya tha; C6 me P1-06 ke proved formulas/status lage). Pre-edit jaanch: local = remote = `a92bb21`, working tree saaf; blueprint SHA-256 pehle `013ef5a2…`, baad me `ec2fd8d5…`. Koi divergence nahi mila, isliye edit aage badha.
+- **Ek controlled edit** `02_THEOREM_BLUEPRINT.md` me: upar dated Correction Notes + har sthan par `[P1-08 …]` note. C5 hull-mean split (`L_O=1` par `ν_P`, `L_O≥2` par `μ_P`; `P=1` par `1/4` sirf `L_O≥2` hisse par), code-dimension mean barkaraar; dual-order sentence aur `ρ/σ/h^♮/h_a#` ke rol saaf; `#` ki domain `f(0)≠0`; C4 me dual-containing ginati; T1 me `A`-submodule/fixed-label scope; C6 me proved variance formulas (mean `w_O`, variance `w_O²`). Diff ki poori jaanch — iske alawa koi badlaav nahi. GAP-01, GAP-06, GAP-17 **band**.
+- **Validation (asal me chalayi gayi, bina badle):** `validate_p1_03.py` byte-identical pass; `validate_p1_05.py`, `validate_p1_06.py`, `validate_repeated_root.py` — sab pass. Formulas P1-06 Theorem 3.7 se shabdashah match verify kiye.
+- **Files update:** `02_THEOREM_BLUEPRINT.md`, `04_BLUEPRINT_GAP_REGISTER.md`, ye worklog; audit `P1_08_INTEGRATION_AUDIT.md` (+PDF) alag commit me. Purani proof/validation files untouched. **Manuscript drafting ab bhi nahi; Gate G1 (novelty) khula hai.**
+- **Overall verdict:** **CONDITIONAL GO** — mathematical core ab corrected-freeze ke saath proved hai; sirf Gate G1 bacha hai.
+- **Agle sujhaye command (sirf ek):** `P1-09` — Gate-G1 closure package: repo L1 ki antim sthiti, safe novelty vakya, aur Gate-G1 par antim vote; taaki manuscript-phase ka rasta khule ya seema saaf ho.

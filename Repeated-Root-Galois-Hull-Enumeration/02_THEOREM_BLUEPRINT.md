@@ -1,7 +1,11 @@
 # Theorem Blueprint — Repeated-Root k-Galois Hull Enumeration
-**Status:** Statements FIXED (Phase 0). Proofs Phase 3 me likhe jayenge; har proof obligation ko RR-number diya hai.
+**Status:** Statements FIXED (Phase 0); **P1-08 (21 October 2026) corrections applied — neeche wale Correction Notes dekho.** Proofs Phase 3 me likhe jayenge; har proof obligation ko RR-number diya hai.
 **Convention freeze:** Predecessor manuscript jaisi hi — code-first pairing, inverse-Frobenius reciprocal.
 Sirf itna hoga, iske alawa koi chuppi (silent) convention-change nahi.
+
+## Correction Notes (P1-08 — 21 October 2026; Commander decisions, dated — no silent edits)
+
+Commander ke explicit faislon (P1-07 dossier ke baad) se: **PC-1, PC-2, PC-3, PC-4, PC-5 APPROVED** aur is file me unke sthanon par **[P1-08 …]** notes ke saath lage hain — PC-1 (C5 hull-mean ka `L_O = 1` / `L_O ≥ 2` split; purana display galat tha), PC-2 (dual-order set-builder sentence freeze me), PC-3 (`#` ki domain `f(0) ≠ 0`), PC-4 (C4 dual-containing ginati), PC-5 (T1 me `A`-submodule/fixed-label scope). **PC-6 REJECTED** — purana "to be proved (RR-8)" label ab galat hota kyunki RR-8 `P1-06` me proved hai; C6 me proved formulas/status hi likha hai. Har badlaav ka proof-sandarbh aur audit `P1_08_INTEGRATION_AUDIT.md` me hai. In notes ke alawa is file me koi badlaav nahi kiya gaya.
 
 ---
 
@@ -10,14 +14,14 @@ Sirf itna hoga, iske alawa koi chuppi (silent) convention-change nahi.
 - `p` prime; `q = p^e`, `e ≥ 1`; `0 ≤ k < e` (Galois index).
 - `A ≅ ∏_{s=1}^N K_s`, `K_s = F_{q^{m_s}} = F_{p^{d_s}}`, `d_s = e m_s`. Component labels fixed.
 - `σ(a) = a^{p^k}`, `ρ(a) = a^{p^{d_s−k}} = σ⁻¹` (component par; `s` aksar suppress).
-- Code-first pairing: `⟨x,y⟩_{s,k} = Σ_i x_i σ(y_i)`; dual `D(C)`, hull `Hull_k(C) = C ∩ D(C)`.
+- Code-first pairing: `⟨x,y⟩_{s,k} = Σ_i x_i σ(y_i)`; dual `D(C)`, hull `Hull_k(C) = C ∩ D(C)`. **[P1-08, PC-2]** `D(C) = {y : ⟨c, y⟩_{s,k} = 0 for all c ∈ C}` — code vector pehle slot me, candidate dusre slot me. Isi order se `D(C) = ρ(C^⊥)` (coordinatewise `ρ = σ⁻¹`); Euclidean dual ka generator `h^♮(x) = h_0^{-1} Σ_i h_i x^{deg h − i}` (ordinary reciprocal, bina Frobenius) hai, aur code-first dual ka generator `h_a# = ρ̄(h_a^♮)` hai (proof: `P1_04_PROOFS_T1_T4.md`, Lemma RR-3 aur Proposition 4.2).
 - **Naya:** `ϱ ≥ 0`, `P = p^ϱ`, `n = P·n₀`, `gcd(n₀,p) = 1` (`ϱ = 0` ⟺ simple-root purana case).
 - `λ = (λ_s) ∈ A*`, `M_s(x) = x^n − λ_s ∈ K_s[x]`.
 - `μ_s ∈ K_s*`: `λ_s` ka ekmatra `P`-th root (Frobenius `a ↦ a^P` finite field ka bijection hai).
 - `M̄_s(x) = x^{n₀} − μ_s`; `F_s` = uske distinct monic irreducible factors over `K_s`.
   To `M_s = M̄_s^P = ∏_{f∈F_s} f^P`.
 - Exponent assignment: `a = (a_f)_{f∈F_s}`, `a_f ∈ {0,…,P}`; `g_a = ∏ f^{a_f}`; `C_s(a) = ⟨g_a⟩ ⊆ K_s[x]/(M_s)`.
-- Reciprocal: `f#(x) = ρ(f₀)⁻¹ Σ_i ρ(f_i) x^{r−i}` (monic, degree-rakh rakhta hai) — purani paribhasha hi.
+- Reciprocal: `f#(x) = ρ(f₀)⁻¹ Σ_i ρ(f_i) x^{r−i}` (monic, degree-rakh rakhta hai) — purani paribhasha hi. **[P1-08, PC-3]** `#` sirf un monic `f` ke liye defined hai jinke liye `f(0) ≠ 0` ho (warna `ρ(f₀)⁻¹` undefined hai); is paper ke saare upyogon me ye automatic hai, kyunki `f | M̄_s` aur `M̄_s(0) = −μ_s ≠ 0` (vaise hi `h_a(0) ≠ 0`).
 - Compatibility (har `s` par): **`λ_s^{1+p^{d_s−k}} = 1`** — tabhi `τ_s : F_s → F_s`, `τ_s(f) = f#` permutation hai.
 
 ---
@@ -27,11 +31,11 @@ Sirf itna hoga, iske alawa koi chuppi (silent) convention-change nahi.
 ### T1 — Parametrization (exponent assignments hi codes hain)
 Har component code `C_s ⊆ K_s[x]/(M_s)` ka ekmatra monic generator `M_s` ka divisor hai, isliye
 `a ↦ C_s(a)` ek bijection hai `{0,…,P}^{F_s} → {λ_s-constacyclic codes of length n over K_s}`.
-CRT se global codes `A`-par `⟷` assignments ka product. Kul ginati `(P+1)^{Σ_s |F_s|}`.
+CRT se global codes `A`-par `⟷` assignments ka product. Kul ginati `(P+1)^{Σ_s |F_s|}`. **[P1-08, PC-5]** Global code se arth hai `A^n` ka `A`-submodule, fixed labeled CRT decomposition `A ≅ ∏_s K_s` ke tahat; component codes `K_s`-linear hain, aur ginati labeled assignments ki hai, equivalence/isometry classes ki nahi. (Product-parametrization `A`-submodules ke liye hai; arbitrary component-mixing `F_q`-subspaces ke liye ye dawa nahi hai.)
 *Proof:* `K_s[x]` PID hai; `(M_s)` ke upar ke ideals ⟷ monic divisors. Separable base ke distinct factors par exponent hi divisor tay karta hai. **[RR-1: routine, par non-semisimple quotient `(M_s)` me ideal-jali (lattice) saaf shabdon me likhna.]**
 
 ### T2 — Reciprocal, multiplicities ke saath; compatibility ka dohra roop
-(i) `#` monic polynomials par multiplicative hai; isliye `(∏ f^{a_f})# = ∏ (f#)^{a_f}`.
+(i) `#` (**`f(0) ≠ 0`** wale — **[P1-08, PC-3]**) monic polynomials par multiplicative hai; isliye `(∏ f^{a_f})# = ∏ (f#)^{a_f}`.
 (ii) Root action: `f(α)=0 ⟹ f#(α^{−p^{d_s−k}})=0` (purana lemma, bilkul waisa hi — multiplicity isse nahi badalti).
 (iii) Compatibility ke samkaksh roop: `λ_s^{1+p^{d_s−k}}=1 ⟺ μ_s^{1+p^{d_s−k}}=1`.
 *Proof of (iii):* `λ = μ^P` hai; `λ^{1+p^D}=1 ⟺ (μ^{1+p^D})^P=1`. Char-`p` field me `x^P=1 ⟹ (x−1)^P=0 ⟹ x=1`. ∎
@@ -77,11 +81,15 @@ E(u,z) := Σ_{labeled a} u^{dim_{F_q} C(a)} z^{dim_{F_q} Hull_k(C(a))}
 - **C3 LCD count:** `#{a : Hull = 0} = 2^{#orbits}`.
   *Proof ki chaabi:* ek orbit par `min(P−α_i, α_{i−1})=0 ∀i` hona ⟺ ya to saare `α_i=0` ya saare `α_i=P`.
   (Agar kahin `α_i=P` hai to agla bhi `P` — band cycle me saare `P`; agar `P` kahin nahi aur kahin `α_i∈{1,…,P−1}` hai to uske agle kenare par yogdaan `≥1`.) Dhyaan: ginati `P` se swatantra hai — ye chhota par sundar tathya alag se chamkana.
-- **C4 Self-orthogonal / dual-containing kirdaar:** `C ⊆ D(C)` ⟺ har orbit-edge par `α_{i−1}+α_i ≥ P`; ginati `∏_O tr(B_P^{L_O})`, `(B_P)_{a,b} = 1` agar `a+b ≥ P` varna `0`. Ulta: `D(C) ⊆ C` ⟺ `α_{i−1}+α_i ≤ P` har edge par. (Dono T4 ke yogdaano ki tulna se — hull ka yogdaan code ke yogdaan ko edge-dar-edge (termwise) nahi paar kar sakta, isiliye vaishvik (global) barabari kenare-dar-kenare majboor karti hai.)
+- **C4 Self-orthogonal / dual-containing kirdaar:** `C ⊆ D(C)` ⟺ har orbit-edge par `α_{i−1}+α_i ≥ P`; ginati `∏_O tr(B_P^{L_O})`, `(B_P)_{a,b} = 1` agar `a+b ≥ P` varna `0`. Ulta: `D(C) ⊆ C` ⟺ `α_{i−1}+α_i ≤ P` har edge par. **[P1-08, PC-4]** Dual-containing ginati (upar wale characterization aur compatible-twist labeled model ke tahat): `#{a : D(C) ⊆ C} = ∏_O tr((B′_P)^{L_O})`, `(B′_P)_{a,b} = 1` agar `a + b ≤ P` varna `0` (proof: `P1_05_PROOFS_T5_T6_COROLLARIES.md` §5; dono ginatiyaan `α_i ↦ P − α_i` se barabar hain). (Dono T4 ke yogdaano ki tulna se — hull ka yogdaan code ke yogdaan ko edge-dar-edge (termwise) nahi paar kar sakta, isiliye vaishvik (global) barabari kenare-dar-kenare majboor karti hai.)
 - **C5 Mean:** Uniform random labeled assignment par `E[dim C] = (n/2)·(Σ_s m_s)` (kul `F_q`-lambai ka aadha) aur
-  `E[Hull] = [P(2P+1) / (6(P+1))] · Σ_O w_O L_O`.
-  *Chaabi:* ek kenare par `min(P−α_i, α_{i−1})` do swatantra uniform `{0,…,P}` ka `min` hai; `E[min] = Σ_{t=1}^P ((P−t+1)/(P+1))² = P(2P+1)/(6(P+1))`. `P=1` par `1/4` — purana mean wapas. ✅
-- **C6 Variance:** Orbit-swatantra yog; `L=1` (self-loop: `min(P−A,A)`), `L=2` (do kenare ek hi jodi ko saanjha karte hain), `L≥3` (sirf padosi kenare sah-sambandhit) — teeno cases ke band sutra (closed forms) Phase 4 me `P` ke parimaani (polynomial) roop me nikale jayenge. `P=1` par purana `a=2` wala exception iska sabse chhota roop hai. **[RR-8]**
+  `E[Hull] = μ_P · Σ_{O : L_O ≥ 2} w_O L_O + ν_P · Σ_{O : L_O = 1} w_O`, jahan `μ_P = P(2P+1)/(6(P+1))` aur `ν_P = ⌊P²/4⌋/(P+1)`. **[P1-08 correction, PC-1: purana display `E[Hull] = [P(2P+1)/(6(P+1))] · Σ_O w_O L_O` `L_O = 1` orbits par galat tha — proof: `P1_06_MOMENT_PROOFS_C5_C6.md`, Theorem 2.4.]**
+  *Chaabi:* `L_O ≥ 2` par har kenare par `min(P−α_i, α_{i−1})` do **distinct** swatantra uniform `{0,…,P}` ka `min` hai; `E[min] = Σ_{t=1}^P ((P−t+1)/(P+1))² = μ_P`. Lekin `L_O = 1` par kenara self-loop `min(P−A, A)` hai, jiski expectation `ν_P` hai (`P = 1` par `ν_1 = 0`); isiliye `P=1` par `E[Hull] = (1/4)·Σ_{L_O ≥ 2} w_O L_O` hai — `1/4` sirf `L_O ≥ 2` wale hisse par lagta hai.
+- **C6 Variance (PROVED — `P1_06_MOMENT_PROOFS_C5_C6.md`, Theorem 3.7):** Uniform labeled model me `Var(dim_{F_q} Hull_k) = Σ_s Σ_{O ∈ O_s} w_O² · V_{L_O}(P)`, jahan ek orbit ke liye `S_L = Σ_i min(P−A_i, A_{i−1})` (cyclic) aur
+  `V_1(P) = P(P+2)(P²+2P+4)/(48(P+1)²)` (`P` even), `(P−1)(P+3)/48` (`P` odd);
+  `V_2(P) = P(P+2)(P²+2P+3)/(18(P+1)²)`;
+  `V_L(P) = L · P(P+2)(P²+2P+2)/(60(P+1)²)` (`L ≥ 3`).
+  Dhyaan: mean me vajan `w_O` lagta hai, variance me `w_O²` (component/orbit swatantrata se). Beech ke parinaam: adjacent covariance `κ_P = −P(P+2)(7P²+14P+9)/(360(P+1)²)`, `L=2` cross-covariance `−P²(P+2)²/(36(P+1)²)`. **[RR-8 discharged. P1-08: PC-6 ka purana "to be proved (RR-8)" label Commander dwara REJECTED hai — yahan proved status aur sandarbh hi sahi hai, woh label nahi lagaya gaya.]** `P=1` par purana `a=2` wala exception iska sabse chhota roop hai.
 - **C7 (shartiya) EAQECC:** Finite-field case (`N=1, m_1=1`) me jis code ka distance `d` jana ho, usse standard `[[n, K−H, d; n−K−H]]` EAQECC. Affine case me sirf tab, jab component distances se Gray/CRT distance pakka ho. **Enumerator akela quantum dawa nahi karega.** **[RR-9: is khand ko sabse aakhir me, sabse savdhaani se.]**
 
 ---
