@@ -158,3 +158,13 @@
 - **Validation (asal me chalayi gayi):** `code/validate_p1_06.py` — exact fractions, `P ∈ {1,2,3,4,5,8,9}`, `L ∈ {1,2,3,4,6}` par band sutra = finite sums = enumeration, global assembly (729-tuple enumeration + convolution): `ALL P1-06 MOMENT CHECKS PASSED`.
 - **Overall verdict:** **CONDITIONAL GO.** Core mathematics (T1–T6, C1–C6) ab proved hai; PC-1…PC-6 ke faisle, Gate G1 (novelty) aur manuscript drafting baki — drafting ab bhi nahi hogi.
 - **Agle sujhaye command (sirf ek):** `P1-07` — PC-1…PC-6 par ek saath faisla aur approved corrections ko dated correction notes ke roop me blueprint me lagana (ya explicit rejection दर्ज karna), taaki proved core manuscript-phase ke liye freeze ho sake.
+
+
+## 2026-10-21 — P1-07 PC Decision Dossier (koi approval nahi)
+
+- **Deliverable:** `P1_07_PC_DECISION_DOSSIER.md` + side-PDF `P1_07_PC_DECISION_DOSSIER.pdf` (5 pages, visual QA pass). Har PC ke liye: frozen text, exact old→new change, ganit-karan, proof/evidence sthan, classification, accept/reject ke parinaam, aur **sirf recommendation** — PC-1, PC-2, PC-3, PC-4, PC-5: APPROVE (recommendation); PC-6: **REJECT as superseded** (RR-8 P1-06 me prove ho gaya, isliye "to be proved" label ab galat hoga; sahi follow-up C6 me band sutra lagana hai, jo alag integration edit hai).
+- **Statuses:** PC-1…PC-6 **saare PENDING** hain — is command ne kuch approve/integrate nahi kiya. Frozen blueprint untouched, Gate G1 khula aur PCs se unrelated.
+- **Validation (asal me chalayi gayi):** `validate_p1_03.py` (byte-identical), `validate_p1_05.py`, `validate_p1_06.py` — teeno bina badle rerun, sab pass.
+- **Files banayi:** `P1_07_PC_DECISION_DOSSIER.md`, `P1_07_PC_DECISION_DOSSIER.pdf`. **Files update:** ye worklog, `04_BLUEPRINT_GAP_REGISTER.md` (P1-07 outcome).
+- **Overall verdict:** **CONDITIONAL GO.** Dossier taiyaar hai; ab faisla Boss/Commander ka hai. Manuscript drafting ab bhi nahi.
+- **Agle sujhaye command (sirf ek):** `P1-08` — PC-1…PC-6 par APPROVE/REJECT/DEFER दर्ज karke accepted changes ko dated correction notes ke roop me ek hi blueprint edit me lagana aur nayi frozen state record karna.

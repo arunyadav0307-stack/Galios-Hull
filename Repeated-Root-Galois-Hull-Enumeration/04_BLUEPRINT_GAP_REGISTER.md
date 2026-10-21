@@ -752,3 +752,12 @@ A single future approval command should decide PC-1...PC-6 together, with any bl
 **Status changes requested (not applied):** GAP-01/PC-1 mathematics now fully proved (blueprint adoption pending approval); RR-8 (GAP entry for C6) mathematics discharged — blueprint adoption likewise pending. PC-1…PC-6 remain unapproved; frozen blueprint untouched; Gate G1 open.
 
 **The single recommended next command is now P1-07** (single approval-and-integration command: decide PC-1…PC-6 together, apply approved corrections to the blueprint as dated correction notes, and close Gates G1/G3 bookkeeping for the proved core T1–T6/C1–C6 — or record explicit rejection).
+
+
+---
+
+### P1-07 outcome (21 Oct 2026) — decision dossier delivered; ALL PC STATUSES STILL PENDING
+
+`P1_07_PC_DECISION_DOSSIER.md` (+ PDF) documents each proposal with exact frozen text, exact old→new change, reason, proof/evidence locations, classification, accept/reject/defer consequences, and a **recommendation only**: PC-1 APPROVE (theorem correctness; frozen C5 hull mean false, split proved in P1-06 Theorem 2.4, `P=1` case verified: `ν_1 = 0`, `μ_1 = 1/4`); PC-2 APPROVE (add `D(C) = {y : ⟨c, y⟩_{s,k} = 0 ∀ c ∈ C}`; trace through RR-2/RR-3/RR-4 with `ρ/σ/h^♮/h_a#` roles; opposite order would change the generator); PC-3 APPROVE (add `f(0) ≠ 0`; else `#` undefined, witness `f(x) = x`); PC-4 APPROVE (add dual-containing count `∏ tr((B'_P)^{L_O})`; proved in P1-05 §5 and computationally verified; pure completion); PC-5 APPROVE (state `A`-submodule/fixed-label scope in T1; product parametrization fails for arbitrary mixing `F_q`-subspaces); PC-6 **REJECT as superseded** (the "to be proved (RR-8)" label was correct when proposed, but RR-8 is now proved in P1-06 Theorem 3.7, so the label would be false; the right follow-up is integrating the C6 closed forms, a different edit proposed inside the dossier). **No PC was approved, rejected, or integrated by P1-07.** Integration must be a separate future command applying accepted items as dated correction notes (GAP-17 rule). Checks rerun unmodified: `validate_p1_03.py` (byte-identical), `validate_p1_05.py`, `validate_p1_06.py` — all passed. Frozen blueprint untouched; Gate G1 open and unrelated to the PCs.
+
+**The single recommended next command is now P1-08** (Boss/Commander decision-and-integration: record APPROVE/REJECT/DEFER for PC-1…PC-6, apply accepted changes as dated correction notes in one blueprint edit, and record the new frozen state).
