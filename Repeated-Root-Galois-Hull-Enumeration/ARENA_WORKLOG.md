@@ -189,3 +189,13 @@
 - **Validation:** teeno scripts bina badle rerun — p1_03 byte-identical, p1_05/p1_06 pass.
 - **Files banayi:** `P1_09_GATE_G1_NOVELTY_AUDIT.md/.pdf`, `P1_09_OVERLAP_MATRIX.md/.pdf`. **Files update:** ye worklog, `04_BLUEPRINT_GAP_REGISTER.md` (P1-09 outcome), `code/md_to_pdf.py` (heading-italics ka chhota fix). Frozen blueprint, proof aur purani validation files untouched.
 - **Agle sujhaye command (sirf ek):** `P1-10` — L1 ka lawful full text author/institutional channel se lekar L1-Q1…Q6 ka theorem-level extraction; uske turant baad Gate G1 par dobara vote.
+
+
+## 2026-10-21 — P1-10 Lawful L1 Acquisition Plan
+
+- **Deliverable:** `P1_10_L1_ACCESS_AND_EXTRACTION.md` + side-PDF `P1_10_L1_ACCESS_AND_EXTRACTION.pdf` (3 pages, visual QA pass). Repo state verify: local = remote `84ffa46`, blueprint hash `ec2fd8d5…` identical, tree saaf.
+- **Koshish aur natija:** 8 lawful routes ka dated record — Springer (sirf abstract), Unpaywall taaza (`has_repository_copy = false`), OpenAlex/S2/ACM DL, repository-hunts nakam, correction uplabdh (paper nahi). **Kisi ko contact nahi kiya gaya** — ye baat deliverable me saaf likhi hai. Nayi abstract-level jankari: "considering some restrictions on q" — theorem ka andaz phir bhi nahi lagaya. L1-Q1…Q6 sab **UNRESOLVED**.
+- **Drafts taiyaar:** (A) corresponding author ko chhoti e-mail (Boss bhejenge; Dr Islam — saha-lekhak aur advisor — ke zariye rasta sabse aasan), (B) library/ILL form fields. Copy milne par extraction checklist (§7) bhi likh di.
+- **Faisla:** Novelty claim **DEFER**, overall **CONDITIONAL GO**, Gate G1 band nahi hua, manuscript drafting ab bhi gated. Validation teeno scripts bina badle rerun — sab pass.
+- **Files banayi:** `P1_10_L1_ACCESS_AND_EXTRACTION.md`, `P1_10_L1_ACCESS_AND_EXTRACTION.pdf`. **Files update:** ye worklog, `04_BLUEPRINT_GAP_REGISTER.md` (P1-10 outcome). Frozen blueprint/proofs/validations untouched.
+- **Agle sujhaye command (sirf ek):** `P1-11` — Boss-side acquisition: Draft A bhejna (seedha ya Dr Islam ke zariye) aur/ya Draft B library me file karna; lawful copy milte hi §7 checklist se extraction aur Gate G1 par dobara vote. Tab tak project corrected freeze par ruka rahega.
