@@ -838,3 +838,17 @@ Deliverables: **`P1_15_MANUSCRIPT_DRAFT.tex`** (primary; complete self-contained
 **Unresolved items carried forward:** (i) Gate G1 / repo L1 (theorem-level comparison; sole path remains the P1-11 handoff + P1-13 evidence trigger); (ii) N1–N3 adoption decision (P1-15 companion file); (iii) author names/affiliations/acknowledgements placeholders in the draft; (iv) LaTeX compilation and visual proofreading on a TeX system; (v) the stale RR checkboxes inside the frozen blueprint (P1-14 flag (ii)) if the Commander ever approves a bookkeeping note.
 
 **The single recommended next command is now P1-16** (author-side review cycle: (a) compile the .tex on a TeX system and return any compile errors/visual issues for fixing; (b) decide adoption of N1–N3; (c) fill author/affiliation placeholders — while the Gate-G1 path remains the P1-11/P1-13 lawful-acquisition trigger; no novelty wording enters the draft until Gate G1 is decided).
+
+
+## P1-16 outcome (2026-10-21, independent manuscript audit)
+
+Full audit: `P1_16_INDEPENDENT_AUDIT.md`. **No mathematical error found** in T1-T6, assembly, P=1 recovery, C1-C6 or N1-N3. C5/C6 re-derived by hand (covariance cancellation, L=1/L=2/L>=3 cases, w_O^2 weights); fresh exact probes at (P,L) = (11,2),(11,3),(4,5),(6,3),(10,2),(12,1) all exact; validator rerun byte-identical.
+- GAP-16-01 (missing justification, minor): Lemma 4.1 proof boundary cases r=0/s=0 unstated.
+- GAP-16-02 (missing justification, minor): constacyclic code over A not explicitly defined (ideal/shift-invariant).
+- GAP-16-03 (presentation): .md companion labels P=1 recovery Proposition 6.4 vs .tex 6.5 (remark shares counter).
+- GAP-16-04 (bibliographic + justification, minor): Sec.10 EAQECC remark rests only on Euclidean BDS2006; add Galois-rank justification/citation; verify BDS metadata.
+- GAP-16-05 (bibliographic): k-Galois inner-product origin uncited; complete from primary source at submission.
+- GAP-16-06 (bibliographic, minor): missing titles/initials (CDL2015, Sharma2015, WZLL2023, ZWLL2025, Talbi2021); Eldin author-name form conflict; serial-ring citation scope.
+- GAP-16-07 (presentation, micro): T4 component/global shorthand clause.
+- GAP-16-08 (bibliographic note): DIMP2026/ES2026 characterizations verified from arXiv texts only; keep as is.
+Blueprint SHA-256 re-verified ec2fd8d58f8d2a986314f83997d750d689f7c88e98ec8f87753ab4c9cf438cff; manuscript, proof packages and blueprint deliberately unchanged.
