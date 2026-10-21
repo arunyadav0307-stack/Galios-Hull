@@ -149,3 +149,12 @@
 - **Files banayi:** `P1_05_PROOFS_T5_T6_COROLLARIES.md`, `P1_05_PROOFS_T5_T6_COROLLARIES.pdf`, `code/validate_p1_05.py`, `code/validation_p1_05_output.txt`. **Files update:** ye worklog, `04_BLUEPRINT_GAP_REGISTER.md` (P1-05 outcome). Frozen blueprint, purani validation files/scripts untouched.
 - **Overall verdict:** **CONDITIONAL GO.** T1–T6 aur C1–C4 proved; moments (C5/C6), PC faisle aur Gate G1 baki — manuscript drafting ab bhi nahi.
 - **Agle sujhaye command (sirf ek):** `P1-06` — Moments package: C5 mean-split ka formal proof (ganit ke roop me; blueprint-change PC-1 approval par nirbhar rahega) aur C6 variance ke band sutra (RR-8) `L=1, L=2, L≥3` cases ke liye.
+
+
+## 2026-10-21 — P1-06 Formal Moment Analysis (C5, C6)
+
+- **Deliverable:** `P1_06_MOMENT_PROOFS_C5_C6.md` + side-PDF `P1_06_MOMENT_PROOFS_C5_C6.pdf` (5 pages, visual QA pass). Frozen C5/C6 pehle transcribe kiye. C5 code-dimension mean sahi sabit; hull mean ka split `ν_P` (L=1 self-loop) / `μ_P` (L≥2) pura derive kiya — ye PC-1 ka ganit hai, **blueprint adoption ab bhi unapproved**. C6 (RR-8) ke teeno band sutra nikaale: `Var(S_1)` parity-split, `Var(S_2) = P(P+2)(P²+2P+3)/(18(P+1)²)`, `Var(S_L) = L·P(P+2)(P²+2P+2)/(60(P+1)²)` (L≥3); adjacent covariance `κ_P < 0` conditioning se, L=2 cross-moment tail double-sum se. Global variance `Σ w_O² Var(S_{L_O})`.
+- **Files banayi:** `P1_06_MOMENT_PROOFS_C5_C6.md`, `P1_06_MOMENT_PROOFS_C5_C6.pdf`, `code/validate_p1_06.py`, `code/validation_p1_06_output.txt`. **Files update:** ye worklog, `04_BLUEPRINT_GAP_REGISTER.md` (P1-06 outcome). Frozen blueprint aur purani validation files untouched (reruns byte-identical/pass).
+- **Validation (asal me chalayi gayi):** `code/validate_p1_06.py` — exact fractions, `P ∈ {1,2,3,4,5,8,9}`, `L ∈ {1,2,3,4,6}` par band sutra = finite sums = enumeration, global assembly (729-tuple enumeration + convolution): `ALL P1-06 MOMENT CHECKS PASSED`.
+- **Overall verdict:** **CONDITIONAL GO.** Core mathematics (T1–T6, C1–C6) ab proved hai; PC-1…PC-6 ke faisle, Gate G1 (novelty) aur manuscript drafting baki — drafting ab bhi nahi hogi.
+- **Agle sujhaye command (sirf ek):** `P1-07` — PC-1…PC-6 par ek saath faisla aur approved corrections ko dated correction notes ke roop me blueprint me lagana (ya explicit rejection दर्ज karna), taaki proved core manuscript-phase ke liye freeze ho sake.
