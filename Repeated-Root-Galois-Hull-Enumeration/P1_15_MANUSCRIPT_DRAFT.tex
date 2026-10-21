@@ -520,6 +520,40 @@ z^{w_O \sum \min(P-\alpha_i,\alpha_{i-1})}\), and Theorem~\ref{thm:T5}
 identifies \(\mathcal{E}_O(u,z) = \tr(T^{(P)}_{w_O}(u,z)^{L_O})\).
 \end{proof}
 
+\begin{corollary}[joint symmetry of the enumerator]\label{cor:jointsym}
+Put \(\Delta := \sum_{s,O} P w_O L_O = n \sum_s m_s\) (indeed, for each
+component \(s\), \(\sum_{O \in \mathcal{O}_s} w_O L_O = m_s n_0\), since
+the degrees of the distinct irreducible factors of
+\(\bar M_s\) sum to \(n_0\); hence \(\Delta\) is the maximum, and ambient,
+\(\Fq\)-dimension). Then for all integers \(K, H\),
+\[
+\#\{a : (\dim_{\Fq} C(a), \dim_{\Fq} \Hull_k(C(a))) = (K,H)\}
+= \#\{a : (\dim_{\Fq} C(a), \dim_{\Fq} \Hull_k(C(a))) = (\Delta-K,H)\},
+\]
+equivalently \(\mathcal{E}(u,z) = u^{\Delta} \mathcal{E}(u^{-1}, z)\).
+In particular, for every \(K\) the multiset of hull dimensions over the
+assignments with \(\dim_{\Fq} C = K\) equals that over the assignments
+with \(\dim_{\Fq} C = \Delta - K\).
+\end{corollary}
+
+\begin{proof}
+It suffices to argue on one orbit \(O\) of length \(L\) and weight \(w\);
+the global statement follows by summing over orbits. Define
+\(\alpha'_i = P - \alpha_{-i}\) (indices mod \(L\)). This is an
+involution of \(\{0,\dots,P\}^L\): applying it twice returns
+\(\alpha_i\). Its code contribution is
+\(w \sum_i (P-\alpha'_i) = w \sum_i \alpha_{-i} = w \sum_i \alpha_i
+= PwL - w\sum_i (P-\alpha_i)\), so \(K\) maps to \(PwL - K\). Its hull
+contribution satisfies, with the reindexing \(j = -i+1\),
+\(\min(P-\alpha'_i, \alpha'_{i-1}) = \min(\alpha_{-i}, P-\alpha_{-i+1})
+= \min(P-\alpha_j, \alpha_{j-1})\),
+term by term equal to the hull sum of \(\alpha\). Hence the involution
+pairs tuples of joint type \((K,H)\) with tuples of type
+\((PwL-K, H)\), proving the per-orbit coefficient identity; the product
+over all orbits (Theorem~\ref{thm:T6}) gives the claim with
+\(\Delta = \sum_O Pw_OL_O\).
+\end{proof}
+
 \begin{remark}[hypotheses of the identity]
 As an identity in \(\Z[u,z]\), Theorem~\ref{thm:T5} holds for every
 integer \(P \ge 1\); the prime-power form \(P = p^{\varrho}\) is needed
@@ -600,6 +634,34 @@ already forces \(\alpha_0 \in \{0,P\}\)). Hence each \(\alpha_i \in
 orbits.
 \end{proof}
 
+\begin{corollary}[LCD refinement: the code dimension of LCD assignments]
+\label{cor:LCDref}
+With \(\Delta\) as in Corollary~\ref{cor:jointsym},
+\[
+\sum_{a \,:\, \Hull_k(C(a)) = 0} u^{\dim_{\Fq} C(a)}
+\;=\; \prod_{s} \prod_{O \in \mathcal{O}_s} \big(1 + u^{P w_O L_O}\big).
+\]
+Consequently, under the uniform distribution on labeled assignments,
+conditionally on \(\Hull_k(C(a)) = 0\) the code dimension is distributed
+as \(\sum_O (P w_O L_O)\, \xi_O\) with independent
+\(\xi_O \sim \mathrm{Bernoulli}(1/2)\); in particular
+\(\E[\dim_{\Fq} C \mid \Hull_k(C) = 0] = \Delta/2\) and
+\(\operatorname{Var}(\dim_{\Fq} C \mid \Hull_k(C) = 0)
+= \frac{P^2}{4} \sum_O (w_O L_O)^2\).
+\end{corollary}
+
+\begin{proof}
+By Corollary~\ref{cor:C3}, \(\Hull_k(C(a)) = 0\) if and only if every
+orbit restriction is constant, \(\alpha \equiv 0\) or \(\alpha \equiv
+P\); these two tuples have code contributions \(Pw_OL_O\) and \(0\)
+respectively (Theorem~\ref{thm:T4}), giving the displayed product by
+independence across orbits. Conditioning the uniform distribution on
+this product event keeps the orbits independent with the two options
+equally likely, which is the stated Bernoulli sum; its mean is
+\(\tfrac12 \sum_O Pw_OL_O = \Delta/2\) and its variance is
+\(\sum_O (Pw_OL_O)^2 \cdot \tfrac14\).
+\end{proof}
+
 \begin{corollary}[C4: self-orthogonal and dual-containing codes]
 \label{cor:C4}
 \(C(a) \subseteq D(C(a))\) if and only if
@@ -627,6 +689,64 @@ Theorem~\ref{thm:T3}, and \(\alpha_{i-1} - \min(P-\alpha_i,\alpha_{i-1})
 condition \(\alpha_{i-1}+\alpha_i \le P\) and the count
 \(\tr((B'_P)^{L_O})\). The involution \(\alpha_i \mapsto P-\alpha_i\)
 maps one edge condition to the other, so the counts agree.
+\end{proof}
+
+\begin{corollary}[restricted enumerators for the self-orthogonal and
+dual-containing families]\label{cor:restricted}
+For an orbit of length \(L\) and weight \(w\), define matrices over
+\(\Z[t]\) and \(\Z[u,z]\) by
+\[
+\big(A^{\mathrm{SO}}_w(t)\big)_{a,b} =
+\begin{cases} t^{\,w(P-b)}, & a + b \ge P, \\ 0, & a + b < P,
+\end{cases}
+\qquad
+\big(A^{\mathrm{DC}}_w(u,z)\big)_{a,b} =
+\begin{cases} u^{\,w(P-b)} z^{\,wa}, & a + b \le P, \\ 0, & a + b > P,
+\end{cases}
+\]
+the row index \(a\) being the previous exponent and the column index
+\(b\) the current one, as in Theorem~\ref{thm:T5}. Then
+\[
+\sum_{a \,:\, C(a) \subseteq D(C(a))} t^{\dim_{\Fq} C(a)}
+= \prod_{s} \prod_{O \in \mathcal{O}_s}
+\tr\!\Big(\big(A^{\mathrm{SO}}_{w_O}(t)\big)^{L_O}\Big),
+\]
+whose specialization \(t = uz\) is the joint enumerator of the
+self-orthogonal family (there \(\dim_{\Fq} \Hull_k = \dim_{\Fq} C\)), and
+\[
+\sum_{a \,:\, D(C(a)) \subseteq C(a)}
+u^{\dim_{\Fq} C(a)} z^{\dim_{\Fq} \Hull_k(C(a))}
+= \prod_{s} \prod_{O \in \mathcal{O}_s}
+\tr\!\Big(\big(A^{\mathrm{DC}}_{w_O}(u,z)\big)^{L_O}\Big).
+\]
+Writing \(N_{\mathrm{SO}}(K)\) for the number of self-orthogonal
+assignments with \(\dim_{\Fq} C = K\) and \(N_{\mathrm{DC}}(K,H)\) for
+the number of dual-containing assignments with
+\((\dim_{\Fq} C, \dim_{\Fq} \Hull_k) = (K,H)\), one has
+\(N_{\mathrm{SO}}(K) = N_{\mathrm{DC}}(\Delta - K, K)\) for all \(K\).
+At \(u = z = 1\) the two enumerators reduce to the two counts of
+Corollary~\ref{cor:C4}.
+\end{corollary}
+
+\begin{proof}
+Both admissibility conditions are those of Corollary~\ref{cor:C4}, and
+both dimensions are sums over orbits, so by the closed-walk expansion of
+Theorem~\ref{thm:T5} it suffices to check one orbit. On a
+self-orthogonal tuple, \(\Hull_k(C) = C\), so the joint weight is
+\((uz)^{\dim_{\Fq} C}\); along an edge \(a \to b\) the code contribution
+is \(w(P-b)\) and admissibility is \(a+b \ge P\), which is exactly the
+weight built into \(A^{\mathrm{SO}}_w\). On a dual-containing tuple,
+\(\Hull_k(C) = D(C)\), whose per-orbit dimension is
+\(w \sum_i \alpha_i = w \sum_i \alpha_{i-1}\) (proof of
+Corollary~\ref{cor:C4}); the edge \(a \to b\) therefore carries code
+weight \(w(P-b)\) (from \(b\)) and hull weight \(wa\) (from the previous
+exponent), with admissibility \(a + b \le P\), as in
+\(A^{\mathrm{DC}}_w\). The trace includes the closing edge, i.e. the
+orbit-boundary condition. For the symmetry, the per-orbit complement
+\(\alpha_i \mapsto P - \alpha_i\) maps the self-orthogonal condition to
+the dual-containing condition bijectively, sends \(\dim_{\Fq} C = K\) to
+\(\dim_{\Fq} C = \Delta - K\), and sends the hull dimension to
+\(\sum_O w_O \sum_i (P - \alpha_i) = K\).
 \end{proof}
 
 % =====================================================================
