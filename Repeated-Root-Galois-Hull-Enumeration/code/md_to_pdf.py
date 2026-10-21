@@ -121,7 +121,7 @@ def main() -> None:
         if m:
             flush_para()
             level = len(m.group(1))
-            title = clean_inline(m.group(2).replace("**", ""))
+            title = clean_inline(m.group(2).replace("**", "")).replace("__", "")
             sizes = {1: 15, 2: 12.5, 3: 11, 4: 10}
             pdf.ln(2.5 if level > 1 else 0)
             pdf.set_font("dejavu", "B", sizes.get(level, 9.5))

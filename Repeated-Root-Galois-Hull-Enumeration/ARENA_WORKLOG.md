@@ -178,3 +178,14 @@
 - **Files update:** `02_THEOREM_BLUEPRINT.md`, `04_BLUEPRINT_GAP_REGISTER.md`, ye worklog; audit `P1_08_INTEGRATION_AUDIT.md` (+PDF) alag commit me. Purani proof/validation files untouched. **Manuscript drafting ab bhi nahi; Gate G1 (novelty) khula hai.**
 - **Overall verdict:** **CONDITIONAL GO** — mathematical core ab corrected-freeze ke saath proved hai; sirf Gate G1 bacha hai.
 - **Agle sujhaye command (sirf ek):** `P1-09` — Gate-G1 closure package: repo L1 ki antim sthiti, safe novelty vakya, aur Gate-G1 par antim vote; taaki manuscript-phase ka rasta khule ya seema saaf ho.
+
+
+## 2026-10-21 — P1-09 Gate G1 Novelty Closure Audit
+
+- **Deliverables:** `P1_09_GATE_G1_NOVELTY_AUDIT.md` + `P1_09_OVERLAP_MATRIX.md` (dono ke side-PDF bane; visual QA pass). Freeze pehle verify: blueprint hash `ec2fd8d5…` (P1-08 after-hash se identical), commit `33a8c28`. Local checkout phir reset mili thi — backup + remote se restore + `diff -r` se identity confirm; koi history rewrite nahi, kuch khoya nahi.
+- **L1 phir UNRESOLVED:** taaza lawful koshish (OpenAlex/Semantic Scholar dono band, Springer sirf abstract, manuscript-search nakam) — koi theorem abstract se andaz nahi lagaya. L1-Q1…Q6 ki tulna abhi mumkin nahi; yahi ekmatra Gate-G1 blocker hai.
+- **Overlap:** L4/L8 (arXiv full text) hull-formula machinery pehle se majboot; L2 mean-headline, L3 small-dims (p|n sahit). Joint labeled enumerator + transfer trace + P-variance kisi inspected source me nahi mila — lekin search non-exhaustive hai (MathSciNet/Scopus/WoS nahi hue), isliye **novelty ka koi dawa nahi**.
+- **Faisla:** **Gate G1 DEFER** (band nahi hua); novelty/priority claims par **NO-GO**; overall **CONDITIONAL GO**. Manuscript drafting ab bhi gated hai.
+- **Validation:** teeno scripts bina badle rerun — p1_03 byte-identical, p1_05/p1_06 pass.
+- **Files banayi:** `P1_09_GATE_G1_NOVELTY_AUDIT.md/.pdf`, `P1_09_OVERLAP_MATRIX.md/.pdf`. **Files update:** ye worklog, `04_BLUEPRINT_GAP_REGISTER.md` (P1-09 outcome), `code/md_to_pdf.py` (heading-italics ka chhota fix). Frozen blueprint, proof aur purani validation files untouched.
+- **Agle sujhaye command (sirf ek):** `P1-10` — L1 ka lawful full text author/institutional channel se lekar L1-Q1…Q6 ka theorem-level extraction; uske turant baad Gate G1 par dobara vote.
