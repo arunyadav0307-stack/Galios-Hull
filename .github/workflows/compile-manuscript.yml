@@ -1,6 +1,12 @@
 name: Compile manuscript (one-off)
 
 on:
+  push:
+    branches:
+      - arena/ab8e330d-galios-hull
+    paths:
+      - 'Repeated-Root-Galois-Hull-Enumeration/P1_15_MANUSCRIPT_DRAFT.tex'
+      - '.github/workflows/compile-manuscript.yml'
   workflow_dispatch:
 
 permissions:
