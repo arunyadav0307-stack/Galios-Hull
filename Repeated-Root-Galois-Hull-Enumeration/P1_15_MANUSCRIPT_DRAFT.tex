@@ -594,10 +594,10 @@ component \(s\), \(\sum_{O \in \mathcal{O}_s} w_O L_O = m_s n_0\), since
 the degrees of the distinct irreducible factors of
 \(\bar M_s\) sum to \(n_0\); hence \(\Delta\) is the maximum, and ambient,
 \(\Fq\)-dimension). Then for all integers \(K, H\),
-\[
+\begin{align*}
 \#\{a : (\dim_{\Fq} C(a), \dim_{\Fq} \Hull_k(C(a))) = (K,H)\}
-= \#\{a : (\dim_{\Fq} C(a), \dim_{\Fq} \Hull_k(C(a))) = (\Delta-K,H)\},
-\]
+&= \#\{a : (\dim_{\Fq} C(a), \dim_{\Fq} \Hull_k(C(a))) = (\Delta-K,H)\},
+\end{align*}
 equivalently \(\mathcal{E}(u,z) = u^{\Delta} \mathcal{E}(u^{-1}, z)\).
 In particular, for every \(K\) the multiset of hull dimensions over the
 assignments with \(\dim_{\Fq} C = K\) equals that over the assignments
@@ -910,8 +910,7 @@ note the squared weights, in contrast to the mean.
 \(V_1(P) = \dfrac{(P-1)(P+3)}{48}\) if \(P\) is odd.
 \item[(ii)] For \(L \ge 3\), two adjacent edges satisfy
 \(\operatorname{Cov}(X_i, X_{i+1}) = \kappa_P < 0\), where
-\(\kappa_P =
--\dfrac{P(P+2)(7P^2+14P+9)}{360(P+1)^2}\), while non-adjacent edge pairs
+\(\kappa_P = -\frac{P(P+2)(7P^2+14P+9)}{360(P+1)^2}\), while non-adjacent edge pairs
 are independent.
 \item[(iii)] For \(L=2\):
 \(\E[X_0 X_1] = \dfrac{P^2(P-1)}{12(P+1)}\) and
@@ -1032,9 +1031,11 @@ the predecessor exponent is positive, while the second edge contributes
 nothing because its predecessor exponent is \(0\). Evaluating all nine
 tuples gives
 \[
-(0,0)\mapsto(4,0),\quad (0,1)\mapsto(3,1),\quad (0,2)\mapsto(2,2),\quad
-(1,0)\mapsto(3,1),\quad (1,1)\mapsto(2,2),\quad (1,2)\mapsto(1,1),\quad
-(2,0)\mapsto(2,2),\quad (2,1)\mapsto(1,1),\quad (2,2)\mapsto(0,0).
+\begin{aligned}
+(0,0)&\mapsto(4,0),\quad (0,1)\mapsto(3,1),\quad (0,2)\mapsto(2,2),\quad
+(1,0)\mapsto(3,1),\quad (1,1)\mapsto(2,2),\\
+(1,2)&\mapsto(1,1),\quad (2,0)\mapsto(2,2),\quad (2,1)\mapsto(1,1),\quad (2,2)\mapsto(0,0).
+\end{aligned}
 \]
 Grouping equal pairs yields the joint distribution
 \(\{(4,0):1, (3,1):2, (2,2):3, (1,1):2, (0,0):1\}\). Two features are
@@ -1133,15 +1134,15 @@ of weight \(1\) with six edges, contributes \(6\mu_2 = 10/3\).
 For the record, the full joint distribution of
 \((\dim_{\Fq} C, \dim_{\Fq}\Hull_k(C))\) is
 {\footnotesize
-\((0,0){:}\,1, (1,1){:}\,7, (2,0){:}\,1, (2,2){:}\,27, (3,1){:}\,6,
-(3,2){:}\,12, (3,3){:}\,59, (4,2){:}\,33, (4,3){:}\,48, (4,4){:}\,80,
-(5,2){:}\,24, (5,3){:}\,86, (5,4){:}\,96, (5,5){:}\,60, (6,2){:}\,24,
-(6,3){:}\,84, (6,4){:}\,144, (6,5){:}\,84, (6,6){:}\,21, (7,2){:}\,24,
-(7,3){:}\,84, (7,4){:}\,156, (7,5){:}\,102, (7,6){:}\,24, (7,7){:}\,3,
-(8,2){:}\,24, (8,3){:}\,84, (8,4){:}\,144, (8,5){:}\,84, (8,6){:}\,21,
-(9,2){:}\,24, (9,3){:}\,86, (9,4){:}\,96, (9,5){:}\,60, (10,2){:}\,33,
-(10,3){:}\,48, (10,4){:}\,80, (11,1){:}\,6, (11,2){:}\,12,
-(11,3){:}\,59, (12,0){:}\,1, (12,2){:}\,27, (13,1){:}\,7, (14,0){:}\,1\).}
+\((0,0){:}\,1\), \((1,1){:}\,7\), \((2,0){:}\,1\), \((2,2){:}\,27\), \((3,1){:}\,6,
+(3,2){:}\,12\), \((3,3){:}\,59\), \((4,2){:}\,33\), \((4,3){:}\,48\), \((4,4){:}\,80,
+(5,2){:}\,24\), \((5,3){:}\,86\), \((5,4){:}\,96\), \((5,5){:}\,60\), \((6,2){:}\,24,
+(6,3){:}\,84\), \((6,4){:}\,144\), \((6,5){:}\,84\), \((6,6){:}\,21\), \((7,2){:}\,24,
+(7,3){:}\,84\), \((7,4){:}\,156\), \((7,5){:}\,102\), \((7,6){:}\,24\), \((7,7){:}\,3,
+(8,2){:}\,24\), \((8,3){:}\,84\), \((8,4){:}\,144\), \((8,5){:}\,84\), \((8,6){:}\,21,
+(9,2){:}\,24\), \((9,3){:}\,86\), \((9,4){:}\,96\), \((9,5){:}\,60\), \((10,2){:}\,33,
+(10,3){:}\,48\), \((10,4){:}\,80\), \((11,1){:}\,6\), \((11,2){:}\,12,
+(11,3){:}\,59\), \((12,0){:}\,1\), \((12,2){:}\,27\), \((13,1){:}\,7\), \((14,0){:}\,1\).}
 
 The exponent formula is thus checked against the hull dimensions of
 actual codes on an orbit of length \(6\). One point must be stated
