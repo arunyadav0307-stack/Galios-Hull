@@ -880,34 +880,89 @@ the \(L\) adjacent pairs contribute, by (ii)), and
 \section{Examples and computational verification}\label{sec:examples}
 % =====================================================================
 
+The five examples are arranged so that each one makes a different part
+of the theory visible. Example~\ref{ex:E1} is small enough to check by
+hand and shows how a single exponent tuple produces its two coordinates.
+Example~\ref{ex:E2} isolates the simple-root specialization.
+Examples~\ref{ex:E3} and \ref{ex:E4} leave the orbit model and compare
+the exponent formulas with ranks of Gram matrices of explicitly
+constructed codes, first for mixed orbit lengths and then for a long
+orbit. Example~\ref{ex:E5} finally tests the product assembly over two
+components. Throughout, \(K\) denotes the code-dimension coordinate and
+\(H\) the hull-dimension coordinate of a labeled assignment.
+
 \begin{example}[one orbit, \(P=2\), \(L=2\), \(w=1\), by hand]
 \label{ex:E1}
-The nine assignments \(\alpha = (\alpha_0,\alpha_1)\) give
-\((\sum_i (2-\alpha_i), \sum_i \min(2-\alpha_i,\alpha_{i-1}))\) as
-follows:
-\((0,0)\mapsto(4,0)\), \((0,1)\mapsto(3,1)\), \((0,2)\mapsto(2,2)\),
-\((1,0)\mapsto(3,1)\), \((1,1)\mapsto(2,2)\), \((1,2)\mapsto(1,1)\),
-\((2,0)\mapsto(2,2)\), \((2,1)\mapsto(1,1)\), \((2,2)\mapsto(0,0)\).
-Hence \(\E[S_2] = 10/9 = 2\mu_2\), \(\operatorname{Var}(S_2) = 44/81 =
-V_2(2)\) (the \(L=2\) case of Theorem~\ref{thm:C6}), and exactly two
-assignments have hull contribution \(0\), as Corollary~\ref{cor:C3}
-requires per orbit.
+This example shows the bookkeeping of Theorem~\ref{thm:T4} in the
+smallest repeated-root case. The two positions form one orbit, and for
+\(\alpha = (\alpha_0,\alpha_1)\) the two coordinates are
+\(K = \sum_i (2-\alpha_i)\) and
+\(H = \sum_i \min(2-\alpha_i, \alpha_{i-1})\). For instance, for
+\(\alpha = (0,1)\) one gets \(K = (2-0) + (2-1) = 3\) and
+\(H = \min(2,1) + \min(1,0) = 1\); the first edge contributes because
+the predecessor exponent is positive, while the second edge contributes
+nothing because its predecessor exponent is \(0\). Evaluating all nine
+tuples gives
+\[
+(0,0)\mapsto(4,0),\quad (0,1)\mapsto(3,1),\quad (0,2)\mapsto(2,2),\quad
+(1,0)\mapsto(3,1),\quad (1,1)\mapsto(2,2),\quad (1,2)\mapsto(1,1),\quad
+(2,0)\mapsto(2,2),\quad (2,1)\mapsto(1,1),\quad (2,2)\mapsto(0,0).
+\]
+Grouping equal pairs yields the joint distribution
+\(\{(4,0):1, (3,1):2, (2,2):3, (1,1):2, (0,0):1\}\). Two features are
+already visible. First, the multiplicities are symmetric under
+\(K \leftrightarrow 4-K\) at fixed \(H\), as
+Corollary~\ref{cor:jointsym} requires for this orbit (here
+\(\Delta = PwL = 4\)). Second, the moments can be read off directly:
+\(\E[S_2] = (0\cdot1 + 1\cdot2 + 2\cdot3 + 1\cdot2 + 0\cdot1)/9 =
+10/9 = 2\mu_2\), and
+\(\operatorname{Var}(S_2) = 44/81 = V_2(2)\), the \(L=2\) case of
+Theorem~\ref{thm:C6}. The separate \(L=2\) formula is essential here:
+the two edges of a 2-orbit share both variables, and formally inserting
+\(L=2\) into the \(L \ge 3\) formula would give the incorrect value
+\(8/27\). Finally, exactly two assignments, \(\alpha \equiv 0\) and
+\(\alpha \equiv P\), have hull contribution \(0\), as
+Corollary~\ref{cor:C3} requires per orbit.
 \end{example}
 
 \begin{example}[simple-root orbit, \(P=1\), \(L=3\), \(w=1\)]\label{ex:E2}
-The joint distribution is
-\(\{(0,0):1,\ (1,1):3,\ (2,1):3,\ (3,0):1\}\): the hull contribution
-counts \(1\!\to\!0\) transitions (Proposition~\ref{prop:P1}), with
-\(\E = 3/4 = 3\mu_1\) and variance \(3/16 = V_3(1)\).
+At \(P=1\) the exponents are binary and the example checks the
+simple-root specialization of Proposition~\ref{prop:P1}. The code
+coordinate is the number of zeros, \(K = \sum_i (1-\alpha_i)\), while
+the hull coordinate counts the cyclic transitions \(1 \to 0\). The
+two constant words behave exceptionally: \(000\) gives \((K,H) =
+(3,0)\) and \(111\) gives \((0,0)\). Every non-constant binary word
+of length \(3\), viewed cyclically, has exactly one block of ones and
+one block of zeros, hence exactly one \(1 \to 0\) transition and
+\(H = 1\). There are three words of weight \(1\) (so \(K=2\)) and
+three of weight \(2\) (so \(K=1\)). Therefore the joint distribution
+is
+\(\{(0,0):1,\ (1,1):3,\ (2,1):3,\ (3,0):1\}\), from which
+\(\E = 3/4 = 3\mu_1\) and
+\(\operatorname{Var} = 3/16 = V_3(1)\) follow immediately. The table
+also displays the symmetry of Corollary~\ref{cor:jointsym} in its
+smallest form: the hull multiplicity at \(K=0\) equals that at
+\(K=3\), and the multiplicity at \(K=1\) equals that at \(K=2\).
 \end{example}
 
 \begin{example}[a repeated-root field case]\label{ex:E3}
 Take \(K = \mathbb{F}_4\), \(k=1\), \(\lambda=1\), \(P=2\), \(n_0=5\),
-\(n=10\). The factors of \(x^5-1\) over \(\mathbb{F}_4\) have degrees
-\(1,2,2\), with \(\tau\)-orbit lengths \(1,2\); there are \(3^3=27\)
-assignments. The joint \((\dim_K C, \dim_K \Hull_1(C))\) distribution,
-computed directly from generator polynomials and the rank of the
-code-first Gram matrix \(\big(\sum_j B_{t,j}\sigma(B_{r,j})\big)\), is
+\(n=10\). This case is chosen because it is genuinely repeated-root
+(\(P=2\)) while still small, and because it contains both orbit types.
+The factors of \(x^5-1\) over \(\mathbb{F}_4\) have degrees
+\(1,2,2\); the degree-one factor is fixed by \(\tau\), and the two
+degree-two factors form one orbit of length \(2\). Thus there are three
+exponent positions and \(3^3=27\) assignments. (Dimensions in the
+display are over \(K\) itself; the orbit weights are therefore \(1\)
+for the length-one orbit and \(2\) for the length-two orbit.)
+
+The point of the example is that the distribution below was computed
+in two independent ways: from the exponent formulas of
+Theorems~\ref{thm:T4} and \ref{thm:T6}, and directly from codes, by
+forming, for each assignment \(a\), the generator \(g_a\), a basis of
+shifts, and the rank of the code-first Gram matrix
+\(\big(\sum_j B_{t,j}\sigma(B_{r,j})\big)\). The two computations
+agree on the joint \((\dim_K C, \dim_K \Hull_1(C))\) distribution
 \[
 \begin{aligned}
 \{&(0,0):1, (1,1):1, (2,0):1, (2,2):2, (3,3):2, (4,2):2, (4,4):3,
@@ -915,39 +970,80 @@ code-first Gram matrix \(\big(\sum_j B_{t,j}\sigma(B_{r,j})\big)\), is
 &(6,4):3, (7,3):2, (8,0):1, (8,2):2, (9,1):1, (10,0):1\},
 \end{aligned}
 \]
-in agreement with Theorems~\ref{thm:T4} and \ref{thm:T6}. It gives
-\(\E[\Hull] = 23/9 = \nu_2 + 2\cdot 2\mu_2 = \tfrac13 + \tfrac{20}{9}\)
-(the length-one orbit contributes through \(\nu_2\), not \(\mu_2\)),
-\(\operatorname{Var}(\Hull) = 194/81\) from Theorem~\ref{thm:C6}, LCD
-count \(4 = 2^2\), and self-orthogonal \(=\) dual-containing count \(12\).
+whose entries sum to \(27\), as they must. The moment formulas can be
+understood orbit by orbit: the length-one orbit is a self-loop and
+contributes \(\nu_2 = 1/3\), whereas the length-two orbit has weight
+\(2\) and two edges, hence contributes \(2 \cdot 2\mu_2 = 20/9\).
+This gives
+\(\E[\Hull] = 23/9 = \nu_2 + 2\cdot 2\mu_2 = \tfrac13 +
+\tfrac{20}{9}\) --- the separate \(\nu_P\) term is not a cosmetic
+distinction here, since using \(\mu_2\) for the length-one orbit as
+well would give the wrong mean. The variance is
+\(\operatorname{Var}(\Hull) = 194/81\) from Theorem~\ref{thm:C6}.
+The counting corollaries are equally visible: there are two orbits, so
+the LCD count is \(4 = 2^2\) (Corollary~\ref{cor:C3}), and the
+self-orthogonal and dual-containing counts agree at \(12\), in line
+with Corollary~\ref{cor:C4} and its refinement in
+Corollary~\ref{cor:restricted}.
 \end{example}
 
 \begin{example}[orbit of length \(6\)]\label{ex:E4}
 Take \(K = \mathbb{F}_8\), \(k=1\), \(\lambda=1\), \(P=2\), \(n_0=7\),
-\(n=14\). The seven linear factors of \(x^7-1\) form \(\tau\)-orbits of
-lengths \(1\) and \(6\); over the \(3^7 = 2187\) assignments the Gram-rank
-computation again agrees with Theorems~\ref{thm:T4} and \ref{thm:T6}
-assignment by assignment, with \(\E[\Hull] = 11/3\),
+\(n=14\). The seven linear factors of \(x^7-1\) form \(\tau\)-orbits
+of lengths \(1\) and \(6\), so there are \(3^7 = 2187\) assignments.
+Whereas Example~\ref{ex:E3} tests mixed orbit lengths, this example is
+included for the length-six orbit. The Gram-rank computation was
+compared with the exponent formula assignment by assignment, not only
+through the aggregated distribution; it gives
+\(\E[\Hull] = 11/3\) and
 \(\operatorname{Var}(\Hull) = 10/9 = V_1(2) + V_6(2) = \tfrac29 +
-\tfrac89\), LCD count \(4\), and self-orthogonal \(=\) dual-containing
-count \(258\). Because the exponent formula is checked against the
-actual hull dimensions of actual codes on an orbit of length \(6\), this
-example also certifies the predecessor orientation \(\alpha_{i-1}\):
-on such an orbit the predecessor and successor readings give different
-hull dimensions for generic \(\alpha\), so the check would detect a
-transposed convention (cf.\ the remark after Theorem~\ref{thm:T6}).
+\tfrac89\), with LCD count \(4\) and self-orthogonal \(=\) dual-containing
+count \(258\). The mean decomposition is again instructive: the
+length-one orbit contributes \(\nu_2 = 1/3\), and the length-six orbit,
+of weight \(1\) with six edges, contributes \(6\mu_2 = 10/3\).
+
+The assignment-by-assignment comparison has a specific purpose. On an
+orbit of length at most \(2\), the predecessor term \(\alpha_{i-1}\)
+and its successor analogue cannot be distinguished by symmetry; on a
+length-six orbit they give different hull dimensions for a generic
+tuple \(\alpha\). Agreement for every one of the \(2187\)
+assignments therefore certifies the predecessor orientation imposed by
+the code-first pairing (Theorem~\ref{thm:T3}), and not merely a
+distribution-level coincidence (cf.\ the remark after
+Theorem~\ref{thm:T6}).
 \end{example}
 
 \begin{example}[two components]\label{ex:E5}
-For \(A = \mathbb{F}_2 \times \mathbb{F}_4\) (\(q=2\), \(k=0\),
-\(\lambda=(1,1)\), \(P=2\), \(n_0=7\)), the orbit data
-\((L_O, w_O)\) are \((1,1), (2,3)\) and \((1,2), (2,6)\). Convolving the
-per-orbit distributions of Theorem~\ref{thm:T5} gives the global joint
-distribution over \(3^6 = 729\) labeled assignments, with LCD count
-\(16 = 2^4\), self-orthogonal and dual-containing counts \(144\) each,
-\(\E[\Hull] = 11\) (Theorem~\ref{thm:C5}), and
-\(\operatorname{Var}(\Hull) = 230/9\) (Theorem~\ref{thm:C6}); the same
-numbers result from adding independently computed component dimensions.
+The final example tests the assembly step
+(Proposition~\ref{prop:assembly} and Theorem~\ref{thm:T6}), rather
+than a single orbit. Let \(A = \mathbb{F}_2 \times \mathbb{F}_4\)
+(\(q=2\), \(k=0\), \(\lambda=(1,1)\), \(P=2\), \(n_0=7\)). The orbit
+data \((L_O, w_O)\) are \((1,1), (2,3)\) on the first component and
+\((1,2), (2,6)\) on the second: four orbits and
+\(1+2+1+2 = 6\) exponent positions in total, hence
+\(3^6 = 729\) labeled assignments. Because assignments on distinct
+orbits are independent, the global joint distribution is the
+convolution (equivalently, the coefficientwise product) of the four
+per-orbit distributions of Theorem~\ref{thm:T5}; the same distribution
+is obtained by computing the two components separately and adding their
+dimensions. This agreement is the concrete content of the product
+formula in Theorem~\ref{thm:T6}.
+
+The summary numbers illustrate how the global formulas are assembled.
+There are four orbits, so the LCD count is \(2^4 = 16\)
+(Corollary~\ref{cor:C3}). The self-orthogonal and dual-containing
+counts are \(144\) each, as Corollary~\ref{cor:C4} predicts. The mean
+splits according to orbit length: the two length-one orbits contribute
+\((1+2)\nu_2 = 1\), while the two length-two orbits contribute
+\((3\cdot 2 + 6\cdot 2)\mu_2 = 10\), giving
+\(\E[\Hull] = 11\) (Theorem~\ref{thm:C5}). Likewise the variance is
+the weight-squared sum
+\(\operatorname{Var}(\Hull) = 230/9\) of
+Theorem~\ref{thm:C6}, namely
+\(1^2 V_1(2) + 3^2 V_2(2) + 2^2 V_1(2) + 6^2 V_2(2) = 230/9\).
+Thus Example~\ref{ex:E5} verifies, in one place, the independence of
+orbit blocks, the \(L=1\) versus \(L \ge 2\) mean constants, and the
+\(w_O^2\) weighting in the variance.
 \end{example}
 
 \paragraph{Computational verification.}
