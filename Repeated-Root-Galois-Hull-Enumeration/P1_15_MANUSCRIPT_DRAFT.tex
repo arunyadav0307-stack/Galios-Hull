@@ -971,6 +971,37 @@ the \(L\) adjacent pairs contribute, by (ii)), and
 \(8/27\)), because the two edges of a 2-orbit share both variables.
 \end{proof}
 
+\begin{corollary}[second-order structure of the two dimensions]\label{cor:secondorder}
+Under the uniform model of this section,
+\[
+\operatorname{Var}\big(\dim_{\Fq} C\big)
+= \frac{P(P+2)}{12}\sum_s\sum_{f\in\mathcal{F}_s} w_f^2,
+\qquad
+\operatorname{Cov}\big(\dim_{\Fq} C,\,\dim_{\Fq}\Hull_k(C)\big)=0.
+\]
+In particular, the two dimensions are uncorrelated (they need not be
+independent).
+\end{corollary}
+
+\begin{proof}
+By Theorem~\ref{thm:T4},
+\(\dim_{\Fq} C=\sum_{s,f} w_f(P-A_f)\) with independent \(A_f\) uniform
+on \(\{0,\dots,P\}\), and
+\(\operatorname{Var}(P-A_f)=P(P+2)/12\), giving the variance formula.
+For the covariance, orbit blocks are independent, so it suffices to
+consider one orbit with \(K_O=\sum_i(P-A_i)\) and \(S_O=\sum_j X_j\).
+In \(\operatorname{Cov}(K_O,S_O)\), a term
+\(\operatorname{Cov}(P-A_i,X_j)\) can be nonzero only for
+\(i\in\{j,j-1\}\). With
+\(\gamma_P:=\operatorname{Cov}(B,\min(B,C))=P(P+2)/24\) for independent
+\(B,C\) uniform on \(\{0,\dots,P\}\) (a direct power-sum computation),
+the terms \(i=j\) and \(i=j-1\) contribute \(+\gamma_P\) and
+\(-\gamma_P\) respectively when \(L\ge2\); for \(L=1\), symmetry under
+\(A\mapsto P-A\) gives covariance \(0\) directly. Hence each orbit
+contributes \(0\), and summing with the weights \(w_O^2\) gives
+\(\operatorname{Cov}=0\).
+\end{proof}
+
 % =====================================================================
 \section{Examples and computational verification}\label{sec:examples}
 % =====================================================================
