@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025/Debian) (preloaded format=pdflatex 2026.10.22)  22 OCT 2026 23:47
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025/Debian) (preloaded format=pdflatex 2026.10.22)  22 OCT 2026 23:49
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -248,18 +248,8 @@ Overfull \hbox (17.07025pt too wide) detected at line 489
  []
 
 [6]
-Overfull \hbox (55.51254pt too wide) detected at line 600
-\OT1/cmr/m/n/10.95 #\OMS/cmsy/m/n/10.95 f\OML/cmm/m/it/10.95 a \OT1/cmr/m/n/10.
-95 : ([][] \OML/cmm/m/it/10.95 C\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 a\OT1/c
-mr/m/n/10.95 )\OML/cmm/m/it/10.95 ; [][] [][]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/
-10.95 C\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 a\OT1/cmr/m/n/10.95 ))) = (\OML/
-cmm/m/it/10.95 K; H\OT1/cmr/m/n/10.95 )\OMS/cmsy/m/n/10.95 g \OT1/cmr/m/n/10.95
- = #\OMS/cmsy/m/n/10.95 f\OML/cmm/m/it/10.95 a \OT1/cmr/m/n/10.95 : ([][] \OML/
-cmm/m/it/10.95 C\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 a\OT1/cmr/m/n/10.95 )\O
-ML/cmm/m/it/10.95 ; [][] [][]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 C\OT1/cmr/
-m/n/10.95 (\OML/cmm/m/it/10.95 a\OT1/cmr/m/n/10.95 ))) = (^^A \OMS/cmsy/m/n/10.
-95 ^^@ \OML/cmm/m/it/10.95 K; H\OT1/cmr/m/n/10.95 )\OMS/cmsy/m/n/10.95 g\OML/cm
-m/m/it/10.95 ;
+Overfull \hbox (60.37912pt too wide) detected at line 600
+[]
  []
 
 [7]
@@ -297,7 +287,7 @@ r/m/n/10.95 (\OML/cmm/m/it/10.95 K; H\OT1/cmr/m/n/10.95 )$
  []
 
 [9]
-Overfull \hbox (71.24275pt too wide) in paragraph at lines 911--916
+Overfull \hbox (32.48193pt too wide) in paragraph at lines 911--915
 []\OT1/cmr/m/it/10.95 For $\OML/cmm/m/it/10.95 L \OMS/cmsy/m/n/10.95 ^^U \OT1/c
 mr/m/n/10.95 3$\OT1/cmr/m/it/10.95 , two ad-ja-cent edges sat-isfy $[]\OT1/cmr/
 m/n/10.95 (\OML/cmm/m/it/10.95 X[]; X[]\OT1/cmr/m/n/10.95 ) = \OML/cmm/m/it/10.
@@ -306,13 +296,13 @@ m/n/10.95 (\OML/cmm/m/it/10.95 X[]; X[]\OT1/cmr/m/n/10.95 ) = \OML/cmm/m/it/10.
  []
 
 [10]
-Overfull \hbox (2.00261pt too wide) in paragraph at lines 959--972
+Overfull \hbox (2.00261pt too wide) in paragraph at lines 958--971
 []\OT1/cmr/m/n/10.95 Independence across or-bits gives the weighted sum. For on
 e or-bit: $\OML/cmm/m/it/10.95 L \OT1/cmr/m/n/10.95 = 1$ is Lemma 8.3[](i).
  []
 
 
-Overfull \hbox (5.3241pt too wide) in paragraph at lines 987--1003
+Overfull \hbox (5.3241pt too wide) in paragraph at lines 986--1002
 []\OT1/cmr/m/n/10.95 By The-o-rem 5.2[], $[][] \OML/cmm/m/it/10.95 C \OT1/cmr/m
 /n/10.95 = [][] \OML/cmm/m/it/10.95 w[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 
 P \OMS/cmsy/m/n/10.95 ^^@ \OML/cmm/m/it/10.95 A[]\OT1/cmr/m/n/10.95 )$ with in-
@@ -321,92 +311,45 @@ de-pen-dent $\OML/cmm/m/it/10.95 A[]$ \OT1/cmr/m/n/10.95 uni-form on $\OMS/cmsy
  g$\OT1/cmr/m/n/10.95 ,
  []
 
-[11]
-Overfull \hbox (271.3212pt too wide) detected at line 1038
-\OT1/cmr/m/n/10.95 (0\OML/cmm/m/it/10.95 ; \OT1/cmr/m/n/10.95 0) \OMS/cmsy/m/n/
-10.95 7! \OT1/cmr/m/n/10.95 (4\OML/cmm/m/it/10.95 ; \OT1/cmr/m/n/10.95 0)\OML/c
-mm/m/it/10.95 ;  \OT1/cmr/m/n/10.95 (0\OML/cmm/m/it/10.95 ; \OT1/cmr/m/n/10.95 
-1) \OMS/cmsy/m/n/10.95 7! \OT1/cmr/m/n/10.95 (3\OML/cmm/m/it/10.95 ; \OT1/cmr/m
-/n/10.95 1)\OML/cmm/m/it/10.95 ;  \OT1/cmr/m/n/10.95 (0\OML/cmm/m/it/10.95 ; \O
-T1/cmr/m/n/10.95 2) \OMS/cmsy/m/n/10.95 7! \OT1/cmr/m/n/10.95 (2\OML/cmm/m/it/1
-0.95 ; \OT1/cmr/m/n/10.95 2)\OML/cmm/m/it/10.95 ;  \OT1/cmr/m/n/10.95 (1\OML/cm
-m/m/it/10.95 ; \OT1/cmr/m/n/10.95 0) \OMS/cmsy/m/n/10.95 7! \OT1/cmr/m/n/10.95 
-(3\OML/cmm/m/it/10.95 ; \OT1/cmr/m/n/10.95 1)\OML/cmm/m/it/10.95 ;  \OT1/cmr/m/
-n/10.95 (1\OML/cmm/m/it/10.95 ; \OT1/cmr/m/n/10.95 1) \OMS/cmsy/m/n/10.95 7! \O
-T1/cmr/m/n/10.95 (2\OML/cmm/m/it/10.95 ; \OT1/cmr/m/n/10.95 2)\OML/cmm/m/it/10.
-95 ;  \OT1/cmr/m/n/10.95 (1\OML/cmm/m/it/10.95 ; \OT1/cmr/m/n/10.95 2) \OMS/cms
-y/m/n/10.95 7! \OT1/cmr/m/n/10.95 (1\OML/cmm/m/it/10.95 ; \OT1/cmr/m/n/10.95 1)
-\OML/cmm/m/it/10.95 ;  \OT1/cmr/m/n/10.95 (2\OML/cmm/m/it/10.95 ; \OT1/cmr/m/n/
-10.95 0) \OMS/cmsy/m/n/10.95 7! \OT1/cmr/m/n/10.95 (2\OML/cmm/m/it/10.95 ; \OT1
-/cmr/m/n/10.95 2)\OML/cmm/m/it/10.95 ;  \OT1/cmr/m/n/10.95 (2\OML/cmm/m/it/10.9
-5 ; \OT1/cmr/m/n/10.95 1) \OMS/cmsy/m/n/10.95 7! \OT1/cmr/m/n/10.95 (1\OML/cmm/
-m/it/10.95 ; \OT1/cmr/m/n/10.95 1)\OML/cmm/m/it/10.95 ;  \OT1/cmr/m/n/10.95 (2\
-OML/cmm/m/it/10.95 ; \OT1/cmr/m/n/10.95 2) \OMS/cmsy/m/n/10.95 7! \OT1/cmr/m/n/
-10.95 (0\OML/cmm/m/it/10.95 ; \OT1/cmr/m/n/10.95 0)\OML/cmm/m/it/10.95 :
+[11] [12]
+Overfull \hbox (2.46057pt too wide) in paragraph at lines 1134--1146
+\OT1/cmr/m/n/9 (2\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 0)[] 1$, $(2\OML/cmm/m/it/9 ;
+ \OT1/cmr/m/n/9 2)[] 27$, $(3\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 1)[] 6\OML/cmm/m/
+it/9 ; \OT1/cmr/m/n/9 (3\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 2)[] 12$, $(3\OML/cmm/
+m/it/9 ; \OT1/cmr/m/n/9 3)[] 59$, $(4\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 2)[] 33$,
+ $(4\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 3)[] 48$, $(4\OML/cmm/m/it/9 ; \OT1/cmr/m/
+n/9 4)[] 80\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 (5\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 
+2)[] 24$, $(5\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 3)[] 86$, $(5\OML/cmm/m/it/9 ; \O
+T1/cmr/m/n/9 4)[] 96$, $(5\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 5)[] 60$,
  []
 
-[12]
-Overfull \hbox (1599.0324pt too wide) in paragraph at lines 1133--1145
-[]\OT1/cmr/m/n/10.95 For the record, the full joint dis-tri-bu-tion of $([][] \
-OML/cmm/m/it/10.95 C; [][] [][]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 C\OT1/cm
-r/m/n/10.95 ))$ is $\OT1/cmr/m/n/9 (0\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 0)[] 1\OM
-L/cmm/m/it/9 ; \OT1/cmr/m/n/9 (1\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 1)[] 7\OML/cmm
-/m/it/9 ; \OT1/cmr/m/n/9 (2\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 0)[] 1\OML/cmm/m/it
-/9 ; \OT1/cmr/m/n/9 (2\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 2)[] 27\OML/cmm/m/it/9 ;
- \OT1/cmr/m/n/9 (3\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 1)[] 6\OML/cmm/m/it/9 ; \OT1
-/cmr/m/n/9 (3\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 2)[] 12\OML/cmm/m/it/9 ; \OT1/cmr
-/m/n/9 (3\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 3)[] 59\OML/cmm/m/it/9 ; \OT1/cmr/m/n
-/9 (4\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 2)[] 33\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 (
-4\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 3)[] 48\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 (4\OM
-L/cmm/m/it/9 ; \OT1/cmr/m/n/9 4)[] 80\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 (5\OML/cm
-m/m/it/9 ; \OT1/cmr/m/n/9 2)[] 24\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 (5\OML/cmm/m/
-it/9 ; \OT1/cmr/m/n/9 3)[] 86\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 (5\OML/cmm/m/it/9
- ; \OT1/cmr/m/n/9 4)[] 96\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 (5\OML/cmm/m/it/9 ; \
-OT1/cmr/m/n/9 5)[] 60\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 (6\OML/cmm/m/it/9 ; \OT1/
-cmr/m/n/9 2)[] 24\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 (6\OML/cmm/m/it/9 ; \OT1/cmr/
-m/n/9 3)[] 84\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 (6\OML/cmm/m/it/9 ; \OT1/cmr/m/n/
-9 4)[] 144\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 (6\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 5
-)[] 84\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 (6\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 6)[] 
-21\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 (7\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 2)[] 24\O
-ML/cmm/m/it/9 ; \OT1/cmr/m/n/9 (7\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 3)[] 84\OML/c
-mm/m/it/9 ; \OT1/cmr/m/n/9 (7\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 4)[] 156\OML/cmm/
-m/it/9 ; \OT1/cmr/m/n/9 (7\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 5)[] 102\OML/cmm/m/i
-t/9 ; \OT1/cmr/m/n/9 (7\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 6)[] 24\OML/cmm/m/it/9 
-; \OT1/cmr/m/n/9 (7\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 7)[] 3\OML/cmm/m/it/9 ; \OT
-1/cmr/m/n/9 (8\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 2)[] 24\OML/cmm/m/it/9 ; \OT1/cm
-r/m/n/9 (8\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 3)[] 84\OML/cmm/m/it/9 ; \OT1/cmr/m/
-n/9 (8\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 4)[] 144\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9
- (8\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 5)[] 84\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 (8\
-OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 6)[] 21\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 (9\OML/
-cmm/m/it/9 ; \OT1/cmr/m/n/9 2)[] 24\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 (9\OML/cmm/
-m/it/9 ; \OT1/cmr/m/n/9 3)[] 86\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 (9\OML/cmm/m/it
-/9 ; \OT1/cmr/m/n/9 4)[] 96\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 (9\OML/cmm/m/it/9 ;
- \OT1/cmr/m/n/9 5)[] 60\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 (10\OML/cmm/m/it/9 ; \O
-T1/cmr/m/n/9 2)[] 33\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 (10\OML/cmm/m/it/9 ; \OT1/
-cmr/m/n/9 3)[] 48\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 (10\OML/cmm/m/it/9 ; \OT1/cmr
-/m/n/9 4)[] 80\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 (11\OML/cmm/m/it/9 ; \OT1/cmr/m/
-n/9 1)[] 6\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 (11\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 
-2)[] 12\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 (11\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 3)[
-] 59\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 (12\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 0)[] 1
-\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 (12\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 2)[] 27\OM
-L/cmm/m/it/9 ; \OT1/cmr/m/n/9 (13\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 1)[] 7\OML/cm
-m/m/it/9 ; \OT1/cmr/m/n/9 (14\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 0)[] 1$. 
+
+Overfull \hbox (20.241pt too wide) in paragraph at lines 1134--1146
+\OT1/cmr/m/n/9 (6\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 2)[] 24\OML/cmm/m/it/9 ; \OT1
+/cmr/m/n/9 (6\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 3)[] 84$, $(6\OML/cmm/m/it/9 ; \O
+T1/cmr/m/n/9 4)[] 144$, $(6\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 5)[] 84$, $(6\OML/c
+mm/m/it/9 ; \OT1/cmr/m/n/9 6)[] 21$, $(7\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 2)[] 2
+4\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 (7\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 3)[] 84$, 
+$(7\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 4)[] 156$, $(7\OML/cmm/m/it/9 ; \OT1/cmr/m/
+n/9 5)[] 102$, $(7\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 6)[] 24$, $(7\OML/cmm/m/it/9
+ ; \OT1/cmr/m/n/9 7)[] 3\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 (8\OML/cmm/m/it/9 ; \O
+T1/cmr/m/n/9 2)[] 24$,
  []
 
 [13] [14] [15]
-Underfull \hbox (badness 4505) in paragraph at lines 1420--1424
+Underfull \hbox (badness 4505) in paragraph at lines 1421--1425
 []\OT1/cmr/m/n/10.95 I. Deb-nath and O. Prakash, Av-er-age di-men-sions of Ga-l
 ois hulls of con-sta-
  []
 
 [16]
-Underfull \hbox (badness 1248) in paragraph at lines 1530--1534
+Underfull \hbox (badness 1248) in paragraph at lines 1531--1535
 []\OT1/cmr/m/n/10.95 T. Wu, S. Zhu, L. Liu, and L. Li, Repeated-root con-sta-cy
 clic codes of length
  []
 
 
-Underfull \hbox (badness 3679) in paragraph at lines 1530--1534
+Underfull \hbox (badness 3679) in paragraph at lines 1531--1535
 \OT1/cmr/m/n/10.95 6\OML/cmm/m/it/10.95 `[]p[]$\OT1/cmr/m/n/10.95 , \OT1/cmr/m/
 it/10.95 Ad-vances in Math-e-mat-ics of Com-mu-ni-ca-tions \OT1/cmr/m/n/10.95 1
 7(5) (2023), 1154--1180.
@@ -419,10 +362,10 @@ L3 programming layer <2026-01-19>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 2553 strings out of 469514
- 36425 string characters out of 5470071
- 460756 words of memory out of 5000000
- 31209 multiletter control sequences out of 15000+600000
+ 2555 strings out of 469514
+ 36481 string characters out of 5470071
+ 462756 words of memory out of 5000000
+ 31211 multiletter control sequences out of 15000+600000
  640967 words of font info for 91 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  57i,12n,65p,473b,281s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -452,7 +395,7 @@ usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/sh
 are/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/share/te
 xlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/tex
 live/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
-Output written on P1_15_MANUSCRIPT_DRAFT.pdf (17 pages, 418337 bytes).
+Output written on P1_15_MANUSCRIPT_DRAFT.pdf (17 pages, 418506 bytes).
 PDF statistics:
  200 PDF objects out of 1000 (max. 8388607)
  123 compressed objects within 2 object streams
