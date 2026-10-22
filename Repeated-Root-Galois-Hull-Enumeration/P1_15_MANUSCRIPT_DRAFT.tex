@@ -1043,8 +1043,70 @@ Theorem~\ref{thm:C6}, namely
 \(1^2 V_1(2) + 3^2 V_2(2) + 2^2 V_1(2) + 6^2 V_2(2) = 230/9\).
 Thus Example~\ref{ex:E5} verifies, in one place, the independence of
 orbit blocks, the \(L=1\) versus \(L \ge 2\) mean constants, and the
-\(w_O^2\) weighting in the variance.
+the \(w_O^2\) weighting in the variance.
 \end{example}
+
+\paragraph{A table of EAQECC-optimal and near-optimal codes.}
+We record ten further finite-field codes, all with \(\lambda = 1\) (hence
+\(\mu = 1\)) and a single component (\(N = m_1 = 1\)), so all dimensions
+below are over \(\mathbb{F}_q\) itself. Throughout, \(\omega\) denotes a
+root of \(x^2 + x + 1\) in \(\mathbb{F}_4\), \(\theta\) a root of
+\(x^3 + x + 1\) in \(\mathbb{F}_8\), and \(\iota\) an element of
+\(\mathbb{F}_9\) with \(\iota^2 = -1\). The exponent tuple \(a\) refers to
+the following ordered factor lists of \(x^{n_0} - 1\): over
+\(\mathbb{F}_2\) with \(n_0 = 3\): \((x+1,\ x^2+x+1)\); over
+\(\mathbb{F}_3\) with \(n_0 = 2\): \((x+1,\ x+2)\); over \(\mathbb{F}_4\)
+with \(n_0 = 5\): \((x+1,\ x^2 + \omega x + 1,\ x^2 + \omega^2 x + 1)\);
+over \(\mathbb{F}_4\) with \(n_0 = 3\):
+\((x+1,\ x+\omega,\ x+\omega^2)\); over \(\mathbb{F}_5\) with \(n_0 = 2\):
+\((x+1,\ x+4)\); over \(\mathbb{F}_7\) with \(n_0 = 2\): \((x+1,\ x+6)\);
+over \(\mathbb{F}_8\) with \(n_0 = 7\): \((x+\beta)_\beta\) with \(\beta\)
+running through \(1, \theta, 1+\theta, \theta^2, 1+\theta^2,
+\theta+\theta^2, 1+\theta+\theta^2\); over \(\mathbb{F}_8\) with
+\(n_0 = 3\): \((x+1,\ x^2+x+1)\); over \(\mathbb{F}_9\) with \(n_0 = 8\):
+\((x+\beta)_\beta\) with \(\beta\) running through \(1, 2, \iota,
+1+\iota, 2+\iota, 2\iota, 1+2\iota, 2+2\iota\); and over
+\(\mathbb{F}_9\) with \(n_0 = 2\): \((x+1,\ x+2)\). For each row, \(d\)
+is the minimum distance of \(C(a)\), determined independently of the
+enumerator (exact computation; see the computational-verification
+paragraph below), and \(H = \dim \Hull_k(C(a))\) is computed from
+Theorem~\ref{thm:T4}. The EAQECC column applies the conditional quantum
+remark of Section~\ref{sec:limitations}, giving
+\([[n, K-H, d;\, n-K-H]]_q\). The last column is the EA Singleton defect
+\(\Delta = \big(n - (K-H) + (n-K-H)\big) - 2(d-1) = 2(n-K-d+1)\).
+Following the convention of~\cite{DIMP2026}, we write \({}^*\) when
+\(\Delta = 0\), i.e.\ the EAQECC meets the EA Singleton bound (we call
+such a code EA-optimal), and \({}^\dagger\) when \(\Delta = 2\)
+(near-optimal). Optimality here is meant only with respect to this EA
+Singleton bound; no comparison with best-known classical code tables is
+made. Rows with \(P = 1\) are simple-root specializations; the remaining
+rows are genuinely repeated-root.
+
+\begin{table}[htbp]
+\centering
+\footnotesize
+\caption{Ten new finite-field exponent assignments. The EAQECC column
+gives the optimal code \([[n, K-H, d;\, n-K-H]]_q\) obtained from the
+conditional quantum remark, marked \({}^*\) if it meets the EA Singleton
+bound (\(\Delta = 0\)) and \({}^\dagger\) if \(\Delta = 2\).}
+\label{tab:eaqecc}
+\begin{tabular}{cllcccr}
+\hline
+No. & Setting & \(a\) & \([n,K,d]_q\) & \(H\) & EAQECC & \(\Delta\) \\
+\hline
+1 & \(\mathbb{F}_2\ (k{=}0, P{=}2, n_0{=}3)\) & \((2,0)\) & \([6,4,2]_2\) & \(0\) & \([[6,4,2;2]]_2^{\dagger}\) & \(2\) \\
+2 & \(\mathbb{F}_3\ (k{=}0, P{=}3, n_0{=}2)\) & \((1,3)\) & \([6,2,4]_3\) & \(1\) & \([[6,1,4;3]]_3^{\dagger}\) & \(2\) \\
+3 & \(\mathbb{F}_4\ (k{=}1, P{=}1, n_0{=}5)\) & \((0,0,1)\) & \([5,3,3]_4\) & \(2\) & \([[5,1,3;0]]_4^{*}\) & \(0\) \\
+4 & \(\mathbb{F}_4\ (k{=}1, P{=}2, n_0{=}3)\) & \((0,1,2)\) & \([6,3,3]_4\) & \(1\) & \([[6,2,3;2]]_4^{\dagger}\) & \(2\) \\
+5 & \(\mathbb{F}_5\ (k{=}0, P{=}5, n_0{=}2)\) & \((1,3)\) & \([10,6,4]_5\) & \(3\) & \([[10,3,4;1]]_5^{\dagger}\) & \(2\) \\
+6 & \(\mathbb{F}_7\ (k{=}0, P{=}7, n_0{=}2)\) & \((1,3)\) & \([14,10,4]_7\) & \(4\) & \([[14,6,4;0]]_7^{\dagger}\) & \(2\) \\
+7 & \(\mathbb{F}_8\ (k{=}1, P{=}1, n_0{=}7)\) & \((0,0,0,0,1,1,1)\) & \([7,4,4]_8\) & \(1\) & \([[7,3,4;2]]_8^{*}\) & \(0\) \\
+8 & \(\mathbb{F}_8\ (k{=}1, P{=}2, n_0{=}3)\) & \((2,0)\) & \([6,4,2]_8\) & \(0\) & \([[6,4,2;2]]_8^{\dagger}\) & \(2\) \\
+9 & \(\mathbb{F}_9\ (k{=}1, P{=}1, n_0{=}8)\) & \((0,1,0,0,0,1,1,1)\) & \([8,4,5]_9\) & \(2\) & \([[8,2,5;2]]_9^{*}\) & \(0\) \\
+10 & \(\mathbb{F}_9\ (k{=}1, P{=}3, n_0{=}2)\) & \((1,2)\) & \([6,3,3]_9\) & \(2\) & \([[6,1,3;1]]_9^{\dagger}\) & \(2\) \\
+\hline
+\end{tabular}
+\end{table}
 
 \paragraph{Computational verification.}
 All formulas above were checked by exact (integer and rational)
@@ -1058,7 +1120,7 @@ Examples~\ref{ex:E3}--\ref{ex:E5} and further cases
 \(P=3\)), comprising \(2769\) field-level assignments in total, in
 addition to an orbit grid of \(52\) pairs \((P,L)\),
 \(P \in \{1,2,3,4,5,7,8,9\}\). The moment closed forms were also
-re-derived symbolically from their defining sums. These computations are
+re-derived symbolically from their defining sums. The ten codes of Table~\ref{tab:eaqecc} were checked separately by the accompanying script \texttt{code/validate\_code\_table.py}: for every row the hull dimension was computed both from Theorem~\ref{thm:T4} and from the code-first Gram matrix, and the minimum distance exactly by parity-check column dependency, confirmed by an explicit minimum-weight codeword and, except in the \(\mathbb{F}_7\) row, by direct enumeration of all codewords. These computations are
 supporting evidence for the tested cases; the proofs of
 Sections~\ref{sec:param}--\ref{sec:moments} are independent of them.
 
