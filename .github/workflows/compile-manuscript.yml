@@ -1,0 +1,44 @@
+name: Compile manuscript (one-off)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install TeX Live (minimal set for this manuscript)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            texlive-latex-base texlive-latex-recommended \
+            texlive-fonts-recommended
+
+      - name: Compile manuscript (two pdflatex passes)
+        working-directory: Repeated-Root-Galois-Hull-Enumeration
+        run: |
+          pdflatex -interaction=nonstopmode P1_15_MANUSCRIPT_DRAFT.tex || true
+          pdflatex -interaction=nonstopmode P1_15_MANUSCRIPT_DRAFT.tex || true
+          ls -la P1_15_MANUSCRIPT_DRAFT.pdf P1_15_MANUSCRIPT_DRAFT.log
+
+      - name: Commit compiled PDF and log back to this branch
+        run: |
+          mkdir -p Repeated-Root-Galois-Hull-Enumeration/compiled
+          cp Repeated-Root-Galois-Hull-Enumeration/P1_15_MANUSCRIPT_DRAFT.pdf \
+             Repeated-Root-Galois-Hull-Enumeration/compiled/P1_15_MANUSCRIPT_DRAFT.pdf
+          cp Repeated-Root-Galois-Hull-Enumeration/P1_15_MANUSCRIPT_DRAFT.log \
+             Repeated-Root-Galois-Hull-Enumeration/compiled/P1_15_MANUSCRIPT_DRAFT.log
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add Repeated-Root-Galois-Hull-Enumeration/compiled/P1_15_MANUSCRIPT_DRAFT.pdf \
+                  Repeated-Root-Galois-Hull-Enumeration/compiled/P1_15_MANUSCRIPT_DRAFT.log
+          git commit -m "CI: compiled manuscript PDF and log" || echo "nothing to commit"
+          git push origin HEAD:${{ github.ref_name }}
