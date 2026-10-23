@@ -1,0 +1,29 @@
+# R4 probe log -- generated 2026-10-23T16:48:22Z
+Python 3.11.2
+
+==============================================================================
+e=2, q=3, n=2, F_9, M=[[1,1],[1,-1]]
+  matrix check: M=[[1,1],[1,-1]], MM* = nu I with nu = 2  -> admissible: True
+  field-level codes (alpha, k, d):
+    alpha=1: (2,1), (1,2), (1,2), (0,None)
+    alpha=2: (2,1), (1,2), (1,2), (0,None)
+    alpha=3: (2,1), (1,2), (1,2), (0,None)
+    alpha=4: (2,1), (0,None)
+    alpha=5: (2,1), (0,None)
+    alpha=6: (2,1), (1,2), (1,2), (0,None)
+    alpha=7: (2,1), (0,None)
+    alpha=8: (2,1), (0,None)
+  9 distinct component-invariant groups (k1,d1,k2,d2)
+  groups on which the Gray distance is NOT determined by (k1,d1,k2,d2): 1
+      (k1,d1,k2,d2)=(1, 2, 1, 2) -> Gray distances [2, 3]
+  => the Gray distance is NOT a function of the component data alone
+     (so no product over components can reproduce the quantum-parameter count)
+  dual-containing pairs: 144; distinct quantum parameters (k1+k2, d): [(2, 2), (2, 3), (3, 2), (4, 1)]
+
+==============================================================================
+the same instance with a SECOND admissible matrix M2 = [[1,1],[t,-t]],
+t = 2 in F_9 (norm 1, so M2 M2* = 2 I).  The paper leaves M free subject to
+MM* = nu I, so this tests whether the parameters depend on that choice.
+  M=((1, 1), (1, -1)):  MM* = nu I with nu=2, admissible=True
+  M=((1, 1), (2, -2)):  MM* = nu I with nu=2, admissible=True
+  pairs of alpha=1 codes whose Gray distance depends on the choice of M: 0/16

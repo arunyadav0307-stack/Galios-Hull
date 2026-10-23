@@ -293,26 +293,41 @@ count a product of field-level laws, and those laws are given for arbitrary `n` 
 by the source's Theorem 10 and by Sangwisut–Jitman–Udomkavanich (AMC 2017). This is a negative
 result about the proposed question, **not** a defect in the source paper.
 
+## R4 feasibility and structural test (2026-10-23) — structurally GO
+
+Full argument: `phase2/R4_FEASIBILITY.md`. Probe: `phase2/r4_probe/` (`r4_probe.py`, log 29 lines,
+runtime < 1 s).
+
+R4 is the fourth revision considered and **the first that passes the structural test that killed
+R1–R3**.
+
+| Item | Outcome |
+|---|---|
+| Question | count `λ`-constacyclic codes over `R_e` with `C^{⊥_H} ⊆ C` by quantum parameters `[[en, 2k−en, ≥d]]`, i.e. by (hull dimension, Gray distance) |
+| Gray map (source pp. 6–7, 15, full text) | `ψ` applies `M` (`M M* = νI_e`) to the vector of `e` component symbols **at each position** |
+| Structural fact | the Gray weight is `Σ_i g(s_{1i},…,s_{ei})` — a joint function of the components **at each position**, not a sum of component weights; for `e=2`, `w_G = w(a+b)+w(a−b)` |
+| Consequence | a weight-1 Gray word exists **iff** `C_1 ∩ C_2` contains a weight-1 word, so `d(ψ(C))` depends on `C_1 ∩ C_2` — a joint invariant. **No function of `(k_ℓ, d_ℓ)` determines it** |
+| Numeric confirmation | `q=3, e=2, n=2`, `F_9`, `M=[[1,1],[1,−1]]`: 9 component-invariant groups; the group `(k₁,d₁,k₂,d₂)=(1,2,1,2)` realises Gray distances **`{2,3}`** — non-constant; 144 dual-containing pairs; parameters `(k,d) ∈ {(2,2),(2,3),(3,2),(4,1)}` |
+| Scope limit found (5.1) | `M` is a free parameter (`MM*=νI`); two admissible choices gave *identical* distances in this instance (`0/16`), so no `M`-dependence is claimed |
+| Scope limit found (5.2) | the paper's `e=2` matrix has `ν = 2`, which is `0` in even characteristic: `M` is singular, `ψ` not injective, and the probe reproduces Gray distance `0` over `F_4`. Not an error (all the paper's examples use odd `q`) but a real generality restriction |
+| Prior-art pass (K4-1) | **search level only.** Counts of prescribed hull dimension exist (arXiv:2605.29204); hull+distance counting exists *for all linear codes, asymptotically* (arXiv:2512.12519) — the closest threat; constacyclic distance work is tables, not counts. Absence **not** established; B-1/B-2 open |
+| Feasibility (K4-2) | **partial**: exact enumeration is affordable at small `n`, nothing more. No closed form identified |
+| Verdict | **structurally GO**; not yet GO as a research question. K4-1 and K4-2 remain open, and Gate 2 has not been re-run |
+
 ## Next step
 
-**No further work is authorised or recommended on the current research question.** R3 (`c9d4517`),
-R1 (`25bbe62`) and R2 (this commit) have each collapsed under their own kill criteria, and Gate 2
-remains **NOT PASSED**. Phase 3 is **not started**.
+R1, R2, R3 are **NO-GO** (`25bbe62`, `78b89ac`, `c9d4517`). **R4 is structurally GO but unproven on
+novelty**, so Gate 2 stays NOT PASSED. Phase 3 is **not started**.
 
-Two options, for the author to choose; neither is begun:
+Order of work now in progress, requiring no further authorisation:
 
-* **(a) Different question.** The only candidate identified that is *not* a product of field-level
-  laws is the **distance-constrained** quantum-parameter distribution over `R_e`: the hull dimension
-  is a sum over CRT components, but the minimum distance is not, so a distance constraint genuinely
-  couples them. This is not a relabelled R1/R2/R3, it is materially harder, and it would need its
-  own feasibility/kill test before any Phase 3 work. R3's decision document (§9, item 2) already
-  flagged it in the same terms.
-* **(b) Close at Gate 2.** Record that the proposed contribution is not distinguishable from prior
-  art on the available evidence, with blockers B-1 (publisher full texts) and B-2
-  (Debnath–Prakash body) still open.
-
-Recommendation: **(b) unless (a) is explicitly authorised**, because (a) may well collapse for the
-same structural reason and should not be entered without a stated kill criterion.
+1. **K4-1 (decisive for R4).** Full-text check of arXiv:2512.12519 and arXiv:2605.29204 — do they
+   already give an exact joint (hull, distance) count that specialises to constacyclic families? If
+   yes, R4 is `K` and the project closes at Gate 2. Also attempt B-1/B-2 again.
+2. **K4-2.** If K4-1 clears, decide whether the (hull, Gray distance) distribution has any structure
+   beyond brute force — in particular whether the repeated-root distance formulas give closed forms
+   for the field-level laws that the ring-level count needs.
+3. **Gate 2 re-run** on R4 only if both clear. Only then Phase 3.
 
 Phase 1 stands complete; nothing in Phase 2 changed a Phase 1 result, count or register entry.
 
