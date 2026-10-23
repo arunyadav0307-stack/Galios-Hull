@@ -7,3 +7,8 @@ research_project/prior_art/
 __pycache__/
 *.py[cod]
 .pytest_cache/
+
+# Page-anchored text corpus extracted from the source PDF: derived from a
+# copyrighted article and fully regenerable. Rebuild with
+#   python3 research_project/tools/extract_source_text.py
+research_project/source_audit/source_text/

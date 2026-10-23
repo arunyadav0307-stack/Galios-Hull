@@ -26,6 +26,10 @@ A document existing is never, by itself, evidence of a passed gate.
 | 0.10 | Obtain the blueprint's named source paper | **BLOCKED** | 12 external access routes tried and closed; see `source_audit/SOURCE_ACCESS_STATUS.md` §2 |
 | 0.11 | Repository-wide search for the PDF (working tree, all 11 branches, all 349 blobs, both ZIPs by magic bytes, whole filesystem) | **PASS as a search, negative as a result** | `source_audit/REPOSITORY_SOURCE_SEARCH.md`; gate output: 6 PDFs examined, 0 accepted, 2 distinct documents, neither is the source paper |
 | 0.12 | Armed gate that accepts the file wherever it is placed | **PASS** | `tools/find_and_verify_source.py` (walks the tree, tests every PDF, records SHA-256, exit 0 only on exactly one acceptance) + `tools/verify_source_pdf.py --selftest` 3/3 |
+| 0.13 | Phase 1 work specification written in advance | **PASS** | `source_audit/PHASE1_EXECUTION_PLAN.md`: entry conditions (including the version tag), the four deliverable schemas, evidence standard, failure-mode responses |
+| 0.14 | Phase 1 machinery built and dry-run | **PASS** | `tools/extract_source_text.py` refuses a non-source PDF, and under `--force` extracts 27 pages / 34 heading candidates / 30 high-confidence, 4 needing triage — mechanics proven, output discarded to `/tmp` |
+| 0.15 | One-command handoff from "PDF supplied" to "Phase 1 may start" | **PASS** | `tools/accept_source_and_prepare.sh`; negative test on the wrong PDF: staged copy removed, original untouched, drop folder left clean |
+| 0.16 | Read-only readiness check | **PASS** | `tools/preflight.py` → 18 PASS / 3 WARN / 0 FAIL, `RESULT: WAITING`; also refuses to report READY while a Phase 1 deliverable exists without an accepted source |
 
 ### Gate 0 verdict
 
@@ -96,6 +100,20 @@ under Option 2 of the blocker document.
 | A-2 | The uploaded PDF is the intended artifact even though it is not the named paper | it is the only research PDF supplied | yes — user may supply Object C |
 | A-3 | Prior audits are inputs, not authority | project rule §3 of `PROJECT_PLAN.md` | no |
 | A-4 | `prior_art/` may be excluded from Git because it is a byte-identical extraction of committed ZIPs | `FILE_MANIFEST.csv` | yes |
+
+## Prepared for Phase 1 (nothing executed)
+
+| Artefact | Purpose |
+|---|---|
+| `source_audit/PHASE1_EXECUTION_PLAN.md` | the Phase 1 specification: entry conditions, deliverable schema, evidence rules, failure responses |
+| `tools/extract_source_text.py` | page-anchored corpus + draft heading index; refuses any non-source PDF |
+| `tools/accept_source_and_prepare.sh` | one command: stage → identify → record SHA-256 → build corpus → preflight |
+| `tools/preflight.py` | read-only readiness report (18 PASS / 3 WARN / 0 FAIL today; `RESULT: WAITING`) |
+| `requirements.txt` | pinned Python dependencies |
+| `source_paper/` | the drop point |
+
+No Phase 1 deliverable exists, and `preflight.py` fails the build if one appears
+before the source is accepted.
 
 ## Next step
 

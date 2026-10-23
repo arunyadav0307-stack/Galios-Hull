@@ -3,6 +3,13 @@
 **Raised:** 2026-10-23 (UTC) · **Severity:** blocking · **Owner of decision:** user
 **Gate affected:** Gate 0 ("the exact source PDF and the usable research environment are identified")
 
+> **STATUS: RESOLVED BY DECISION (2026-10-23).** The user chose **Option 1** of §4:
+> Yadav et al. (2024) is the source of record; Debnath et al. is excluded as a
+> substitute. The identity question below is therefore closed. What remains open is
+> only the *file*: see `SOURCE_ACCESS_STATUS.md` and `REPOSITORY_SOURCE_SEARCH.md`.
+> The original text is preserved unchanged beneath this banner as the record of how
+> the issue was found and escalated.
+
 ---
 
 ## 1. The finding

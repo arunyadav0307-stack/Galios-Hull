@@ -275,3 +275,44 @@ Place the file in research_project/source_paper/ (any name ending .pdf) and re-r
 ```
 
 Scope: working tree; 11 remote branches / 349 blobs read in full where >=10 kB; both ZIPs tested entry-by-entry by magic bytes; `find /` over the filesystem. Detail: source_audit/REPOSITORY_SOURCE_SEARCH.md.
+
+## 16. Phase 1 readiness (preparatory work, 2026-10-23)
+
+Tooling built and dry-run. Nothing below produced a Phase 1 deliverable.
+
+```
+$ python3 research_project/tools/verify_source_pdf.py --selftest
+PASS  accepts a conforming record                                    expected=accept got=accept
+PASS  rejects the Debnath preprint                                   expected=reject got=reject
+PASS  rejects a right-title/right-author document without journal or DOI expected=reject got=reject
+
+SELFTEST: PASS
+[exit=0]
+
+$ python3 research_project/tools/extract_source_text.py --pdf <wrong pdf>   # gated run
+REFUSING: Galios hulls of constacclic codes over affine algebra rings'.pdf is not the source paper.
+  FAIL  A  is not a known wrong paper      this is Debnath et al. "galois hulls of constacyclic codes over affine algebra rings"
+  FAIL  B  expected title found            title not found
+[refused]
+
+$ python3 research_project/tools/extract_source_text.py --pdf <wrong pdf> --force --out /tmp/t2   # mechanics only
+  empty pages    0
+  heading lines  34  {'Example': 5, 'Table': 3, 'Lemma': 9, 'Theorem': 10, 'Corollary': 5, 'Remark': 2}
+  numbered       30 high-confidence, 4 low (manual triage)
+  NOTE these are line-level candidates, not verified statements.
+
+$ bash research_project/tools/accept_source_and_prepare.sh <wrong pdf>   # must stage then unstage
+
+NOT ACCEPTED (exit 1). Removing the staged copy so the drop folder stays clean.
+The original at Galios hulls of constacclic codes over affine algebra rings'.pdf was not modified.
+drop folder afterwards: README.md
+
+$ python3 research_project/tools/preflight.py
+
+summary: 18 pass, 3 warn, 0 fail
+
+RESULT: WAITING — Phase 0 is complete and consistent; Phase 1 is gated on the source PDF.
+Next: put the Yadav et al. PDF in research_project/source_paper/ and run
+      python3 research_project/tools/find_and_verify_source.py --record
+[exit=1]
+```

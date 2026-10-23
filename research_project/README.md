@@ -22,7 +22,9 @@ in the workspace.** No Phase 1 work has begun. See `PHASE_STATUS.md` and
 | 6 | `source_audit/SOURCE_PAPER_METADATA.md` | the three distinct papers in play and their access status |
 | 7 | `source_audit/ENVIRONMENT_CAPABILITIES.md` | what the sandbox can and cannot do |
 | 8 | `source_audit/PRIOR_ART_REGISTER.md` | the earlier work found in the ZIPs and how it is treated |
-| 9 | `source_audit/PHASE0_VERIFICATION_LOG.md` | commands, outputs, exit codes behind every claim above |
+| 9 | `source_audit/REPOSITORY_SOURCE_SEARCH.md` | the exhaustive search proving the PDF is absent (all branches, both ZIPs, filesystem) |
+| 10 | `source_audit/PHASE1_EXECUTION_PLAN.md` | exactly what Phase 1 will do, and to what standard, once the PDF exists |
+| 11 | `source_audit/PHASE0_VERIFICATION_LOG.md` | commands, outputs, exit codes behind every claim above |
 
 ## The short version
 
@@ -67,6 +69,26 @@ research_project/
 
 Later phases will add `literature/`, `theory/`, `proofs/`, `code/`, `data/`,
 `verification/`, `paper/`, with the blueprint's exact deliverable names.
+
+## Start Phase 1 the moment the PDF exists
+
+```bash
+bash research_project/tools/accept_source_and_prepare.sh /path/to/yadav.pdf
+python3 research_project/tools/preflight.py        # READY / WAITING / BROKEN
+```
+
+`accept_source_and_prepare.sh` stages the file, proves its identity, records its
+SHA-256, builds the page-anchored corpus, and deletes the staged copy if the file is
+not the source paper. `preflight.py` is read-only and reports the gate state at any
+time.
+
+| Tool | Purpose |
+|---|---|
+| `tools/find_and_verify_source.py` | identity gate over every PDF in the tree; exit 0 only on exactly one acceptance |
+| `tools/verify_source_pdf.py` | the identity test itself; `--selftest` proves it accepts and rejects correctly |
+| `tools/extract_source_text.py` | page-anchored corpus + draft heading index (refuses a non-source PDF) |
+| `tools/preflight.py` | Phase 0 consistency, gate state, tool availability, premature-deliverable check |
+| `tools/accept_source_and_prepare.sh` | the four steps above in one command |
 
 ## Reproduce Phase 0
 

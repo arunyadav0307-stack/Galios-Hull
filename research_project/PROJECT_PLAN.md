@@ -75,6 +75,8 @@ research_project/
 ├── PROJECT_PLAN.md           this file
 ├── PHASE_STATUS.md           per-phase status and evidence
 ├── source_audit/             Phase 0–1 documents, manifests, verification logs
+│   └── source_text/          generated page-anchored corpus (git-ignored, regenerable)
+├── source_paper/             drop point for the accepted source PDF
 ├── literature/               Phase 2 documents and comparison matrix
 ├── theory/                   Phases 3–5 (framework, factor orbits, proofs)
 ├── proofs/                   Phase 5 proof packages, dependency graph
@@ -83,7 +85,8 @@ research_project/
 ├── verification/             Phase 7 logs, reproducibility records
 ├── paper/                    Phase 9 LaTeX source and bibliography
 ├── logs/                     command transcripts with timestamps
-├── tools/                    inventory and extraction utilities
+├── tools/                    inventory, identity gate, corpus builder, preflight
+├── requirements.txt          Python dependencies with pinned versions
 └── prior_art/                extracted copies of the two submitted ZIPs (not tracked)
 ```
 

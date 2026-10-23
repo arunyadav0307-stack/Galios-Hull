@@ -1,0 +1,12 @@
+# Phase 1–7 Python dependencies (all optional except pypdf).
+# Session-local installs are not captured by the repository snapshot; reinstall with:
+#   pip install -r research_project/requirements.txt
+#
+# pypdf       PDF page count, metadata, per-page text extraction   (required)
+# sympy       exact symbolic algebra, polynomial identity checks   (recommended)
+# galois      finite-field construction and linear codes           (recommended)
+# numpy       array support; dependency of galois                  (recommended)
+pypdf==6.21.2
+sympy==1.14.0
+galois==0.4.11
+numpy==2.4.6
