@@ -209,9 +209,32 @@ Also corrected: the Phase 2 matrix had dropped Udomkavanich from the `[21]` auth
 * **B-2 — Debnath–Prakash (2022/23) body not read.** E1 = `K` rests on their abstract; if their "restrictions on `q`" exclude `m = 2, k = 1`, or their count is aggregate rather than per-dimension, E1 falls to `N2`. One library visit settles it.
 * **U-8 (carried from Phase 1)** — the version of record still has not been examined; all page references are to `hal-04825601v1`.
 
+## R3 decision document (2026-10-23) — R3 NOT RECOMMENDED
+
+Prepared at the user's request, after Phase 2, at their preferred candidate **R3: the distribution of dual-containing codes over `R_e`**. Deliverable: `phase2/R3_DECISION.md`. Phase 3 was **not** started.
+
+| Item | Outcome |
+|---|---|
+| Question specified | yes — ring, code family, length and multiplier hypotheses, and the duality convention fixed in §1 (the involution is the **ring** `q`-th power, i.e. conjugate-reciprocal `u ↦ u^{−1}`, since `e \| q+1` forces `q ≡ −1 mod e`) |
+| Counting target distinguished | codes/ideals, never generator listings — the Phase 1 **F-1** unnormalised-`η` trap would corrupt a tuple count; equivalence classes explicitly out of scope |
+| Constituent relationship | **proved**: the involution fixes every CRT idempotent, so `C^{⊥H} = ⊕_j e_j (C_j^{⊥H})` and `C^{⊥H} ⊆ C ⟺ ∀j C_j^{⊥H} ⊆ C_j`; hence `N(n,λ) = ∏_j N_F(n, α_j)` |
+| Kill criterion | **fired** — K1 (source Thm 16), K2 (idempotents fixed), K3 (published field-level counts), K4 (product) |
+| Smallest test case | `q=3, e=2, n=2` (`\|R\|=81`, 64 multipliers) and `q=2, e=3, n=2` (`\|R\|=64`, 27 multipliers, three components, repeated-root) |
+| Result | product identity exact on **64/64** and **27/27** multipliers, over every ideal; dual decomposition exact on **16/16** and **27/27** CRT tuples |
+
+**Supporting probe (new, small, deterministic):** `phase2/r3_probe/` — `r3_probe.py`, `r3_dual_formula.py`, `r3_hull_dim_check.py`, log in `r3_probe_log.txt`. Runtime ≈ 15 s total, stdlib only, no network.
+
+**Phase 1 items strengthened by the probe** (no Phase 1 result changed):
+* **Theorem 10** (`QUOTED` in Phase 1) recomputed independently: hull-dimension additivity holds **16/16** and **27/27**, including `e = 3`.
+* **Theorem 16** had been verified only against `e = 2` table rows; it is now corroborated at `e = 3` as well.
+
+**Recommendation recorded:** stop R3. It is precise enough to authorise, and its answer is a product of known counts. The only non-collapsing variant is quantum-parameter distribution with a distance constraint (the distance couples components), which is a different and much harder problem, not a relabelled R3.
+
+**Four errors made and fixed inside the probe** (E-1 monic-only ideal enumeration; E-2 `+=` instead of `−=` in RREF; E-3 coefficientwise conjugation instead of the paper's conjugate-reciprocal involution, which produced a spurious failure of Theorem 16; E-4 incorrect subspace intersection). All are recorded in `R3_DECISION.md` §8 because the verdict rests on the probe.
+
 ## Next step
 
-**Phase 2 is delivered and Gate 2 is NOT PASSED.** The blueprint's stop condition is now the binding one: the research question must be revised to R1, R2 or R3 (or a combination), and the corresponding kill criterion settled, before Phase 3 begins. Phase 3 and later phases remain **not started** and require explicit authorisation.
+**Phase 2 is delivered and Gate 2 is NOT PASSED.** R3 — the first candidate the user selected — has now been examined and **does not survive** its own kill criterion (see the R3 decision section above). The next action is therefore to select **R1 or R2**, and to settle its kill criterion in the same way before Phase 3 begins. Phase 3 and later phases remain **not started** and require explicit authorisation.
 
 Phase 1 stands complete; nothing in Phase 2 changed a Phase 1 result, count or register entry.
 
