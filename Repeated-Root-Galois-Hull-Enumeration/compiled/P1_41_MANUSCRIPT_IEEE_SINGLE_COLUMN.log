@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025/Debian) (preloaded format=pdflatex 2026.10.23)  23 OCT 2026 00:49
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025/Debian) (preloaded format=pdflatex 2026.10.23)  23 OCT 2026 02:06
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -254,17 +254,17 @@ Underfull \hbox (badness 6961) in paragraph at lines 144--145
  []
 
 
-Underfull \hbox (badness 1796) in paragraph at lines 150--152
+Underfull \hbox (badness 1796) in paragraph at lines 152--154
 \OT1/ptm/m/n/9 root case un-der ad-di-tional hy-
  []
 
 
-Underfull \hbox (badness 3250) in paragraph at lines 157--160
+Underfull \hbox (badness 3250) in paragraph at lines 159--162
 \OT1/ptm/m/n/9 self-orthogonal and dual-containing counts; ex-act
  []
 
 [2] [3] [4] [5] [6] [7] [8] [9] [10]
-Overfull \hbox (22.7658pt too wide) in paragraph at lines 885--890
+Overfull \hbox (22.7658pt too wide) in paragraph at lines 887--892
 \OT1/ptm/b/n/10 Lemma VIII.1 \OT1/ptm/m/n/10 (edge mo-ments)\OT1/ptm/b/n/10 . \
 OT1/ptm/m/it/10 For in-de-pen-dent $\OML/cmm/m/it/10 U; V$ \OT1/ptm/m/it/10 uni
 -form on $\OMS/cmsy/m/n/10 f\OT1/cmr/m/n/10 0\OML/cmm/m/it/10 ; [] ; P\OMS/cmsy
@@ -274,7 +274,7 @@ b/m/n/10 E\OT1/cmr/m/n/10 [[](\OML/cmm/m/it/10 U; V\OT1/cmr/m/n/10 )[]] =
  []
 
 [11] [12] [13]
-Overfull \hbox (26.62352pt too wide) in paragraph at lines 1158--1170
+Overfull \hbox (26.62352pt too wide) in paragraph at lines 1173--1185
 []\OT1/ptm/m/n/10 For the record, the full joint dis-tri-bu-tion of $\OT1/cmr/m
 /n/10 ([][] \OML/cmm/m/it/10 C; [][] [][]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 C\OT
 1/cmr/m/n/10 ))$ \OT1/ptm/m/n/10 is $\OT1/cmr/m/n/8 (0\OML/cmm/m/it/8 ; \OT1/cm
@@ -287,11 +287,11 @@ OML/cmm/m/it/8 ; \OT1/cmr/m/n/8 (3\OML/cmm/m/it/8 ; \OT1/cmr/m/n/8 2)[] 12$\OT1
  []
 
 LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 1
-184.
+199.
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 ) [14] [15]
-Overfull \hbox (49.7204pt too wide) in paragraph at lines 1304--1335
+Overfull \hbox (49.7204pt too wide) in paragraph at lines 1319--1350
 \OT1/ptm/m/n/10 the scripts and their saved out-puts ac-com-pany the pa-per in 
 the di-rec-tory \OT1/pcr/m/n/10 code/\OT1/ptm/m/n/10 . (i) \OT1/ptm/m/it/10 Or-
 bit level \OT1/ptm/m/n/10 (\OT1/pcr/m/n/10 code/validate_p1_14.py\OT1/ptm/m/n/1
@@ -299,7 +299,7 @@ bit level \OT1/ptm/m/n/10 (\OT1/pcr/m/n/10 code/validate_p1_14.py\OT1/ptm/m/n/1
  []
 
 [16] [17]
-Underfull \hbox (badness 5970) in paragraph at lines 1434--1437
+Underfull \hbox (badness 5970) in paragraph at lines 1449--1452
 []\OT1/ptm/m/n/8 T. Brun, I. De-ve-tak, and M.-H. Hsieh, Cor-rect-ing quan-tum 
 er-rors with en-tan-gle-ment, \OT1/ptm/m/it/8 Sci-ence \OT1/ptm/m/n/8 314 (2006
 ), 436--439.
@@ -318,7 +318,7 @@ Here is how much of TeX's memory you used:
  31454 multiletter control sequences out of 15000+600000
  671615 words of font info for 127 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 56i,12n,65p,486b,326s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 56i,12n,65p,486b,293s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb></usr/
 share/texlive/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex9.pfb></usr/sh
@@ -346,7 +346,7 @@ sbm7.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive
 /texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fon
 ts/type1/urw/times/utmri8a.pfb>
-Output written on P1_41_MANUSCRIPT_IEEE_SINGLE_COLUMN.pdf (19 pages, 399780 byt
+Output written on P1_41_MANUSCRIPT_IEEE_SINGLE_COLUMN.pdf (19 pages, 401167 byt
 es).
 PDF statistics:
  213 PDF objects out of 1000 (max. 8388607)
