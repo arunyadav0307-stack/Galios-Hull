@@ -1,0 +1,42 @@
+name: Compile P1-54 introduction revision
+on:
+  push:
+    branches: [arena/ab8e330d-galios-hull]
+    paths:
+      - 'Repeated-Root-Galois-Hull-Enumeration/P1_15_MANUSCRIPT_DRAFT.tex'
+      - 'Repeated-Root-Galois-Hull-Enumeration/P1_41_MANUSCRIPT_IEEE_SINGLE_COLUMN.tex'
+      - '.github/workflows/compile-p1-54.yml'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile article version
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: P1_15_MANUSCRIPT_DRAFT.tex
+          working_directory: Repeated-Root-Galois-Hull-Enumeration
+          args: -pdf -interaction=nonstopmode -halt-on-error
+      - name: Compile IEEE version
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: P1_41_MANUSCRIPT_IEEE_SINGLE_COLUMN.tex
+          working_directory: Repeated-Root-Galois-Hull-Enumeration
+          args: -pdf -interaction=nonstopmode -halt-on-error
+      - name: Collect PDFs and logs
+        run: |
+          mkdir -p Repeated-Root-Galois-Hull-Enumeration/compiled
+          cp Repeated-Root-Galois-Hull-Enumeration/P1_15_MANUSCRIPT_DRAFT.pdf Repeated-Root-Galois-Hull-Enumeration/compiled/
+          cp Repeated-Root-Galois-Hull-Enumeration/P1_15_MANUSCRIPT_DRAFT.log Repeated-Root-Galois-Hull-Enumeration/compiled/
+          cp Repeated-Root-Galois-Hull-Enumeration/P1_41_MANUSCRIPT_IEEE_SINGLE_COLUMN.pdf Repeated-Root-Galois-Hull-Enumeration/compiled/
+          cp Repeated-Root-Galois-Hull-Enumeration/P1_41_MANUSCRIPT_IEEE_SINGLE_COLUMN.log Repeated-Root-Galois-Hull-Enumeration/compiled/
+          rm -f Repeated-Root-Galois-Hull-Enumeration/*.pdf Repeated-Root-Galois-Hull-Enumeration/*.log Repeated-Root-Galois-Hull-Enumeration/*.aux Repeated-Root-Galois-Hull-Enumeration/*.out
+      - name: Commit compiled outputs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add Repeated-Root-Galois-Hull-Enumeration/compiled
+          git commit -m "CI: compiled manuscript PDFs and logs (P1-54 introduction revision)" || echo "no changes"
+          git push
