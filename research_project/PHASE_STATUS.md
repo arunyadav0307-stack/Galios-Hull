@@ -1,186 +1,161 @@
 # PHASE STATUS
 
-**Updated:** 2026-10-23 (UTC) · **Branch:** `arena/831a2e65-galios-hull`
+**Updated:** 2026-10-23 · **Branch:** `arena/831a2e65-galios-hull`
 · **Base commit:** `33aeb795a53e72d87856b6a255652c2acad41b0b`
-· **Source of record:** Yadav, Singh, Islam, Prakash, Solé, *Comput. Appl. Math.*
-**43** (2024) 269, DOI `10.1007/s40314-024-02789-1` — **designated by the user on
-2026-10-23**; full text **not yet in hand** (`source_audit/SOURCE_ACCESS_STATUS.md`).
-**Vocabulary:** `PASS` · `FAIL` · `BLOCKED` · `PROVISIONAL` — each status names its evidence.
-A document existing is never, by itself, evidence of a passed gate.
+· **Source of record:** Yadav, Singh, Islam, Prakash, Solé, *Hermitian hull of constacyclic codes over a class of non-chain rings and new quantum codes*, *Comput. Appl. Math.* **43**, art. 269 (2024), DOI `10.1007/s40314-024-02789-1`.
+· **Version examined (binding): `hal-04825601v1`** — HAL author deposit, 23 pp., SHA-256 `7f7e6803dffe8d42912c506cc0b6d8910187be169e14c869f3275d896c27d249`, staged at `source_paper/Hermitian hull of constacyclic codes and quantum Codes.pdf`.
+
+**Vocabulary:** `PASS` · `FAIL` · `BLOCKED` · `PROVISIONAL` — each status names its evidence. A document existing is never, by itself, evidence of a passed gate.
 
 ---
 
-## Phase 0 — Workspace inspection and source integrity
+## Gate summary
+
+| Gate | Blueprint condition | Status | Evidence |
+|---|---|---|---|
+| **Gate 0** | "The exact source PDF and the usable research environment are identified. If the PDF cannot be accessed, stop and request it." | **PASS** (2026-10-23) | `GATE 0: PASS` from `tools/find_and_verify_source.py` over 7 PDFs with exactly 1 acceptance; SHA-256 + version recorded in `source_audit/SOURCE_PDF_MANIFEST.csv`; identity cross-checked against the HAL record, the DOI record and the publisher landing page (`SOURCE_PAPER_METADATA.md`) |
+| **Gate 1** | "Central source-paper results and the assumptions needed for the new work are understood and documented." | **PASS** (2026-10-23) | four required deliverables written (`phase1/SOURCE_*.md`); 25/25 register entries; 33/33 table rows and 31/31 example checks recomputed exactly; 11/11 audit items recorded |
+| Gate 2 | "The proposed main contribution is distinguishable from the closest known results." | **NOT STARTED** | out of scope for this run (see §Scope) |
+
+---
+
+## Phase 0 — Workspace inspection and source integrity (COMPLETE)
+
+Executed earlier in this session; full log in `source_audit/PHASE0_VERIFICATION_LOG.md` (including the §18 recovery record and its correction). Condensed, with two statuses revised by later events:
 
 | # | Blueprint requirement | Status | Evidence |
 |---|---|---|---|
-| 0.1 | Locate the exact uploaded PDF | **PASS** | `source_audit/SOURCE_INVENTORY.md` §1; `logs/phase0_evidence.out` §2–§4 |
-| 0.2 | Record the source filename and SHA-256 | **PASS** | `Galios hulls of constacclic codes over affine algebra rings'.pdf`, 291 546 B, `0db90bfb…c039`; `FILE_MANIFEST.csv` row 1 |
-| 0.3 | Identify the source unambiguously | **FAIL against the brief / PASS against the artifact** | the PDF is Debnath–Islam–Martínez-Moro–Prakash, arXiv:2412.08512v1 → *Discrete Math.* **349**(2) (2026) 114750. The blueprint names Yadav et al., CAM **43** (2024) 269. `SOURCE_PAPER_METADATA.md`; `SOURCE_IDENTITY_BLOCKER.md` |
-| 0.4 | Inventory prior manuscripts, blueprints, audits, code, conflicting versions | **PASS** | `SOURCE_INVENTORY.md` §2–§3; `PRIOR_ART_REGISTER.md` (two streams, 155 + 102 files, 5 conflicts logged) |
-| 0.5 | Verify archive integrity rather than assume it | **PASS** | `zipfile.testzip() is None` for both; 101/101 manifest entries re-hash; `logs/phase0_evidence.out` §3, §5 |
-| 0.6 | Check availability of Python, Magma, finite-field libraries, LaTeX, bibliography tools, PDF utilities | **PASS** | `ENVIRONMENT_CAPABILITIES.md`; probes in `logs/phase0_evidence.out` §7 |
-| 0.7 | Create a clean project directory; never infer a file from a planned name | **PASS** | `research_project/` created; every path in this report exists and is listed in §Deliverables below |
-| 0.8 | Preserve original files | **PASS** | no root artifact modified or deleted; `git status` shows only the new `research_project/` tree; extraction was to a separate directory |
+| 0.1 | Locate the exact uploaded PDF | **PASS** | `source_audit/SOURCE_INVENTORY.md` §1 |
+| 0.2 | Record source filename and SHA-256 | **PASS** | `source_audit/FILE_MANIFEST.csv`; per-document hashes in `SOURCE_PDF_MANIFEST.csv` |
+| 0.3 | Identify the source unambiguously | **PASS after correction** | Originally the only PDF present was Debnath et al. (arXiv:2412.08512v1) — **not** the source paper. The verifier rejects it decisively (`REJECTED — impersonator`). The Yadav et al. deposit supplied later is `ACCEPTED`. |
+| 0.4 | Inventory prior manuscripts, blueprints, audits, code, conflicting versions | **PASS** | `SOURCE_INVENTORY.md` §2–§3; `PRIOR_ART_REGISTER.md` (155 + 102 files, 5 conflicts) |
+| 0.5 | Verify archive integrity rather than assume it | **PASS** | `zipfile.testzip() is None` for both ZIPs; 101/101 manifest entries re-hashed |
+| 0.6 | Check availability of Python, Magma, finite-field libraries, LaTeX, bibliography tools, PDF utilities | **PASS** | `ENVIRONMENT_CAPABILITIES.md`; current preflight: 19 PASS / 2 WARN / 0 FAIL (WARN: `pdflatex`, `magma`) |
+| 0.7 | Create a clean project directory; never infer a file from a planned name | **PASS** | `research_project/` |
+| 0.8 | Preserve original files | **PASS** | no root artifact modified or deleted; the source PDF was staged *into* the project tree, never replacing anything |
 | 0.9 | Separate verified facts, unresolved issues, assumptions | **PASS** | `PROJECT_PLAN.md` §5–§6; §Unresolved below |
-| 0.10 | Obtain the blueprint's named source paper | **BLOCKED** | 12 external access routes tried and closed; see `source_audit/SOURCE_ACCESS_STATUS.md` §2 |
-| 0.11 | Repository-wide search for the PDF (working tree, all 11 branches, all 349 blobs, both ZIPs by magic bytes, whole filesystem) | **PASS as a search, negative as a result** | `source_audit/REPOSITORY_SOURCE_SEARCH.md`; gate output: 6 PDFs examined, 0 accepted, 2 distinct documents, neither is the source paper |
-| 0.12 | Armed gate that accepts the file wherever it is placed | **PASS** | `tools/find_and_verify_source.py` (walks the tree, tests every PDF, records SHA-256, exit 0 only on exactly one acceptance) + `tools/verify_source_pdf.py --selftest` 3/3 |
-| 0.13 | Phase 1 work specification written in advance | **PASS** | `source_audit/PHASE1_EXECUTION_PLAN.md`: entry conditions (including the version tag), the four deliverable schemas, evidence standard, failure-mode responses |
-| 0.14 | Phase 1 machinery built and dry-run | **PASS** | `tools/extract_source_text.py` refuses a non-source PDF, and under `--force` extracts 27 pages / 34 heading candidates / 30 high-confidence, 4 needing triage — mechanics proven, output discarded to `/tmp` |
-| 0.15 | One-command handoff from "PDF supplied" to "Phase 1 may start" | **PASS** | `tools/accept_source_and_prepare.sh`; negative test on the wrong PDF: staged copy removed, original untouched, drop folder left clean |
-| 0.16 | Read-only readiness check | **PASS** | `tools/preflight.py` → 18 PASS / 3 WARN / 0 FAIL, `RESULT: WAITING`; also refuses to report READY while a Phase 1 deliverable exists without an accepted source |
-| 0.17 | Non-destructive validation of the pipeline against the blueprint | **PASS after repair** | `tools/selftest_gate.py` 7/7; defects D-1 and D-2 found and fixed (below) |
+| 0.10 | Obtain the blueprint's named source paper | **PASS** (was `BLOCKED`) | unblocked on 2026-10-23 by the user supplying the HAL deposit; access history in `SOURCE_ACCESS_STATUS.md` |
+| 0.11 | Repository-wide search for the PDF | **PASS as a search, negative as a result** | `REPOSITORY_SOURCE_SEARCH.md`: 6 PDFs, 0 accepted, 11 branches, 349 blobs, both ZIPs by magic bytes, whole filesystem |
+| 0.12 | Armed gate that accepts the file wherever placed | **PASS** | `tools/find_and_verify_source.py`; selftest 3/3 |
+| 0.13 | Phase 1 specification written in advance | **PASS** | `source_audit/PHASE1_EXECUTION_PLAN.md` |
+| 0.14 | Phase 1 machinery built and dry-run | **PASS** | `tools/extract_source_text.py` |
+| 0.15 | One-command handoff "PDF supplied → Phase 1 may start" | **PASS** | `tools/accept_source_and_prepare.sh` — used for the real acceptance |
+| 0.16 | Read-only readiness check | **PASS** | `tools/preflight.py` → 19 PASS / 2 WARN / 0 FAIL → `READY — source PDF accepted. Phase 1 may start.` |
+| 0.17 | Non-destructive validation of the pipeline | **PASS after repair** | `tools/selftest_gate.py` **7/7** |
 
-### Gate 0 verdict
+**Defects found and fixed in Phase 0** (kept as audit trail): D-1 manifest row inflation (fixed by dedupe on `(SHA-256, verdict)` + atomic rewrite); D-2 `preflight.py` directory side effect and path display; D-3 flag shadowing `record`/`record()` in `preflight`-era code; **D-3′ a second instance of the same shadowing in `find_and_verify_source.py:58`**, hit during the real acceptance and fixed (`record` → `do_record`).
 
-> **BLOCKED.** The research environment is identified and usable (PASS), but the
-> *exact source PDF named by the blueprint* is not present and cannot be obtained
-> by this agent. The only PDF available is a different paper that cites the named
-> one as reference [43].
+---
 
-The blueprint's Gate 0 wording is explicit: *"The exact source PDF and the usable
-research environment are identified. If the PDF cannot be accessed, stop and
-request it."* The condition is therefore not met on the source side, and the
-blueprint's own instruction is to stop and request the document.
+## Phase 1 — Complete source-paper mathematical audit (COMPLETE)
 
-**Escalation:** `source_audit/SOURCE_IDENTITY_BLOCKER.md` §4–§7 (four options, one
-recommendation, one question for the user).
+### What was actually done, in order
 
-**Update 2026-10-23 — decision recorded.** The user designated **Yadav et al.
-(2024)** as the authoritative source. That resolves U-1 but not the *file*: the
-article is not obtainable by this agent (publisher paywall; the single green-OA copy
-at HAL is behind an interactive anti-bot challenge and the host is outside the
-sandbox's egress allowlist). Per the blueprint's stop rule and the user's explicit
-instruction, **Phase 1 has not started**. The required file and the two acceptable
-filenames are specified in `source_audit/SOURCE_ACCESS_STATUS.md` §4.
+1. **Source staged and accepted.** `tools/accept_source_and_prepare.sh` → `GATE 0: PASS`; manifest row written with version tag; corpus built.
+2. **Corpus built.** `tools/extract_source_text.py` → 23 page files (`source_audit/source_text/pages/page_002.txt … page_023.txt`, git-ignored, regenerable), 0 empty pages, 24 heading lines (12 theorem / 5 lemma / 4 corollary / 3 example), 23 high-confidence + 1 low-confidence. The extraction tool was extended with a `version` column (`verify_source_pdf.py`, 3 insertions / 2 deletions) and re-passed selftest 7/7.
+3. **The whole article was read** (pp.2–23), and every statement was re-read against its page before entering the register.
+4. **Independent recomputation** with exact finite-field arithmetic (`galois` over `GF(p²)`, no Magma): `code/gfcore.py` (field, Hermitian dual, hull, exact minimum distance, conjugate-reciprocal map), `code/phase1_examples.py`, `code/phase1_tables.py`, `code/phase1_audit.py`.
+5. **Four deliverables written** (below), then the low-confidence heading triaged, then this status.
 
-## Phases 1–11
+### Deliverables (blueprint §1A/§1B)
 
-**Not started.** No Phase 1 artefact exists, no theorem register has been written
-for either candidate source, and no novelty claim has been made. Phase 1 is
-`BLOCKED` on the Gate 0 decision, not on capability: the paper that *is* present
-is fully readable (27 pp., searchable text), so Phase 1 could start immediately
-under Option 2 of the blocker document.
+| Deliverable | Path | Content |
+|---|---|---|
+| `SOURCE_THEOREM_REGISTER.md` | `research_project/phase1/` | 25 entries (19 numbered statements + 3 examples + 3 tables) with verbatim text, hypotheses, conclusion, proof method, classification, uses and status; 20 `VERIFIED`, 5 `QUOTED`, 0 `UNCLEAR`, 0 `SUSPECT` |
+| `SOURCE_MATHEMATICAL_AUDIT.md` | `research_project/phase1/` | the nine §1B items with verdicts and evidence, plus 9 explicit unclear/unverified arguments and 5 recorded internal conflicts |
+| `SOURCE_NOTATION_GLOSSARY.md` | `research_project/phase1/` | every symbol with domain, quantifier scope and first page, plus a **10-row overload register** |
+| `SOURCE_EXAMPLE_RECALCULATION.md` | `research_project/phase1/` | Examples 1–3 and all 33 table rows, field by field, with method and verdict |
 
-## What Phase 0 established (facts, not interpretations)
+Supporting evidence (regenerable, committed):
+`code/{gfcore,phase1_examples,phase1_tables,phase1_audit}.py`,
+`phase1/raw/{examples_log.txt,audit_log.txt,tables_recalc.json,audit_results.json}`.
 
-1. The repository contains exactly three tracked files and one commit; all three
-   files open and hash cleanly.
-2. The uploaded PDF is a 27-page arXiv v1 preprint of a published *Discrete
-   Mathematics* article, with a complete text layer and correct internal metadata.
-3. That PDF is **not** the paper named in the blueprint; it cites that paper as
-   [43] and the named paper's full text is absent.
-4. The named paper exists bibliographically (Springer, CAM 43:269, 2024-06-04,
-   DOI `10.1007/s40314-024-02789-1`) but is paywalled; no open copy was found.
-5. The two committed ZIPs contain a large prior body of work: a 102-file finished
-   manuscript package (19-page PDF, byte-identical between archives, manifest
-   101/101) and a 51-file later audit that declares the manuscript stage blocked
-   and the novelty gate failed.
-6. No LaTeX, Magma, Sage, GAP or PDF utilities are installed; Python 3.11.2 with
-   `pypdf` is available, and `sympy`/`numpy`/`galois` can be installed from PyPI
-   (session-local only).
+### Verification results
+
+| Check | Result | Reproduce |
+|---|---|---|
+| Examples 1–3 + Gray matrices `MM* = νI` | **31/31 PASS** | `python3 research_project/code/phase1_examples.py` |
+| Tables 1–3, every row (length, dimension, **exact** minimum distance, hull, dual-containing, quantum parameters, Singleton residual) | **33/33 PASS** | `python3 research_project/code/phase1_tables.py` |
+| §1B structural audit, items 1–7 | **11/11 items CONFIRMED** (one with a normalisation correction) | `python3 research_project/code/phase1_audit.py` |
+
+Highlights that carry real weight:
+
+* `x¹²−1`, `x¹⁴−12`, `x⁶−4` each equal the product of the paper's printed factors **exactly**; every printed conjugate-reciprocal pairing confirmed with the paper's own `p^†`; the three printed generators confirmed as products of the printed factors.
+* Example 2's `[28,25,4]₁₃²` and the MDS quantum code `[[28,22,≥4]]₁₃` — the strongest claim in the paper — reproduced with **exact** distance 4 and Singleton residual 0.
+* The hull-dimension formula tested against linear algebra on 220 divisors, **exhaustively** over all 4096 divisors of `x¹²−1` (attained exactly `{0,1,2,3}`, matching Corollary 9's bound 3), and the `R₂` bound 6 attained by direct computation.
+* The Hermitian-LCD iff (`n·r ∈ S_{q²}`) tested on four `(n,r)` cases, holding in all four.
+* The dual-containing iff tested in both directions, including the violating configuration.
+
+### Findings (recorded, not "fixed")
+
+| ID | Finding | Effect |
+|---|---|---|
+| F-1 | The printed `η_i = (u^e−1)/(u−μ^{i−1})` are **not** idempotents for `e = 3`: `Ση_i = 3u² ≠ 1`; each is a nonzero scalar multiple (`8, 3, 24` in Example 3) of a genuine idempotent | **none** — every use is `η_i C_i` with `F_{q²}`-linear `C_i`, so the scalar is absorbed. `R₂` is normalised correctly. Marked `CONFIRMED WITH CORRECTION` |
+| F-2 | Example 3 writes "`C₃ = ⟨g₂(x)⟩`" where `g₃ = x+t¹⁰` was just defined and the dimension `4+5+5 = 14` requires `g₃` | **none** — typographical; recomputed with `g₃` and reproduced exactly |
+| F-3 | `nr` in Theorem 11 / Corollaries 12, 14 is printed without a multiplication sign | read as the product `n·r`; established by the proof's own wording and by four numerical tests (the quotient reading fails them) |
+| F-4 | The γ/β "discrepancy" suspected earlier in this session is **retracted**: the paper's formula is correct and reproduces its own totals (6 and 3); the fault was an incorrect totient in my helper | none; the retraction is recorded so the claim cannot resurface |
+| F-5 | Table 3's "Remark / Comparison" column (`New`, `Optimal [11]`, …) refers to references [3], [11], [14] | **`UNVERIFIED`, out of Phase-1 scope**; neither used nor adjusted |
+
+**No numbered statement is flagged `SUSPECT`. No reported parameter of the paper failed to reproduce.**
+
+**Low-confidence heading triaged:** `HEADING_INDEX.csv` line `page 6, kind Theorem, number empty, "theorem."` is a **false positive** — the tail of the sentence "…can be obtained by the next theorem." (p.6). Tables 1–3 are *missing* from the heading index because the extractor renders the caption `T able 1`; all three were added by hand from pp.17–19. Both facts are recorded in the register.
+
+---
 
 ## Unresolved issues
 
 | ID | Issue | Type | Consequence |
 |---|---|---|---|
 | U-1 | Which paper is the source of record? | **RESOLVED 2026-10-23** | Yadav et al. designated authoritative; Debnath et al. excluded as a substitute |
-| U-2 | Yadav et al. full text not in the workspace | **blocking** | Phase 1 cannot start; a verified PDF must be supplied (`SOURCE_ACCESS_STATUS.md` §4) |
-| U-7 | Two non-identical versions exist (Springer version of record vs HAL author deposit; different corollary numbering) | versioning | every Phase 1 result must be tagged with its version; the version of record is preferred |
-| U-3 | Prior package's branch/commit (`arena/01a0c9d2…`, `360c1ef9…`) absent from this repo | provenance | prior work usable as content only, never as history |
+| U-2 | Yadav et al. full text not in the workspace | **RESOLVED 2026-10-23** | HAL deposit `hal-04825601v1` supplied, accepted, SHA-256 recorded |
+| U-7 | Two non-identical versions exist (Springer version of record vs HAL deposit — different corollary/theorem numbering) | versioning | every Phase 1 result is tagged `hal-04825601v1`; the register states that publisher numbering is **not** interchangeable |
+| U-8 | The version of record was never examined; only the HAL author deposit | versioning | Phase 1 conclusions hold **for `hal-04825601v1` only**. If the version of record differs in a statement or a table entry, that phase must be re-run on it. Not currently blocking, because every number verified here comes from the deposit. |
+| U-3 | Prior package's branch/commit absent from this repo | provenance | prior work usable as content only, never as history |
 | U-4 | Prior archive holds both a "completed" manuscript and an audit declaring that stage blocked | internal conflict | neither is authoritative; re-derivation required |
-| U-5 | Published version of Object A (45 refs) differs from v1 (44 refs) | versioning | all Object A claims in this project must be tagged "arXiv v1" |
-| U-6 | No LaTeX / CAS | environment | Phase 9 PDF and Phase 7 external CAS cross-check impossible; must be declared, not simulated |
+| U-5 | Published version of Object A (45 refs) differs from v1 (44 refs) | versioning | all Object A claims must be tagged "arXiv v1" |
+| U-6 | No LaTeX, no Magma, no Sage/GAP | environment | Phase 9 PDF and the CAS cross-check of Phase 7 cannot be run here; declared, not simulated. Phase 1 is unaffected — `galois` provided an independent exact check, which is stronger than repeating Magma. |
 
 ## Assumptions currently relied upon
 
 | ID | Assumption | Basis | Reversible? |
 |---|---|---|---|
-| A-1 | The PDF blueprint governs, not the 153 KB markdown blueprint in prior art | user instruction | no |
-| A-2 | The uploaded PDF is the intended artifact even though it is not the named paper | it is the only research PDF supplied | yes — user may supply Object C |
-| A-3 | Prior audits are inputs, not authority | project rule §3 of `PROJECT_PLAN.md` | no |
-| A-4 | `prior_art/` may be excluded from Git because it is a byte-identical extraction of committed ZIPs | `FILE_MANIFEST.csv` | yes |
-
-## Pipeline validation (2026-10-23) — non-destructive
-
-Seventeen checks were run; three defects were found and two of them repaired.
-
-| Check | Result |
-|---|---|
-| identity selftest (`verify_source_pdf.py --selftest`) | **3/3 PASS** |
-| **positive control** — a synthetic fixture carrying the real title, all five authors and the DOI | **ACCEPTED** (exit 0). This is the important one: it shows the gate is not a "reject everything" filter |
-| negative control — title only, no authors/journal | rejected (exit 1) |
-| negative control — title + authors, no journal/DOI | rejected (exit 1) |
-| negative control — Debnath et al. identity | rejected (exit 1) |
-| the PDF actually in the repository | rejected (exit 1) |
-| gate over the real repository | `GATE 0: BLOCKED`, 6 PDFs, 0 accepted |
-| corpus builder on a non-source PDF | refuses (exit 1) |
-| handoff script, negative path | stages, rejects, **removes the staged copy**; original untouched; drop folder left with only its README |
-| preflight | 18 PASS / 3 WARN / 0 FAIL → `WAITING` |
-| reproducible suite (`tools/selftest_gate.py`) | **7/7 PASS** |
-
-### Defects found and their disposition
-
-| ID | Defect | Severity | Disposition |
-|---|---|---|---|
-| D-1 | Recording an identification appended a new row every run, so re-running the gate (or the handoff script, which records twice) inflated the evidence file. The manifest already carried **three identical REJECTED rows** for the same file as a result. | real, evidence-integrity | **FIXED** — `record()` now de-duplicates on (SHA-256, verdict) and rewrites atomically. The existing manifest was collapsed from 3 rows to 1, keeping the earliest timestamp. |
-| D-2 | `preflight.py` was documented as read-only but created `source_paper/` as a side effect, and paths outside the repository printed as `../../../tmp/...`. | cosmetic / side effect | **FIXED** — the gate no longer creates directories; `display()` prints absolute paths outside the repository. |
-| D-3 | The new `record()` function was shadowed by the local `record` flag inside `main()` (`TypeError: 'bool' object is not callable`). | real, would have crashed the first acceptance | **FIXED** — the flag is now `do_record`; caught by the idempotence test, not by inspection. |
-
-No original file, evidence document, or prior-art artefact was modified. The one
-data file that changed is `SOURCE_PDF_MANIFEST.csv`, and only by removing
-byte-identical duplicate rows.
-
-## Prepared for Phase 1 (nothing executed)
-
-| Artefact | Purpose |
-|---|---|
-| `source_audit/PHASE1_EXECUTION_PLAN.md` | the Phase 1 specification: entry conditions, deliverable schema, evidence rules, failure responses |
-| `tools/extract_source_text.py` | page-anchored corpus + draft heading index; refuses any non-source PDF |
-| `tools/accept_source_and_prepare.sh` | one command: stage → identify → record SHA-256 → build corpus → preflight |
-| `tools/preflight.py` | read-only readiness report (18 PASS / 3 WARN / 0 FAIL today; `RESULT: WAITING`) |
-| `requirements.txt` | pinned Python dependencies |
-| `source_paper/` | the drop point |
-
-No Phase 1 deliverable exists, and `preflight.py` fails the build if one appears
-before the source is accepted.
-
-## Next step
-
-**One action unblocks everything: place the PDF in `research_project/source_paper/`
-(any `*.pdf` name) and run `python3 research_project/tools/find_and_verify_source.py --record`.**
-
-The repository has now been searched exhaustively — working tree, all 11 remote
-branches (349 blobs), both ZIPs entry-by-entry by magic bytes, and the entire
-filesystem: six PDFs exist, and none is the Yadav et al. article
-(`source_audit/REPOSITORY_SOURCE_SEARCH.md`).
-
-Preferred — the version of record, saved as
-`Yadav-2024-Hermitian-hull-CAM-43-269-Springer.pdf` in the repository root.
-Acceptable — the author deposit, saved as
-`Yadav-2024-Hermitian-hull-CAM-43-269-HAL-v1.pdf`; download it in an ordinary
-browser from
-`https://hal.science/hal-04825601v1/file/Hermitian%20hull%20of%20constacyclic%20codes%20and%20quantum%20Codes.pdf`
-(the browser solves the anti-bot challenge; this sandbox cannot).
-
-On arrival I run `python3 research_project/tools/verify_source_pdf.py <file> --record`
-and, only if it returns ACCEPTED, start Phase 1 (theorem register, mathematical
-audit, notation glossary, example recalculation).
+| A-1 | The PDF blueprint governs, not the markdown blueprint in prior art | user instruction | no |
+| A-3 | Prior audits are inputs, not authority | `PROJECT_PLAN.md` §3 | no |
+| A-4 | `prior_art/` may be excluded from Git (byte-identical extraction of committed ZIPs) | `FILE_MANIFEST.csv` | yes |
+| A-5 | The corpus `page_NNN.txt` text is a faithful (if layout-flattened) rendering of the PDF | extractor output checked against page images for dense formula pages (pp.8–9, 13–14) | yes — a re-extraction would be needed if a formula's reading were disputed |
+| A-6 | `hal-04825601v1` is the same *mathematical content* as the version of record | identical title/authors/DOI and identical abstract modulo numbering; **not verified page-by-page** | no until the version of record is examined (U-8) |
 
 ---
 
-## Deliverables produced in Phase 0
+## Scope compliance for this run
 
-| Blueprint deliverable | Path | Bytes | SHA-256 |
-|---|---|---:|---|
-| `PROJECT_PLAN.md` | `research_project/PROJECT_PLAN.md` | 8 651 | `50ecc6be031f4d8d9a74257e2d84f4ef444b3b4244d5f4b8ff5dbb096496a499` |
-| `SOURCE_INVENTORY.md` | `research_project/source_audit/SOURCE_INVENTORY.md` | 10 231 | `3e0a0d6162f1d9f061c33913410a74c5fc1a2a000f07e47b21860ea015db95eb` |
-| `SOURCE_PAPER_METADATA.md` | `research_project/source_audit/SOURCE_PAPER_METADATA.md` | 7 116 | `4c1d77637a2ee3f9332cfe5497cbeb52c0a9bc43eb4be195fe59117dcddef3ac` |
-| `ENVIRONMENT_CAPABILITIES.md` | `research_project/source_audit/ENVIRONMENT_CAPABILITIES.md` | 5 772 | `de4cb331f1db6dff257bef2b2c39eb2964dba0c451c0a38273964fe5af5cb654` |
-| `PHASE_STATUS.md` | `research_project/PHASE_STATUS.md` | *(this file)* | hash recorded in `PHASE0_VERIFICATION_LOG.md` §13 (a file cannot contain its own hash) |
+The blueprint's closing instruction is: *"Execute Phase 0 and Phase 1 only. … Do not draft the new paper or claim novelty. Verify every deliverable exists, report exact paths and unresolved issues, and stop after reporting the Phase 1 status."*
 
-Supporting (not required by the blueprint, produced for evidence):
-`source_audit/SOURCE_IDENTITY_BLOCKER.md`, `source_audit/PRIOR_ART_REGISTER.md`,
-`source_audit/FILE_MANIFEST.csv`, `source_audit/PHASE0_VERIFICATION_LOG.md`,
-`tools/inventory.py`, `tools/extract_prior_art.sh`, `logs/phase0_evidence.out`.
+* Phase 2 (related literature and novelty audit) **has not been started**; no novelty claim is made anywhere.
+* No manuscript text, no enumerator, no generating function, no new theorem.
+* No original file was overwritten, and the corrected §18 recovery record in `PHASE0_VERIFICATION_LOG.md` is intact.
+* The source paper's own numbers were never adjusted to fit a computation, and no computation was adjusted to fit the paper.
+
+## Next step
+
+**Phase 1 is complete and Gate 1 passes. The next action is Phase 2** (related-literature and novelty audit, `SOURCE_THEOREM_REGISTER.md` as input) — to be started only on the user's instruction.
+
+One open item that Phase 2 should absorb rather than Phase 1: obtaining and diffing the **version of record** (U-8). Phase 1's results are stated for `hal-04825601v1` and are unaffected until a difference is exhibited.
+
+---
+
+## Deliverables index
+
+| Blueprint deliverable | Path |
+|---|---|
+| `PROJECT_PLAN.md` | `research_project/PROJECT_PLAN.md` |
+| `SOURCE_INVENTORY.md` | `research_project/source_audit/SOURCE_INVENTORY.md` |
+| `SOURCE_PAPER_METADATA.md` | `research_project/source_audit/SOURCE_PAPER_METADATA.md` |
+| `ENVIRONMENT_CAPABILITIES.md` | `research_project/source_audit/ENVIRONMENT_CAPABILITIES.md` |
+| `PHASE_STATUS.md` | `research_project/PHASE_STATUS.md` (this file) |
+| `SOURCE_THEOREM_REGISTER.md` | `research_project/phase1/SOURCE_THEOREM_REGISTER.md` |
+| `SOURCE_MATHEMATICAL_AUDIT.md` | `research_project/phase1/SOURCE_MATHEMATICAL_AUDIT.md` |
+| `SOURCE_NOTATION_GLOSSARY.md` | `research_project/phase1/SOURCE_NOTATION_GLOSSARY.md` |
+| `SOURCE_EXAMPLE_RECALCULATION.md` | `research_project/phase1/SOURCE_EXAMPLE_RECALCULATION.md` |
+
+Supporting evidence: `source_audit/PHASE0_VERIFICATION_LOG.md`, `source_audit/SOURCE_PDF_MANIFEST.csv`, `source_audit/PHASE1_EXECUTION_PLAN.md`, `source_audit/REPOSITORY_SOURCE_SEARCH.md`, `source_audit/PRIOR_ART_REGISTER.md`, `source_audit/SOURCE_IDENTITY_BLOCKER.md`, `source_audit/SOURCE_ACCESS_STATUS.md`, `phase1/raw/*`, `code/*`, `tools/*`, `logs/*`.

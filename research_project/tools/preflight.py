@@ -42,10 +42,10 @@ SUPPORTING = [
     "source_audit/SOURCE_PDF_MANIFEST.csv",
 ]
 PHASE1_DELIVERABLES = [
-    "source_audit/SOURCE_THEOREM_REGISTER.md",
-    "source_audit/SOURCE_MATHEMATICAL_AUDIT.md",
-    "source_audit/SOURCE_NOTATION_GLOSSARY.md",
-    "source_audit/SOURCE_EXAMPLE_RECALCULATION.md",
+    "phase1/SOURCE_THEOREM_REGISTER.md",
+    "phase1/SOURCE_MATHEMATICAL_AUDIT.md",
+    "phase1/SOURCE_NOTATION_GLOSSARY.md",
+    "phase1/SOURCE_EXAMPLE_RECALCULATION.md",
 ]
 
 results = []          # (block, name, status, note)
@@ -132,10 +132,22 @@ def check_tools():
             "present" if found else "absent — declare, do not simulate")
 
 
-def check_no_premature_phase1():
-    present = [r for r in PHASE1_DELIVERABLES if size(r) > 0]
-    add("phase1", "no Phase 1 deliverable yet", "PASS" if not present else "FAIL",
-        "none present" if not present else f"unexpected: {present}")
+def check_phase1_state(gate):
+    """The four Phase 1 deliverables are forbidden before the source is accepted and
+    required after it. One check, two states - never a PASS that means nothing."""
+    present = [r.split("/")[-1] for r in PHASE1_DELIVERABLES if size(r) > 0]
+    missing = [r.split("/")[-1] for r in PHASE1_DELIVERABLES if size(r) == 0]
+    if gate != 0:                      # source not accepted yet
+        add("phase1", "no Phase 1 deliverable before source acceptance",
+            "PASS" if not present else "FAIL",
+            "none present" if not present else f"premature: {present}")
+    else:                              # source accepted: they are now expected
+        add("phase1", "four Phase 1 deliverables present",
+            "PASS" if not missing else "WARN",
+            f"{len(present)}/4 present" + (f"; missing {missing}" if missing else ""))
+    empty = [r for r in PHASE1_DELIVERABLES if r in [x for x in PHASE1_DELIVERABLES] and os.path.isfile(os.path.join(RP, r)) and size(r) < 400]
+    if empty:
+        add("phase1", "Phase 1 deliverables non-trivial", "WARN", f"near-empty: {empty}")
 
 
 def main(argv):
@@ -145,7 +157,7 @@ def main(argv):
     gate = check_source_gate()
     check_manifest_consistency()
     check_tools()
-    check_no_premature_phase1()
+    check_phase1_state(gate)
 
     if not quiet:
         block = None
@@ -164,8 +176,13 @@ def main(argv):
         print("\nRESULT: BROKEN — a Phase 0 artifact is missing or inconsistent.")
         return 2
     if gate == 0:
-        print("\nRESULT: READY — source PDF accepted. Phase 1 may start.")
-        print("Next: python3 research_project/tools/extract_source_text.py  (page-anchored corpus)")
+        done = [r for r in PHASE1_DELIVERABLES if size(r) > 0]
+        if len(done) == len(PHASE1_DELIVERABLES):
+            print("\nRESULT: READY — source PDF accepted and all four Phase 1 deliverables present.")
+            print("Gate 1 status and evidence: research_project/PHASE_STATUS.md")
+        else:
+            print("\nRESULT: READY — source PDF accepted. Phase 1 may start.")
+            print("Next: python3 research_project/tools/extract_source_text.py  (page-anchored corpus)")
         return 0
     print("\nRESULT: WAITING — Phase 0 is complete and consistent; Phase 1 is gated on the source PDF.")
     print("Next: put the Yadav et al. PDF in research_project/source_paper/ and run")

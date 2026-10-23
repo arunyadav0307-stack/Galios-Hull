@@ -9,6 +9,13 @@
 > only the *file*: see `SOURCE_ACCESS_STATUS.md` and `REPOSITORY_SOURCE_SEARCH.md`.
 > The original text is preserved unchanged beneath this banner as the record of how
 > the issue was found and escalated.
+>
+> **UPDATE 2026-10-23 (later, same day): fully closed.** The file question was
+> resolved when the HAL author deposit (`hal-04825601v1`) was supplied. It passed
+> the identity gate: `GATE 0: PASS`, 7 PDFs examined, exactly 1 acceptance, SHA-256
+> `7f7e6803dffe8d42912c506cc0b6d8910187be169e14c869f3275d896c27d249`, version tag
+> recorded. Phase 1 then ran to completion. See `PHASE_STATUS.md` and
+> `SOURCE_PDF_MANIFEST.csv`. Nothing in this document is now open.
 
 ---
 

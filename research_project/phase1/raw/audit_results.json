@@ -1,0 +1,57 @@
+[
+ {
+  "item": "A1 ring decomposition (e=2)",
+  "verdict": "CONFIRMED",
+  "detail": "GF(5^2): x^2-1 splits, eps1,eps2 are orthogonal idempotents summing to 1"
+ },
+ {
+  "item": "A1 ring decomposition (e=2)",
+  "verdict": "CONFIRMED",
+  "detail": "GF(7^2): x^2-1 splits, eps1,eps2 are orthogonal idempotents summing to 1"
+ },
+ {
+  "item": "A1 ring decomposition (e=2)",
+  "verdict": "CONFIRMED",
+  "detail": "GF(13^2): x^2-1 splits, eps1,eps2 are orthogonal idempotents summing to 1"
+ },
+ {
+  "item": "A1 ring decomposition (e=3)",
+  "verdict": "CONFIRMED",
+  "detail": "GF(5^2): x^3-1 splits into linear factors, interpolated idempotents verified"
+ },
+ {
+  "item": "A1 ring decomposition (e=3)",
+  "verdict": "CONFIRMED",
+  "detail": "GF(11^2): x^3-1 splits into linear factors, interpolated idempotents verified"
+ },
+ {
+  "item": "A2 idempotents eta_l",
+  "verdict": "CONFIRMED WITH CORRECTION",
+  "detail": "eta_i as printed in Sec.2 and in Example 3 are unnormalised quotients; normalised versions are orthogonal idempotents summing to 1 (scalar absorbed)"
+ },
+ {
+  "item": "A3 factorisation / gamma,beta (p.8-9)",
+  "verdict": "CONFIRMED",
+  "detail": "gamma(j)=phi(j)/(phi(r)ord_j(q^2)), beta(j)=phi(j)/(2phi(r)ord_j(q^2)) reproduce the counts 6+3 (Ex1, p.14), 0+7 (Ex2, p.15), 0+3 (Ex3, p.15) and the degree identity n=sum ord*gamma+sum 2*ord*beta"
+ },
+ {
+  "item": "A4 hull-dimension formula (Thm 8, Cor 9)",
+  "verdict": "CONFIRMED",
+  "detail": "one constituent: hull dims attained exhaustively over all 4096 divisors = [0, 1, 2, 3], matching Cor 9's bound 0..3; lcm formula equals linear algebra on 220 samples; two-constituent case attains the Thm 8 bound 6 by direct linear algebra"
+ },
+ {
+  "item": "A5 Hermitian LCD criterion (Thm 11, Cor 12)",
+  "verdict": "CONFIRMED",
+  "detail": "on four (n,r) cases the set of attained hull dimensions is {0} exactly when n*r is in S_{q^2}"
+ },
+ {
+  "item": "A6 dual-containing criterion (Thm 15, 16)",
+  "verdict": "CONFIRMED",
+  "detail": "the violating configuration (both members of a CR pair) fails and the allowed one holds, matching the b_ij + c_ij <= p^v condition; all 14 Table-3 rows independently dual-containing"
+ },
+ {
+  "item": "A7 Gray map (Lemma 3, Thm 6, Lemma 17 use)",
+  "verdict": "CONFIRMED",
+  "detail": "psi is injective (dimension preserved), psi(C^perp_H)=psi(C)^perp_H holds, and hull(psi(C)) equals the sum of the constituent hull dimensions; MM*=nu I verified for M, M(5), M(11)"
+ }
+]

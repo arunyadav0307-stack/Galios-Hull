@@ -1,0 +1,52 @@
+
+===== EXAMPLE 1: p=5, GF(25), n=12, alpha=1, r=1 =====
+  [PASS] prod of the 12 printed factors == x^12 - 1
+  [PASS] the 6 named factors are self-CR and the 3 named pairs are CR pairs
+  [PASS] g1 = x^3+x^2+t^8x+t^8 equals (x+1)(x+t^10)(x+t^22)
+  [PASS] hull dim C1 = 0 (paper 0)
+  [PASS] hull dim C2 = 1 (paper 1)
+  [PASS] ring-code hull dim = 1 (paper 1)
+  [PASS] g1', g2' both Hermitian LCD: hull 0, 0 (paper: LCD)
+  [PASS] Omega = [1, 2, 3, 6] (paper 1,2,3,6); Omega' = [4, 12] (paper 4,12)
+  [PASS] gamma = {1: 1, 2: 1, 3: 2, 6: 2} sum 6 (paper 1,1,2,2 sum 6); beta = {4: 1, 12: 2} sum 3 (paper 1,2 sum 3)
+  psi(C): length 24, dim 20, exact min distance 4
+  [PASS] [24,20,4] = paper [24,20,4]
+  psi(C'): dim 20, hull 0 (paper: LCD, k=20)
+  [PASS] psi(C') has k=20 and hull 0 (Hermitian LCD)
+
+===== EXAMPLE 2: p=13, GF(169), n=14, alpha=12, r=2 =====
+  [PASS] prod of the 14 printed factors == x^14 - 12
+  [PASS] all 7 printed pairs are conjugate-reciprocal pairs
+  [PASS] g1 = x^2+t^21x+1 equals (x+t^18)(x+t^150)
+  [PASS] Omega = [] (paper empty); Omega' = [4, 28] (paper 4,28); beta = {4: 1, 28: 6} (paper 1,6)
+  [PASS] both constituents dual-containing: C1 True, C2 True (paper yes)
+  psi(C): length 28, dim 25, exact min distance 4
+  [PASS] [28,25,4] = paper [28,25,4]
+  quantum [[28,22,>=4]] over F13 ; Singleton residual k+2d-(n+2) = 0
+  [PASS] quantum [[28,22,>=4]] and MDS (residual 0)
+
+===== EXAMPLE 3: p=5, GF(25), n=6, alpha=4, r=2, e=3 =====
+  [PASS] prod of the 6 printed factors == x^6 - 4
+  [PASS] all 3 printed pairs are conjugate-reciprocal pairs
+  [PASS] g1 = x^2+tx+t^8 equals (x+t^2)(x+2)
+  [PASS] g1 constituent is dual-containing: True
+  [PASS] g2 constituent is dual-containing: True
+  [PASS] g3 constituent is dual-containing: True
+  printed eta_i: ['x^2 + 18x + 11', 'x^2 + x + 1', 'x^2 + 11x + 18']
+  eta1+eta2+eta3 mod (u^3-1) = 3x^2   [= 3u^2, not 1]
+  eta1^2 = 8 * eta1 mod (u^3-1)
+  eta2^2 = 3 * eta2 mod (u^3-1)
+  eta3^2 = 24 * eta3 mod (u^3-1)
+  [PASS] each printed eta_i is a nonzero scalar multiple of an idempotent
+  [PASS] normalised e_i are orthogonal (True) and sum to 1 (1)
+  psi(C) via M(5): length 18, dim 14, exact min distance 4
+  [PASS] [18,14,4] = paper [18,14,4]
+  quantum [[18,10,>=4]] over F5 ; Singleton residual = -2
+  [PASS] quantum [[18,10,>=4]] near-MDS (residual -2)
+
+===== GRAY MATRICES: M M* = nu I =====
+  [PASS] M(5, 2x2): MM* = {2}*I, off-diag zero: True -> nu = 2
+  [PASS] M(5, 3x3): MM* = {4}*I, off-diag zero: True -> nu = 4
+  [PASS] M(11, 3x3): MM* = {3}*I, off-diag zero: True -> nu = 3
+
+===== SUMMARY: 31/31 checks PASSED =====

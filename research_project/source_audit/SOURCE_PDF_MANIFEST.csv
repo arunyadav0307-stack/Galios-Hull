@@ -1,2 +1,3 @@
-recorded_utc,path,sha256,bytes,pages,pdf_title,pdf_author,verdict
-2026-10-23T12:05:37Z,Galios hulls of constacclic codes over affine algebra rings'.pdf,0db90bfbeda69ad1af231b81d92f24be3589ed15ac2e0ade6605ba7ad0ddc039,291546,27,Galois hulls of constacyclic codes over affine algebra rings,Indibar Debnath; Habibul Islam; E. Martínez-Moro; Om Prakash; ,REJECTED
+recorded_utc,path,sha256,bytes,pages,pdf_title,pdf_author,verdict,version
+2026-10-23T12:05:37Z,Galios hulls of constacclic codes over affine algebra rings'.pdf,0db90bfbeda69ad1af231b81d92f24be3589ed15ac2e0ade6605ba7ad0ddc039,291546,27,Galois hulls of constacyclic codes over affine algebra rings,Indibar Debnath; Habibul Islam; E. Martínez-Moro; Om Prakash; ,REJECTED,
+2026-10-23T15:12:57Z,research_project/source_paper/Hermitian hull of constacyclic codes and quantum Codes.pdf,7f7e6803dffe8d42912c506cc0b6d8910187be169e14c869f3275d896c27d249,612826,23,Hermitian hull of constacyclic codes over a class of non-chain rings and new quantum codes,"Shikha Yadav, Ashutosh Singh, Habibul Islam, Om Prakash, Patrick Solé",ACCEPTED,"HAL author deposit (hal-04825601v1), 23 pp. incl. HAL cover page"

@@ -55,7 +55,7 @@ def main(argv):
     root = ROOT
     if "--root" in argv:
         root = argv[argv.index("--root") + 1]
-    record = "--record" in argv
+    do_record = "--record" in argv
 
     rows, accepted = [], []
     for path in pdfs(root):
@@ -83,7 +83,7 @@ def main(argv):
         print(f"  ACCEPTED -> {display(p)}  sha256 {sha256(p)}")
 
     if len(accepted) == 1:
-        if record:
+        if do_record:
             from pypdf import PdfReader
             p = accepted[0]
             info = describe(p)

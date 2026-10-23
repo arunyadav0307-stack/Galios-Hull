@@ -1,0 +1,58 @@
+
+--- A1/A2: ring decomposition and idempotents ---
+  p=5, e=2: q+1=6, e|q+1=True, x^e-1 splits into 2 linear factors (need 2) -> True
+    interpolated CRT idempotents: e_i^2=e_i True, orthogonal True, sum=1 True
+    paper's eps1=(1+u)/2, eps2=(1-u)/2: idempotent True, orthogonal True, sum 1
+[CONFIRMED] A1 ring decomposition (e=2): GF(5^2): x^2-1 splits, eps1,eps2 are orthogonal idempotents summing to 1
+  p=7, e=2: q+1=8, e|q+1=True, x^e-1 splits into 2 linear factors (need 2) -> True
+    interpolated CRT idempotents: e_i^2=e_i True, orthogonal True, sum=1 True
+    paper's eps1=(1+u)/2, eps2=(1-u)/2: idempotent True, orthogonal True, sum 1
+[CONFIRMED] A1 ring decomposition (e=2): GF(7^2): x^2-1 splits, eps1,eps2 are orthogonal idempotents summing to 1
+  p=13, e=2: q+1=14, e|q+1=True, x^e-1 splits into 2 linear factors (need 2) -> True
+    interpolated CRT idempotents: e_i^2=e_i True, orthogonal True, sum=1 True
+    paper's eps1=(1+u)/2, eps2=(1-u)/2: idempotent True, orthogonal True, sum 1
+[CONFIRMED] A1 ring decomposition (e=2): GF(13^2): x^2-1 splits, eps1,eps2 are orthogonal idempotents summing to 1
+  p=5, e=3: q+1=6, e|q+1=True, x^e-1 splits into 3 linear factors (need 3) -> True
+    interpolated CRT idempotents: e_i^2=e_i True, orthogonal True, sum=1 True
+[CONFIRMED] A1 ring decomposition (e=3): GF(5^2): x^3-1 splits into linear factors, interpolated idempotents verified
+  p=11, e=3: q+1=12, e|q+1=True, x^e-1 splits into 3 linear factors (need 3) -> True
+    interpolated CRT idempotents: e_i^2=e_i True, orthogonal True, sum=1 True
+[CONFIRMED] A1 ring decomposition (e=3): GF(11^2): x^3-1 splits into linear factors, interpolated idempotents verified
+  printed eta_i for e=3 (Example 3) are the quotients (u^3-1)/(u-mu^{i-1}), i.e. each a
+  NONZERO SCALAR multiple of the true idempotent; the scalar is absorbed by F_{q^2}-linearity.
+[CONFIRMED WITH CORRECTION] A2 idempotents eta_l: eta_i as printed in Sec.2 and in Example 3 are unnormalised quotients; normalised versions are orthogonal idempotents summing to 1 (scalar absorbed)
+
+--- A3: factorisation counts gamma/beta for the three examples ---
+  Ex1: Omega=[1, 2, 3, 6] Omega'=[4, 12] sum gamma=6 sum beta=3 degree check 12 == n=12 -> True
+  Ex2: Omega=[] Omega'=[4, 28] sum gamma=0 sum beta=7 degree check 14 == n=14 -> True
+  Ex3: Omega=[] Omega'=[4, 12] sum gamma=0 sum beta=3 degree check 6 == n=6 -> True
+[CONFIRMED] A3 factorisation / gamma,beta (p.8-9): gamma(j)=phi(j)/(phi(r)ord_j(q^2)), beta(j)=phi(j)/(2phi(r)ord_j(q^2)) reproduce the counts 6+3 (Ex1, p.14), 0+7 (Ex2, p.15), 0+3 (Ex3, p.15) and the degree identity n=sum ord*gamma+sum 2*ord*beta
+
+--- A4: hull dimension formula (Thm 8 / Cor 9) ---
+  n=12, alpha=1 over GF(25): x^12-1 = product of 12 linear factors, 4096 monic divisors
+  lcm(g,((x^n-a)/g)^dagger) vs linear-algebra hull on 220 sampled divisors: equal = True; values seen [0, 1, 2, 3]
+  exhaustive (4096 divisors): hull dimensions attained [0, 1, 2, 3]
+  Cor 9 bound for one constituent: sum_{j in Omega'} ord_j(q^2) beta(j) = 3 (Omega'=[4, 12], beta={4: 1, 12: 2})
+  an extremal constituent: g* = x^3 + 11x^2 + 24x + 2 (hull 3)
+  psi(C1 (+) C2) with C1=C2=<g*>: linear-algebra hull = 6; Thm 8 bound 2*3 = 6
+[CONFIRMED] A4 hull-dimension formula (Thm 8, Cor 9): one constituent: hull dims attained exhaustively over all 4096 divisors = [0, 1, 2, 3], matching Cor 9's bound 0..3; lcm formula equals linear algebra on 220 samples; two-constituent case attains the Thm 8 bound 6 by direct linear algebra
+
+--- A5: Hermitian LCD criterion nr in S_{q^2} (Thm 11/13, Cor 12/14) ---
+  n=6, ord(alpha)=r=1: n*r=6 in S_25? True; sampled hull dims [0] -> D={0}? True ; iff holds: True
+  n=12, ord(alpha)=r=1: n*r=12 in S_25? False; sampled hull dims [0, 1, 2, 3] -> D={0}? False ; iff holds: True
+  n=14, ord(alpha)=r=2: n*r=28 in S_25? False; sampled hull dims [0, 1, 3, 4, 6, 7] -> D={0}? False ; iff holds: True
+  n=6, ord(alpha)=r=2: n*r=12 in S_25? False; sampled hull dims [0, 1, 2, 3] -> D={0}? False ; iff holds: True
+[CONFIRMED] A5 Hermitian LCD criterion (Thm 11, Cor 12): on four (n,r) cases the set of attained hull dimensions is {0} exactly when n*r is in S_{q^2}
+
+--- A6: dual-containing criterion (Thm 15/16) ---
+  g = f*f^dagger (both members of one CR pair): dual-containing = False (Thm 15 predicts False)
+  g1 = (x+t^18)(x+t^150) (one member each of two pairs): dual-containing = True (Thm 15 predicts True)
+[CONFIRMED] A6 dual-containing criterion (Thm 15, 16): the violating configuration (both members of a CR pair) fails and the allowed one holds, matching the b_ij + c_ij <= p^v condition; all 14 Table-3 rows independently dual-containing
+
+--- A7: Gray map properties ---
+  n=12/12 p=5: dim(psi(C)) = k1+k2 True, psi(C^perpH)=psi(C)^perpH True, hull(psi(C))=hull(C1)+hull(C2) True
+  n=12/12 p=5: dim(psi(C)) = k1+k2 True, psi(C^perpH)=psi(C)^perpH True, hull(psi(C))=hull(C1)+hull(C2) True
+  n=14/14 p=13: dim(psi(C)) = k1+k2 True, psi(C^perpH)=psi(C)^perpH True, hull(psi(C))=hull(C1)+hull(C2) True
+[CONFIRMED] A7 Gray map (Lemma 3, Thm 6, Lemma 17 use): psi is injective (dimension preserved), psi(C^perp_H)=psi(C)^perp_H holds, and hull(psi(C)) equals the sum of the constituent hull dimensions; MM*=nu I verified for M, M(5), M(11)
+
+11 audit items recorded

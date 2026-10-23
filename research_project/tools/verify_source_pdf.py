@@ -149,7 +149,7 @@ def display(path):
 
 
 FIELDS = ["recorded_utc", "path", "sha256", "bytes", "pages",
-          "pdf_title", "pdf_author", "verdict"]
+          "pdf_title", "pdf_author", "verdict", "version"]
 
 
 def record(path, digest, size, npages, title, author, verdict):
@@ -174,10 +174,11 @@ def record(path, digest, size, npages, title, author, verdict):
         "pdf_title": title or "",
         "pdf_author": author or "",
         "verdict": verdict,
+        "version": "",          # set by hand once the version is established
     })
     tmp = MANIFEST + ".tmp"
     with open(tmp, "w", newline="") as fh:
-        w = csv.DictWriter(fh, fieldnames=FIELDS)
+        w = csv.DictWriter(fh, fieldnames=FIELDS, restval="")
         w.writeheader()
         w.writerows(rows)
     os.replace(tmp, MANIFEST)

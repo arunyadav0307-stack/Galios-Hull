@@ -2,7 +2,16 @@
 
 **Recorded:** 2026-10-23 (UTC) · **Branch:** `arena/831a2e65-galios-hull`
 **Designated source of record:** the paper named by the blueprint (user decision, 2026-10-23)
-**Gate 0 status:** **BLOCKED — source file not yet in hand**
+**Gate 0 status:** ~~BLOCKED — source file not yet in hand~~ → **PASS (2026-10-23)**
+
+> **RESOLVED.** The HAL author deposit was supplied by the user, staged at
+> `source_paper/Hermitian hull of constacyclic codes and quantum Codes.pdf`
+> (612 826 B, 23 pp., SHA-256 `7f7e6803…c27d249`), accepted by the identity gate
+> (`GATE 0: PASS`, 7 PDFs examined, 1 acceptance), and its version tag
+> `hal-04825601v1` recorded in `SOURCE_PDF_MANIFEST.csv`. The access routes tried
+> below are retained as history of the escalation only; **none of them was
+> retried**, per the user's instruction. Phase 1 has been executed and Gate 1
+> passes — see `../PHASE_STATUS.md`.
 
 ---
 
