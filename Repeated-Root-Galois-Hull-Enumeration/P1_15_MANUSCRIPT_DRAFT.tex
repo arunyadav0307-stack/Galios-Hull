@@ -71,7 +71,6 @@ Galois hull; joint enumerator; transfer matrix; finite products of finite fields
 
 For a linear code \(C\) over a finite field, the hull --- the intersection
 of \(C\) with its dual --- controls several constructions, including the
-amount of entanglement needed in entanglement-assisted quantum codes and
 the behaviour of LCD (linear complementary dual) codes. Replacing the
 Euclidean inner product by a Galois inner product~\cite{FZ2017} leads to the
 \(k\)-Galois hull \(\Hull_k(C) = C \cap D(C)\), where \(D(C)\) is the dual
@@ -91,14 +90,13 @@ Galois hull formulas for constacyclic codes \cite{DIMP2026},
 decomposing the semisimple alphabet into components over \(\Fq\) and
 summing the component hull dimensions, for lengths \(n = n' p^{e'}\)
 under hypotheses on the order of the twist; the enumeration of such
-codes by hull dimension is left open there. Relative hulls for general linear codes, including \(e\)-Galois hulls and their quantum-code consequences, were studied in \cite{ACLMRS2024}. Eldin and Sol\'e
+codes by hull dimension is left open there. Relative hulls for general linear codes, including \(e\)-Galois hulls, were studied in \cite{ACLMRS2024}. Eldin and Sol\'e
 developed generator polynomial matrices for the Galois hulls of
 multi-twisted codes, of which constacyclic codes are the index-one case
 \cite{ES2026}; their results are per-code --- a generator polynomial
 matrix and a hull-dimension formula for a given code, over a single
 finite field --- with no enumeration over codes. Galois hulls of cyclic serial codes over a finite chain ring are studied in
-\cite{Talbi2021}; hulls of separable double cyclic codes over \(\mathbb{Z}_{p^2}\), including \(p\)-dimensions, average \(p\)-dimensions and counts at fixed hull \(p\)-dimension, were determined in \cite{DPDC2025}, and the existence of cyclic and negacyclic codes with one-dimensional hulls was characterized in \cite{DS2024}; Galois hulls have likewise been used for quantum-code
-constructions over a finite non-chain ring \cite{ZKZ2026}; repeated-root constacyclic codes and their (Euclidean)
+\cite{Talbi2021}; hulls of separable double cyclic codes over \(\mathbb{Z}_{p^2}\), including \(p\)-dimensions, average \(p\)-dimensions and counts at fixed hull \(p\)-dimension, were determined in \cite{DPDC2025}, and the existence of cyclic and negacyclic codes with one-dimensional hulls was characterized in \cite{DS2024}; repeated-root constacyclic codes and their (Euclidean)
 duals, including LCD and self-dual enumerations in special lengths, have
 a substantial literature \cite{CDL2015, Sharma2015, WZLL2023, ZWLL2025}.
 
@@ -152,8 +150,7 @@ reciprocal-orbit lengths are \(1, 2\) and \(4\) (Theorem~4) \\
 \cite{DIMP2026} & constacyclic codes over affine algebra rings
 (components over \(\Fq\)), lengths \(n = n' p^{e'}\) & Galois hull
 dimension of a given code, summed over components; LCD criterion;
-entanglement-assisted constructions; enumeration by hull dimension
-left open \\
+enumeration by hull dimension left open \\
 \cite{ES2026} & multi-twisted codes over a finite field, of which
 constacyclic codes are the index-one case & generator polynomial matrix
 and dimension formula for the Galois hull of a given code;
@@ -867,10 +864,7 @@ hull dimension is a positive proportion of the ambient dimension
 code of the family has a hull growing linearly with \(n\), in contrast
 to random linear codes, whose hull dimension stays bounded in
 probability~\cite{Sendrier1997}. The variance formulas quantify the
-fluctuations around this behaviour and, through the entanglement cost
-\(c = n - K - H\) of the conditional quantum remark in
-Section~\ref{sec:limitations}, describe its typical size in this
-ensemble. Comparisons with average-dimension formulas in the literature
+fluctuations around this behaviour. Comparisons with average-dimension formulas in the literature
 should be made only under matching hypotheses; the results below are
 stated strictly for the labeled repeated-root ensemble defined here.
 
@@ -1047,7 +1041,7 @@ contributes \(0\), and summing with the weights \(w_O^2\) gives
 \section{Examples and computational verification}\label{sec:examples}
 % =====================================================================
 
-The seven examples are arranged so that each one makes a different part
+The six examples are arranged so that each one makes a different part
 of the theory visible. Example~\ref{ex:E1} is small enough to check by
 hand and shows how a single exponent tuple produces its two coordinates.
 Example~\ref{ex:E2} isolates the simple-root specialization.
@@ -1057,8 +1051,7 @@ constructed codes, first for mixed orbit lengths and then for a long
 orbit. Example~\ref{ex:E5} tests the product assembly over two
 components, and Example~\ref{ex:E6} leaves the cyclic case \(\lambda = 1\)
 used in Examples~\ref{ex:E3}--\ref{ex:E5} and works with a compatible
-twist of order four. Example~\ref{ex:E7} solves one row of the EAQECC
-table below in full. Throughout, \(K\) denotes the code-dimension coordinate and
+twist of order four. Throughout, \(K\) denotes the code-dimension coordinate and
 \(H\) the hull-dimension coordinate of a labeled assignment.
 
 \begin{example}[one orbit, \(P=2\), \(L=2\), \(w=1\), by hand]
@@ -1257,90 +1250,6 @@ exercised here beyond the cyclic case \(\lambda = 1\) and the negacyclic
 case \(\lambda = -1\).
 \end{example}
 
-\begin{example}[a worked EAQECC row]\label{ex:E7}
-We solve row~4 of Table~\ref{tab:eaqecc} in full. Take
-\(K = \mathbb{F}_4 = \mathbb{F}_2(\omega)\) with
-\(\omega^2 + \omega + 1 = 0\), \(k = 1\), \(\lambda = 1\), \(P = 2\),
-\(n_0 = 3\), \(n = 6\), and the assignment \(a = (0,1,2)\) on the
-ordered factors \((x+1, x+\omega, x+\omega^2)\) of \(x^3 - 1\), so
-\(g_a = (x+\omega)(x+\omega^2)^2\). Every root
-\(\beta \in \{1, \omega, \omega^2\}\) satisfies \(\beta^3 = 1\), hence
-\(\beta^{-2} = \beta\); thus each linear factor is fixed by \(\tau\),
-giving three orbits of length \(1\) and weight \(1\).
-Theorem~\ref{thm:T4} gives \(K = (2-0) + (2-1) + (2-2) = 3\) and, each
-orbit being a self-loop,
-\(H = \min(2,0) + \min(1,1) + \min(0,2) = 0 + 1 + 0 = 1\). The minimum
-distance is \(d = 3\) by the exact computation described in the
-computational-verification paragraph below, so \(C(a)\) is a
-\([6,3,3]_4\) code. The conditional quantum remark of
-Section~\ref{sec:limitations} therefore gives the EAQECC
-\([[6, K-H, d;\, n-K-H]]_4 = [[6,2,3;2]]_4\), with EA Singleton defect
-\(\Delta = 2(n-K-d+1) = 2\): the near-optimal (\({}^\dagger\)) code of
-row~4.
-\end{example}
-
-\paragraph{A table of EAQECC-optimal and near-optimal codes.}
-We record ten further finite-field codes, all with \(\lambda = 1\) (hence
-\(\mu = 1\)) and a single component (\(N = m_1 = 1\)), so all dimensions
-below are over \(\mathbb{F}_q\) itself. Throughout, \(\omega\) denotes a
-root of \(x^2 + x + 1\) in \(\mathbb{F}_4\), \(\theta\) a root of
-\(x^3 + x + 1\) in \(\mathbb{F}_8\), and \(\iota\) an element of
-\(\mathbb{F}_9\) with \(\iota^2 = -1\). The exponent tuple \(a\) refers to
-the following ordered factor lists of \(x^{n_0} - 1\): over
-\(\mathbb{F}_2\) with \(n_0 = 3\): \((x+1,\ x^2+x+1)\); over
-\(\mathbb{F}_3\) with \(n_0 = 2\): \((x+1,\ x+2)\); over \(\mathbb{F}_4\)
-with \(n_0 = 5\): \((x+1,\ x^2 + \omega x + 1,\ x^2 + \omega^2 x + 1)\);
-over \(\mathbb{F}_4\) with \(n_0 = 3\):
-\((x+1,\ x+\omega,\ x+\omega^2)\); over \(\mathbb{F}_5\) with \(n_0 = 2\):
-\((x+1,\ x+4)\); over \(\mathbb{F}_7\) with \(n_0 = 2\): \((x+1,\ x+6)\);
-over \(\mathbb{F}_8\) with \(n_0 = 7\): \((x+\beta)_\beta\) with \(\beta\)
-running through \(1, \theta, 1+\theta, \theta^2, 1+\theta^2,
-\theta+\theta^2, 1+\theta+\theta^2\); over \(\mathbb{F}_8\) with
-\(n_0 = 3\): \((x+1,\ x^2+x+1)\); over \(\mathbb{F}_9\) with \(n_0 = 8\):
-\((x+\beta)_\beta\) with \(\beta\) running through \(1, 2, \iota,
-1+\iota, 2+\iota, 2\iota, 1+2\iota, 2+2\iota\); and over
-\(\mathbb{F}_9\) with \(n_0 = 2\): \((x+1,\ x+2)\). For each row, \(d\)
-is the minimum distance of \(C(a)\), determined independently of the
-enumerator (exact computation; see the computational-verification
-paragraph below), and \(H = \dim \Hull_k(C(a))\) is computed from
-Theorem~\ref{thm:T4}. The EAQECC column applies the conditional quantum
-remark of Section~\ref{sec:limitations}, giving
-\([[n, K-H, d;\, n-K-H]]_q\). The last column is the EA Singleton defect
-\(\Delta = \big(n - (K-H) + (n-K-H)\big) - 2(d-1) = 2(n-K-d+1)\).
-Following the convention of~\cite{DIMP2026}, we write \({}^*\) when
-\(\Delta = 0\), i.e.\ the EAQECC meets the EA Singleton bound (we call
-such a code EA-optimal), and \({}^\dagger\) when \(\Delta = 2\)
-(near-optimal). Optimality here is meant only with respect to this EA
-Singleton bound; no comparison with best-known classical code tables is
-made. Rows with \(P = 1\) are simple-root specializations; the remaining
-rows are genuinely repeated-root.
-
-\begin{table}[htbp]
-\centering
-\footnotesize
-\caption{Ten new finite-field exponent assignments. The EAQECC column
-gives the optimal code \([[n, K-H, d;\, n-K-H]]_q\) obtained from the
-conditional quantum remark, marked \({}^*\) if it meets the EA Singleton
-bound (\(\Delta = 0\)) and \({}^\dagger\) if \(\Delta = 2\).}
-\label{tab:eaqecc}
-\begin{tabular}{cllcccr}
-\hline
-No. & Setting & \(a\) & \([n,K,d]_q\) & \(H\) & EAQECC & \(\Delta\) \\
-\hline
-1 & \(\mathbb{F}_2\ (k{=}0, P{=}2, n_0{=}3)\) & \((2,0)\) & \([6,4,2]_2\) & \(0\) & \([[6,4,2;2]]_2^{\dagger}\) & \(2\) \\
-2 & \(\mathbb{F}_3\ (k{=}0, P{=}3, n_0{=}2)\) & \((1,3)\) & \([6,2,4]_3\) & \(1\) & \([[6,1,4;3]]_3^{\dagger}\) & \(2\) \\
-3 & \(\mathbb{F}_4\ (k{=}1, P{=}1, n_0{=}5)\) & \((0,0,1)\) & \([5,3,3]_4\) & \(2\) & \([[5,1,3;0]]_4^{*}\) & \(0\) \\
-4 & \(\mathbb{F}_4\ (k{=}1, P{=}2, n_0{=}3)\) & \((0,1,2)\) & \([6,3,3]_4\) & \(1\) & \([[6,2,3;2]]_4^{\dagger}\) & \(2\) \\
-5 & \(\mathbb{F}_5\ (k{=}0, P{=}5, n_0{=}2)\) & \((1,3)\) & \([10,6,4]_5\) & \(3\) & \([[10,3,4;1]]_5^{\dagger}\) & \(2\) \\
-6 & \(\mathbb{F}_7\ (k{=}0, P{=}7, n_0{=}2)\) & \((1,3)\) & \([14,10,4]_7\) & \(4\) & \([[14,6,4;0]]_7^{\dagger}\) & \(2\) \\
-7 & \(\mathbb{F}_8\ (k{=}1, P{=}1, n_0{=}7)\) & \((0,0,0,0,1,1,1)\) & \([7,4,4]_8\) & \(1\) & \([[7,3,4;2]]_8^{*}\) & \(0\) \\
-8 & \(\mathbb{F}_8\ (k{=}1, P{=}2, n_0{=}3)\) & \((2,0)\) & \([6,4,2]_8\) & \(0\) & \([[6,4,2;2]]_8^{\dagger}\) & \(2\) \\
-9 & \(\mathbb{F}_9\ (k{=}1, P{=}1, n_0{=}8)\) & \((0,1,0,0,0,1,1,1)\) & \([8,4,5]_9\) & \(2\) & \([[8,2,5;2]]_9^{*}\) & \(0\) \\
-10 & \(\mathbb{F}_9\ (k{=}1, P{=}3, n_0{=}2)\) & \((1,2)\) & \([6,3,3]_9\) & \(2\) & \([[6,1,3;1]]_9^{\dagger}\) & \(2\) \\
-\hline
-\end{tabular}
-\end{table}
-
 \paragraph{Computational verification.}
 All formulas above were checked by exact (integer and rational)
 computation; the scripts and their saved outputs accompany the paper in
@@ -1363,14 +1272,7 @@ field-level cases with \(P \in \{4, 8, 9\}\) (\(\mathbb{F}_2\) with
 \(P = 4\) (\(25\)) and \(P = 8\) (\(81\)); \(\mathbb{F}_3\) with
 \(P = 9\) (\(100\))) are checked in
 \texttt{code/validate\_audit\_fixes.py}, which also verifies the
-hull-generator orientation statement of Example~\ref{ex:E4}. (iv) The
-ten codes of Table~\ref{tab:eaqecc} were checked separately by the
-accompanying script \texttt{code/validate\_code\_table.py}: for every
-row the hull dimension was computed both from Theorem~\ref{thm:T4} and
-from the code-first Gram matrix, and the minimum distance exactly by
-parity-check column dependency, confirmed by an explicit minimum-weight
-codeword and, except in the \(\mathbb{F}_7\) row, by direct enumeration
-of all codewords. These computations are supporting evidence for the
+hull-generator orientation statement of Example~\ref{ex:E4}. These computations are supporting evidence for the
 tested cases; the proofs of
 Sections~\ref{sec:param}--\ref{sec:moments} are independent of them.
 
@@ -1410,31 +1312,6 @@ rather than by labeled assignments; the extension from constacyclic
 (index-one) to multi-twisted codes; and distance distributions, which
 would require machinery beyond the enumerator.
 
-\begin{remark}[conditional quantum remark]
-In the finite-field case (\(N=1\), \(m_1=1\), so \(q = p^e\) and
-\(0 \le k < e\)), let \(C\) be an \([n, K]\) code over \(\Fq\) and let
-\(H = \dim \Hull_k(C)\). Let
-\(\Pi\) be a parity-check matrix of \(C\) (rows a basis of \(C^\perp\)) and
-put \(c = \mathrm{rank}\big(\Pi\, \rho(\Pi)^{\mathsf T}\big)\), with
-\(\rho\) applied entrywise. The kernel of the pairing map
-\(D(C) \to (C^\perp)^*\), \(y \mapsto \big(z \mapsto \sum_i z_i y_i\big)\),
-is exactly \(C \cap D(C)\); hence \(c = (n-K) - H\). Therefore, when the
-entanglement-assisted construction is used in its Galois form
-\cite{DIMP2026} (the framework of \cite{BDS2006}), \(C\) yields an
-\([[n, K-H, d_{\mathrm{EA}};\, n-K-H]]\) entanglement-assisted quantum
-code, where \(d_{\mathrm{EA}}\) is the distance furnished by that
-construction and must be determined independently. The enumerator of
-Theorem~\ref{thm:T6} determines the joint distribution of \((K, H)\)
-only; it yields no distance information, and no quantum parameter is
-claimed from it alone. The product case \(N \ge 2\) requires, in
-addition, control of distances under the product decomposition. The ten
-codes of Table~\ref{tab:eaqecc} are explicit instances whose distances
-were computed independently, so their displayed parameters are
-unconditional; no asymptotic family is claimed, since for repeated-root
-families the distance --- which the enumerator does not control --- is
-the limiting quantity.
-\end{remark}
-
 % =====================================================================
 \section{Conclusion}
 % =====================================================================
@@ -1470,11 +1347,6 @@ S.~Bouyuklieva, I.~Bouyukliev, and F.~\"Ozbudak,
 Sequence of numbers of linear codes with increasing hull dimensions,
 \emph{Designs, Codes and Cryptography} 94 (2026), Article 39.
 doi:10.1007/s10623-025-01776-9.
-
-\bibitem{BDS2006}
-T.~Brun, I.~Devetak, and M.-H.~Hsieh,
-Correcting quantum errors with entanglement,
-\emph{Science} 314 (2006), 436--439. doi:10.1126/science.1131563.
 
 \bibitem{CDL2015}
 B.~Chen, H.~Q. Dinh, and H.~Liu,
@@ -1597,12 +1469,6 @@ T.~Wu, S.~Zhu, L.~Liu, and L.~Li,
 Repeated-root constacyclic codes of length \(6\ell^m p^n\),
 \emph{Advances in Mathematics of Communications} 17(5) (2023),
 1154--1180. doi:10.3934/amc.2021044.
-
-\bibitem{ZKZ2026}
-E.~Zhang, B.~Kong, and X.~Zheng,
-Quantum codes from Galois hulls of constacyclic codes over a finite
-non-chain ring,
-\emph{Entropy} 28 (2026), 407. doi:10.3390/e28040407.
 
 \bibitem{ZWLL2025}
 Q.~Zhang, W.~Wang, S.~Luo, and Y.~Li,
