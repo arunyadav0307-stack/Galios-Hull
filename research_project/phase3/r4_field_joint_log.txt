@@ -1,0 +1,57 @@
+# Phase 3 K4-2 log -- generated 2026-10-23T17:06:10Z
+Python 3.11.2
+
+==========================================================================
+F_9, n=6, alpha=1:  x^6 - 1 = (x-1)^3 (x+1)^3,  16 cyclic codes
+  (a,b)=(0,0)  dim=6  hull=0  d=1
+  (a,b)=(0,1)  dim=5  hull=1  d=2
+  (a,b)=(0,2)  dim=4  hull=1  d=2
+  (a,b)=(0,3)  dim=3  hull=0  d=2
+  (a,b)=(1,0)  dim=5  hull=1  d=2
+  (a,b)=(1,1)  dim=4  hull=2  d=2
+  (a,b)=(1,2)  dim=3  hull=2  d=3
+  (a,b)=(1,3)  dim=2  hull=1  d=4
+  (a,b)=(2,0)  dim=4  hull=1  d=2
+  (a,b)=(2,1)  dim=3  hull=2  d=3
+  (a,b)=(2,2)  dim=2  hull=2  d=3
+  (a,b)=(2,3)  dim=1  hull=1  d=6
+  (a,b)=(3,0)  dim=3  hull=0  d=2
+  (a,b)=(3,1)  dim=2  hull=1  d=4
+  (a,b)=(3,2)  dim=1  hull=1  d=6
+  (a,b)=(3,3)  dim=0  hull=0  d=None
+
+  joint distribution of (hull, d) over the 16 codes:
+    hull=0, d=1: 1
+    hull=0, d=2: 2
+    hull=0, d=None: 1
+    hull=1, d=2: 4
+    hull=1, d=4: 2
+    hull=1, d=6: 2
+    hull=2, d=2: 1
+    hull=2, d=3: 3
+
+  marginal hull law : {0: 4, 1: 8, 2: 4}
+  marginal d law    : {1: 1, 2: 7, 3: 3, 4: 2, 6: 2, None: 1}
+
+  is the joint law the product of the marginals?
+    hull=0, d=1: observed 1, independent prediction 0.250
+    hull=0, d=2: observed 2, independent prediction 1.750
+    hull=0, d=None: observed 1, independent prediction 0.250
+    hull=1, d=2: observed 4, independent prediction 3.500
+    hull=1, d=4: observed 2, independent prediction 1.000
+    hull=1, d=6: observed 2, independent prediction 1.000
+    hull=2, d=2: observed 1, independent prediction 1.750
+    hull=2, d=3: observed 3, independent prediction 0.750
+    => joint law = product of marginals: False
+
+  control: does the hull law depend only on (a,b) through the per-factor data?
+    hull = min(a,3-a) + min(b,3-b) reproduced for all 16 codes: True
+
+  distance by (a,b) matrix (rows a=0..3, cols b=0..3):
+    a=0:   1    2    2    2
+    a=1:   2    2    3    4
+    a=2:   2    3    3    6
+    a=3:   2    4    6  None
+
+  distance depends on BOTH a and b jointly, not on a+b alone:
+    a+b=0: d in [1]; a+b=1: d in [2]; a+b=2: d in [2]; a+b=3: d in [2, 3]; a+b=4: d in [3, 4]; a+b=5: d in [6]; a+b=6: d in []

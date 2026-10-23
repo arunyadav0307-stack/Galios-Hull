@@ -314,25 +314,46 @@ R1–R3**.
 | Feasibility (K4-2) | **partial**: exact enumeration is affordable at small `n`, nothing more. No closed form identified |
 | Verdict | **GO** — survives the structural test and is not pre-empted by the closest known results. **Gate 2 PASSED on R4** (distinguishable; no novelty claimed). K4-2 (feasibility of an exact count) becomes the first task of Phase 3 |
 
+## Phase 3 — started 2026-10-23 (task K4-2 complete)
+
+Deliverable: `phase3/K4_2_FEASIBILITY.md`; probe `phase3/r4_field_joint.py`, log
+`r4_field_joint_log.txt` (≈ 4 s).
+
+**K4-2 question:** is R4's object — the joint (Hermitian hull dimension, minimum distance) law —
+determined by the two marginals, or is the coupling essential?
+
+**Answer: the coupling is essential.**
+
+| Item | Result |
+|---|---|
+| Instance | `F_9`, `n=6`, `α=1`; `x^6−1 = (x−1)³(x+1)³`; 16 cyclic codes `⟨(x−1)^a(x+1)^b⟩` |
+| Method | distances **exact** by increasing-weight membership testing (proven minima, no bounds); hull dimensions by the kernel method, independently of any formula |
+| Consistency | `hull = min(a,3−a)+min(b,3−b)` reproduced for **16/16** — R1's orbit formula re-confirmed on a two-orbit instance |
+| Joint law | hull 0 → `d ∈ {1,2,∞}`; hull 1 → `d ∈ {2,4,6}`; hull 2 → `d ∈ {2,3}` |
+| Independence | **fails**: e.g. `(hull 1, d=6)` observed 2 vs predicted 1.00; `(hull 2, d=2)` observed 1 vs predicted 1.75 |
+| Dimension | `d` is **not** a function of `dim = 6−a−b` either: on `a+b=3`, `d=2` for `(0,3),(3,0)` and `d=3` for `(1,2),(2,1)` |
+| Verdict | joint law is irreducible; no closed form found; exact computation is affordable at table scale |
+
+Consequence recorded: the Phase 3 deliverable cannot be "combine two known enumerators". Programme
+(P3-1 exact tables over `q ∈ {3,4,5}`, `n ≤ 12`, several `α`; P3-2 structural theorems, starting with
+the two-orbit distance matrix proven above; P3-3 the ring-level Gray coupling) is recorded in the
+deliverable, and **P3-2 is now in progress**.
+
+**No theorem, no closed form and no novelty claim** is made in this Phase 3 section. Blockers B-1
+and B-2 remain open.
+
 ## Next step
 
-**Gate 2 has been passed on R4.** R1, R2, R3 are recorded NO-GO (`25bbe62`, `78b89ac`, `c9d4517`).
-R4 — the exact joint (Hermitian hull dimension, Gray distance) distribution of `λ`-constacyclic codes
-over `R_e` with `C^{⊥_H} ⊆ C` — is distinguishable from the closest known results and, unlike the
-other three, is not a product of field-level laws.
+**Phase 3 is in progress.** Gate 2 is passed on R4 (`372d9a3`); K4-2 is complete (`K4_2_FEASIBILITY.md`).
+Next item is **P3-2**: prove structural facts about the two-orbit family `⟨(x−1)^a(x+1)^b⟩` in
+`F_9[x]/(x^6−1)`, where the exact distance matrix is already a complete answer, and test the
+conjecture that every LCD (`hull = 0`) code in that family has `d ≤ 2`.
 
-**Phase 3 may now begin.** Its first task is **K4-2**, feasibility, in this order:
+P3-1 (exact tables over larger `q, n`) follows, then P3-3 (the ring-level Gray coupling, which is the
+actual R4 question).
 
-1. Fix the research statement precisely, including the choice of `M` (which the paper leaves free
-   subject to `MM* = νI`).
-2. Settle whether the field-level input — the joint (hull dimension, minimum distance) law for
-   `λ`-constacyclic codes over `F_{q²}` of length `n`, for arbitrary `n` including `p | n` — is
-   obtainable in closed form, e.g. from the repeated-root distance results of Dinh, or whether it is
-   irreducibly a computation.
-3. Only then decide the deliverable: a closed-form distribution, or an exact algorithm plus tables.
-
-Phase 3 and later phases have **not** begun; the first Phase 3 deliverable will be the feasibility
-decision in (2). Nothing in Phase 2 changed a Phase 1 result, count or register entry.
+R1, R2, R3 remain NO-GO and are not revisited. Nothing in Phase 2 or Phase 3 has changed a Phase 1
+result, count or register entry.
 
 Phase 1 stands complete; nothing in Phase 2 changed a Phase 1 result, count or register entry.
 
