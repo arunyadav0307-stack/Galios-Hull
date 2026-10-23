@@ -265,17 +265,54 @@ plus an untrimmed remainder; over-generated subspace enumeration — true count 
 assertion). One error of my own in drafting §1 (asserting that duality permutes CRT components) was
 caught by explicit computation and corrected in §4.5; the earlier R3 record had it right.
 
+## R2 decision (2026-10-23) — R2 NO-GO, Gate 2 cannot be passed on this question
+
+Full argument: `phase2/R2_DECISION.md`. Probe: `phase2/r2_probe/` (`r2_probe.py`, log 53 lines,
+runtime < 1 s).
+
+| Item | Outcome |
+|---|---|
+| Question | does the hull-dimension distribution depend on the decomposition `λ = Σ_ℓ η_ℓ α_ℓ`? |
+| Finding | **the premise is false — the decomposition is unique**, in both readings |
+| Reading A (CRT coordinates `α_ℓ = λ(μ_ℓ)`) | `Σ_ℓ e_ℓ λ(μ_ℓ) = λ` verified **27/27** (`q=2,e=3`), and by linearity for **every** `λ` at `e=4`; coordinates are evaluations, hence forced |
+| Reading B (paper's `η_ℓ`) | `{η_ℓ}` is a **basis** (`η_ℓ(μ_j)=0`, `ℓ≠j`), so `(a_ℓ) ↦ Σ η_ℓ a_ℓ` is **injective** on all 64 elements, units hit **27/27**, all fibres size 1 — a change of basis, not an ambiguity |
+| F-1 quantified | `λ(μ_ℓ) = a_ℓ·η_ℓ(μ_ℓ)` with `η_ℓ(μ_ℓ) = 1,3,2` (`q=2,e=3`) and `1,2,6,3` (`q=3,e=4`); `Σ η_ℓ = (0,0,1)` and `(0,0,0,1)`, never `1`. Using `a_ℓ` as the component multiplier predicts the wrong hull law for **18 of 27** multipliers at `F_4, n=6` (where the field laws differ) |
+| Multiset dependence | with correct coordinates, `F_4, n=6`: 4 distinct multisets of component laws, each inducing **exactly one** distribution; totals `27, 243, 2187, 19683` = products of field code counts |
+| Kill criterion | **K-R2: CRT (source Theorem 2)** — the decomposition is the coordinate map, a bijection; there is no free variable to depend on. R2 is not a known-result corollary, it is **vacuous** |
+| Verdict | **NO-GO** (`K`) |
+
+**Scope note.** The `η`-normalisation issue is a hazard for a *counting* extension, not an error in
+the paper: the paper uses `η_ℓ` only inside lcm-based hull formulas and never counts. Phase 1's
+conclusion that no parameter changes stands.
+
+**Gate 2 status.** R1, R2 and R3 have now all failed their own kill criteria. Gate 2 — *"the
+proposed main contribution is distinguishable from the closest known results"* — **cannot be passed**
+by the "count `λ`-constacyclic codes over `R_e` by Hermitian hull dimension, then form a
+joint/total enumerator" line. The obstruction is structural: the CRT decomposition makes every such
+count a product of field-level laws, and those laws are given for arbitrary `n` (including `p | n`)
+by the source's Theorem 10 and by Sangwisut–Jitman–Udomkavanich (AMC 2017). This is a negative
+result about the proposed question, **not** a defect in the source paper.
+
 ## Next step
 
-**Phase 2 is delivered and Gate 2 is NOT PASSED.** Two of the three surviving revisions have now been examined and both fail their own kill criteria: **R3** (product of published field-level counts, `c9d4517`) and **R1** (lattice-point count in the boxes of the source's own Theorem 10). **R2** is the only candidate left, and it is **untested**.
+**No further work is authorised or recommended on the current research question.** R3 (`c9d4517`),
+R1 (`25bbe62`) and R2 (this commit) have each collapsed under their own kill criteria, and Gate 2
+remains **NOT PASSED**. Phase 3 is **not started**.
 
-The single next action, on explicit authorisation, is to settle R2's decisive lemma:
+Two options, for the author to choose; neither is begun:
 
-> For `λ ∈ R_e^*` with `e ≥ 3`, determine the number of decompositions `λ = Σ_ℓ η_ℓ α_ℓ` up to unit multiplication in `R_e^*`; then decide whether the hull-dimension distribution over the `e` components depends on the decomposition chosen or only on the multiset `{α_ℓ}`.
+* **(a) Different question.** The only candidate identified that is *not* a product of field-level
+  laws is the **distance-constrained** quantum-parameter distribution over `R_e`: the hull dimension
+  is a sum over CRT components, but the minimum distance is not, so a distance constraint genuinely
+  couples them. This is not a relabelled R1/R2/R3, it is materially harder, and it would need its
+  own feasibility/kill test before any Phase 3 work. R3's decision document (§9, item 2) already
+  flagged it in the same terms.
+* **(b) Close at Gate 2.** Record that the proposed contribution is not distinguishable from prior
+  art on the available evidence, with blockers B-1 (publisher full texts) and B-2
+  (Debnath–Prakash body) still open.
 
-It is a short, exact computation on the `R_e` machinery already validated in R3 and R1. Two failure modes are live: if the decomposition is unique up to units and permutations, R2 degenerates to bookkeeping; if the answer is invariant in the decomposition, R2 has no content beyond R1. In either case the honest conclusion is that all three revisions are `K` and Gate 2 cannot be passed by this line of attack, and that should be reported rather than worked around.
-
-Phase 3 and later phases remain **not started** and require explicit authorisation.
+Recommendation: **(b) unless (a) is explicitly authorised**, because (a) may well collapse for the
+same structural reason and should not be entered without a stated kill criterion.
 
 Phase 1 stands complete; nothing in Phase 2 changed a Phase 1 result, count or register entry.
 

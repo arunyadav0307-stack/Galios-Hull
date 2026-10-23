@@ -1,0 +1,53 @@
+# R2 probe log -- generated 2026-10-23T16:37:34Z
+Python 3.11.2
+
+## r2_probe.py -- decomposition uniqueness, F-1 impact, multiset dependence
+==============================================================================
+CASE 1 -- only affordable e >= 3; n=6 has p | n and differing laws   q=2, e=3, R_e over F_4, |R_e| = 64, n=6
+T1  the true idempotents of R_e
+    roots of u^3 - 1 in F_4: [1, 2, 3]
+      e_1 = (1, 1, 1)
+      e_2 = (1, 3, 2)
+      e_3 = (1, 2, 3)
+    e_l^2 = e_l : True    e_l e_j = 0 : True    sum_l e_l = 1 : True
+T2  how many decompositions does a given lambda have?
+    |R_e^*| = 27   (|R_e| = 64; a unit iff every evaluation lambda(mu_l) is nonzero)
+    reading A (CRT):  sum_l e_l lambda(mu_l) = lambda  : 27/27
+      coordinates are evaluations => #decompositions = 1 for every lambda
+    reading B (eta):  images of all 64 tuples: 64  (injective: True)
+      units hit: 27/27    fibre sizes: [1]
+      => reading B is a bijection too: #decompositions = 1 here as well
+      the eta_l are a BASIS of R_e (eta_l(mu_j) = 0 for l != j), so this is a
+      change of basis, not an ambiguity
+T3  Phase 1 finding F-1, quantified: are reading B's coefficients the component multipliers?
+    eta_l(mu_l) = 1, 3, 2
+    relation lambda(mu_l) = a_l * eta_l(mu_l) holds for all units : True
+      => a_l is NOT the l-th component multiplier unless eta_l(mu_l) = 1,
+         which happens only for the l with mu_l = 1 (all others are rescaled)
+    field laws, F_4, n=6: alpha=1->{0: 8, 1: 12, 2: 6, 3: 1}, alpha=2->{0: 2, 3: 1}, alpha=3->{0: 2, 3: 1}
+    lambda whose hull law is predicted WRONG by reading B: 18/27
+      (the same 27 lambda, so this is a real hazard to any count, but it is a
+       normalisation error, not an open question)
+T4  with the correct coordinates, does the law depend on anything but the multiset?
+    distinct multisets of component laws: 4;  multisets with more than one induced distribution: 0
+      [{0: 2, 3: 1}, {0: 2, 3: 1}, {0: 2, 3: 1}]  ->  [{0: 8, 3: 12, 6: 6, 9: 1}]
+      [{0: 2, 3: 1}, {0: 2, 3: 1}, {0: 8, 1: 12, 2: 6, 3: 1}]  ->  [{0: 32, 1: 48, 2: 24, 3: 36, 4: 48, 5: 24, 6: 12, 7: 12, 8: 6, 9: 1}]
+      [{0: 2, 3: 1}, {0: 8, 1: 12, 2: 6, 3: 1}, {0: 8, 1: 12, 2: 6, 3: 1}]  ->  [{0: 128, 1: 384, 2: 480, 3: 384, 4: 312, 5: 264, 6: 162, 7: 60, 8: 12, 9: 1}]
+      [{0: 8, 1: 12, 2: 6, 3: 1}, {0: 8, 1: 12, 2: 6, 3: 1}, {0: 8, 1: 12, 2: 6, 3: 1}]  ->  [{0: 512, 1: 2304, 2: 4608, 3: 5376, 4: 4032, 5: 2016, 6: 672, 7: 144, 8: 18, 9: 1}]
+    => the law is a symmetric function of the component laws; there is no
+       free choice of decomposition to depend on.
+
+==============================================================================
+CASE 2 -- q=3, e=4 (e | q+1), |R_e| = 6561: element level only
+T1  the true idempotents of R_e
+    roots of u^4 - 1 in F_9: [1, 2, 3, 6]
+      e_1 = (1, 1, 1, 1)
+      e_2 = (1, 2, 1, 2)
+      e_3 = (1, 6, 2, 3)
+      e_6 = (1, 3, 2, 6)
+    e_l^2 = e_l : True    e_l e_j = 0 : True    sum_l e_l = 1 : True
+  T2 by linearity: sum_l e_l lambda(mu_l) = lambda on the 4 monomials u^0..u^3 : True  => holds for every lambda in R_e
+  T3: sum_l eta_l = (0, 0, 0, 1)   (equals 1? False)
+      eta_l(mu_l) = 1, 2, 6, 3
+      => whenever e > 1 the eta_l are not the component multipliers;
+         the normalised e_l are, and by linearity the decomposition is unique.
