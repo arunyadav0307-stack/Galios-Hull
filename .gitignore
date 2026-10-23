@@ -1,0 +1,9 @@
+# Extracted prior-art trees: byte-identical copies of the two ZIPs committed at the
+# repository root. Reproduce with research_project/tools/extract_prior_art.sh,
+# which verifies both archive hashes before extracting.
+research_project/prior_art/
+
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/

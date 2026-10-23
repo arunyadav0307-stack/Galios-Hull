@@ -1,0 +1,118 @@
+=== PHASE 0 EVIDENCE TRANSCRIPT ===
+date_utc: 2026-10-23T11:46:34Z
+host: Linux 6.1.158+ x86_64
+
+$ cat /etc/os-release | head -2
+PRETTY_NAME="Debian GNU/Linux 12 (bookworm)"
+NAME="Debian GNU/Linux"
+[exit=0]
+
+$ git rev-parse --abbrev-ref HEAD
+arena/831a2e65-galios-hull
+[exit=0]
+
+$ git rev-parse HEAD
+33aeb795a53e72d87856b6a255652c2acad41b0b
+[exit=0]
+
+$ git status --porcelain | wc -l
+1
+[exit=0]
+
+$ git ls-tree -r --long HEAD
+100644 blob 3b12477363684b8680c1e28de8f1a5a730671b02  291546	Galios hulls of constacclic codes over affine algebra rings'.pdf
+100644 blob 723cbde3a2d06da0cc9a7890faaa4cbd80b56b79 1644180	Galios-Hull-Complete-Work-2026-10-20.zip
+100644 blob 7d1936e8f07cd88c3dab8b3c0237949b754b578c 1152081	Galios-Hull-Submission-Phase10F.zip
+[exit=0]
+
+$ sha256sum *
+0db90bfbeda69ad1af231b81d92f24be3589ed15ac2e0ade6605ba7ad0ddc039  Galios hulls of constacclic codes over affine algebra rings'.pdf
+c192e76c43d828ad879a7bba8494b11b44981969a0a6295203e0d7ae389d3179  Galios-Hull-Complete-Work-2026-10-20.zip
+6fd1a675fa4d780db71631156ddc8bd1554d517348ba24264bf2a0cccce2ad12  Galios-Hull-Submission-Phase10F.zip
+sha256sum: research_project: Is a directory
+[exit=1]
+
+$ python3 - <<'PY'
+import zipfile
+for z in ['Galios-Hull-Complete-Work-2026-10-20.zip','Galios-Hull-Submission-Phase10F.zip']:
+    zf=zipfile.ZipFile(z); f=[i for i in zf.infolist() if not i.is_dir()]
+    print(z, 'entries', len(zf.namelist()), 'files', len(f), 'bytes', sum(i.file_size for i in f), 'testzip', zf.testzip())
+PY
+Galios-Hull-Complete-Work-2026-10-20.zip entries 169 files 155 bytes 3046562 testzip None
+Galios-Hull-Submission-Phase10F.zip entries 110 files 102 bytes 2156750 testzip None
+[exit=0]
+
+$ python3 - <<'PY'
+from pypdf import PdfReader
+r=PdfReader("Galios hulls of constacclic codes over affine algebra rings'.pdf")
+print('pages', len(r.pages))
+print('metadata', r.metadata)
+t=''.join((p.extract_text() or '') for p in r.pages)
+print('chars', len(t))
+print('yadav_mentions', t.lower().count('yadav'))
+PY
+pages 27
+metadata {'/Producer': 'GPL Ghostscript 10.01.2', '/CreationDate': "D:20241211205909-05'00'", '/ModDate': "D:20241211205909-05'00'", '/Creator': 'LaTeX with hyperref', '/Title': 'Galois hulls of constacyclic codes over affine algebra rings', '/Subject': '', '/Author': 'Indibar Debnath; Habibul Islam; E. Martínez-Moro; Om Prakash; ', '/Keywords': ''}
+chars 54001
+yadav_mentions 4
+[exit=0]
+
+$ diff -rq research_project/prior_art/Galios-Hull-Complete-Work-2026-10-20/01_Paper_Package research_project/prior_art/Galios-Hull-kGalois-Phase10F | wc -l
+0
+[exit=0]
+
+$ python3 - <<'PY'
+import re,hashlib,pathlib
+base='research_project/prior_art/Galios-Hull-Complete-Work-2026-10-20/01_Paper_Package/'
+ok=bad=miss=0
+for line in open(base+'MANIFEST.txt'):
+    m=re.match(r'^([0-9a-f]{64})\s+(\d+)\s+(\S.*)$', line.rstrip())
+    if not m: continue
+    h,size,p=m.group(1),int(m.group(2)),m.group(3)
+    f=pathlib.Path(base+p)
+    if not f.exists(): miss+=1; continue
+    if hashlib.sha256(f.read_bytes()).hexdigest()==h and f.stat().st_size==size: ok+=1
+    else: bad+=1
+print('manifest entries OK',ok,'MISMATCH',bad,'MISSING',miss)
+PY
+manifest entries OK 101 MISMATCH 0 MISSING 0
+[exit=0]
+
+$ for t in pdflatex latex bibtex latexmk tectonic magma sage gap pdftotext pdfinfo qpdf gs; do printf '%s=' $t; command -v $t >/dev/null 2>&1 && echo present || echo MISSING; done
+pdflatex=MISSING
+latex=MISSING
+bibtex=MISSING
+latexmk=MISSING
+tectonic=MISSING
+magma=MISSING
+sage=MISSING
+gap=MISSING
+pdftotext=MISSING
+pdfinfo=MISSING
+qpdf=MISSING
+gs=MISSING
+[exit=0]
+
+$ python3 -c 'import sys;print(sys.version)'
+3.11.2 (main, Apr  8 2026, 01:58:00) [GCC 12.2.0]
+[exit=0]
+
+$ python3 -c 'import pypdf;print("pypdf",pypdf.__version__)'
+pypdf 6.21.2
+[exit=0]
+
+$ python3 -c 'import sympy,numpy,galois;print("sympy",sympy.__version__,"numpy",numpy.__version__,"galois",galois.__version__)'
+sympy 1.14.0 numpy 2.4.6 galois 0.4.11
+[exit=0]
+
+$ wc -l research_project/source_audit/FILE_MANIFEST.csv
+261 research_project/source_audit/FILE_MANIFEST.csv
+[exit=0]
+
+$ awk -F, 'NR>1{c[$4]++} END{for(k in c) print k,c[k]}' research_project/source_audit/FILE_MANIFEST.csv
+repo-root 3
+prior-art/Phase10F 102
+prior-art/CompleteWork 155
+[exit=0]
+
+=== END ===
