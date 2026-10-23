@@ -1047,7 +1047,7 @@ contributes \(0\), and summing with the weights \(w_O^2\) gives
 \section{Examples and computational verification}\label{sec:examples}
 % =====================================================================
 
-The six examples are arranged so that each one makes a different part
+The seven examples are arranged so that each one makes a different part
 of the theory visible. Example~\ref{ex:E1} is small enough to check by
 hand and shows how a single exponent tuple produces its two coordinates.
 Example~\ref{ex:E2} isolates the simple-root specialization.
@@ -1057,7 +1057,8 @@ constructed codes, first for mixed orbit lengths and then for a long
 orbit. Example~\ref{ex:E5} tests the product assembly over two
 components, and Example~\ref{ex:E6} leaves the cyclic case \(\lambda = 1\)
 used in Examples~\ref{ex:E3}--\ref{ex:E5} and works with a compatible
-twist of order four. Throughout, \(K\) denotes the code-dimension coordinate and
+twist of order four. Example~\ref{ex:E7} solves one row of the EAQECC
+table below in full. Throughout, \(K\) denotes the code-dimension coordinate and
 \(H\) the hull-dimension coordinate of a labeled assignment.
 
 \begin{example}[one orbit, \(P=2\), \(L=2\), \(w=1\), by hand]
@@ -1254,6 +1255,28 @@ Gram-rank brute force over the explicitly constructed codes
 (\texttt{code/validate\_audit\_fixes.py}), so the constacyclic theory is
 exercised here beyond the cyclic case \(\lambda = 1\) and the negacyclic
 case \(\lambda = -1\).
+\end{example}
+
+\begin{example}[a worked EAQECC row]\label{ex:E7}
+We solve row~4 of Table~\ref{tab:eaqecc} in full. Take
+\(K = \mathbb{F}_4 = \mathbb{F}_2(\omega)\) with
+\(\omega^2 + \omega + 1 = 0\), \(k = 1\), \(\lambda = 1\), \(P = 2\),
+\(n_0 = 3\), \(n = 6\), and the assignment \(a = (0,1,2)\) on the
+ordered factors \((x+1, x+\omega, x+\omega^2)\) of \(x^3 - 1\), so
+\(g_a = (x+\omega)(x+\omega^2)^2\). Every root
+\(\beta \in \{1, \omega, \omega^2\}\) satisfies \(\beta^3 = 1\), hence
+\(\beta^{-2} = \beta\); thus each linear factor is fixed by \(\tau\),
+giving three orbits of length \(1\) and weight \(1\).
+Theorem~\ref{thm:T4} gives \(K = (2-0) + (2-1) + (2-2) = 3\) and, each
+orbit being a self-loop,
+\(H = \min(2,0) + \min(1,1) + \min(0,2) = 0 + 1 + 0 = 1\). The minimum
+distance is \(d = 3\) by the exact computation described in the
+computational-verification paragraph below, so \(C(a)\) is a
+\([6,3,3]_4\) code. The conditional quantum remark of
+Section~\ref{sec:limitations} therefore gives the EAQECC
+\([[6, K-H, d;\, n-K-H]]_4 = [[6,2,3;2]]_4\), with EA Singleton defect
+\(\Delta = 2(n-K-d+1) = 2\): the near-optimal (\({}^\dagger\)) code of
+row~4.
 \end{example}
 
 \paragraph{A table of EAQECC-optimal and near-optimal codes.}
