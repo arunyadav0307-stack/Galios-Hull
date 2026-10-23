@@ -3,8 +3,10 @@
 A phase-gated, proof-first research project executed under the **Arena Master
 Research Blueprint** (7 pp., SHA-256 `abcecc47…ae23`, `arunyadav0307-stack/JOINT@main`).
 
-**Current status: Phase 0 complete · Gate 0 BLOCKED on a source-identity decision.**
-No Phase 1 work has begun. See `PHASE_STATUS.md`.
+**Current status: Phase 0 complete · source of record designated (Yadav et al.,
+CAM 43:269, 2024) · Gate 0 still BLOCKED because that paper's full text is not yet
+in the workspace.** No Phase 1 work has begun. See `PHASE_STATUS.md` and
+`source_audit/SOURCE_ACCESS_STATUS.md`.
 
 ---
 
@@ -13,13 +15,14 @@ No Phase 1 work has begun. See `PHASE_STATUS.md`.
 | # | File | What it settles |
 |---|---|---|
 | 1 | `PHASE_STATUS.md` | what passed, what is blocked, what is unresolved, what happens next |
-| 2 | `source_audit/SOURCE_IDENTITY_BLOCKER.md` | the one decision the project needs from its owner |
-| 3 | `PROJECT_PLAN.md` | scope, phase/gate table, rules, assumptions, risks |
-| 4 | `source_audit/SOURCE_INVENTORY.md` | every file, hash, archive and prior document in the workspace |
-| 5 | `source_audit/SOURCE_PAPER_METADATA.md` | the three distinct papers in play and their access status |
-| 6 | `source_audit/ENVIRONMENT_CAPABILITIES.md` | what the sandbox can and cannot do |
-| 7 | `source_audit/PRIOR_ART_REGISTER.md` | the earlier work found in the ZIPs and how it is treated |
-| 8 | `source_audit/PHASE0_VERIFICATION_LOG.md` | commands, outputs, exit codes behind every claim above |
+| 2 | `source_audit/SOURCE_ACCESS_STATUS.md` | what is needed to unblock Phase 1, and every access route tried |
+| 3 | `source_audit/SOURCE_IDENTITY_BLOCKER.md` | the source-identity issue and its recorded resolution |
+| 4 | `PROJECT_PLAN.md` | scope, phase/gate table, rules, assumptions, risks |
+| 5 | `source_audit/SOURCE_INVENTORY.md` | every file, hash, archive and prior document in the workspace |
+| 6 | `source_audit/SOURCE_PAPER_METADATA.md` | the three distinct papers in play and their access status |
+| 7 | `source_audit/ENVIRONMENT_CAPABILITIES.md` | what the sandbox can and cannot do |
+| 8 | `source_audit/PRIOR_ART_REGISTER.md` | the earlier work found in the ZIPs and how it is treated |
+| 9 | `source_audit/PHASE0_VERIFICATION_LOG.md` | commands, outputs, exit codes behind every claim above |
 
 ## The short version
 
@@ -29,8 +32,10 @@ No Phase 1 work has begun. See `PHASE_STATUS.md`.
   constacyclic codes over affine algebra rings*, arXiv:2412.08512v1 / *Discrete
   Math.* **349**(2) (2026) 114750 — a different ring, a different ($k$-Galois)
   inner product, and different theorems. It cites the blueprint's paper as [43].
-* The blueprint's paper is paywalled and is not in the workspace, so Phases 1–6
-  cannot be executed against it here.
+* The blueprint's paper is **the designated source of record**, but it is not in
+  the workspace and this agent cannot fetch it (publisher paywall; the only free
+  copy at HAL is behind an interactive anti-bot challenge). It must be supplied as a
+  file; a verifier is armed to accept only the right document.
 * The two ZIPs hold earlier work: a finished 19-page manuscript on the $k$-Galois
   affine-algebra question, and a later audit that declares the joint-enumerator
   direction non-novel and the manuscript stage blocked. Both are registered as
@@ -49,10 +54,13 @@ research_project/
 │   ├── ENVIRONMENT_CAPABILITIES.md
 │   ├── PRIOR_ART_REGISTER.md
 │   ├── SOURCE_IDENTITY_BLOCKER.md
+│   ├── SOURCE_ACCESS_STATUS.md
+│   ├── SOURCE_PDF_MANIFEST.csv
 │   ├── FILE_MANIFEST.csv      260 rows: sha256, bytes, origin, duplicate_of, path
 │   └── PHASE0_VERIFICATION_LOG.md
 ├── logs/phase0_evidence.out   raw command transcript
 ├── tools/inventory.py         regenerates FILE_MANIFEST.csv
+├── tools/verify_source_pdf.py identity gate for the supplied source PDF
 ├── tools/extract_prior_art.sh verifies + extracts the two ZIPs
 └── prior_art/                 extracted copies (git-ignored)
 ```

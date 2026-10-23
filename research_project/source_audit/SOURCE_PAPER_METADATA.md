@@ -1,9 +1,17 @@
 # SOURCE PAPER METADATA — Phase 0
 
 **Prepared:** 2026-10-23 (UTC) · **Branch:** `arena/831a2e65-galios-hull`
+**Updated:** 2026-10-23 — user decision recorded: **Object C (Yadav et al.) is the
+source of record**. Objects A and B are retained as related work only.
 
 There are **three** distinct bibliographic objects in play. They are recorded
 separately because they must not be conflated.
+
+> **Decision of record (2026-10-23).** The blueprint's named paper is authoritative
+> for this project. The Debnath et al. preprint that happens to be in the workspace
+> is **not** a substitute and will not be treated as one. Access to Object C is
+> **still outstanding**; see `SOURCE_ACCESS_STATUS.md` for the twelve routes tried
+> and the exact file needed. Phase 1 has not started.
 
 ---
 
@@ -69,7 +77,8 @@ about Object A refer to **arXiv:2412.08512v1** unless explicitly marked otherwis
 | DOI | `10.1007/s40314-024-02789-1` |
 | Dates | received 2023-12-02 · revised 2024-04-08 · accepted 2024-05-21 · published 2024-06-04 |
 | Access | **paywalled**: "This is a preview of subscription content"; article PDF purchasable at USD 39.95 |
-| Copy in workspace | **none** |
+| Open deposit | **yes, at HAL**: `hal-04825601v1`, a 516.23 kB author-deposited PDF ("Files produced by the author(s)", licence "HAL Authorization", deposited 2024-12-08). Unpaywall/OpenAlex/Semantic Scholar all point to it as the only green OA copy. Its corollary numbering (`Corollaries 3.2 and 3.3`) differs from the publisher abstract (`Corollaries 2 and 3`), so it is **not** byte-identical with the version of record. |
+| Copy in workspace | **none** — download blocked by an interactive anti-bot challenge; see `SOURCE_ACCESS_STATUS.md` §2 |
 
 Verified abstract content (Springer landing page, read 2026-10-23) — it matches the
 blueprint's description on pp. 1–3:
@@ -101,17 +110,14 @@ and discusses it in the introduction (p. 3):
 
 | Question | Answer | Evidence |
 |---|---|---|
-| Is the uploaded PDF the paper named by the blueprint? | **No.** | Object A vs Object C: different title, authors, journal, ring, inner product, code family, and results. Object C appears in Object A only as reference [43]. |
-| Is the uploaded PDF a legitimate research paper suitable for audit? | **Yes.** | 27-page arXiv v1, complete text layer, published in *Discrete Mathematics* 349(2) (2026) 114750. |
-| Is the blueprint's source paper available in the workspace? | **No.** | exhaustive filename and hash search of both ZIPs and the root; only one source PDF exists, and it is Object A. |
-| Can Object C be obtained by this agent? | **Not by open access.** | Springer landing page serves abstract + references only; no arXiv version surfaced in a targeted search; direct HTTPS to `link.springer.com` from the sandbox is blocked (TLS), and the page tool returns only the preview. |
+| Which paper governs this project? | **Object C (Yadav et al.)** — user decision, 2026-10-23 | blueprint pp. 1–2; `SOURCE_ACCESS_STATUS.md` |
+| Is the uploaded PDF (Object A) the paper named by the blueprint? | **No.** | Object A vs Object C: different title, authors, journal, ring, inner product, code family, and results. Object C appears in Object A only as reference [43]. |
+| Is Object A a legitimate research paper? | **Yes**, and it stays in the workspace unmodified. | 27-page arXiv v1, complete text layer, published in *Discrete Mathematics* 349(2) (2026) 114750. |
+| Is the blueprint's source paper available in the workspace? | **Not yet.** | twelve access routes tried (`SOURCE_ACCESS_STATUS.md` §2); the only free copy sits behind an anti-bot challenge and direct egress to that host is blocked |
+| Can Object C be obtained by this agent? | **No.** | Springer serves a preview only; HAL download blocked; no other copy indexed |
 
-**Consequence:** the blueprint's Phases 1–6 are written for Object C's ring
-$\mathcal R_e$ ($u^e=1$, $e\mid(q+1)$, Hermitian inner product, matrix Gray map).
-Object A studies a different ring ($\mathbb F_q[X]/\langle t\rangle$ components,
-square-free), a different inner product ($k$-Galois, second slot), and different
-results (idempotent generators, EAQECC via Galois hulls). Substituting one for the
-other changes the mathematics, not merely the citation.
-
-This is escalated as **Gate 0 blocker** in `SOURCE_IDENTITY_BLOCKER.md`. A decision
-is required before Phase 1 begins.
+**Consequence:** Gate 0 stays **BLOCKED** until the correct PDF is supplied. The
+blueprint's own instruction for this situation is to stop and request the document,
+which is what happened: no Phase 1 deliverable has been produced. Object A is
+*never* substituted, and none of its results, notations or hypotheses are carried
+into the Yadav-based project.

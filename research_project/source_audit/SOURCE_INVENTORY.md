@@ -138,8 +138,8 @@ of Debnath–Islam–Martínez-Moro–Prakash.
 
 | ID | Item | Classification | Consequence |
 |---|---|---|---|
-| M-1 | Blueprint's named source paper is not the uploaded PDF | **Conflict — blocking** | Gate 0 cannot be closed as written; decision required (`SOURCE_IDENTITY_BLOCKER.md`) |
-| M-2 | Yadav et al. full text unavailable (paywalled; no arXiv copy found) | **Missing — external** | Phase 1 cannot audit that paper unless the PDF is supplied |
+| M-1 | Blueprint's named source paper is not the uploaded PDF | **Conflict — resolved by decision (2026-10-23)** | Yadav et al. is the source of record; Debnath et al. is excluded as a substitute (`SOURCE_IDENTITY_BLOCKER.md`) |
+| M-2 | Yadav et al. full text unavailable in the workspace (publisher paywall; green-OA copy behind an anti-bot challenge) | **Missing — blocking** | Phase 1 cannot start until the PDF is supplied (`SOURCE_ACCESS_STATUS.md`) |
 | M-3 | No LaTeX, Magma, Sage, GAP | **Missing — environment** | Phase 9 PDF build impossible here; Phase 7 cross-checks must be self-written |
 | M-4 | Prior package claims a branch/commit that does not exist here | **Unverifiable provenance** | prior work is usable as evidence of content only |
 | M-5 | Prior archive contains both a completed manuscript and an audit declaring the manuscript stage blocked | **Conflict — internal to prior art** | neither can be assumed correct; both must be re-derived |

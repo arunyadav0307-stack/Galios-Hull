@@ -205,3 +205,53 @@ Originals untouched (git diff against HEAD restricted to paths outside research_
 ```
 [no output above = no tracked file outside research_project/ changed]
 ```
+
+## 14. Source-access attempt log (2026-10-23, after the user designated Yadav et al.)
+
+```
+$ python3 research_project/tools/verify_source_pdf.py --selftest
+PASS  accepts a conforming record                                    expected=accept got=accept
+PASS  rejects the Debnath preprint                                   expected=reject got=reject
+PASS  rejects a right-title/right-author document without journal or DOI expected=reject got=reject
+
+SELFTEST: PASS
+[exit=0]
+
+$ python3 research_project/tools/verify_source_pdf.py "<the only source PDF present>" --record
+file        Galios hulls of constacclic codes over affine algebra rings'.pdf
+bytes       291546
+sha256      0db90bfbeda69ad1af231b81d92f24be3589ed15ac2e0ade6605ba7ad0ddc039
+pages       27
+pdf_title   'Galois hulls of constacyclic codes over affine algebra rings'
+pdf_author  'Indibar Debnath; Habibul Islam; E. Martínez-Moro; Om Prakash; '
+
+FAIL  A  is not a known wrong paper      this is Debnath et al. "galois hulls of constacyclic codes over affine algebra rings"
+FAIL  B  expected title found            title not found
+FAIL  C  all five authors present        missing ['singh', 'sol']
+FAIL  D  journal or DOI identity         neither found
+FAIL  info ring R_e / e|(q+1) signal     not detected on pp. 1-2 (informational only)
+FAIL  info dual-containing discussed     not on pp. 1-2
+
+VERDICT: REJECTED — this file is not the paper named by the blueprint.
+         Phase 1 must not start on it.
+recorded -> research_project/source_audit/SOURCE_PDF_MANIFEST.csv
+[exit=1]
+```
+
+Network probes made through the agent page-fetch tool (not the shell, whose egress is allowlisted):
+
+```
+unpaywall api            -> is_oa true, oa_status green, HAL hal-04825601v1 (submittedVersion)
+openalex api             -> any_repository_has_fulltext true, oa_url = HAL
+semanticscholar api      -> openAccessPdf url = HAL, status GREEN
+springer landing (5/5 chunks) -> abstract + references + about-this-article only; no body text
+hal landing              -> metadata readable; file listed 516.23 kB
+hal file / document URLs -> Anubis anti-bot challenge; challenge URL returns 503
+r.jina.ai proxy of HAL   -> returns the Anubis page
+hal.archives-ouvertes.fr -> Anubis pass-challenge then 503
+core.ac.uk               -> 'This page is not available now'
+scholar.archive.org      -> ALTCHA anti-bot gate
+github code search       -> 8 hits, all Scopus metadata dumps, no article text
+```
+
+Detail and per-route evidence: source_audit/SOURCE_ACCESS_STATUS.md §2.

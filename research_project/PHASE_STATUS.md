@@ -2,6 +2,9 @@
 
 **Updated:** 2026-10-23 (UTC) · **Branch:** `arena/831a2e65-galios-hull`
 · **Base commit:** `33aeb795a53e72d87856b6a255652c2acad41b0b`
+· **Source of record:** Yadav, Singh, Islam, Prakash, Solé, *Comput. Appl. Math.*
+**43** (2024) 269, DOI `10.1007/s40314-024-02789-1` — **designated by the user on
+2026-10-23**; full text **not yet in hand** (`source_audit/SOURCE_ACCESS_STATUS.md`).
 **Vocabulary:** `PASS` · `FAIL` · `BLOCKED` · `PROVISIONAL` — each status names its evidence.
 A document existing is never, by itself, evidence of a passed gate.
 
@@ -20,6 +23,7 @@ A document existing is never, by itself, evidence of a passed gate.
 | 0.7 | Create a clean project directory; never infer a file from a planned name | **PASS** | `research_project/` created; every path in this report exists and is listed in §Deliverables below |
 | 0.8 | Preserve original files | **PASS** | no root artifact modified or deleted; `git status` shows only the new `research_project/` tree; extraction was to a separate directory |
 | 0.9 | Separate verified facts, unresolved issues, assumptions | **PASS** | `PROJECT_PLAN.md` §5–§6; §Unresolved below |
+| 0.10 | Obtain the blueprint's named source paper | **BLOCKED** | 12 access routes tried and closed; see `source_audit/SOURCE_ACCESS_STATUS.md` §2. A verifier is armed and validated (`tools/verify_source_pdf.py`, `--selftest` PASS; rejects the Debnath preprint, records verdicts to `SOURCE_PDF_MANIFEST.csv`) |
 
 ### Gate 0 verdict
 
@@ -35,6 +39,14 @@ blueprint's own instruction is to stop and request the document.
 
 **Escalation:** `source_audit/SOURCE_IDENTITY_BLOCKER.md` §4–§7 (four options, one
 recommendation, one question for the user).
+
+**Update 2026-10-23 — decision recorded.** The user designated **Yadav et al.
+(2024)** as the authoritative source. That resolves U-1 but not the *file*: the
+article is not obtainable by this agent (publisher paywall; the single green-OA copy
+at HAL is behind an interactive anti-bot challenge and the host is outside the
+sandbox's egress allowlist). Per the blueprint's stop rule and the user's explicit
+instruction, **Phase 1 has not started**. The required file and the two acceptable
+filenames are specified in `source_audit/SOURCE_ACCESS_STATUS.md` §4.
 
 ## Phases 1–11
 
@@ -66,8 +78,9 @@ under Option 2 of the blocker document.
 
 | ID | Issue | Type | Consequence |
 |---|---|---|---|
-| U-1 | Which paper is the source of record? | **blocking decision** | Phases 1–6 cannot be specified until resolved |
-| U-2 | Yadav et al. full text inaccessible (paywall; no arXiv copy) | external | Phase 1 cannot audit Object C without the document |
+| U-1 | Which paper is the source of record? | **RESOLVED 2026-10-23** | Yadav et al. designated authoritative; Debnath et al. excluded as a substitute |
+| U-2 | Yadav et al. full text not in the workspace | **blocking** | Phase 1 cannot start; a verified PDF must be supplied (`SOURCE_ACCESS_STATUS.md` §4) |
+| U-7 | Two non-identical versions exist (Springer version of record vs HAL author deposit; different corollary numbering) | versioning | every Phase 1 result must be tagged with its version; the version of record is preferred |
 | U-3 | Prior package's branch/commit (`arena/01a0c9d2…`, `360c1ef9…`) absent from this repo | provenance | prior work usable as content only, never as history |
 | U-4 | Prior archive holds both a "completed" manuscript and an audit declaring that stage blocked | internal conflict | neither is authoritative; re-derivation required |
 | U-5 | Published version of Object A (45 refs) differs from v1 (44 refs) | versioning | all Object A claims in this project must be tagged "arXiv v1" |
@@ -84,16 +97,19 @@ under Option 2 of the blocker document.
 
 ## Next step
 
-**User decision required** (`SOURCE_IDENTITY_BLOCKER.md` §7):
+**One action unblocks everything: supply the PDF.**
 
-1. supply Yadav et al. (2024) → Phase 1 audits Object C exactly as the blueprint
-   specifies; or
-2. authorise re-scoping to Debnath et al. (2024/2026) → Phase 1 audits Object A
-   with a written deviation register; or
-3. reframe around the F11 defect; or
-4. stop at Phase 0.
+Preferred — the version of record, saved as
+`Yadav-2024-Hermitian-hull-CAM-43-269-Springer.pdf` in the repository root.
+Acceptable — the author deposit, saved as
+`Yadav-2024-Hermitian-hull-CAM-43-269-HAL-v1.pdf`; download it in an ordinary
+browser from
+`https://hal.science/hal-04825601v1/file/Hermitian%20hull%20of%20constacyclic%20codes%20and%20quantum%20Codes.pdf`
+(the browser solves the anti-bot challenge; this sandbox cannot).
 
-No Phase 1 work will be started before that answer is recorded here.
+On arrival I run `python3 research_project/tools/verify_source_pdf.py <file> --record`
+and, only if it returns ACCEPTED, start Phase 1 (theorem register, mathematical
+audit, notation glossary, example recalculation).
 
 ---
 
