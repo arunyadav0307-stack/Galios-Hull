@@ -358,19 +358,36 @@ Five instances, **169 codes, 144 with exactly computed distances** (`q ∈ {3,2}
 Both refutations were pre-registered as conjectures in `K4_2_FEASIBILITY.md` §2.1 and are recorded as
 refuted rather than quietly dropped. No theorem and no novelty claim is made.
 
+## Phase 3 — P3-2 structural results (2026-10-23)
+
+Deliverable `phase3/P3_2_TWO_ORBIT.md`.
+
+| Result | Status |
+|---|---|
+| Lemma 1: no word of weight 1 for any `(a,b) ≠ (0,0)` in the two-orbit family | **proved** |
+| Lemma 2: single-orbit codes over `n=6` have `d = 2` | **proved** |
+| Lemma 3: `[6,1,6]` MDS corners with `d = 6` | **proved** |
+| Lemma 4: `d(C(1,1)) = 2` | **proved** |
+| Four middle values (`d = 3,3,4,3`) | computed only, no formula claimed |
+| `n=9` complete table (10 codes): `hull = min(a,9−a)` | computed, 10/10 |
+| `d(C_a) = min{w((x−1)^j) : j ≥ a}` at `n=9` | **conjecture**, 10/10 |
+
+Recorded error avoided: `(x−1)^9 = x^9 − 1 ≡ 0` in `R`, so it is *not* a weight-2 word — a natural
+mistake that would have broken the `n=9` reading.
+
+The field-level picture is now documented; next is **P3-3**, the ring-level `R_e` Gray coupling,
+which is the actual R4 question.
+
 ## Next step
 
-**Phase 3 in progress.** Gate 2 passed on R4 (`372d9a3`); K4-2 complete; P3-1 complete
-(`P3_1_TABLES.md`). Next is **P3-2**: structural theorems for the two-orbit family
-`⟨(x−1)^a (x+1)^b⟩` in `F_9[x]/(x^6−1)`, where the distance matrix is already complete, and for the
-MDS/LCD pattern the tables now exhibit.
+**Phase 3 continues with P3-3** — the ring-level statement: the joint distribution of dual-containing
+`λ`-constacyclic codes over `R_e` by quantum parameters, using the Gray coupling proved in
+`R4_FEASIBILITY.md` §3 and the field-level tables of P3-1/P3-2.
 
-**P3-3** (the ring-level `R_e` Gray coupling, the actual R4 question) follows. The two refuted
-conjectures are not revisited; the surviving structural fact (joint law irreducibility) is what
-Phase 3 rests on.
-
-R1, R2, R3 remain NO-GO. Nothing in Phase 2 or Phase 3 has changed a Phase 1 result, count or
-register entry.
+Open items carried forward, all recorded: the four unproved middle distances of the two-orbit family;
+the `n=9` power-attainment conjecture; choice of `M` in the Gray map (must be fixed in any theorem
+statement); the even-characteristic limitation of the paper's `e=2` matrix. R1, R2, R3 remain NO-GO.
+Blockers B-1 (publisher full texts) and B-2 (Debnath–Prakash body) remain open. No novelty claimed.
 
 Phase 1 stands complete; nothing in Phase 2 changed a Phase 1 result, count or register entry.
 
