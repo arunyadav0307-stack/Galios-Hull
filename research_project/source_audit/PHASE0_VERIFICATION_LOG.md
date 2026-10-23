@@ -359,13 +359,35 @@ is fully reproducible and is recorded here as evidence.
 |---|---|---|---|
 | `git log` showed only `33aeb79`; `research_project/` untracked | local `.git` refs rolled back | `git fetch origin`; branch pointer restored to `origin/arena/831a2e65-galios-hull` = `ebbbcf3` | `git log --oneline` shows `ebbbcf3, 69496e8, 746bdec, 3b56509` |
 | — | — | before moving the pointer, all 29 tracked files were compared blob-by-blob with the commit | 29/29 identical, 0 differing, 0 missing |
-| `preflight` FAIL: inventory counts | `research_project/prior_art/` absent (git-ignored, not in snapshot) | `bash research_project/tools/extract_prior_art.sh` (re-verifies both ZIP hashes first, then extracts 155 + 102 files) | inventory counts back to 3/155/102 |
+| `research_project/prior_art/` absent (git-ignored, not in snapshot) | derived tree lost with the sandbox | `bash research_project/tools/extract_prior_art.sh` (re-verifies both ZIP hashes first, then extracts 155 + 102 files) | 155 + 102 files restored; `FILE_MANIFEST.csv` counts 3/155/102 |
 | `preflight` FAIL: `pypdf` not importable | session-local site-packages rolled back | `pip install -r research_project/requirements.txt` | pypdf 6.21.2, sympy 1.14.0, galois 0.4.11, numpy 2.4.6 |
 | long pypdf Type1-font warnings on stderr | `fontTools` was installed ad hoc earlier and was not pinned | added `fonttools==4.67.0` to `requirements.txt` and installed it | warnings gone; `preflight` reports fonttools present |
 
 **Final state after restoration:** `preflight` → **19 PASS / 2 WARN / 0 FAIL**,
 `RESULT: WAITING`; `selftest_gate.py` → **7/7 PASS**; working tree clean at
 `ebbbcf3`; Gate 0 still **BLOCKED** on the source PDF.
+
+### Correction to this section (2026-10-23, verified against the transcript)
+
+An earlier version of the table above stated that `preflight` failed on *inventory
+counts* because `prior_art/` was missing. **That was wrong, and it has been
+corrected.** Evidence:
+
+* `check_manifest_consistency()` in `preflight.py` reads only
+  `source_audit/FILE_MANIFEST.csv`, a tracked file that was present throughout the
+  rollback; it never consults `prior_art/`. It could not have failed for that reason.
+* The three observed preflight outcomes were `15P/5W/1F` → `16P/4W/1F` →
+  `19P/2W/0F`. The single `FAIL` in the first two runs was **`pypdf` not
+  importable** — the only *required*-tool check. The `+1 PASS / −1 WARN` step
+  between the first two runs was the working tree going from dirty (untracked
+  `research_project/`) to clean after the branch pointer was restored.
+* `prior_art/` was still correctly regenerated — it is needed for prior-art access
+  in Phase 2 and is referenced by `PRIOR_ART_REGISTER.md` — but its absence was
+  never a preflight failure.
+
+Lesson recorded rather than hidden: a recovery log written from memory of the turn
+can overstate causality. The counts in this log are the ones that matter, and they
+are reproduced by `preflight.py` on demand.
 
 The two remaining WARNs are the absent `pdflatex` (Phase 9) and `magma` (Phase 7
 cross-check) — both are declared limitations, not defects.
