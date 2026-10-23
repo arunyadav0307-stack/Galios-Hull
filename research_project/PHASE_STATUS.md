@@ -30,7 +30,7 @@ Executed earlier in this session; full log in `source_audit/PHASE0_VERIFICATION_
 | 0.3 | Identify the source unambiguously | **PASS after correction** | Originally the only PDF present was Debnath et al. (arXiv:2412.08512v1) — **not** the source paper. The verifier rejects it decisively (`REJECTED — impersonator`). The Yadav et al. deposit supplied later is `ACCEPTED`. |
 | 0.4 | Inventory prior manuscripts, blueprints, audits, code, conflicting versions | **PASS** | `SOURCE_INVENTORY.md` §2–§3; `PRIOR_ART_REGISTER.md` (155 + 102 files, 5 conflicts) |
 | 0.5 | Verify archive integrity rather than assume it | **PASS** | `zipfile.testzip() is None` for both ZIPs; 101/101 manifest entries re-hashed |
-| 0.6 | Check availability of Python, Magma, finite-field libraries, LaTeX, bibliography tools, PDF utilities | **PASS** | `ENVIRONMENT_CAPABILITIES.md`; current preflight: 19 PASS / 2 WARN / 0 FAIL (WARN: `pdflatex`, `magma`) |
+| 0.6 | Check availability of Python, Magma, finite-field libraries, LaTeX, bibliography tools, PDF utilities | **PASS** | `ENVIRONMENT_CAPABILITIES.md`; current preflight in a **clean tree**: **20 PASS / 2 WARN / 0 FAIL** (WARN: `pdflatex`, `magma`); the working-tree check adds a third WARN while files are uncommitted, giving 19/3/0 — 22 checks in total either way |
 | 0.7 | Create a clean project directory; never infer a file from a planned name | **PASS** | `research_project/` |
 | 0.8 | Preserve original files | **PASS** | no root artifact modified or deleted; the source PDF was staged *into* the project tree, never replacing anything |
 | 0.9 | Separate verified facts, unresolved issues, assumptions | **PASS** | `PROJECT_PLAN.md` §5–§6; §Unresolved below |
@@ -40,7 +40,7 @@ Executed earlier in this session; full log in `source_audit/PHASE0_VERIFICATION_
 | 0.13 | Phase 1 specification written in advance | **PASS** | `source_audit/PHASE1_EXECUTION_PLAN.md` |
 | 0.14 | Phase 1 machinery built and dry-run | **PASS** | `tools/extract_source_text.py` |
 | 0.15 | One-command handoff "PDF supplied → Phase 1 may start" | **PASS** | `tools/accept_source_and_prepare.sh` — used for the real acceptance |
-| 0.16 | Read-only readiness check | **PASS** | `tools/preflight.py` → 19 PASS / 2 WARN / 0 FAIL → `READY — source PDF accepted. Phase 1 may start.` |
+| 0.16 | Read-only readiness check | **PASS** | `tools/preflight.py` → 20 PASS / 2 WARN / 0 FAIL → `READY — source PDF accepted and all four Phase 1 deliverables present.` |
 | 0.17 | Non-destructive validation of the pipeline | **PASS after repair** | `tools/selftest_gate.py` **7/7** |
 
 **Defects found and fixed in Phase 0** (kept as audit trail): D-1 manifest row inflation (fixed by dedupe on `(SHA-256, verdict)` + atomic rewrite); D-2 `preflight.py` directory side effect and path display; D-3 flag shadowing `record`/`record()` in `preflight`-era code; **D-3′ a second instance of the same shadowing in `find_and_verify_source.py:58`**, hit during the real acceptance and fixed (`record` → `do_record`).
@@ -76,7 +76,7 @@ Supporting evidence (regenerable, committed):
 |---|---|---|
 | Examples 1–3 + Gray matrices `MM* = νI` | **31/31 PASS** | `python3 research_project/code/phase1_examples.py` |
 | Tables 1–3, every row (length, dimension, **exact** minimum distance, hull, dual-containing, quantum parameters, Singleton residual) | **33/33 PASS** | `python3 research_project/code/phase1_tables.py` |
-| §1B structural audit, items 1–7 | **11/11 items CONFIRMED** (one with a normalisation correction) | `python3 research_project/code/phase1_audit.py` |
+| §1B structural audit, items 1–7 | **11/11 checks CONFIRMED** — the nine §1B items, with the ring decomposition run in 5 configurations (one item, A2, carries a normalisation correction) | `python3 research_project/code/phase1_audit.py` |
 
 Highlights that carry real weight:
 
@@ -135,6 +135,34 @@ The blueprint's closing instruction is: *"Execute Phase 0 and Phase 1 only. … 
 * No manuscript text, no enumerator, no generating function, no new theorem.
 * No original file was overwritten, and the corrected §18 recovery record in `PHASE0_VERIFICATION_LOG.md` is intact.
 * The source paper's own numbers were never adjusted to fit a computation, and no computation was adjusted to fit the paper.
+
+## Final Phase 1 consistency check (2026-10-23, read-only)
+
+Run at the user's request after Phase 1 was committed as `c82de37`. Everything below was **re-read and
+re-derived from the stored artifacts**, not from the prose; no mathematical computation was repeated.
+
+| Check | Method | Result |
+|---|---|---|
+| Source identity | `sha256sum`, `stat`, `pypdf` on the staged PDF vs `SOURCE_PDF_MANIFEST.csv` | **match** — `7f7e6803…c27d249`, 612 826 B, 23 pp., verdict `ACCEPTED` |
+| Version tag | every deliverable vs the manifest | **match** — `hal-04825601v1` in all five places, no stale tag |
+| Theorem numbering | 25 register IDs vs `HEADING_INDEX.csv` and the corpus | **match** — HAL v1 sequence T1, T2, L3, L4, L5, T6, L7, T8, C9, T10, T11, C12, T13, C14, T15, T16, L17, T18, T19 |
+| Page anchors | 23 fenced verbatim quotes searched in the pages they cite; 12 further claims (captions, `η_i` list, `M(5)`, the Example-3 `C3` slip, Theorem 15's condition, Lemma 17, Theorem 8's `λ = ε₁α + ε₂α`) | **35/35 located on the cited page** |
+| Table values | the 33 rows regenerated from `phase1/raw/tables_recalc.json` and diffed against the report | **33/33 byte-identical** |
+| Counts | 31 `[PASS]` / 0 `[FAIL]` in `examples_log.txt`; 33/33 `PASS` rows; 25 entries with 20 `VERIFIED` / 5 `QUOTED`, none without a status; 11 audit records (10 `CONFIRMED`, 1 `CONFIRMED WITH CORRECTION`) | **all as reported** |
+| Preflight / selftest | `tools/preflight.py`, `tools/selftest_gate.py` | 20 PASS / 2 WARN / 0 FAIL; selftest **7/7** |
+| Novelty | full-text scan of the four deliverables | **no novelty claim present** |
+
+**Two inconsistencies were found and corrected** (they were in prose only — no mathematical result,
+count, register entry or table value changed):
+
+| ID | Inconsistency | Correction |
+|---|---|---|
+| C-1 | `PHASE_STATUS.md` stated the preflight total as "19 PASS / 2 WARN / 0 FAIL", a state that does not exist: the clean-tree run is **20 PASS / 2 WARN**, and it drops to 19 PASS / **3** WARN only while the tree is dirty. The same row also quoted the pre-correction `RESULT:` line. | counts restated for both tree states, `RESULT:` line re-quoted from the current tool output |
+| C-2 | `source_audit/SOURCE_ACCESS_STATUS.md` §6 "Status statement" still asserted **"Gate 0: BLOCKED"** and **"Phase 1: not started … no Phase 1 deliverable has been written"** — a *current-status* section contradicting its own top banner and this file. | §6 marked **SUPERSEDED**, original text preserved verbatim beneath a banner giving the current status |
+| C-3 | minor: `PHASE_STATUS.md` summarised the audit as "11/11 items", while the audit document has **nine** §1B items and the log has **11 records** (the ring decomposition was run in five configurations). | restated as "11/11 checks, nine items" so the two figures cannot be read as the same thing |
+
+The corrected documents were re-validated (preflight 20/2/0, selftest 7/7) and committed separately so
+that `c82de37` and all verified deliverables are preserved unchanged.
 
 ## Next step
 

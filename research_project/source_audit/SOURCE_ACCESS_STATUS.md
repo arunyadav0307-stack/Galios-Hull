@@ -130,7 +130,12 @@ Each verdict is appended to `source_audit/SOURCE_PDF_MANIFEST.csv`.
 So the gate is armed and has been shown to reject the wrong document; it has not
 yet had the opportunity to accept the right one.
 
-## 6. Status statement
+## 6. Status statement — **SUPERSEDED** (recorded 2026-10-23 before the PDF arrived)
+
+> **SUPERSEDED — kept verbatim as the audit trail.** The four bullets below were correct when
+> written and are *not* the current status. Current status: **Gate 0 = PASS**, **Phase 1 =
+> COMPLETE**, **Gate 1 = PASS**, Phase 2 not started; see `../PHASE_STATUS.md`. Corrected at the
+> user's request during the final Phase 1 consistency check (2026-10-23).
 
 * **Phase 0:** complete, unchanged, and still valid. Its deliverables stand; this
   document is an addendum that closes the "source of record?" question while
