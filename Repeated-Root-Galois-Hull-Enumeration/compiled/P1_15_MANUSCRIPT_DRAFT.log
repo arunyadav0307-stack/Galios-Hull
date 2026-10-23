@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025/Debian) (preloaded format=pdflatex 2026.10.23)  23 OCT 2026 02:14
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025/Debian) (preloaded format=pdflatex 2026.10.23)  23 OCT 2026 02:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -211,43 +211,38 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \hbox (badness 2717) in paragraph at lines 150--151
+Underfull \hbox (badness 2717) in paragraph at lines 152--153
 \OT1/cmr/m/n/10 al-ge-bra rings (com-po-nents
  []
 
 
-Underfull \hbox (badness 3635) in paragraph at lines 151--155
+Underfull \hbox (badness 3635) in paragraph at lines 153--157
 []\OT1/cmr/m/n/10 Galois hull di-men-sion of a given code,
  []
 
 
-Underfull \hbox (badness 1057) in paragraph at lines 151--155
+Underfull \hbox (badness 1057) in paragraph at lines 153--157
 \OT1/cmr/m/n/10 summed over com-po-nents; LCD cri-te-rion;
  []
 
 
-Underfull \hbox (badness 1478) in paragraph at lines 155--156
-\OT1/cmr/m/n/10 con-sta-cyclic codes are the
- []
-
-
-Underfull \hbox (badness 1721) in paragraph at lines 157--158
+Underfull \hbox (badness 1721) in paragraph at lines 161--162
 []\OT1/cmr/m/n/10 repeated-root length $\OML/cmm/m/it/10 n \OT1/cmr/m/n/10 =
  []
 
 
-Underfull \hbox (badness 1303) in paragraph at lines 158--161
+Underfull \hbox (badness 1303) in paragraph at lines 162--165
 []\OT1/cmr/m/n/10 joint dis-tri-bu-tion of $([] \OML/cmm/m/it/10 C; [] [][]\OT1
 /cmr/m/n/10 (\OML/cmm/m/it/10 C\OT1/cmr/m/n/10 ))$;
  []
 
 
-Underfull \hbox (badness 4217) in paragraph at lines 158--161
+Underfull \hbox (badness 4217) in paragraph at lines 162--165
 \OT1/cmr/m/n/10 LCD, self-orthogonal and dual-containing
  []
 
 [2] [3] [4] [5]
-Overfull \hbox (17.07025pt too wide) detected at line 501
+Overfull \hbox (17.07025pt too wide) detected at line 505
 [][] \OML/cmm/m/it/10.95 C\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 a\OT1/cmr/m/n
 /10.95 )  =  [] [] \OML/cmm/m/it/10.95 w[] []\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/
 10.95 P \OMS/cmsy/m/n/10.95 ^^@ \OML/cmm/m/it/10.95 []\OT1/cmr/m/n/10.95 )\OML
@@ -258,19 +253,19 @@ Overfull \hbox (17.07025pt too wide) detected at line 501
  []
 
 [6]
-Overfull \hbox (60.37912pt too wide) detected at line 625
+Overfull \hbox (60.37912pt too wide) detected at line 629
 []
  []
 
 [7]
-Overfull \hbox (23.33835pt too wide) in paragraph at lines 740--748
+Overfull \hbox (23.33835pt too wide) in paragraph at lines 744--752
 \OT1/cmr/m/it/10.95 Consequently, un-der the uni-form dis-tri-bu-tion on la-bel
 ed as-sign-ments, con-di-tion-ally on $[][]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10
 .95 C\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 a\OT1/cmr/m/n/10.95 )) =
  []
 
 
-Overfull \hbox (23.02098pt too wide) in paragraph at lines 740--748
+Overfull \hbox (23.02098pt too wide) in paragraph at lines 744--752
 \OT1/cmr/m/it/10.95 in par-tic-u-lar $\U/msb/m/n/10.95 E\OT1/cmr/m/n/10.95 [[][
 ] \OML/cmm/m/it/10.95 C \OMS/cmsy/m/n/10.95 j [][]\OT1/cmr/m/n/10.95 (\OML/cmm/
 m/it/10.95 C\OT1/cmr/m/n/10.95 ) = 0] = ^^A\OML/cmm/m/it/10.95 =\OT1/cmr/m/n/10
@@ -281,14 +276,14 @@ C \OMS/cmsy/m/n/10.95 j [][]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 C\OT1/cmr/m
  []
 
 [8]
-Overfull \hbox (20.53816pt too wide) in paragraph at lines 810--813
+Overfull \hbox (20.53816pt too wide) in paragraph at lines 814--817
 \OT1/cmr/m/it/10.95 whose spe-cial-iza-tion $\OML/cmm/m/it/10.95 t \OT1/cmr/m/n
 /10.95 = \OML/cmm/m/it/10.95 uz$ \OT1/cmr/m/it/10.95 is the joint enu-mer-a-tor
  of the self-orthogonal fam-ily (there $[][] [][] \OT1/cmr/m/n/10.95 =
  []
 
 
-Overfull \hbox (10.99127pt too wide) in paragraph at lines 818--826
+Overfull \hbox (10.99127pt too wide) in paragraph at lines 822--830
 \OT1/cmr/m/it/10.95 Writing $\OML/cmm/m/it/10.95 N[]\OT1/cmr/m/n/10.95 (\OML/cm
 m/m/it/10.95 K\OT1/cmr/m/n/10.95 )$ \OT1/cmr/m/it/10.95 for the num-ber of self
 -orthogonal as-sign-ments with $[][] \OML/cmm/m/it/10.95 C \OT1/cmr/m/n/10.95 =
@@ -297,7 +292,7 @@ r/m/n/10.95 (\OML/cmm/m/it/10.95 K; H\OT1/cmr/m/n/10.95 )$
  []
 
 [9] [10]
-Overfull \hbox (32.48193pt too wide) in paragraph at lines 949--953
+Overfull \hbox (32.48193pt too wide) in paragraph at lines 953--957
 []\OT1/cmr/m/it/10.95 For $\OML/cmm/m/it/10.95 L \OMS/cmsy/m/n/10.95 ^^U \OT1/c
 mr/m/n/10.95 3$\OT1/cmr/m/it/10.95 , two ad-ja-cent edges sat-isfy $[]\OT1/cmr/
 m/n/10.95 (\OML/cmm/m/it/10.95 X[]; X[]\OT1/cmr/m/n/10.95 ) = \OML/cmm/m/it/10.
@@ -306,13 +301,13 @@ m/n/10.95 (\OML/cmm/m/it/10.95 X[]; X[]\OT1/cmr/m/n/10.95 ) = \OML/cmm/m/it/10.
  []
 
 
-Overfull \hbox (2.00261pt too wide) in paragraph at lines 996--1009
+Overfull \hbox (2.00261pt too wide) in paragraph at lines 1000--1013
 []\OT1/cmr/m/n/10.95 Independence across or-bits gives the weighted sum. For on
 e or-bit: $\OML/cmm/m/it/10.95 L \OT1/cmr/m/n/10.95 = 1$ is Lemma 8.3[](i).
  []
 
 [11]
-Overfull \hbox (5.3241pt too wide) in paragraph at lines 1024--1040
+Overfull \hbox (5.3241pt too wide) in paragraph at lines 1028--1044
 []\OT1/cmr/m/n/10.95 By The-o-rem 5.2[], $[][] \OML/cmm/m/it/10.95 C \OT1/cmr/m
 /n/10.95 = [][] \OML/cmm/m/it/10.95 w[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 
 P \OMS/cmsy/m/n/10.95 ^^@ \OML/cmm/m/it/10.95 A[]\OT1/cmr/m/n/10.95 )$ with in-
@@ -322,7 +317,7 @@ de-pen-dent $\OML/cmm/m/it/10.95 A[]$ \OT1/cmr/m/n/10.95 uni-form on $\OMS/cmsy
  []
 
 [12]
-Overfull \hbox (2.46057pt too wide) in paragraph at lines 1172--1184
+Overfull \hbox (2.46057pt too wide) in paragraph at lines 1176--1188
 \OT1/cmr/m/n/9 (2\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 0)[] 1$, $(2\OML/cmm/m/it/9 ;
  \OT1/cmr/m/n/9 2)[] 27$, $(3\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 1)[] 6\OML/cmm/m/
 it/9 ; \OT1/cmr/m/n/9 (3\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 2)[] 12$, $(3\OML/cmm/
@@ -334,7 +329,7 @@ T1/cmr/m/n/9 4)[] 96$, $(5\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 5)[] 60$,
  []
 
 
-Overfull \hbox (20.241pt too wide) in paragraph at lines 1172--1184
+Overfull \hbox (20.241pt too wide) in paragraph at lines 1176--1188
 \OT1/cmr/m/n/9 (6\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 2)[] 24\OML/cmm/m/it/9 ; \OT1
 /cmr/m/n/9 (6\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 3)[] 84$, $(6\OML/cmm/m/it/9 ; \O
 T1/cmr/m/n/9 4)[] 144$, $(6\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 5)[] 84$, $(6\OML/c
@@ -347,19 +342,19 @@ T1/cmr/m/n/9 2)[] 24$,
  []
 
 [13] [14] [15]
-Underfull \hbox (badness 4505) in paragraph at lines 1459--1463
+Underfull \hbox (badness 4505) in paragraph at lines 1463--1467
 []\OT1/cmr/m/n/10.95 I. Deb-nath and O. Prakash, Av-er-age di-men-sions of Ga-l
 ois hulls of con-sta-
  []
 
 [16] [17]
-Underfull \hbox (badness 1248) in paragraph at lines 1569--1573
+Underfull \hbox (badness 1248) in paragraph at lines 1573--1577
 []\OT1/cmr/m/n/10.95 T. Wu, S. Zhu, L. Liu, and L. Li, Repeated-root con-sta-cy
 clic codes of length
  []
 
 
-Underfull \hbox (badness 3679) in paragraph at lines 1569--1573
+Underfull \hbox (badness 3679) in paragraph at lines 1573--1577
 \OT1/cmr/m/n/10.95 6\OML/cmm/m/it/10.95 `[]p[]$\OT1/cmr/m/n/10.95 , \OT1/cmr/m/
 it/10.95 Ad-vances in Math-e-mat-ics of Com-mu-ni-ca-tions \OT1/cmr/m/n/10.95 1
 7(5) (2023), 1154--1180.
@@ -370,10 +365,6 @@ it/10.95 Ad-vances in Math-e-mat-ics of Com-mu-ni-ca-tions \OT1/cmr/m/n/10.95 1
 LaTeX2e <2025-11-01>
 L3 programming layer <2026-01-19>
  ***********
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
  ) 
 Here is how much of TeX's memory you used:
  2555 strings out of 469514
@@ -410,7 +401,7 @@ re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/tex
 live/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/share/texlive/t
 exmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texlive/te
 xmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
-Output written on P1_15_MANUSCRIPT_DRAFT.pdf (18 pages, 431286 bytes).
+Output written on P1_15_MANUSCRIPT_DRAFT.pdf (18 pages, 431288 bytes).
 PDF statistics:
  208 PDF objects out of 1000 (max. 8388607)
  128 compressed objects within 2 object streams

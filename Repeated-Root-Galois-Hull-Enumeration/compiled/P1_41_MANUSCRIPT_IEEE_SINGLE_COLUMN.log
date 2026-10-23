@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025/Debian) (preloaded format=pdflatex 2026.10.23)  23 OCT 2026 02:14
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025/Debian) (preloaded format=pdflatex 2026.10.23)  23 OCT 2026 02:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -249,22 +249,22 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 48.
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texlive/texm
 f-dist/fonts/enc/dvips/base/8r.enc}]
-Underfull \hbox (badness 6961) in paragraph at lines 146--147
+Underfull \hbox (badness 6961) in paragraph at lines 148--149
 []\OT1/ptm/m/n/9 constacyclic codes over fi-nite
  []
 
 
-Underfull \hbox (badness 3492) in paragraph at lines 155--159
+Underfull \hbox (badness 3492) in paragraph at lines 157--161
 \OT1/ptm/m/n/9 com-po-nents; LCD cri-te-rion; entanglement-assisted
  []
 
 
-Underfull \hbox (badness 3250) in paragraph at lines 162--165
+Underfull \hbox (badness 3250) in paragraph at lines 166--169
 \OT1/ptm/m/n/9 self-orthogonal and dual-containing counts; ex-act
  []
 
 [2] [3] [4] [5] [6] [7] [8] [9] [10]
-Overfull \hbox (22.7658pt too wide) in paragraph at lines 890--895
+Overfull \hbox (22.7658pt too wide) in paragraph at lines 894--899
 \OT1/ptm/b/n/10 Lemma VIII.1 \OT1/ptm/m/n/10 (edge mo-ments)\OT1/ptm/b/n/10 . \
 OT1/ptm/m/it/10 For in-de-pen-dent $\OML/cmm/m/it/10 U; V$ \OT1/ptm/m/it/10 uni
 -form on $\OMS/cmsy/m/n/10 f\OT1/cmr/m/n/10 0\OML/cmm/m/it/10 ; [] ; P\OMS/cmsy
@@ -274,7 +274,7 @@ b/m/n/10 E\OT1/cmr/m/n/10 [[](\OML/cmm/m/it/10 U; V\OT1/cmr/m/n/10 )[]] =
  []
 
 [11] [12] [13]
-Overfull \hbox (26.62352pt too wide) in paragraph at lines 1176--1188
+Overfull \hbox (26.62352pt too wide) in paragraph at lines 1180--1192
 []\OT1/ptm/m/n/10 For the record, the full joint dis-tri-bu-tion of $\OT1/cmr/m
 /n/10 ([][] \OML/cmm/m/it/10 C; [][] [][]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 C\OT
 1/cmr/m/n/10 ))$ \OT1/ptm/m/n/10 is $\OT1/cmr/m/n/8 (0\OML/cmm/m/it/8 ; \OT1/cm
@@ -287,11 +287,11 @@ OML/cmm/m/it/8 ; \OT1/cmr/m/n/8 (3\OML/cmm/m/it/8 ; \OT1/cmr/m/n/8 2)[] 12$\OT1
  []
 
 LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 1
-202.
+206.
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 ) [14] [15]
-Overfull \hbox (49.7204pt too wide) in paragraph at lines 1322--1353
+Overfull \hbox (49.7204pt too wide) in paragraph at lines 1326--1357
 \OT1/ptm/m/n/10 the scripts and their saved out-puts ac-com-pany the pa-per in 
 the di-rec-tory \OT1/pcr/m/n/10 code/\OT1/ptm/m/n/10 . (i) \OT1/ptm/m/it/10 Or-
 bit level \OT1/ptm/m/n/10 (\OT1/pcr/m/n/10 code/validate_p1_14.py\OT1/ptm/m/n/1
@@ -299,7 +299,7 @@ bit level \OT1/ptm/m/n/10 (\OT1/pcr/m/n/10 code/validate_p1_14.py\OT1/ptm/m/n/1
  []
 
 [16] [17]
-Underfull \hbox (badness 5970) in paragraph at lines 1452--1455
+Underfull \hbox (badness 5970) in paragraph at lines 1456--1459
 []\OT1/ptm/m/n/8 T. Brun, I. De-ve-tak, and M.-H. Hsieh, Cor-rect-ing quan-tum 
 er-rors with en-tan-gle-ment, \OT1/ptm/m/it/8 Sci-ence \OT1/ptm/m/n/8 314 (2006
 ), 436--439.
@@ -346,7 +346,7 @@ sbm7.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive
 /texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fon
 ts/type1/urw/times/utmri8a.pfb>
-Output written on P1_41_MANUSCRIPT_IEEE_SINGLE_COLUMN.pdf (19 pages, 401680 byt
+Output written on P1_41_MANUSCRIPT_IEEE_SINGLE_COLUMN.pdf (19 pages, 401828 byt
 es).
 PDF statistics:
  213 PDF objects out of 1000 (max. 8388607)
