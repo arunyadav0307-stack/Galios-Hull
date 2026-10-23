@@ -56,8 +56,9 @@ notice:
       6 topics plus an MSC line — replace with IEEE Index Terms, ideally
       from the IEEE Thesaurus, and drop/relocate the MSC line as the
       template requires).
-- [ ] **ORCID is mandatory for all authors** at submission — author must
-      register/link an ORCID iD (not yet on file; do not invent one).
+- [x] **ORCID is mandatory for all authors** at submission — author-supplied
+      ORCID iD 0009-0009-1169-3264 added to the manuscript (23 Oct 2026;
+      checksum-valid and the public record name matches the author).
 - [ ] References in IEEE numbered style, cited in order of appearance
       (already satisfied; DOIs included).
 - [ ] Hybrid journal: Open Access is optional (OA fee US$1,750 if chosen
