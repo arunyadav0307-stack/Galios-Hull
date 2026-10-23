@@ -83,7 +83,9 @@ with respect to a Frobenius-twisted pairing. Galois hulls of constacyclic
 codes have been determined, at the level of hull dimensions and hull
 generators, in a number of settings. Over finite fields,
 Debnath, Prakash and Islam determined the Galois hull dimension of
-constacyclic codes and the number of such codes with a given Galois hull
+constacyclic codes, including repeated-root lengths \(n = n' p^{\nu}\),
+and, under the restriction \(e \mid 4(e-k)\), \(e \nmid 2(e-k)\) on the
+field degree, the number of such codes with a given Galois hull
 dimension \cite{DPI2023} (see also the correction \cite{DPI2023corr}); average Galois hull dimensions over finite
 fields and over an auxiliary ring were computed by Debnath and Prakash
 \cite{DP2025}, and constacyclic codes with small Galois hull dimension
@@ -104,7 +106,10 @@ a substantial literature \cite{CDL2015, Sharma2015, WZLL2023, ZWLL2025}.
 In this paper we (1) determine the \(k\)-Galois dual and hull of every
 repeated-root constacyclic code of length \(P n_0\) over a finite product
 of finite fields, for compatible twists, in exponent form
-(Theorems~\ref{thm:T3} and~\ref{thm:T4}); (2) show that the joint law of
+(Theorems~\ref{thm:T3} and~\ref{thm:T4}); for a single field component
+the resulting hull-dimension formula agrees with
+\cite[Theorem~3]{DPI2023}, and the product-of-fields form given here is
+what the joint enumerator of item~(2) is built on; (2) show that the joint law of
 \((\dim_{\Fq} C, \dim_{\Fq} \Hull_k(C))\) over labeled assignments is a
 product of traces of \((P{+}1)\)-state transfer matrices indexed by the
 orbits of the reciprocal involution (Theorem~\ref{thm:T6}), with the
@@ -127,9 +132,10 @@ earlier work.
 \centering
 \small
 \caption{Positioning relative to the closest earlier work. The
-comparison with \cite{DPI2023} and its correction is based on the
-published abstracts; no theorem-level comparison with that work is
-asserted.}
+comparison with \cite{DPI2023} is based on its published full text
+(Theorem~3, Corollary~1 and Theorem~4); the correction
+\cite{DPI2023corr} makes only minor textual corrections and does not
+change its theorems.}
 \label{tab:positioning}
 \begin{tabular}{@{}p{3.0cm}p{4.4cm}p{7.0cm}@{}}
 \hline
@@ -137,9 +143,10 @@ Work & Setting & What is determined \\
 \hline
 \cite{DP2025} & constacyclic codes over finite fields and over an
 auxiliary ring & average Galois hull dimensions \\
-\cite{DPI2023, DPI2023corr} & constacyclic codes over finite fields &
-Galois hull dimension of a given code; number of codes with given hull
-dimension (as reported in the abstract) \\
+\cite{DPI2023, DPI2023corr} & constacyclic codes over a finite field,
+lengths \(n = n' p^{\nu}\) & Galois hull dimension of a given code
+(Theorem~3); number of codes with given hull dimension when
+reciprocal-orbit lengths are \(1, 2\) and \(4\) (Theorem~4) \\
 \cite{DIMP2026} & constacyclic codes over affine algebra rings, mainly
 in a simple-root framework, with a repeated-root case under additional
 hypotheses on the order of the twist & Galois hull formulas for a given
@@ -507,6 +514,19 @@ orbits (constant degree on an orbit) and using
 hull formula; multiplication by \(m_s\) and summation over \(s\) gives
 the \(\Fq\)-dimensions.
 \end{proof}
+
+\begin{remark}[relation to \cite{DPI2023}]
+For a single component (\(N = 1\)), Theorem~\ref{thm:T4} recovers
+\cite[Theorem~3]{DPI2023}: with \(P = p^{\nu}\) and cycle contribution
+\(a_t P - \sum_i \max(u_i, P - u_{i-1})\), the identity
+\(P - \max(u, P - v) = \min(P - u, v)\) identifies their summand with
+\(\sum_i \min(P - \alpha_i, \alpha_{i-1})\) above, the factor degree
+\(\operatorname{ord}_j(q)\) being our orbit weight \(w_O\). Their
+counting result \cite[Theorem~4]{DPI2023} is restricted to
+reciprocal-orbit lengths \(1, 2\) and \(4\) and counts by hull
+dimension alone; the joint enumerator below imposes no restriction on
+orbit length and records both dimensions.
+\end{remark}
 
 % =====================================================================
 \section{The transfer-matrix enumerator}\label{sec:enumerator}
