@@ -15,7 +15,7 @@
 |---|---|---|---|
 | **Gate 0** | "The exact source PDF and the usable research environment are identified. If the PDF cannot be accessed, stop and request it." | **PASS** (2026-10-23) | `GATE 0: PASS` from `tools/find_and_verify_source.py` over 7 PDFs with exactly 1 acceptance; SHA-256 + version recorded in `source_audit/SOURCE_PDF_MANIFEST.csv`; identity cross-checked against the HAL record, the DOI record and the publisher landing page (`SOURCE_PAPER_METADATA.md`) |
 | **Gate 1** | "Central source-paper results and the assumptions needed for the new work are understood and documented." | **PASS** (2026-10-23) | four required deliverables written (`phase1/SOURCE_*.md`); 25/25 register entries; 33/33 table rows and 31/31 example checks recomputed exactly; 11/11 audit items recorded |
-| Gate 2 | "The proposed main contribution is distinguishable from the closest known results." | **NOT STARTED** | out of scope for this run (see §Scope) |
+| Gate 2 | "The proposed main contribution is distinguishable from the closest known results." | **NOT PASSED — question must be revised** (2026-10-23) | three novelty tests run in `phase2/NOVELTY_ASSESSMENT.md`; constituent enumerator classified **K** (exact field-level counts already exist: Debnath–Prakash 2022/23, Sangwisut et al. 2015, Lu et al. 2026, arXiv:2605.29204); joint/total enumerators **N2 at best** because CRT multiplicativity makes them a product of the constituent laws; three surviving revisions R1/R2/R3 identified, each at most **N2** and each with a stated kill criterion |
 
 ---
 
@@ -131,7 +131,7 @@ Highlights that carry real weight:
 
 The blueprint's closing instruction is: *"Execute Phase 0 and Phase 1 only. … Do not draft the new paper or claim novelty. Verify every deliverable exists, report exact paths and unresolved issues, and stop after reporting the Phase 1 status."*
 
-* Phase 2 (related literature and novelty audit) **has not been started**; no novelty claim is made anywhere.
+* Phase 2 (related literature and novelty audit) had **not** been started at that point; it was authorised and executed afterwards — see §Phase 2 below. No novelty claim is made anywhere in the project.
 * No manuscript text, no enumerator, no generating function, no new theorem.
 * No original file was overwritten, and the corrected §18 recovery record in `PHASE0_VERIFICATION_LOG.md` is intact.
 * The source paper's own numbers were never adjusted to fit a computation, and no computation was adjusted to fit the paper.
@@ -164,11 +164,56 @@ count, register entry or table value changed):
 The corrected documents were re-validated (preflight 20/2/0, selftest 7/7) and committed separately so
 that `c82de37` and all verified deliverables are preserved unchanged.
 
+## Phase 2 — Related literature and novelty audit (DELIVERED; Gate 2 NOT PASSED)
+
+Run on the user's authorisation after Phase 1 closed. Four deliverables, all under `phase2/`.
+
+| Deliverable | Path | State |
+|---|---|---|
+| `LITERATURE_COMPARISON_MATRIX.csv` | `phase2/LITERATURE_COMPARISON_MATRIX.csv` | 18 rows, the blueprint's 8 columns, plus explicit exact-enumeration / quantum-construction flags and a "difference from proposed work" cell per row |
+| `LITERATURE_REVIEW.md` | `phase2/LITERATURE_REVIEW.md` | method + explicit limits; prior-art map in strands A/B/C plus D; §4 states honestly where the gaps are *unresolved* rather than *empty* |
+| `NOVELTY_ASSESSMENT.md` | `phase2/NOVELTY_ASSESSMENT.md` | the blueprint's three novelty tests; classification of each proposed element; Gate 2 verdict; three revised questions with kill criteria |
+| `REFERENCE_VERIFICATION_REPORT.md` | `phase2/REFERENCE_VERIFICATION_REPORT.md` | reference apparatus audited (48/48 cited, no orphans, no duplicates); 12 key works bibliographically checked |
+
+### Classification (no element reaches `N1`)
+
+| Proposed element | Class | Reason |
+|---|---|---|
+| E1 constituent enumerator `H_ℓ(z_ℓ)` | **K** | exact field-level counts by hull dimension already exist — Debnath–Prakash (2022/23) for Galois hulls of constacyclic codes, Sangwisut et al. (2015), Lu et al. (2026, exact generating function), arXiv:2605.29204 |
+| E2 joint enumerator | **N2** / `K` if constituents are free | the CRT decomposition makes it `Π_ℓ H_ℓ` — the blueprint explicitly forbids treating the phrase "joint enumerator" as a novelty argument |
+| E3 total enumerator | **N2** / `K` | no content independent of E2 |
+| E4 total-vs-constituent dimension relation | **K** | already proved in the source (Thms 8/10) and re-verified in Phase 1 (audit A7) |
+| E5 well-definedness | **K** (routine) with a real hazard | Phase 1 finding F-1 (unnormalised `η_ℓ`) would corrupt a naive count of distinct codes |
+| R1 repeated-root regime (`p` divides `n`) over `R_e` | **N2** | no accessible work covers it |
+| R2 differing multipliers `α_ℓ` over `R_e` | **N2** | no accessible work covers it; uniqueness of the decomposition of `λ` must be settled first |
+| R3 dual-containing subfamily count | **N2** | no accessible work covers it; factorisation risk |
+
+### Gate 2 verdict
+
+**NOT PASSED for the question as currently framed.** The framing "enumerate constacyclic codes by hull dimension over `R_e`, and take the joint/total distribution" is known at the constituent level and only conditionally new at the ring level. Per the blueprint, the research question must be revised; R1–R3 are the three candidates that survive the comparison, each with an explicit kill criterion that must be settled before Phase 3.
+
+### Two retractions recorded during this phase
+
+| ID | Earlier flag | Resolution |
+|---|---|---|
+| P2-R1 | `[22]` in the source's reference list "listed but never cited" | **Retracted.** `[22]` is cited as `[22, Hermitian construction]` in Lemma 17; the audit regex required the digit to be adjacent to `]` |
+| P2-R2 | `[50, 51, 52, 55, 56, 57, 60, 68, 72]` "cited but absent from the list" | **Retracted.** All nine come from `[n,k,d]` / `[[n,k,≥d]]` code-parameter cells in Tables 2–3; they are not citations. The paper's apparatus is sound: 48/48 cited, 0 orphans, 0 duplicates |
+
+Also corrected: the Phase 2 matrix had dropped Udomkavanich from the `[21]` author list; fixed in the CSV, trail in `REFERENCE_VERIFICATION_REPORT.md` §5.
+
+| P2-R3 | First draft described arXiv:2607.12242 as giving "an exact generating function — the hull codimension enumerator, App. B.2" | **Overstated and corrected.** Re-reading the paper's positioning section: Appendix B is *"Counting and the fine structure of the τ-fixed cosets"* and supplies a **product enumerator** giving exact counts, scarcity probability, mean and variance. Wording corrected in the matrix, the review and the assessment. The same section independently confirms that cyclic and negacyclic codes *"have been enumerated by hull dimension"* (Sangwisut et al., Thms 22 and 23) — which strengthens, rather than weakens, the `K` classification of E1 |
+
+### Blockers and limits carried forward
+
+* **B-1 — publisher full texts unreadable.** Bodies of the paywalled works were not accessible (network to Springer/HAL frozen by instruction). Every "known" in the assessment therefore rests on the work's own abstract or on citing sentences, and **nothing is classified `N1`**. Closing B-1 is what would upgrade R1–R3 from `N2` to `N1` or kill them.
+* **B-2 — Debnath–Prakash (2022/23) body not read.** E1 = `K` rests on their abstract; if their "restrictions on `q`" exclude `m = 2, k = 1`, or their count is aggregate rather than per-dimension, E1 falls to `N2`. One library visit settles it.
+* **U-8 (carried from Phase 1)** — the version of record still has not been examined; all page references are to `hal-04825601v1`.
+
 ## Next step
 
-**Phase 1 is complete and Gate 1 passes. The next action is Phase 2** (related-literature and novelty audit, `SOURCE_THEOREM_REGISTER.md` as input) — to be started only on the user's instruction.
+**Phase 2 is delivered and Gate 2 is NOT PASSED.** The blueprint's stop condition is now the binding one: the research question must be revised to R1, R2 or R3 (or a combination), and the corresponding kill criterion settled, before Phase 3 begins. Phase 3 and later phases remain **not started** and require explicit authorisation.
 
-One open item that Phase 2 should absorb rather than Phase 1: obtaining and diffing the **version of record** (U-8). Phase 1's results are stated for `hal-04825601v1` and are unaffected until a difference is exhibited.
+Phase 1 stands complete; nothing in Phase 2 changed a Phase 1 result, count or register entry.
 
 ---
 
@@ -185,5 +230,9 @@ One open item that Phase 2 should absorb rather than Phase 1: obtaining and diff
 | `SOURCE_MATHEMATICAL_AUDIT.md` | `research_project/phase1/SOURCE_MATHEMATICAL_AUDIT.md` |
 | `SOURCE_NOTATION_GLOSSARY.md` | `research_project/phase1/SOURCE_NOTATION_GLOSSARY.md` |
 | `SOURCE_EXAMPLE_RECALCULATION.md` | `research_project/phase1/SOURCE_EXAMPLE_RECALCULATION.md` |
+| `LITERATURE_COMPARISON_MATRIX.csv` | `research_project/phase2/LITERATURE_COMPARISON_MATRIX.csv` |
+| `LITERATURE_REVIEW.md` | `research_project/phase2/LITERATURE_REVIEW.md` |
+| `NOVELTY_ASSESSMENT.md` | `research_project/phase2/NOVELTY_ASSESSMENT.md` |
+| `REFERENCE_VERIFICATION_REPORT.md` | `research_project/phase2/REFERENCE_VERIFICATION_REPORT.md` |
 
 Supporting evidence: `source_audit/PHASE0_VERIFICATION_LOG.md`, `source_audit/SOURCE_PDF_MANIFEST.csv`, `source_audit/PHASE1_EXECUTION_PLAN.md`, `source_audit/REPOSITORY_SOURCE_SEARCH.md`, `source_audit/PRIOR_ART_REGISTER.md`, `source_audit/SOURCE_IDENTITY_BLOCKER.md`, `source_audit/SOURCE_ACCESS_STATUS.md`, `phase1/raw/*`, `code/*`, `tools/*`, `logs/*`.
