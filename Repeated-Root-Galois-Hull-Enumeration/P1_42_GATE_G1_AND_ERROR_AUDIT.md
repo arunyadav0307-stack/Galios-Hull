@@ -232,3 +232,50 @@ the remaining package (joint enumerator, second-order results,
 extension-field assembly) is a sufficient advance remains an
 editorial/referee judgment. Novelty is not claimed to be fully
 established; the paper has not been submitted.
+
+## F. P1-47 update (23 Oct 2026) — ES2026 comparison (arXiv v1)
+
+**Access and caveat.** Eldin–Solé, *Generator polynomial matrices of the
+Galois hulls of multi-twisted codes*, arXiv:2305.15237v1 (24 May 2023),
+was read in full lawfully via the arXiv HTML full text (the Commander did
+not hold a PDF; arXiv is the authors' open-access version of record for
+this comparison). The manuscript cites the published version, *Finite
+Fields Appl.* 109 (2026), Art. 102712; **publisher theorem numbering has
+not been verified against the arXiv text**, so numbers below are arXiv v1
+numbers only.
+
+**Setting.** Multi-twisted (MT) codes over a **single** finite field
+\(\mathbb{F}_{p^e}\): index \(\ell\), block lengths \(m_j\), shift
+constants \(\lambda_j\), viewed as free modules over the PID
+\(\mathbb{F}_q[x]\); constacyclic codes are the index-one case. No
+hypothesis \(\gcd(m_j,p)=1\) is imposed (the PID method also covers
+repeated-root moduli). The hull is MT under the compatibility condition
+\(\Lambda^{-p^{-\kappa}}=\Lambda\), i.e.
+\(\lambda_j^{-p^{e-\kappa}}=\lambda_j\) for all \(j\) — the same condition
+as our per-component \(\lambda_s^{1+p^{d_s-k}}=1\) at index one.
+
+**Theorem-level comparison (arXiv v1 numbering).**
+
+| ES2026 result | Relation to this manuscript |
+|---|---|
+| Theorem 10: GPM \(\mathbf{H}_\kappa\) for the Galois dual of an MT code; Corollary 11: hull is MT under compatibility | Per-code dual/hull machinery for a *given* code. At index one this yields a generator (one generator polynomial) for dual/hull of a given constacyclic code, consistent in content with our Theorems 4.3/5.2 but in GPM/Hermite-normal-form form, not exponent form |
+| Theorem 21: \(\dim\mathcal{Q}_{\mathbf{G}}=\dim\mathcal{C}-\dim h_\kappa(\mathcal{C})\), with \(\dim\mathcal{Q}_{\mathbf{G}}\) computable from the determinantal divisors of \(\mathfrak{B}_{\mathbf{G}}\); Corollary 22 (self-orthogonal iff \(\mathfrak{B}_{\mathbf{G}}=\mathbf{0}\)); Corollary 26 (LCD criterion); Theorems 25/28: GPM for \(h_\kappa(\mathcal{C})\) | A hull-*dimension formula for a given code* via an associated quasi-cyclic code and determinantal divisors. No closed exponent formula along reciprocal orbits, and no product over components/fields |
+| (whole paper) | **Absent (verified):** counting or enumeration of codes by hull dimension; any distribution over a family of assignments; joint \((\dim C,\dim\mathrm{Hull})\) laws; moments (mean/variance/covariance); products of finite fields with \([K_s:\mathbb{F}_q]\) dimension scaling. Their examples are individual optimal/MDS codes, not enumerations |
+
+**Status.** With §§C–F, all four closest works in Table 1 have now been
+compared at theorem level from lawfully read full texts (DPI2023, DP2025:
+publisher full texts supplied by the Commander; DIMP2026, ES2026: arXiv
+v1, publisher numbering unverified). The per-code hull formula
+(DPI2023 Thm. 3; DIMP2026 Thm. 8 over \(\mathbb{F}_q\)-components;
+ES2026 GPM machinery at index one) and the single-field hull mean
+(DP2025 Thm. 3.3) are prior art and are credited as such. No counterpart
+has been found in these texts for: the joint code–hull enumerator as a
+product of transfer-matrix traces over arbitrary reciprocal-orbit
+lengths; the labeled LCD/self-orthogonal/dual-containing counts over a
+product of finite fields; or the second-order results (Theorem 8.4,
+Corollary 8.5). G1 nevertheless remains **PARTIALLY RESOLVED**: the
+comparison covers the identified closest literature, not all literature;
+publisher numberings for DIMP2026/ES2026 are unverified; and whether the
+remaining package constitutes a sufficient advance is an
+editorial/referee judgment. Novelty is not claimed to be fully
+established, and the paper has not been submitted.
