@@ -23,7 +23,9 @@ A document existing is never, by itself, evidence of a passed gate.
 | 0.7 | Create a clean project directory; never infer a file from a planned name | **PASS** | `research_project/` created; every path in this report exists and is listed in §Deliverables below |
 | 0.8 | Preserve original files | **PASS** | no root artifact modified or deleted; `git status` shows only the new `research_project/` tree; extraction was to a separate directory |
 | 0.9 | Separate verified facts, unresolved issues, assumptions | **PASS** | `PROJECT_PLAN.md` §5–§6; §Unresolved below |
-| 0.10 | Obtain the blueprint's named source paper | **BLOCKED** | 12 access routes tried and closed; see `source_audit/SOURCE_ACCESS_STATUS.md` §2. A verifier is armed and validated (`tools/verify_source_pdf.py`, `--selftest` PASS; rejects the Debnath preprint, records verdicts to `SOURCE_PDF_MANIFEST.csv`) |
+| 0.10 | Obtain the blueprint's named source paper | **BLOCKED** | 12 external access routes tried and closed; see `source_audit/SOURCE_ACCESS_STATUS.md` §2 |
+| 0.11 | Repository-wide search for the PDF (working tree, all 11 branches, all 349 blobs, both ZIPs by magic bytes, whole filesystem) | **PASS as a search, negative as a result** | `source_audit/REPOSITORY_SOURCE_SEARCH.md`; gate output: 6 PDFs examined, 0 accepted, 2 distinct documents, neither is the source paper |
+| 0.12 | Armed gate that accepts the file wherever it is placed | **PASS** | `tools/find_and_verify_source.py` (walks the tree, tests every PDF, records SHA-256, exit 0 only on exactly one acceptance) + `tools/verify_source_pdf.py --selftest` 3/3 |
 
 ### Gate 0 verdict
 
@@ -97,7 +99,13 @@ under Option 2 of the blocker document.
 
 ## Next step
 
-**One action unblocks everything: supply the PDF.**
+**One action unblocks everything: place the PDF in `research_project/source_paper/`
+(any `*.pdf` name) and run `python3 research_project/tools/find_and_verify_source.py --record`.**
+
+The repository has now been searched exhaustively — working tree, all 11 remote
+branches (349 blobs), both ZIPs entry-by-entry by magic bytes, and the entire
+filesystem: six PDFs exist, and none is the Yadav et al. article
+(`source_audit/REPOSITORY_SOURCE_SEARCH.md`).
 
 Preferred — the version of record, saved as
 `Yadav-2024-Hermitian-hull-CAM-43-269-Springer.pdf` in the repository root.

@@ -255,3 +255,23 @@ github code search       -> 8 hits, all Scopus metadata dumps, no article text
 ```
 
 Detail and per-route evidence: source_audit/SOURCE_ACCESS_STATUS.md §2.
+
+## 15. Repository-wide source search (2026-10-23)
+
+```
+PDF                                                                                                                    pp  verdict  reason
+-------------------------------------------------------------------------------------------------------------------  ----  -------  ----------------------------------------
+Galios hulls of constacclic codes over affine algebra rings'.pdf                                                       27  reject   this is Debnath et al. "galois hulls of constacyclic codes over affine algebra rings"; tit
+research_project/prior_art/Galios-Hull-Complete-Work-2026-10-20/01_Paper_Package/manuscript/main.pdf                   19  reject   title not found; missing ['yadav', 'singh', 'islam', 'prakash', 'sol']; neither found
+research_project/prior_art/Galios-Hull-Complete-Work-2026-10-20/01_Paper_Package/references/source-paper.pdf           27  reject   this is Debnath et al. "galois hulls of constacyclic codes over affine algebra rings"; tit
+research_project/prior_art/Galios-Hull-Complete-Work-2026-10-20/03_Source_Paper/source-paper-arXiv-2412.08512v1.pdf    27  reject   this is Debnath et al. "galois hulls of constacyclic codes over affine algebra rings"; tit
+research_project/prior_art/Galios-Hull-kGalois-Phase10F/manuscript/main.pdf                                            19  reject   title not found; missing ['yadav', 'singh', 'islam', 'prakash', 'sol']; neither found
+research_project/prior_art/Galios-Hull-kGalois-Phase10F/references/source-paper.pdf                                    27  reject   this is Debnath et al. "galois hulls of constacyclic codes over affine algebra rings"; tit
+
+PDFs examined: 6   accepted: 0
+
+GATE 0: BLOCKED — no PDF in the repository is the source paper.
+Place the file in research_project/source_paper/ (any name ending .pdf) and re-run.
+```
+
+Scope: working tree; 11 remote branches / 349 blobs read in full where >=10 kB; both ZIPs tested entry-by-entry by magic bytes; `find /` over the filesystem. Detail: source_audit/REPOSITORY_SOURCE_SEARCH.md.
