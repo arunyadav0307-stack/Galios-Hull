@@ -1,8 +1,9 @@
 # R4 — Feasibility and structural test: the quantum-parameter distribution
 
-**Status: structurally GO.** R4 is the first candidate in this project whose counting target is
-**not** a product over the CRT components. That is a necessary condition for surviving Gate 2, not a
-sufficient one — §6 lists the two checks that must still be run, and neither is a formality.
+**Status: GO — recommended to carry Gate 2.** R4 is the first candidate in this project whose
+counting target is **not** a product over the CRT components (§3 proves it, §4 confirms it
+numerically), and the prior-art check in §6.1 finds the closest route structurally unable to subsume
+it. Novelty is **not** claimed; distinguishability is.
 
 Written from `78b89ac` on branch `arena/831a2e65-galios-hull`. Probe: `phase2/r4_probe/r4_probe.py`,
 log `r4_probe_log.txt` (29 lines), runtime < 1 s.
@@ -121,12 +122,32 @@ warning against relabelling applies.
 | **Sangwisut–Jitman–Udomkavanich, AMC 2017** | Hermitian hull dimensions of `λ`-constacyclic codes over `F_{q²}`; characterisation/enumeration of self-dual and LCD cases | no distance |
 | **Dinh, Bag, Ashraf–Mohammad, et al.** (repeated-root quantum-code literature) | *tables* of quantum codes from repeated-root constacyclic codes, and over `F_q + uF_q + …` with Gray maps | constructions and tables, not counts or distributions |
 
-Reading: the "count codes with a prescribed hull **and** a distance constraint" idea is not new in
-the abstract (arXiv:2512.12519), and that is the strongest threat to R4. What I did not find is any
-work that does it **for a constacyclic family**, exactly, with a repeated-root parameter — which is
-exactly where the source's machinery lives. Under Phase 2's rules a search result of this kind
-establishes **at most** that R4 is not obviously pre-empted; it does **not** establish absence, and
-B-1/B-2 remain open. Classification, if it survives: **N2 at best**.
+**K4-1 outcome — resolved at abstract/full-text-page level.**
+
+1. **The closest threat is withdrawn.** arXiv:2512.12519 was withdrawn by its authors on 16 Dec 2025
+   with the comment *"There is some overlap in content with existing papers. See 'A further study on
+   the mass formula for linear codes with prescribed hull dimension'"*. Its distance content was
+   **asymptotic** in any case ("asymptotic behavior of Hermitian self-orthogonal codes whose minimum
+   distance is at least `d`"), not an exact count.
+2. **The mass-formula line does not reach R4.** arXiv:2410.13578 (Li–Shi–Li–Ling) and the IEEE TIT
+   2024 / arXiv:2605.29204 papers count **all linear `[n,k]` codes** with prescribed Euclidean,
+   Hermitian or symplectic hull dimension, obtained by letting the unitary/symplectic group act on
+   the **Grassmannian** of all `k`-subspaces. Two consequences settle the point:
+   * those formulas carry **no distance constraint**;
+   * a Grassmannian mass formula **cannot be specialised to a constacyclic family** — the unitary
+     group does not preserve the constacyclic property, and a constacyclic code is a vanishingly
+     small, highly structured subset of the `k`-subspaces. So the mass-formula literature is not a
+     competing route to R4 even in principle; it is a different object.
+3. **Constacyclic work computes the other half.** Sangwisut–Jitman–Udomkavanich (AMC 2017) and the
+   source paper compute hull dimensions and dual-containing *criteria*; the repeated-root
+   quantum-code literature (Dinh, Bag, Ashraf–Mohammad, et al.) produces **tables** of codes. No
+   accessible work gives a **(hull, distance) distribution** for a constacyclic family.
+
+Reading: R4 is **not pre-empted by the closest known results**, and the closest route (mass formulas)
+is structurally unable to subsume it. Under Phase 2's rules this establishes distinguishability, not
+absence of literature: **B-1** (publisher full texts) and **B-2** (Debnath–Prakash body) remain open.
+Classification: **N2** — "not found in the accessible literature under an explicitly stated search",
+which is the strongest statement the evidence supports.
 
 ## 7. Relation to R1/R2/R3
 

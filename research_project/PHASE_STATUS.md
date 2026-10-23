@@ -15,7 +15,7 @@
 |---|---|---|---|
 | **Gate 0** | "The exact source PDF and the usable research environment are identified. If the PDF cannot be accessed, stop and request it." | **PASS** (2026-10-23) | `GATE 0: PASS` from `tools/find_and_verify_source.py` over 7 PDFs with exactly 1 acceptance; SHA-256 + version recorded in `source_audit/SOURCE_PDF_MANIFEST.csv`; identity cross-checked against the HAL record, the DOI record and the publisher landing page (`SOURCE_PAPER_METADATA.md`) |
 | **Gate 1** | "Central source-paper results and the assumptions needed for the new work are understood and documented." | **PASS** (2026-10-23) | four required deliverables written (`phase1/SOURCE_*.md`); 25/25 register entries; 33/33 table rows and 31/31 example checks recomputed exactly; 11/11 audit items recorded |
-| Gate 2 | "The proposed main contribution is distinguishable from the closest known results." | **NOT PASSED — question must be revised** (2026-10-23) | three novelty tests run in `phase2/NOVELTY_ASSESSMENT.md`; constituent enumerator classified **K** (exact field-level counts already exist: Debnath–Prakash 2022/23, Sangwisut et al. 2015, Lu et al. 2026, arXiv:2605.29204); joint/total enumerators **N2 at best** because CRT multiplicativity makes them a product of the constituent laws; three surviving revisions R1/R2/R3 identified, each at most **N2** and each with a stated kill criterion |
+| Gate 2 | "The proposed main contribution is distinguishable from the closest known results." | **PASSED on R4 — distinguishable, not novel** (2026-10-23) | three novelty tests run in `phase2/NOVELTY_ASSESSMENT.md`; constituent enumerator classified **K** (exact field-level counts already exist: Debnath–Prakash 2022/23, Sangwisut et al. 2015, Lu et al. 2026, arXiv:2605.29204); joint/total enumerators **N2 at best** because CRT multiplicativity makes them a product of the constituent laws; three surviving revisions R1/R2/R3 identified, each at most **N2** and each with a stated kill criterion |
 
 ---
 
@@ -310,24 +310,29 @@ R1–R3**.
 | Numeric confirmation | `q=3, e=2, n=2`, `F_9`, `M=[[1,1],[1,−1]]`: 9 component-invariant groups; the group `(k₁,d₁,k₂,d₂)=(1,2,1,2)` realises Gray distances **`{2,3}`** — non-constant; 144 dual-containing pairs; parameters `(k,d) ∈ {(2,2),(2,3),(3,2),(4,1)}` |
 | Scope limit found (5.1) | `M` is a free parameter (`MM*=νI`); two admissible choices gave *identical* distances in this instance (`0/16`), so no `M`-dependence is claimed |
 | Scope limit found (5.2) | the paper's `e=2` matrix has `ν = 2`, which is `0` in even characteristic: `M` is singular, `ψ` not injective, and the probe reproduces Gray distance `0` over `F_4`. Not an error (all the paper's examples use odd `q`) but a real generality restriction |
-| Prior-art pass (K4-1) | **search level only.** Counts of prescribed hull dimension exist (arXiv:2605.29204); hull+distance counting exists *for all linear codes, asymptotically* (arXiv:2512.12519) — the closest threat; constacyclic distance work is tables, not counts. Absence **not** established; B-1/B-2 open |
+| Prior-art pass (K4-1) | **resolved at abstract/page level.** The closest threat arXiv:2512.12519 is **withdrawn** (16 Dec 2025, "overlap with existing papers") and its distance content was asymptotic anyway. The mass-formula line (arXiv:2410.13578, IEEE TIT 2024, arXiv:2605.29204) counts all `[n,k]` codes by hull dimension via a **Grassmannian** group action: no distance constraint, and it **cannot be specialised to a constacyclic family** (the unitary group does not preserve constacyclicity). Constacyclic work gives hull dimensions, criteria or tables — not (hull, distance) distributions. Absence not established; B-1/B-2 open; **N2** |
 | Feasibility (K4-2) | **partial**: exact enumeration is affordable at small `n`, nothing more. No closed form identified |
-| Verdict | **structurally GO**; not yet GO as a research question. K4-1 and K4-2 remain open, and Gate 2 has not been re-run |
+| Verdict | **GO** — survives the structural test and is not pre-empted by the closest known results. **Gate 2 PASSED on R4** (distinguishable; no novelty claimed). K4-2 (feasibility of an exact count) becomes the first task of Phase 3 |
 
 ## Next step
 
-R1, R2, R3 are **NO-GO** (`25bbe62`, `78b89ac`, `c9d4517`). **R4 is structurally GO but unproven on
-novelty**, so Gate 2 stays NOT PASSED. Phase 3 is **not started**.
+**Gate 2 has been passed on R4.** R1, R2, R3 are recorded NO-GO (`25bbe62`, `78b89ac`, `c9d4517`).
+R4 — the exact joint (Hermitian hull dimension, Gray distance) distribution of `λ`-constacyclic codes
+over `R_e` with `C^{⊥_H} ⊆ C` — is distinguishable from the closest known results and, unlike the
+other three, is not a product of field-level laws.
 
-Order of work now in progress, requiring no further authorisation:
+**Phase 3 may now begin.** Its first task is **K4-2**, feasibility, in this order:
 
-1. **K4-1 (decisive for R4).** Full-text check of arXiv:2512.12519 and arXiv:2605.29204 — do they
-   already give an exact joint (hull, distance) count that specialises to constacyclic families? If
-   yes, R4 is `K` and the project closes at Gate 2. Also attempt B-1/B-2 again.
-2. **K4-2.** If K4-1 clears, decide whether the (hull, Gray distance) distribution has any structure
-   beyond brute force — in particular whether the repeated-root distance formulas give closed forms
-   for the field-level laws that the ring-level count needs.
-3. **Gate 2 re-run** on R4 only if both clear. Only then Phase 3.
+1. Fix the research statement precisely, including the choice of `M` (which the paper leaves free
+   subject to `MM* = νI`).
+2. Settle whether the field-level input — the joint (hull dimension, minimum distance) law for
+   `λ`-constacyclic codes over `F_{q²}` of length `n`, for arbitrary `n` including `p | n` — is
+   obtainable in closed form, e.g. from the repeated-root distance results of Dinh, or whether it is
+   irreducibly a computation.
+3. Only then decide the deliverable: a closed-form distribution, or an exact algorithm plus tables.
+
+Phase 3 and later phases have **not** begun; the first Phase 3 deliverable will be the feasibility
+decision in (2). Nothing in Phase 2 changed a Phase 1 result, count or register entry.
 
 Phase 1 stands complete; nothing in Phase 2 changed a Phase 1 result, count or register entry.
 
