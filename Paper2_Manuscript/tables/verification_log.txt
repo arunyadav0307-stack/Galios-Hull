@@ -1,0 +1,16 @@
+[PASS exhaustive] F4, n=10 (n'=5,M=2), lambda=1, k=1: words=27, orbits=[(1, 1), (2, 2)], joint terms=15
+[PASS exhaustive] F4, n=10 (n'=5,M=2), lambda0=omega, k=1: words=27, orbits=[(1, 1), (2, 2)], joint terms=15
+[PASS exhaustive] F3, n=12 (n'=4,M=3), lambda=1, k=0: words=64, orbits=[(1, 1), (1, 1), (1, 2)], joint terms=33
+[PASS exhaustive] F9, n=12 (n'=4,M=3), lambda0=i, k=1: words=16, orbits=[(2, 2)], joint terms=7
+[PASS exhaustive] F9, n=12 (n'=4,M=3), lambda0=-1, k=1: words=256, orbits=[(2, 1), (2, 1)], joint terms=22
+[PASS exhaustive] F8, n=14 (n'=7,M=2), lambda=1, k=1: words=2187, orbits=[(1, 1), (6, 1)], joint terms=44
+[PASS exhaustive] F4 component, n=10, lambda=1, k=1: words=27, orbits=[(1, 1), (2, 2)], joint terms=15
+[PASS exhaustive] F16/F4 component, n=10, lambda=1, k=1: words=243, orbits=[(1, 2), (4, 2)], joint terms=24
+[PASS exhaustive] F4 x F16, n=10: orbits=[(1, 1), (2, 2), (1, 2), (4, 2)], joint terms=123
+[PASS exhaustive] F4, n=14 (n'=7,M=2), lambda=1, k=1 [deg-3 cubics]: words=27, orbits=[(1, 1), (2, 3)], joint terms=15
+[PASS exhaustive] F3, n=24 (n'=8,M=3), lambda0=-1, k=0 [deg-4 quartics]: words=16, orbits=[(2, 4)], joint terms=7
+[PASS sample]     F9, n=24 (n'=8,M=3), lambda=1, k=1: sampled words=60, orbits=[(1, 1), (1, 1), (1, 1), (1, 1), (2, 1), (2, 1)]
+[PASS sample]     F25, n=30 (n'=6,M=5), lambda=1, k=1: sampled words=60, orbits=[(1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1)]
+[PASS sample]     F32, n=62 (n'=31,M=2), lambda=1, k=1: sampled words=12, orbits=[(1, 1), (10, 1), (10, 1), (10, 1)]
+[PASS quotient-ring F4[X]/<X(X^2+X+omega)> in F4^30] 40 compatible + 40 mixed-twist repeated-root codes verified directly!
+ALL DIRECT FINITE-FIELD CHECKS PASSED

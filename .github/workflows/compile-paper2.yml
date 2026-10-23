@@ -1,0 +1,30 @@
+name: Compile Paper 2 elsarticle manuscript
+on:
+  push:
+    branches: [arena/290d05d1-galios-hull]
+    paths:
+      - 'Paper2_Manuscript/manuscript/**'
+      - '.github/workflows/compile-paper2.yml'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile main.tex with TeX Live
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: main.tex
+          working_directory: Paper2_Manuscript/manuscript
+          args: -pdf -interaction=nonstopmode -halt-on-error
+      - name: Clean auxiliary files except pdf, bbl, and log
+        run: |
+          rm -f Paper2_Manuscript/manuscript/*.aux Paper2_Manuscript/manuscript/*.out Paper2_Manuscript/manuscript/*.blg Paper2_Manuscript/manuscript/*.fdb_latexmk Paper2_Manuscript/manuscript/*.fls Paper2_Manuscript/manuscript/*.spl
+      - name: Commit compiled main.pdf, main.bbl, and main.log
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -f Paper2_Manuscript/manuscript/main.pdf Paper2_Manuscript/manuscript/main.bbl Paper2_Manuscript/manuscript/main.log
+          git commit -m "CI: compile Paper 2 main.pdf, main.bbl, and main.log via TeX Live" || echo "no changes"
+          git push

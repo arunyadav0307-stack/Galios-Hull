@@ -1,0 +1,5 @@
+- Exact joint (code, k-Galois hull) enumerator for all repeated-root lengths n'p^t.
+- Covers arbitrary non-split square-free affine algebras and all twists lambda.
+- Compatible k-Galois LCD code counts equal 2^{#orbits}, independent of p^t.
+- Unconditional proof of single-orbit support trapezoid and closed hull variances.
+- Polynomial-time transfer-matrix DP evaluates >10^21 codes in <0.3 seconds.
