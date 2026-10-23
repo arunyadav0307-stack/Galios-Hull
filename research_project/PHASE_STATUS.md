@@ -342,18 +342,35 @@ deliverable, and **P3-2 is now in progress**.
 **No theorem, no closed form and no novelty claim** is made in this Phase 3 section. Blockers B-1
 and B-2 remain open.
 
+## Phase 3 — P3-1 exact tables (2026-10-23)
+
+Deliverable `phase3/P3_1_TABLES.md`; probe `phase3/p3_tables.py`, log `p3_tables_log.txt` (85 lines).
+Five instances, **169 codes, 144 with exactly computed distances** (`q ∈ {3,2}`, `n ∈ {3,6,2,4,6}`).
+
+| Finding | Outcome |
+|---|---|
+| C1: "every LCD code has `d ≤ 2`" | **REFUTED** — `hull = 0` codes reach `d = 3` in 3 of 5 instances; instance A contains **LCD MDS** codes `[3,1,3]`, `[3,2,2]` over `F_9` |
+| C2: "MDS ⟺ self-orthogonal" | **REFUTED both ways** — A: 16 MDS, only 4 self-orthogonal; B: 24 self-orthogonal, only 8 MDS |
+| C3: joint law ≠ product of marginals | **CONFIRMED 5/5** — now across two fields and five lengths, not one instance |
+| Closed form for `d(a,b)` | not found; reframed as a two-point multiplicity-code problem |
+| Ring level (Gray coupling) — the actual R4 question | **not started** (P3-3) |
+
+Both refutations were pre-registered as conjectures in `K4_2_FEASIBILITY.md` §2.1 and are recorded as
+refuted rather than quietly dropped. No theorem and no novelty claim is made.
+
 ## Next step
 
-**Phase 3 is in progress.** Gate 2 is passed on R4 (`372d9a3`); K4-2 is complete (`K4_2_FEASIBILITY.md`).
-Next item is **P3-2**: prove structural facts about the two-orbit family `⟨(x−1)^a(x+1)^b⟩` in
-`F_9[x]/(x^6−1)`, where the exact distance matrix is already a complete answer, and test the
-conjecture that every LCD (`hull = 0`) code in that family has `d ≤ 2`.
+**Phase 3 in progress.** Gate 2 passed on R4 (`372d9a3`); K4-2 complete; P3-1 complete
+(`P3_1_TABLES.md`). Next is **P3-2**: structural theorems for the two-orbit family
+`⟨(x−1)^a (x+1)^b⟩` in `F_9[x]/(x^6−1)`, where the distance matrix is already complete, and for the
+MDS/LCD pattern the tables now exhibit.
 
-P3-1 (exact tables over larger `q, n`) follows, then P3-3 (the ring-level Gray coupling, which is the
-actual R4 question).
+**P3-3** (the ring-level `R_e` Gray coupling, the actual R4 question) follows. The two refuted
+conjectures are not revisited; the surviving structural fact (joint law irreducibility) is what
+Phase 3 rests on.
 
-R1, R2, R3 remain NO-GO and are not revisited. Nothing in Phase 2 or Phase 3 has changed a Phase 1
-result, count or register entry.
+R1, R2, R3 remain NO-GO. Nothing in Phase 2 or Phase 3 has changed a Phase 1 result, count or
+register entry.
 
 Phase 1 stands complete; nothing in Phase 2 changed a Phase 1 result, count or register entry.
 
