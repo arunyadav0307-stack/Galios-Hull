@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.10.1)  23 OCT 2026 09:40
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.10.1)  23 OCT 2026 09:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -211,8 +211,8 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) [1
 
 {/opt/texlive/texdir/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4]
- [5]
-Overfull \hbox (17.07025pt too wide) detected at line 489
+
+Overfull \hbox (17.07025pt too wide) detected at line 490
 [][] \OML/cmm/m/it/10.95 C\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 a\OT1/cmr/m/n
 /10.95 )  =  [] [] \OML/cmm/m/it/10.95 w[] []\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/
 10.95 P \OMS/cmsy/m/n/10.95 ^^@ \OML/cmm/m/it/10.95 []\OT1/cmr/m/n/10.95 )\OML
@@ -222,20 +222,20 @@ Overfull \hbox (17.07025pt too wide) detected at line 489
 \OML/cmm/m/it/10.95 [];  []\OT1/cmr/m/n/10.95 )\OML/cmm/m/it/10.95 ;
  []
 
-[6]
-Overfull \hbox (60.37912pt too wide) detected at line 613
+[5] [6]
+Overfull \hbox (60.37912pt too wide) detected at line 614
 []
  []
 
 [7]
-Overfull \hbox (23.33835pt too wide) in paragraph at lines 728--736
+Overfull \hbox (23.33835pt too wide) in paragraph at lines 729--737
 \OT1/cmr/m/it/10.95 Consequently, un-der the uni-form dis-tri-bu-tion on la-bel
 ed as-sign-ments, con-di-tion-ally on $[][]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10
 .95 C\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 a\OT1/cmr/m/n/10.95 )) =
  []
 
 
-Overfull \hbox (23.02098pt too wide) in paragraph at lines 728--736
+Overfull \hbox (23.02098pt too wide) in paragraph at lines 729--737
 \OT1/cmr/m/it/10.95 in par-tic-u-lar $\U/msb/m/n/10.95 E\OT1/cmr/m/n/10.95 [[][
 ] \OML/cmm/m/it/10.95 C \OMS/cmsy/m/n/10.95 j [][]\OT1/cmr/m/n/10.95 (\OML/cmm/
 m/it/10.95 C\OT1/cmr/m/n/10.95 ) = 0] = ^^A\OML/cmm/m/it/10.95 =\OT1/cmr/m/n/10
@@ -246,14 +246,14 @@ C \OMS/cmsy/m/n/10.95 j [][]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 C\OT1/cmr/m
  []
 
 [8]
-Overfull \hbox (20.53816pt too wide) in paragraph at lines 798--801
+Overfull \hbox (20.53816pt too wide) in paragraph at lines 799--802
 \OT1/cmr/m/it/10.95 whose spe-cial-iza-tion $\OML/cmm/m/it/10.95 t \OT1/cmr/m/n
 /10.95 = \OML/cmm/m/it/10.95 uz$ \OT1/cmr/m/it/10.95 is the joint enu-mer-a-tor
  of the self-orthogonal fam-ily (there $[][] [][] \OT1/cmr/m/n/10.95 =
  []
 
 
-Overfull \hbox (10.99127pt too wide) in paragraph at lines 806--814
+Overfull \hbox (10.99127pt too wide) in paragraph at lines 807--815
 \OT1/cmr/m/it/10.95 Writing $\OML/cmm/m/it/10.95 N[]\OT1/cmr/m/n/10.95 (\OML/cm
 m/m/it/10.95 K\OT1/cmr/m/n/10.95 )$ \OT1/cmr/m/it/10.95 for the num-ber of self
 -orthogonal as-sign-ments with $[][] \OML/cmm/m/it/10.95 C \OT1/cmr/m/n/10.95 =
@@ -262,7 +262,7 @@ r/m/n/10.95 (\OML/cmm/m/it/10.95 K; H\OT1/cmr/m/n/10.95 )$
  []
 
 [9]
-Overfull \hbox (32.48193pt too wide) in paragraph at lines 934--938
+Overfull \hbox (32.48193pt too wide) in paragraph at lines 935--939
 []\OT1/cmr/m/it/10.95 For $\OML/cmm/m/it/10.95 L \OMS/cmsy/m/n/10.95 ^^U \OT1/c
 mr/m/n/10.95 3$\OT1/cmr/m/it/10.95 , two ad-ja-cent edges sat-isfy $[]\OT1/cmr/
 m/n/10.95 (\OML/cmm/m/it/10.95 X[]; X[]\OT1/cmr/m/n/10.95 ) = \OML/cmm/m/it/10.
@@ -271,13 +271,13 @@ m/n/10.95 (\OML/cmm/m/it/10.95 X[]; X[]\OT1/cmr/m/n/10.95 ) = \OML/cmm/m/it/10.
  []
 
 [10]
-Overfull \hbox (2.00261pt too wide) in paragraph at lines 981--994
+Overfull \hbox (2.00261pt too wide) in paragraph at lines 982--995
 []\OT1/cmr/m/n/10.95 Independence across or-bits gives the weighted sum. For on
 e or-bit: $\OML/cmm/m/it/10.95 L \OT1/cmr/m/n/10.95 = 1$ is Lemma 8.3[](i).
  []
 
 
-Overfull \hbox (5.3241pt too wide) in paragraph at lines 1009--1025
+Overfull \hbox (5.3241pt too wide) in paragraph at lines 1010--1026
 []\OT1/cmr/m/n/10.95 By The-o-rem 5.2[], $[][] \OML/cmm/m/it/10.95 C \OT1/cmr/m
 /n/10.95 = [][] \OML/cmm/m/it/10.95 w[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 
 P \OMS/cmsy/m/n/10.95 ^^@ \OML/cmm/m/it/10.95 A[]\OT1/cmr/m/n/10.95 )$ with in-
@@ -287,7 +287,7 @@ de-pen-dent $\OML/cmm/m/it/10.95 A[]$ \OT1/cmr/m/n/10.95 uni-form on $\OMS/cmsy
  []
 
 [11] [12]
-Overfull \hbox (2.46057pt too wide) in paragraph at lines 1157--1169
+Overfull \hbox (2.46057pt too wide) in paragraph at lines 1158--1170
 \OT1/cmr/m/n/9 (2\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 0)[] 1$, $(2\OML/cmm/m/it/9 ;
  \OT1/cmr/m/n/9 2)[] 27$, $(3\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 1)[] 6\OML/cmm/m/
 it/9 ; \OT1/cmr/m/n/9 (3\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 2)[] 12$, $(3\OML/cmm/
@@ -299,7 +299,7 @@ T1/cmr/m/n/9 4)[] 96$, $(5\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 5)[] 60$,
  []
 
 
-Overfull \hbox (20.241pt too wide) in paragraph at lines 1157--1169
+Overfull \hbox (20.241pt too wide) in paragraph at lines 1158--1170
 \OT1/cmr/m/n/9 (6\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 2)[] 24\OML/cmm/m/it/9 ; \OT1
 /cmr/m/n/9 (6\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 3)[] 84$, $(6\OML/cmm/m/it/9 ; \O
 T1/cmr/m/n/9 4)[] 144$, $(6\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 5)[] 84$, $(6\OML/c
@@ -312,19 +312,19 @@ T1/cmr/m/n/9 2)[] 24$,
  []
 
 [13] [14]
-Underfull \hbox (badness 4505) in paragraph at lines 1345--1349
+Underfull \hbox (badness 4505) in paragraph at lines 1346--1350
 []\OT1/cmr/m/n/10.95 I. Deb-nath and O. Prakash, Av-er-age di-men-sions of Ga-l
 ois hulls of con-sta-
  []
 
 [15]
-Underfull \hbox (badness 1248) in paragraph at lines 1455--1459
+Underfull \hbox (badness 1248) in paragraph at lines 1456--1460
 []\OT1/cmr/m/n/10.95 T. Wu, S. Zhu, L. Liu, and L. Li, Repeated-root con-sta-cy
 clic codes of length
  []
 
 
-Underfull \hbox (badness 3679) in paragraph at lines 1455--1459
+Underfull \hbox (badness 3679) in paragraph at lines 1456--1460
 \OT1/cmr/m/n/10.95 6\OML/cmm/m/it/10.95 `[]p[]$\OT1/cmr/m/n/10.95 , \OT1/cmr/m/
 it/10.95 Ad-vances in Math-e-mat-ics of Com-mu-ni-ca-tions \OT1/cmr/m/n/10.95 1
 7(5) (2023), 1154--1180.
@@ -343,7 +343,7 @@ Here is how much of TeX's memory you used:
  31952 multiletter control sequences out of 15000+600000
  639583 words of font info for 83 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 57i,10n,65p,473b,252s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 57i,10n,65p,218b,252s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </opt/texlive/texdir/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></o
 pt/texlive/texdir/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></opt/te
 xlive/texdir/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></opt/texlive
@@ -370,7 +370,7 @@ amsfonts/cm/cmtt10.pfb></opt/texlive/texdir/texmf-dist/fonts/type1/public/amsfo
 nts/cm/cmtt12.pfb></opt/texlive/texdir/texmf-dist/fonts/type1/public/amsfonts/s
 ymbols/msbm10.pfb></opt/texlive/texdir/texmf-dist/fonts/type1/public/amsfonts/s
 ymbols/msbm7.pfb>
-Output written on P1_15_MANUSCRIPT_DRAFT.pdf (16 pages, 400673 bytes).
+Output written on P1_15_MANUSCRIPT_DRAFT.pdf (16 pages, 399230 bytes).
 PDF statistics:
  192 PDF objects out of 1000 (max. 8388607)
  118 compressed objects within 2 object streams
