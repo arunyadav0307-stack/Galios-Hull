@@ -232,9 +232,50 @@ Prepared at the user's request, after Phase 2, at their preferred candidate **R3
 
 **Four errors made and fixed inside the probe** (E-1 monic-only ideal enumeration; E-2 `+=` instead of `−=` in RREF; E-3 coefficientwise conjugation instead of the paper's conjugate-reciprocal involution, which produced a spurious failure of Theorem 16; E-4 incorrect subspace intersection). All are recorded in `R3_DECISION.md` §8 because the verdict rests on the probe.
 
+## R1 feasibility and novelty kill test (2026-10-23) — R1 NO-GO
+
+Full argument: `phase2/R1_FEASIBILITY.md`. Probe: `phase2/r1_probe/` (`r1_probe.py`,
+`r1_orbit_check.py`, log `r1_probe_log.txt`, 185 lines).
+
+| Item | Outcome |
+|---|---|
+| Question | `n = p^v n'` with `v ≥ 1`; enumerate `λ`-constacyclic codes over `R_e` by Hermitian hull dimension and compare with the `v = 0` law |
+| Assumptions fixed | `R_e = F_{q²}[u]/(u^e−1)`, `e \| q+1`; Hermitian `⟨x,y⟩ = Σ x_i y_i^q` with the **ring** `q`-power (conjugate-reciprocal); distinct codes, not generator descriptions |
+| Ring-level reduction | `q`-power **fixes every CRT idempotent** (the coefficient Frobenius cancels the `μ ↦ μ^{−1}` label permutation), so `Hull_H(C) = ⊕_ℓ Hull_H(C_ℓ)` and `N_{R_e}(n,λ) = ∏_ℓ N_F(n, α_ℓ)` — a plain product |
+| Repeated-root effect isolated | entirely the multiplicity `p^v` on the squarefree base `x^{n'} − c`; the ideal structure is unchanged, only the exponent ranges change |
+| Kill criterion | **fired** — **K-R1: source Theorem 10** (general `e`, arbitrary `p^v`, hull dimension = linear form in per-orbit integers with explicit box bounds `0 ≤ a ≤ γ_l(j)⌊p^v/2⌋`, `0 ≤ b ≤ β_l(j)p^v`) + **CRT/PIR**: counting is a lattice-point count in the paper's own boxes |
+| Smallest tests (`p \| n`) | `q=3,n=3=p` over `F_9`; `q=3,n=6=2·3`; plus `q=2,n=2`, `q=3,n=9`, `q=2,n=4`, `q=2,n=8`, `q=2,n=6` |
+| Verification | 184 subspaces of `F_9³` brute-forced, matching the monic-divisor count and hull distribution for **8/8** `α`; lcm formula **32/32** and **80/80**; orbit product exact on **24/24** `α` |
+| Result | repeated roots **do** change the distribution (hull dimensions spread to `⌊n/2⌋`; LCD no longer automatic), but the law is a product over conjugate-reciprocal orbits — the same routine-product failure mode as R3 |
+| Verdict | **NO-GO**: `K`, not `N2` |
+
+**The only textual gap R1 could claim** is that the source states its LCD criteria (Theorems 11/13,
+Corollaries 12/14) under `gcd(n,p) = 1`. Filling it means substituting Theorem 10's bounds and
+noting the achievable set is no longer `{0}` — a line of algebra inside the same paper. That is not
+a research question.
+
+The kill does **not** rely on the paywalled literature (blockers B-1, B-2 stay open); it rests
+entirely on the source paper's own Theorem 10 plus CRT. R1's originally stated criterion
+(Debnath–Prakash covering `p | n` and composing over components) was therefore never evaluated:
+it is not needed.
+
+Three probe defects fixed and recorded in `R1_FEASIBILITY.md` §4.4 (quotient/remainder confusion
+plus an untrimmed remainder; over-generated subspace enumeration — true count is 184, not 488;
+`O(Q^n)` divisor brute force replaced by structural enumeration with the brute force kept as an
+assertion). One error of my own in drafting §1 (asserting that duality permutes CRT components) was
+caught by explicit computation and corrected in §4.5; the earlier R3 record had it right.
+
 ## Next step
 
-**Phase 2 is delivered and Gate 2 is NOT PASSED.** R3 — the first candidate the user selected — has now been examined and **does not survive** its own kill criterion (see the R3 decision section above). The next action is therefore to select **R1 or R2**, and to settle its kill criterion in the same way before Phase 3 begins. Phase 3 and later phases remain **not started** and require explicit authorisation.
+**Phase 2 is delivered and Gate 2 is NOT PASSED.** Two of the three surviving revisions have now been examined and both fail their own kill criteria: **R3** (product of published field-level counts, `c9d4517`) and **R1** (lattice-point count in the boxes of the source's own Theorem 10). **R2** is the only candidate left, and it is **untested**.
+
+The single next action, on explicit authorisation, is to settle R2's decisive lemma:
+
+> For `λ ∈ R_e^*` with `e ≥ 3`, determine the number of decompositions `λ = Σ_ℓ η_ℓ α_ℓ` up to unit multiplication in `R_e^*`; then decide whether the hull-dimension distribution over the `e` components depends on the decomposition chosen or only on the multiset `{α_ℓ}`.
+
+It is a short, exact computation on the `R_e` machinery already validated in R3 and R1. Two failure modes are live: if the decomposition is unique up to units and permutations, R2 degenerates to bookkeeping; if the answer is invariant in the decomposition, R2 has no content beyond R1. In either case the honest conclusion is that all three revisions are `K` and Gate 2 cannot be passed by this line of attack, and that should be reported rather than worked around.
+
+Phase 3 and later phases remain **not started** and require explicit authorisation.
 
 Phase 1 stands complete; nothing in Phase 2 changed a Phase 1 result, count or register entry.
 
