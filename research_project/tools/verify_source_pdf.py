@@ -141,6 +141,48 @@ def selftest():
     return 0 if failures == 0 else 1
 
 
+
+def display(path):
+    """Absolute path when outside the repository, repository-relative otherwise."""
+    rel = os.path.relpath(path, ROOT)
+    return rel if not rel.startswith("..") else os.path.abspath(path)
+
+
+FIELDS = ["recorded_utc", "path", "sha256", "bytes", "pages",
+          "pdf_title", "pdf_author", "verdict"]
+
+
+def record(path, digest, size, npages, title, author, verdict):
+    """Append one identification record, idempotently.
+
+    A row is written only if no existing row carries the same SHA-256 *and* verdict,
+    so re-running the gate never inflates the evidence file. The rewrite is atomic.
+    Returns True when a row was added.
+    """
+    rows = []
+    if os.path.exists(MANIFEST):
+        with open(MANIFEST, newline="") as fh:
+            rows = [r for r in csv.DictReader(fh) if r.get("sha256")]
+    if any(r["sha256"] == digest and r.get("verdict") == verdict for r in rows):
+        return False
+    rows.append({
+        "recorded_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "path": display(path),
+        "sha256": digest,
+        "bytes": size,
+        "pages": npages,
+        "pdf_title": title or "",
+        "pdf_author": author or "",
+        "verdict": verdict,
+    })
+    tmp = MANIFEST + ".tmp"
+    with open(tmp, "w", newline="") as fh:
+        w = csv.DictWriter(fh, fieldnames=FIELDS)
+        w.writeheader()
+        w.writerows(rows)
+    os.replace(tmp, MANIFEST)
+    return True
+
 def main(argv):
     if "--selftest" in argv[1:]:
         return selftest()
@@ -148,7 +190,7 @@ def main(argv):
         print(__doc__)
         return 2
     path = argv[1]
-    record = "--record" in argv[2:]
+    do_record = "--record" in argv[2:]
 
     if not os.path.isfile(path):
         print(f"FAIL  file not found: {path}")
@@ -192,18 +234,11 @@ def main(argv):
         print("VERDICT: REJECTED — this file is not the paper named by the blueprint.")
         print("         Phase 1 must not start on it.")
 
-    if record:
-        new = not os.path.exists(MANIFEST)
-        with open(MANIFEST, "a", newline="") as fh:
-            w = csv.writer(fh)
-            if new:
-                w.writerow(["recorded_utc", "path", "sha256", "bytes", "pages",
-                            "pdf_title", "pdf_author", "verdict"])
-            w.writerow([datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-                        os.path.relpath(path, ROOT), digest, size, npages,
-                        meta.get("/Title", ""), meta.get("/Author", ""),
-                        "ACCEPTED" if ok else "REJECTED"])
-        print(f"recorded -> {os.path.relpath(MANIFEST, ROOT)}")
+    if do_record:
+        added = record(path, digest, size, npages, meta.get("/Title", ""),
+                       meta.get("/Author", ""), "ACCEPTED" if ok else "REJECTED")
+        print(f"{'recorded ->' if added else 'already recorded ->'} "
+              f"{os.path.relpath(MANIFEST, ROOT)}")
 
     return 0 if ok else 1
 

@@ -30,6 +30,7 @@ A document existing is never, by itself, evidence of a passed gate.
 | 0.14 | Phase 1 machinery built and dry-run | **PASS** | `tools/extract_source_text.py` refuses a non-source PDF, and under `--force` extracts 27 pages / 34 heading candidates / 30 high-confidence, 4 needing triage — mechanics proven, output discarded to `/tmp` |
 | 0.15 | One-command handoff from "PDF supplied" to "Phase 1 may start" | **PASS** | `tools/accept_source_and_prepare.sh`; negative test on the wrong PDF: staged copy removed, original untouched, drop folder left clean |
 | 0.16 | Read-only readiness check | **PASS** | `tools/preflight.py` → 18 PASS / 3 WARN / 0 FAIL, `RESULT: WAITING`; also refuses to report READY while a Phase 1 deliverable exists without an accepted source |
+| 0.17 | Non-destructive validation of the pipeline against the blueprint | **PASS after repair** | `tools/selftest_gate.py` 7/7; defects D-1 and D-2 found and fixed (below) |
 
 ### Gate 0 verdict
 
@@ -100,6 +101,36 @@ under Option 2 of the blocker document.
 | A-2 | The uploaded PDF is the intended artifact even though it is not the named paper | it is the only research PDF supplied | yes — user may supply Object C |
 | A-3 | Prior audits are inputs, not authority | project rule §3 of `PROJECT_PLAN.md` | no |
 | A-4 | `prior_art/` may be excluded from Git because it is a byte-identical extraction of committed ZIPs | `FILE_MANIFEST.csv` | yes |
+
+## Pipeline validation (2026-10-23) — non-destructive
+
+Seventeen checks were run; three defects were found and two of them repaired.
+
+| Check | Result |
+|---|---|
+| identity selftest (`verify_source_pdf.py --selftest`) | **3/3 PASS** |
+| **positive control** — a synthetic fixture carrying the real title, all five authors and the DOI | **ACCEPTED** (exit 0). This is the important one: it shows the gate is not a "reject everything" filter |
+| negative control — title only, no authors/journal | rejected (exit 1) |
+| negative control — title + authors, no journal/DOI | rejected (exit 1) |
+| negative control — Debnath et al. identity | rejected (exit 1) |
+| the PDF actually in the repository | rejected (exit 1) |
+| gate over the real repository | `GATE 0: BLOCKED`, 6 PDFs, 0 accepted |
+| corpus builder on a non-source PDF | refuses (exit 1) |
+| handoff script, negative path | stages, rejects, **removes the staged copy**; original untouched; drop folder left with only its README |
+| preflight | 18 PASS / 3 WARN / 0 FAIL → `WAITING` |
+| reproducible suite (`tools/selftest_gate.py`) | **7/7 PASS** |
+
+### Defects found and their disposition
+
+| ID | Defect | Severity | Disposition |
+|---|---|---|---|
+| D-1 | Recording an identification appended a new row every run, so re-running the gate (or the handoff script, which records twice) inflated the evidence file. The manifest already carried **three identical REJECTED rows** for the same file as a result. | real, evidence-integrity | **FIXED** — `record()` now de-duplicates on (SHA-256, verdict) and rewrites atomically. The existing manifest was collapsed from 3 rows to 1, keeping the earliest timestamp. |
+| D-2 | `preflight.py` was documented as read-only but created `source_paper/` as a side effect, and paths outside the repository printed as `../../../tmp/...`. | cosmetic / side effect | **FIXED** — the gate no longer creates directories; `display()` prints absolute paths outside the repository. |
+| D-3 | The new `record()` function was shadowed by the local `record` flag inside `main()` (`TypeError: 'bool' object is not callable`). | real, would have crashed the first acceptance | **FIXED** — the flag is now `do_record`; caught by the idempotence test, not by inspection. |
+
+No original file, evidence document, or prior-art artefact was modified. The one
+data file that changed is `SOURCE_PDF_MANIFEST.csv`, and only by removing
+byte-identical duplicate rows.
 
 ## Prepared for Phase 1 (nothing executed)
 

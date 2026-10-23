@@ -88,6 +88,7 @@ time.
 | `tools/verify_source_pdf.py` | the identity test itself; `--selftest` proves it accepts and rejects correctly |
 | `tools/extract_source_text.py` | page-anchored corpus + draft heading index (refuses a non-source PDF) |
 | `tools/preflight.py` | Phase 0 consistency, gate state, tool availability, premature-deliverable check |
+| `tools/selftest_gate.py` | reproducible 7-check proof that the gate accepts the right document and rejects four near-misses |
 | `tools/accept_source_and_prepare.sh` | the four steps above in one command |
 
 ## Reproduce Phase 0

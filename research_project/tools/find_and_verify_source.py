@@ -17,7 +17,7 @@ import os
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from verify_source_pdf import evaluate, sha256, MANIFEST, ROOT  # noqa: E402
+from verify_source_pdf import evaluate, sha256, display, record, MANIFEST, ROOT  # noqa: E402
 
 SKIP = {".git", "__pycache__", "node_modules"}
 CANDIDATE_DIR = os.path.join(ROOT, "research_project", "source_paper")
@@ -57,11 +57,10 @@ def main(argv):
         root = argv[argv.index("--root") + 1]
     record = "--record" in argv
 
-    os.makedirs(CANDIDATE_DIR, exist_ok=True)
     rows, accepted = [], []
     for path in pdfs(root):
         info = describe(path)
-        rel = os.path.relpath(path, ROOT)
+        rel = display(path)
         if info is None:
             rows.append((rel, "-", "-", "UNREADABLE"))
             continue
@@ -81,26 +80,18 @@ def main(argv):
     print()
     print(f"PDFs examined: {len(rows)}   accepted: {len(accepted)}")
     for p in accepted:
-        print(f"  ACCEPTED -> {os.path.relpath(p, ROOT)}  sha256 {sha256(p)}")
+        print(f"  ACCEPTED -> {display(p)}  sha256 {sha256(p)}")
 
     if len(accepted) == 1:
         if record:
-            import csv
-            from datetime import datetime, timezone
+            from pypdf import PdfReader
             p = accepted[0]
-            new = not os.path.exists(MANIFEST)
-            with open(MANIFEST, "a", newline="") as fh:
-                wr = csv.writer(fh)
-                if new:
-                    wr.writerow(["recorded_utc", "path", "sha256", "bytes", "pages",
-                                 "pdf_title", "pdf_author", "verdict"])
-                info = describe(p)
-                from pypdf import PdfReader
-                meta = PdfReader(p).metadata or {}
-                wr.writerow([datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-                             os.path.relpath(p, ROOT), sha256(p), os.path.getsize(p),
-                             info[0], meta.get("/Title", ""), meta.get("/Author", ""), "ACCEPTED"])
-            print(f"  recorded -> {os.path.relpath(MANIFEST, ROOT)}")
+            info = describe(p)
+            meta = PdfReader(p).metadata or {}
+            added = record(p, sha256(p), os.path.getsize(p), info[0],
+                           meta.get("/Title", ""), meta.get("/Author", ""), "ACCEPTED")
+            print(f"  {'recorded ->' if added else 'already recorded ->'} "
+                  f"{os.path.relpath(MANIFEST, ROOT)}")
         print("\nGATE 0: PASS (source file identified). Phase 1 may start on this file.")
         print("Next: tag the version (version of record vs author deposit) before registering theorems.")
         return 0

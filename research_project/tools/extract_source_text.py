@@ -27,7 +27,7 @@ import re
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from verify_source_pdf import evaluate, sha256  # noqa: E402
+from verify_source_pdf import evaluate, sha256, display  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 DEFAULT_OUT = os.path.join(ROOT, "research_project", "source_audit", "source_text")
@@ -73,7 +73,7 @@ def main(argv):
 
     reader, meta, checks, ok = identify(pdf)
     if not ok and not force:
-        print(f"REFUSING: {os.path.relpath(pdf, ROOT)} is not the source paper.")
+        print(f"REFUSING: {display(pdf)} is not the source paper.")
         for name, passed, note in checks:
             print(f"  {'PASS' if passed else 'FAIL'}  {name:34s} {note}")
         print("Run the verifier for the full report. Use --force only to test mechanics.")
@@ -113,7 +113,7 @@ def main(argv):
         w.writerows(heading_rows)
 
     with open(os.path.join(out, "CORPUS_META.txt"), "w") as fh:
-        fh.write(f"{stamp}source      {os.path.relpath(pdf, ROOT)}\n")
+        fh.write(f"{stamp}source      {display(pdf)}\n")
         fh.write(f"{stamp}sha256      {sha256(pdf)}\n")
         fh.write(f"{stamp}pages       {len(reader.pages)}\n")
         fh.write(f"{stamp}pdf_title   {meta.get('/Title')!r}\n")
@@ -124,7 +124,7 @@ def main(argv):
     kinds = {}
     for h in heading_rows:
         kinds[h["kind"]] = kinds.get(h["kind"], 0) + 1
-    print(f"{stamp}corpus written to {os.path.relpath(out, ROOT)}")
+    print(f"{stamp}corpus written to {display(out)}")
     print(f"  pages          {len(page_rows)}")
     print(f"  empty pages    {sum(r['empty'] for r in page_rows)}")
     print(f"  heading lines  {len(heading_rows)}  {kinds}")

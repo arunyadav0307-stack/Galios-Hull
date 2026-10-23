@@ -149,3 +149,39 @@ bash research_project/tools/accept_source_and_prepare.sh /path/to/yadav.pdf
 
 `preflight.py` refuses to report READY while any Phase 1 deliverable exists without
 the source PDF, and reports the gate state without recording anything.
+
+---
+
+## 8. Blueprint conformance check (2026-10-23)
+
+Every Phase 1 requirement in the blueprint is mapped to the place that satisfies it.
+This is a reading of the blueprint against this plan; it claims nothing about the
+source paper, which has not been read.
+
+| Blueprint requirement (verbatim intent) | Where satisfied |
+|---|---|
+| §1A "Record theorem/lemma/proposition/corollary number and exact mathematical meaning" | §3.1 fields `ID`, `Kind`, `Verbatim statement` |
+| "Record all hypotheses, notation, proof method, consequences, and restrictions" | §3.1 fields `Hypotheses`, `Proof method`, `Conclusion`; §3.3 glossary for notation |
+| "Classify whether each result concerns possible dimensions, exact counts, LCD properties, dual-containing properties, or quantum codes" | §3.1 `Classification` with the blueprint's five classes plus structural |
+| "Record how each result may be used in the proposed project" | §3.1 `Uses in this project` |
+| §1B "Verify ring decomposition and assumptions" | §3.2 item 1 |
+| "Check generator-polynomial factorization, multiplicities, and conjugate-reciprocal operation" | §3.2 items 2–3 |
+| "Check hull-dimension formulas and Hermitian LCD criteria" | §3.2 items 4–5 |
+| "Check dual-containing conditions and Gray-map properties" | §3.2 items 6–7, with the blueprint's explicit prohibition on assuming that a Gray map preserves distance, hull dimension or duality without proof |
+| "Recalculate representative examples and identify unclear or unverified arguments" | §3.4 and §3.2 items 8–9 |
+| Gate 1 "central source-paper results and the assumptions needed for the new work are understood and documented" | §5 closing paragraph: the gate is passed by the register + verdicts + consistency, not by file existence |
+| Blueprint rule "If files, tools, or sources are unavailable, report the limitation" | `ENVIRONMENT_CAPABILITIES.md`; §6 failure-mode table |
+| Blueprint rule "Read the complete source paper, including … tables, references, and conclusions" | §2 corpus covers every page; the register additionally lists tables and, if present, algorithm boxes |
+
+**Two deviations, both recorded and both deliberate:**
+
+1. **Version tagging** is added to the entry conditions (§1 E-3). The blueprint does
+   not mention it because it assumes a single source document; here two non-identical
+   versions circulate, so an untagged register would be unsound. This strengthens the
+   blueprint's own requirement that every claim be traceable.
+2. **A page-anchored corpus** (§2) is generated before the register is written. The
+   blueprint asks for page-level evidence implicitly; producing the anchors first
+   makes every later citation mechanical rather than reconstructed from memory.
+
+No blueprint requirement is dropped, and nothing in this plan anticipates the
+paper's content.

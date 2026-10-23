@@ -316,3 +316,34 @@ Next: put the Yadav et al. PDF in research_project/source_paper/ and run
       python3 research_project/tools/find_and_verify_source.py --record
 [exit=1]
 ```
+
+## 17. Pipeline validation sweep (2026-10-23, non-destructive)
+
+```
+$ python3 research_project/tools/selftest_gate.py
+
+PASS  1 accept a conforming record                 expected=True     got=True
+PASS  2 reject title without authors or journal    expected=False    got=False
+PASS  3 reject title+authors without journal/DOI   expected=False    got=False
+PASS  4 reject the Debnath et al. identity         expected=False    got=False
+PASS  5 reject the PDF actually in the repository  expected=False    got=False
+PASS  6 record twice -> one row                    expected=1 row    got=1 row(s), added=True,False
+PASS  7 out-of-tree path shown absolutely          expected=absolute got=/tmp/gate_selftest_wax6bnqk/accept.pdf
+
+SELFTEST: PASS  (7/7)
+fixtures were built in /tmp/gate_selftest_wax6bnqk and are not part of the repository
+
+$ python3 research_project/tools/verify_source_pdf.py --selftest
+SELFTEST: PASS
+
+$ python3 research_project/tools/find_and_verify_source.py
+
+GATE 0: BLOCKED — no PDF in the repository is the source paper.
+Place the file in research_project/source_paper/ (any name ending .pdf) and re-run.
+
+$ python3 research_project/tools/preflight.py --quiet
+Next: put the Yadav et al. PDF in research_project/source_paper/ and run
+      python3 research_project/tools/find_and_verify_source.py --record
+```
+
+Defects found: D-1 duplicate evidence rows (fixed, manifest collapsed 3 rows -> 1), D-2 preflight side effect + out-of-tree path display (fixed), D-3 local flag shadowing the record() function (fixed; would have crashed the first acceptance).
