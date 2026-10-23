@@ -347,3 +347,25 @@ Next: put the Yadav et al. PDF in research_project/source_paper/ and run
 ```
 
 Defects found: D-1 duplicate evidence rows (fixed, manifest collapsed 3 rows -> 1), D-2 preflight side effect + out-of-tree path display (fixed), D-3 local flag shadowing the record() function (fixed; would have crashed the first acceptance).
+
+## 18. Environment rollback and restoration (2026-10-23, 15:0x UTC)
+
+The sandbox was rolled back between turns: `.git` returned to the base commit
+`33aeb79`, the derived `prior_art/` tree and the session-installed Python packages
+disappeared. The working files themselves survived. Nothing was lost; the recovery
+is fully reproducible and is recorded here as evidence.
+
+| Symptom observed | Root cause | Recovery performed | Verified by |
+|---|---|---|---|
+| `git log` showed only `33aeb79`; `research_project/` untracked | local `.git` refs rolled back | `git fetch origin`; branch pointer restored to `origin/arena/831a2e65-galios-hull` = `ebbbcf3` | `git log --oneline` shows `ebbbcf3, 69496e8, 746bdec, 3b56509` |
+| — | — | before moving the pointer, all 29 tracked files were compared blob-by-blob with the commit | 29/29 identical, 0 differing, 0 missing |
+| `preflight` FAIL: inventory counts | `research_project/prior_art/` absent (git-ignored, not in snapshot) | `bash research_project/tools/extract_prior_art.sh` (re-verifies both ZIP hashes first, then extracts 155 + 102 files) | inventory counts back to 3/155/102 |
+| `preflight` FAIL: `pypdf` not importable | session-local site-packages rolled back | `pip install -r research_project/requirements.txt` | pypdf 6.21.2, sympy 1.14.0, galois 0.4.11, numpy 2.4.6 |
+| long pypdf Type1-font warnings on stderr | `fontTools` was installed ad hoc earlier and was not pinned | added `fonttools==4.67.0` to `requirements.txt` and installed it | warnings gone; `preflight` reports fonttools present |
+
+**Final state after restoration:** `preflight` → **19 PASS / 2 WARN / 0 FAIL**,
+`RESULT: WAITING`; `selftest_gate.py` → **7/7 PASS**; working tree clean at
+`ebbbcf3`; Gate 0 still **BLOCKED** on the source PDF.
+
+The two remaining WARNs are the absent `pdflatex` (Phase 9) and `magma` (Phase 7
+cross-check) — both are declared limitations, not defects.

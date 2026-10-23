@@ -6,7 +6,11 @@
 # sympy       exact symbolic algebra, polynomial identity checks   (recommended)
 # galois      finite-field construction and linear codes           (recommended)
 # numpy       array support; dependency of galois                  (recommended)
+# fonttools   silences pypdf Type1/CFF width warnings on PDFs whose  (recommended)
+#             fonts are not embedded as CID; without it every extraction
+#             prints a long warning to stderr that can hide real errors
 pypdf==6.21.2
 sympy==1.14.0
 galois==0.4.11
 numpy==2.4.6
+fonttools==4.67.0
