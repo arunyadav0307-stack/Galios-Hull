@@ -457,10 +457,8 @@ when the component index $s$ is clear from context we write $e=(e_f)_{f\in\Fs}$.
 Associate to $e\in\{0,\dots,M\}^{\Fs}$ the monic generator polynomial, the monic
 parity-check polynomial, and the component code
 \begin{equation}\label{eq:gen-check}
-g_e(x):=\prod_{f\in\Fs} f(x)^{e_f},
-\qquad
-h_e(x):=\frac{P_s(x)}{g_e(x)}=\prod_{f\in\Fs} f(x)^{M-e_f},
-\qquad
+g_e(x):=\prod_{f\in\Fs} f(x)^{e_f},\quad
+h_e(x):=\frac{P_s(x)}{g_e(x)}=\prod_{f\in\Fs} f(x)^{M-e_f},\quad
 C_s(e):=\langle g_e(x)\rangle\subseteq K_s[x]/\langle P_s(x)\rangle.
 \end{equation}
 
@@ -824,12 +822,12 @@ $\{0\}$ when $r=0$ or $h=0$).
 Write $G(x)=\sum_{u=0}^{r}G_u x^u$. For any $0\le i<h$ and $0\le j<r$, every
 term in $x^i G(x)$ and $x^j H^*(x)$ has degree strictly less than $n$, so the
 Euclidean inner product of their coefficient vectors in $K^n$ is
-\[
+\begin{align*}
 \langle x^i G,\,x^j H^*\rangle_{s,0}
- =H(0)^{-1}\sum_{\substack{0\le u\le r,\;0\le v\le h\\ i+u=j+h-v}} G_u H_v
- =H(0)^{-1}[x^{h-i+j}]\bigl(G(x)H(x)\bigr)
- =H(0)^{-1}[x^{h-i+j}](x^n-a)=0,
-\]
+ &=H(0)^{-1}\sum_{\substack{0\le u\le r,\;0\le v\le h\\ i+u=j+h-v}} G_u H_v \\
+ &=H(0)^{-1}[x^{h-i+j}]\bigl(G(x)H(x)\bigr)
+  =H(0)^{-1}[x^{h-i+j}](x^n-a)=0,
+\end{align*}
 because $0\le i\le h-1$ and $0\le j\le r-1$ imply $1\le h-i+j\le h+r-1=n-1$.
 Hence $\langle H^*(x)\rangle\subseteq\langle G(x)\rangle^{\perpE}$, and equality
 follows from $\dim_K\langle H^*(x)\rangle=r=n-h=\dim_K\langle G(x)\rangle^{\perpE}$.
@@ -956,10 +954,10 @@ x^5-\omega=(x+\omega^2)(x^2+\omega x+\omega)(x^2+x+\omega)
 \]
 so $P_1(x)=x^{10}-\omega^2=f_1(x)^2 f_2(x)^2 f_3(x)^2$. With $\rho_{1,1}(a)=a^2$
 on $\F_4$, \eqref{eq:reciprocal} gives
-\[
-f_1^{\#_{1,1}}(x)=\omega^{-4}(\omega^4+x)=x+\omega^2=f_1(x),\qquad
-f_2^{\#_{1,1}}(x)=\omega^{-2}(\omega^2+\omega^2 x^1+x^2)=x^2+x+\omega=f_3(x),
-\]
+\begin{align*}
+f_1^{\#_{1,1}}(x)&=\omega^{-4}(\omega^4+x)=x+\omega^2=f_1(x),\\
+f_2^{\#_{1,1}}(x)&=\omega^{-2}(\omega^2+\omega^2 x^1+x^2)=x^2+x+\omega=f_3(x),
+\end{align*}
 and hence $f_3^{\#_{1,1}}(x)=f_2(x)$, so $\tau_{1,1}$ has orbits $(f_1)$ of
 length $1$ (degree $1$) and $(f_2,f_3)$ of length $2$ (degree $2$). For the
 exponent selection $e=(e_{f_1},e_{f_2},e_{f_3})=(2,1,0)$,
@@ -969,7 +967,7 @@ $h_e=f_2 f_3^2$, and $1$-Galois dual generator
 h_e^{\#_{1,1}}=f_1^{\,2-e_{f_1}} f_2^{\,2-e_{f_3}} f_3^{\,2-e_{f_2}}
               =f_2^2 f_3,
 \]
-with $\dim_{\F_4}C_1(e)=10-4=6$,
+with $\dim_{\F_4}C_1(e)=10-4=6$, hull ideal
 $\Hull_1(C_1(e))=\langle\lcm(g_e,h_e^{\#_{1,1}})\rangle=\langle f_1^2 f_2^2 f_3\rangle$,
 and $\dim_{\F_4}\Hull_1(C_1(e))=10-8=2$.
 \end{example}
@@ -997,12 +995,14 @@ $\lambda_s$-constacyclic code.
 partition $\{1,\dots,N\}=S_{\mathrm{comp}}\sqcup S_{\mathrm{inc}}$ into
 compatible and incompatible components. Then
 \begin{equation}\label{eq:mixed-twists}
+\begin{aligned}
 \sum_{e\in\mathscr C^{(M)}} U^{\kappa(C(e))}Z^{\eta_k(C(e))}
- =\Biggl(\prod_{s\in S_{\mathrm{comp}}}\sum_{e^{(s)}\in\{0,\dots,M\}^{\Fs}}
+ &=\Biggl(\prod_{s\in S_{\mathrm{comp}}}\sum_{e^{(s)}\in\{0,\dots,M\}^{\Fs}}
     U^{m_s\dim_{K_s}C_s(e^{(s)})}
-    Z^{m_s\dim_{K_s}\Hull_k(C_s(e^{(s)}))}\Biggr)
-  \prod_{s\in S_{\mathrm{inc}}}\prod_{f\in\Fs}
+    Z^{m_s\dim_{K_s}\Hull_k(C_s(e^{(s)}))}\Biggr) \\
+ &\quad\times\prod_{s\in S_{\mathrm{inc}}}\prod_{f\in\Fs}
     \Biggl(\sum_{r=0}^{M}U^{r m_s\deg f}\Biggr).
+\end{aligned}
 \end{equation}
 \end{enumerate}
 \end{proposition}
@@ -1362,12 +1362,12 @@ $s\in S_{\mathrm{comp}}$, identify $\{0,\dots,M\}^{\Fs}$ with
 $\prod_{O\in\Os}\{0,\dots,M\}^{a_O}$ via $e^{(s)}\mapsto
 \bigl((e_{O,0},\dots,e_{O,a_O-1})\bigr)_{O\in\Os}$. Substituting
 \eqref{eq:comp-dim} and \eqref{eq:hull-min-component} factors the component sum as
-\[
+\begin{align*}
 \sum_{e^{(s)}\in\{0,\dots,M\}^{\Fs}}
  U^{m_s\dim_{K_s}C_s(e^{(s)})}\,Z^{m_s\dim_{K_s}\Hull_k(C_s(e^{(s)}))}
- =\prod_{O\in\Os} E_{a_O,w_O}^{(M)}(U,Z)
- =\prod_{O\in\Os}\tr\!\Bigl(T_{w_O}^{(M)}(U,Z)^{a_O}\Bigr),
-\]
+ &=\prod_{O\in\Os} E_{a_O,w_O}^{(M)}(U,Z) \\
+ &=\prod_{O\in\Os}\tr\!\Bigl(T_{w_O}^{(M)}(U,Z)^{a_O}\Bigr),
+\end{align*}
 where the last equality is Lemma~\ref{lem:orbit-trace}. Specialising
 $S_{\mathrm{inc}}=\emptyset$ and $U=1$ gives \eqref{eq:main-compatible}.
 \end{proof}
@@ -1467,8 +1467,8 @@ enumerators for self-orthogonal, dual-containing, and self-dual codes
 Let $\lambda\in\A^*$ be any unit, $0\le k<e$, $n=n'p^t$, $M=p^t$, and
 $W=n\sum_{s=1}^{N}m_s$.
 \begin{enumerate}
-\item[\textup{(a)}] Setting $Z=1$ eliminates all $k$-dependence: every row of
-$T_w^{(M)}(U,1)$ equals $(U^{wM},U^{w(M-1)},\dots,U^w,1)$, a rank-$1$ matrix of
+\item[\textup{(a)}] Setting $Z=1$ eliminates all $k$-dependence: each row of
+$T_w^{(M)}(U,1)$ is $(U^{wM},U^{w(M-1)},\dots,1)$, a rank-$1$ matrix of
 trace $\sum_{r=0}^{M}U^{rw}$, and
 \begin{equation}\label{eq:code-marginal}
 \Epoly^{(M)}(U,1)
@@ -1615,9 +1615,9 @@ support of the single-orbit enumerator $E_{a,w}^{(M)}(U,Z)=\tr(T_w^{(M)}(U,Z)^a)
 is the exact lattice polygon
 \begin{equation}\label{eq:support-trapezoid}
 \operatorname{Supp}\bigl(E_{a,w}^{(M)}\bigr)
- =\Bigl\{(wR,\,wH)\in\Z_{\ge 0}^2:
-    0\le R\le aM,\;\;
-    \min\{R,\,M,\,aM-R\}\le H\le\min\{R,\,aM-R\}\Bigr\}.
+ =\Bigl\{(wR,wH)\in\Z_{\ge 0}^2:
+    0\le R\le aM,\;
+    \min\{R,M,aM-R\}\le H\le\min\{R,aM-R\}\Bigr\}.
 \end{equation}
 In particular, the number of nonzero monomials in $E_{a,w}^{(M)}(U,Z)$ equals
 \begin{equation}\label{eq:support-cardinality}
@@ -1716,8 +1716,8 @@ three affected circular edges change by
 \Delta H
  &=\Bigl(\min\{M-x_{j-1},x_j-1\}-\min\{M-x_{j-1},x_j\}\Bigr) \\
  &\quad +\Bigl(\min\{M-x_j+1,x_{j+1}+1\}-\min\{M-x_j,x_{j+1}\}\Bigr) \\
- &\quad +\Bigl(\min\{M-x_{j+1}-1,x_{j+2}\}-\min\{M-x_{j+1},x_{j+2}\}\Bigr)
- \in\{-1,0\}+\{+1\}+\{-1,0\}=\{-1,0,+1\}.
+ &\quad +\Bigl(\min\{M-x_{j+1}-1,x_{j+2}\}-\min\{M-x_{j+1},x_{j+2}\}\Bigr) \\
+ &\in\{-1,0\}+\{+1\}+\{-1,0\}=\{-1,0,+1\}.
 \end{align*}
 Since $H$ starts at $M$, ends at $R$, and changes by at most $1$ at every step,
 every integer in $[M,R]$ is attained along the walk, proving \eqref{eq:support-trapezoid}.
@@ -1848,20 +1848,18 @@ formulas for $\mathcal V_M(1)=\Var(Y_1)$ in \eqref{eq:orbit-variance-regimes}.
 \item \emph{Single-edge moments ($a\ge 2$):} For $1\le r\le M$,
 $\#\{(u,v)\in\{0,\dots,M\}^2:g(u,v)\ge r\}=(M+1-r)^2$. Summing $1$ and $2r-1$
 against $(M+1-r)^2$ over $1\le r\le M$ gives
-\[
+\begin{gather*}
 \mathbb E[g(X,Y)]=\frac{M(2M+1)}{6(M+1)},
 \qquad
-\mathbb E[g(X,Y)^2]=\frac{M(M^2+M+1)}{6(M+1)},
-\qquad
+\mathbb E[g(X,Y)^2]=\frac{M(M^2+M+1)}{6(M+1)},\\[4pt]
 \Var\bigl(g(X,Y)\bigr)=\frac{M(M+2)(2M^2+4M+3)}{36(M+1)^2}.
-\]
+\end{gather*}
 Summing $\mathbb E[g(X_i,X_{i+1})]$ around $i\in\Z/a\Z$ gives \eqref{eq:eta-mean}.
 \item \emph{Regime $a=2$:} Direct summation over $0\le x,y\le M$ yields
 $\sum_{x,y=0}^{M}g(x,y)g(y,x)=M^2(M-1)(M+1)/12$, so
 $\Cov(g(X,Y),g(Y,X))=-M^2(M+2)^2/\bigl(36(M+1)^2\bigr)$ and
 \[
-\mathcal V_M(2)=\Var\bigl(g(X,Y)+g(Y,X)\bigr)
- =2\Bigl(\Var(g(X,Y))+\Cov\bigl(g(X,Y),g(Y,X)\bigr)\Bigr)
+\mathcal V_M(2)=2\Bigl(\Var(g(X,Y))+\Cov\bigl(g(X,Y),g(Y,X)\bigr)\Bigr)
  =\frac{M(M+2)(M^2+2M+3)}{18(M+1)^2}.
 \]
 \item \emph{Regime $a\ge 3$:} Along the cycle $(X_0,\dots,X_{a-1})$ with $a\ge 3$,
@@ -1895,7 +1893,8 @@ constants across representative prime powers $M=p^t$.
 \centering
 \caption{Exact unweighted local expectation, covariance, and variance constants across prime-power multiplicities $M=p^t$ (Theorem~\ref{thm:moments}).}
 \label{tab:moment-coeffs}
-\footnotesize
+\scriptsize
+\setlength{\tabcolsep}{4pt}
 \begin{tabular}{@{}rrrrrrrr@{}}
 \toprule
 $M$ & $\mathbb E[g]$ ($a\ge 2$) & $\mathbb E[Y_1]$ ($a=1$) & $\Var(g)$ & $\Cov_{\mathrm{adj}}$ & $\mathcal V_M(a)/a$ ($a\ge 3$) & $\mathcal V_M(2)$ & $\mathcal V_M(1)$ \\
@@ -1994,8 +1993,7 @@ $\kappa(C)=\eta_k(C)=W/2$) is given in closed form by
 \begin{equation}\label{eq:SD-count}
 N_{\mathrm{SD}}^{(M)}=
 \begin{cases}
-0, & \text{if }S_{\mathrm{inc}}\neq\emptyset\text{ or }
-     \bigl(M\text{ is odd and }\exists\,s\in S_{\mathrm{comp}},\,O\in\Os\text{ with }a_O\text{ odd}\bigr),\\[6pt]
+0, & \text{if }S_{\mathrm{inc}}\neq\emptyset\text{ or }\bigl(M\text{ is odd and }\exists\,O\in\bigsqcup_{s\in S_{\mathrm{comp}}}\Os\text{ with }a_O\text{ odd}\bigr),\\[6pt]
 (M+1)^{\#\{(s,O)\,:\,s\in S_{\mathrm{comp}},\,O\in\Os,\,a_O\text{ even}\}}, & \text{otherwise}.
 \end{cases}
 \end{equation}
@@ -2172,7 +2170,7 @@ $\lambda_{s,0}$ and the length-$n$ constacyclic shift $\lambda_s=\lambda_{s,0}^M
 \caption{Exact invariants across eleven repeated-root benchmark families ($n=n'M$, $M=p^t$). In all rows both $\lambda_{s,0}$ and $\lambda_s=\lambda_{s,0}^M$ are stated explicitly.}
 \label{tab:summary-families}
 \scriptsize
-\setlength{\tabcolsep}{3.5pt}
+\setlength{\tabcolsep}{2.8pt}
 \begin{tabular}{@{}llrrrlrrrrrrr@{}}
 \toprule
 Algebra $\A$ & $(n',M,n)$ & $k$ & $\lambda_0$ & $\lambda=\lambda_0^M$ & Orbits $(a_O,w_O)$ & $|\mathscr C^{(M)}|$ & $|\mathrm{Supp}|$ & LCD & SO $=$ DC & SD & $\mathbb E[\eta_k]$ & $\Var(\eta_k)$ \\
