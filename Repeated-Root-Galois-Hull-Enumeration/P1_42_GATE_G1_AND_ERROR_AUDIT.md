@@ -186,3 +186,49 @@ still outstanding; whether the joint enumerator, second-order results
 and product-of-fields assembly constitute a sufficient advance remains
 an editorial/referee judgment. Novelty is not claimed to be fully
 established; the paper has not been submitted.
+
+## E. P1-46 update (23 Oct 2026) — DIMP2026 comparison (arXiv v1)
+
+**Access and caveat.** The full text compared here is arXiv:2412.08512v1
+(11 Dec 2024), *Galois hulls of constacyclic codes over affine algebra
+rings* by Debnath–Islam–Martínez-Moro–Prakash, supplied lawfully by the
+Commander (27 pp.; not committed to this repository). The manuscript
+cites the published version, *Discrete Math.* 349(2) (2026), Art. 114750;
+**publisher theorem numbering has not been verified against the arXiv
+text**, so theorem numbers below are arXiv v1 numbers only.
+
+**Setting.** Their alphabet \(A=\mathbb{F}_q[X_1,\dots,X_\ell]/\langle
+t_1,\dots,t_\ell\rangle\) with square-free \(t_i\) is semisimple; via
+primitive idempotents they project onto component codes
+\(C_{S(\nu)}\subseteq\mathbb{F}_q^n\) over the **same** field
+\(\mathbb{F}_q\) (\(\lambda_{S(\nu)}\in\mathbb{F}_q^*\)), indexed by
+Frobenius-conjugacy classes \(S(\nu)\in\hat S\). This is the special case
+\(K_s=\mathbb{F}_q\) (\(m_s=1\)) of the manuscript's product-of-fields
+setting; our components are arbitrary finite fields \(K_s\) with
+\(\dim_{\mathbb{F}_q}=m_s\dim_{K_s}\).
+
+**Theorem-level comparison (arXiv v1 numbering).**
+
+| DIMP2026 result | Relation to this manuscript |
+|---|---|
+| Theorem 7: hull generator \(\bigoplus_{S(\nu)}\mathrm{lcm}(g_{S(\nu)},h^\#_{S(\nu)})\) over \(A\) | Same componentwise lcm structure as our Theorem 5.2/V.2 for \(K_s=\mathbb{F}_q\); ours is in exponent form over arbitrary \(K_s\) and feeds the joint enumerator |
+| Theorem 8: \(q\)-dimension of hull, \(n=n'p^{e'}\) (**repeated-root included**), \(\gcd(\mathrm{ord}\,\lambda,n')=1\), \(\mathrm{ord}(\lambda)\mid(1+p^{e-k})\); formula \(\sum_{S(\nu)}\sum_t\sum_j \mathrm{ord}_j(q)\,b^{S(\nu)}_{tj}\) | Exactly the sum over \(\mathbb{F}_q\)-components of DPI2023 Theorem 3 (their ref. [9]); agrees with our Theorem 5.2/V.2 restricted to \(K_s=\mathbb{F}_q\). Per-code hull dimension over an \(\mathbb{F}_q\)-component product is therefore **not new**; credited via the updated Introduction/Table 1 |
+| Corollary 3.4 (\(\gcd(n,q)=1\)), Corollary 3.5 (cardinality of the set of *attainable* hull dimensions in two special cases), Theorem 9 (sufficient LCD criterion, \(\gcd(n,q)=1\)) | Attainable-value range/LCD *criteria*, not counts of codes. Our Corollaries 7.3–7.6 count labeled codes (LCD \(=2^{\#\mathrm{orbits}}\) etc.) — different objects |
+| Theorem 10 + Gray map: EAQECCs from hull dimensions | Application layer; our conditional EAQECC remark is analogous in kind, not compared parameter-by-parameter |
+
+**Absent from DIMP2026 (verified):** any counting or enumeration of
+codes by hull dimension — their conclusion (p. 26) states this
+enumeration over \(A\) is **still open**; the joint
+\((\dim C,\dim\mathrm{Hull})\) distribution; transfer-matrix formulas;
+moments (mean/variance/covariance); component fields beyond
+\(\mathbb{F}_q\) with \([\,K_s:\mathbb{F}_q\,]\) scaling; per-component
+compatibility in place of the global
+\(\gcd(\mathrm{ord}\,\lambda,n')=1\) hypothesis.
+
+**Status.** G1 remains **PARTIALLY RESOLVED**. ES2026 (Eldin–Solé) is now
+the only closest-work item without a theorem-level comparison; the
+publisher-vs-arXiv numbering caveat for DIMP2026 also remains. Whether
+the remaining package (joint enumerator, second-order results,
+extension-field assembly) is a sufficient advance remains an
+editorial/referee judgment. Novelty is not claimed to be fully
+established; the paper has not been submitted.
