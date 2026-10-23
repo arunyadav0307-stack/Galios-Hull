@@ -19,7 +19,7 @@ For a linear code $C$ over a finite field, the hull — the intersection of $C$ 
 
 | Work | Setting | What is determined |
 |---|---|---|
-| [DP2025] | constacyclic codes over finite fields and over an auxiliary ring | average Galois hull dimensions |
+| [DP2025] | constacyclic codes over finite fields and over an auxiliary ring | average Galois hull dimensions (field case: Theorem 3.3; for one component this is the hull mean of Theorem 8.2) |
 | [DPI2023, DPI2023corr] | constacyclic codes over a finite field, lengths $n = n' p^{\nu}$ | Galois hull dimension of a given code (Theorem 3); number of codes with given hull dimension when reciprocal-orbit lengths are $1, 2$ and $4$ (Theorem 4) |
 | [DIMP2026] | constacyclic codes over affine algebra rings, mainly in a simple-root framework, with a repeated-root case under additional hypotheses on the order of the twist | Galois hull formulas for a given code; entanglement-assisted constructions |
 | [ES2026] | multi-twisted codes, of which constacyclic codes are the index-one case | Galois hull via generator polynomial matrices |
@@ -168,6 +168,8 @@ $$\mu_P = \frac{P(2P+1)}{6(P+1)}, \qquad \nu_P = \frac{\lfloor P^2/4 \rfloor}{P+
 $$\mathbb{E}[\dim_{\mathbb{F}_q} \mathrm{Hull}_k(C)] = \nu_P \sum_{O:\, L_O = 1} w_O + \mu_P \sum_{O:\, L_O \ge 2} w_O L_O .$$
 
 *Proof.* $\mathbb{E}[P - A_f] = P/2$ and $\sum_{f \in \mathcal{F}_s} \deg f = n_0$ give the first formula via Theorem 5.2. For the hull, linearity over orbits reduces to $\mathbb{E}[S_L]$. If $L \ge 2$, each $X_i$ is the minimum of two independent uniforms (for $L=2$, $X_0, X_1$ are the two ordered pairings of the same two distinct variables), so $\mathbb{E}[S_L] = L\mu_P$ by Lemma 8.1. If $L = 1$, $\mathbb{E}[S_1] = \frac{1}{P+1}\sum_{a=0}^P \min(P-a,a)$; the summands are symmetric under $a \mapsto P-a$, giving $P^2/4$ for $P = 2m$ and $(P^2-1)/4$ for $P = 2m+1$, i.e. $\lfloor P^2/4 \rfloor$; hence $\mathbb{E}[S_1] = \nu_P$. Note $\nu_1 = 0$: at $P=1$ an $L_O=1$ orbit contributes nothing, and $\mathbb{E}[\mathrm{Hull}] = \frac14 \sum_{L_O\ge2} w_O L_O$. ∎
+
+**Remark (relation to [DP2025]).** For a single component ($N = 1$, $K_s = \mathbb{F}_q$), the hull mean above agrees with [DP2025, Theorem 3.3]: writing $\Delta_t$ for the sum of the degrees of the distinct factors in reciprocal cycles of length $a_t$ (so $\sum_t a_t \Delta_t = n_0$), their formula simplifies, via $P - \frac{P(4P+5)}{6(P+1)} = \mu_P$ and $P - \frac{3P+1}{4} + \frac{\delta_P}{4(P+1)} = \nu_P$, to $\nu_P \Delta_1 + \mu_P \sum_{t \ge 2} a_t \Delta_t$, which is the display above. No variance or covariance formula is given there; the second-order results below (Theorem 8.4 and Corollary 8.5) have no counterpart in [DP2025].
 
 For the variance, orbit contributions are independent (disjoint exponent variables), so with $V_L(P) := \mathrm{Var}(S_L)$, $\mathrm{Var}(\dim_{\mathbb{F}_q}\mathrm{Hull}_k) = \sum_{s,O} w_O^2 V_{L_O}(P)$; note the squared weights, in contrast to the mean.
 

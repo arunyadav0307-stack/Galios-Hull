@@ -140,3 +140,49 @@ editorial/referee judgment, not established here; (iii) L1 Thm. 3 carries
 the extra hypothesis \(\gcd(n',r)=1\), so the formulas are proved
 equivalent only where both sets of hypotheses apply. Novelty is **not**
 claimed to be fully established, and the paper has not been submitted.
+
+## D. P1-45 update (23 Oct 2026) — DP2025 mean comparison
+
+**Access.** The full text of Debnath–Prakash, *Average dimensions of
+Galois hulls of constacyclic codes*, Adv. Math. Commun.,
+doi:10.3934/amc.2025010 [DP2025], was supplied lawfully by the Commander
+(36 pp. publisher PDF; not committed to this repository, licence).
+
+**Comparison (field case).** DP2025 Theorem 3.3 (their §3.1, \(n=n'p^\nu\),
+\(\operatorname{ord}(\lambda)\mid 1+p^{e-k}\)) gives the average Galois
+hull dimension over \(\mathbb{F}_q\) as
+\(E_k = n - A\Delta_1 - B\sum_{t\ge2} a_t\Delta_t\) with
+\(A=\frac{3P+1}{4}-\frac{\delta_P}{4(P+1)}\), \(B=\frac{P(4P+5)}{6(P+1)}\),
+\(P=p^\nu\), \(\Delta_t\) the total degree of distinct factors in
+reciprocal cycles of length \(a_t\) (\(\sum_t a_t\Delta_t=n'\)). Using
+\(n=P n'\), \(P-B=\mu_P\) and \(P-A=\nu_P\), this is exactly
+\(\nu_P\Delta_1+\mu_P\sum_{t\ge2}a_t\Delta_t\) — the single-component
+case of the manuscript's Theorem 8.2/VIII.2 hull mean. Hence **the hull
+mean is not new for a single field**; it is now credited in the
+manuscript (remark after Theorem 8.2/VIII.2; Table 1 row [DP2025]).
+Verified in exact rational arithmetic for \(P=1,\dots,9\) on 1800 random
+\(\Delta\)-vectors, and on DP2025 Example 3.6 (\(23/4\), reproduced):
+`code/validate_p1_45_dp2025_mean.py`,
+`code/validation_p1_45_dp2025_mean_output.txt`. DP2025 contains **no**
+variance or covariance formula, so Theorem 8.4/VIII.4 and Corollary
+8.5/VIII.5 remain without counterpart there. Its §4 treats the auxiliary
+ring \(R_{m,q}=\mathbb{F}_q[u]/(u^m-u)\) (Theorem 4.23 average), which is
+outside the matched-hypotheses comparison made here.
+
+**Wording caveat recorded.** As printed in the supplied text, §3.1 of
+DP2025 describes the ensemble \(\mathcal{C}(n,q,\lambda)\) with adjacent
+exponents in cycles of length \(\ge2\) taken unequal; however the
+constant their Lemma 3.2 assigns to those edges,
+\(\frac{P(4P+5)}{6(P+1)}\), equals the *unconditional* expectation of
+\(\max(u,P-v)\) for independent uniform \(u,v\) (e.g. \(P=1\): \(3/4\),
+whereas conditioning on \(u\ne v\) gives \(1/2\)). Their Theorem 3.3
+formula therefore coincides with the uniform labeled-ensemble mean, as
+verified above. The discrepancy is recorded without attributing intent;
+no change to our manuscript arises from it.
+
+**Gate status.** G1 remains **PARTIALLY RESOLVED**. Remaining novelty
+uncertainty: theorem-level comparison against ES2026 and DIMP2026 is
+still outstanding; whether the joint enumerator, second-order results
+and product-of-fields assembly constitute a sufficient advance remains
+an editorial/referee judgment. Novelty is not claimed to be fully
+established; the paper has not been submitted.
