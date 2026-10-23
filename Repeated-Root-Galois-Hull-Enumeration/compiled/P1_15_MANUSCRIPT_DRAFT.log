@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025/Debian) (preloaded format=pdflatex 2026.10.23)  23 OCT 2026 02:39
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025/Debian) (preloaded format=pdflatex 2026.10.23)  23 OCT 2026 07:23
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -317,7 +317,7 @@ de-pen-dent $\OML/cmm/m/it/10.95 A[]$ \OT1/cmr/m/n/10.95 uni-form on $\OMS/cmsy
  []
 
 [12]
-Overfull \hbox (2.46057pt too wide) in paragraph at lines 1176--1188
+Overfull \hbox (2.46057pt too wide) in paragraph at lines 1177--1189
 \OT1/cmr/m/n/9 (2\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 0)[] 1$, $(2\OML/cmm/m/it/9 ;
  \OT1/cmr/m/n/9 2)[] 27$, $(3\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 1)[] 6\OML/cmm/m/
 it/9 ; \OT1/cmr/m/n/9 (3\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 2)[] 12$, $(3\OML/cmm/
@@ -329,7 +329,7 @@ T1/cmr/m/n/9 4)[] 96$, $(5\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 5)[] 60$,
  []
 
 
-Overfull \hbox (20.241pt too wide) in paragraph at lines 1176--1188
+Overfull \hbox (20.241pt too wide) in paragraph at lines 1177--1189
 \OT1/cmr/m/n/9 (6\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 2)[] 24\OML/cmm/m/it/9 ; \OT1
 /cmr/m/n/9 (6\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 3)[] 84$, $(6\OML/cmm/m/it/9 ; \O
 T1/cmr/m/n/9 4)[] 144$, $(6\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 5)[] 84$, $(6\OML/c
@@ -341,20 +341,20 @@ n/9 5)[] 102$, $(7\OML/cmm/m/it/9 ; \OT1/cmr/m/n/9 6)[] 24$, $(7\OML/cmm/m/it/9
 T1/cmr/m/n/9 2)[] 24$,
  []
 
-[13] [14] [15]
-Underfull \hbox (badness 4505) in paragraph at lines 1463--1467
+[13] [14] [15] [16]
+Underfull \hbox (badness 4505) in paragraph at lines 1486--1490
 []\OT1/cmr/m/n/10.95 I. Deb-nath and O. Prakash, Av-er-age di-men-sions of Ga-l
 ois hulls of con-sta-
  []
 
-[16] [17]
-Underfull \hbox (badness 1248) in paragraph at lines 1573--1577
+[17]
+Underfull \hbox (badness 1248) in paragraph at lines 1596--1600
 []\OT1/cmr/m/n/10.95 T. Wu, S. Zhu, L. Liu, and L. Li, Repeated-root con-sta-cy
 clic codes of length
  []
 
 
-Underfull \hbox (badness 3679) in paragraph at lines 1573--1577
+Underfull \hbox (badness 3679) in paragraph at lines 1596--1600
 \OT1/cmr/m/n/10.95 6\OML/cmm/m/it/10.95 `[]p[]$\OT1/cmr/m/n/10.95 , \OT1/cmr/m/
 it/10.95 Ad-vances in Math-e-mat-ics of Com-mu-ni-ca-tions \OT1/cmr/m/n/10.95 1
 7(5) (2023), 1154--1180.
@@ -367,10 +367,10 @@ L3 programming layer <2026-01-19>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 2555 strings out of 469514
- 36481 string characters out of 5470071
- 457756 words of memory out of 5000000
- 31211 multiletter control sequences out of 15000+600000
+ 2556 strings out of 469514
+ 36488 string characters out of 5470071
+ 460756 words of memory out of 5000000
+ 31212 multiletter control sequences out of 15000+600000
  640967 words of font info for 91 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  57i,13n,65p,473b,281s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -401,7 +401,7 @@ re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/share/tex
 live/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/share/texlive/t
 exmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texlive/te
 xmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
-Output written on P1_15_MANUSCRIPT_DRAFT.pdf (18 pages, 433211 bytes).
+Output written on P1_15_MANUSCRIPT_DRAFT.pdf (18 pages, 434368 bytes).
 PDF statistics:
  208 PDF objects out of 1000 (max. 8388607)
  128 compressed objects within 2 object streams

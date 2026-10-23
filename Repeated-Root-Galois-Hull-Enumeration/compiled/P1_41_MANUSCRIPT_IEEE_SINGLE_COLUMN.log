@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025/Debian) (preloaded format=pdflatex 2026.10.23)  23 OCT 2026 02:39
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (TeX Live 2025/Debian) (preloaded format=pdflatex 2026.10.23)  23 OCT 2026 07:23
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -274,7 +274,7 @@ b/m/n/10 E\OT1/cmr/m/n/10 [[](\OML/cmm/m/it/10 U; V\OT1/cmr/m/n/10 )[]] =
  []
 
 [11] [12] [13]
-Overfull \hbox (26.62352pt too wide) in paragraph at lines 1180--1192
+Overfull \hbox (26.62352pt too wide) in paragraph at lines 1181--1193
 []\OT1/ptm/m/n/10 For the record, the full joint dis-tri-bu-tion of $\OT1/cmr/m
 /n/10 ([][] \OML/cmm/m/it/10 C; [][] [][]\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 C\OT
 1/cmr/m/n/10 ))$ \OT1/ptm/m/n/10 is $\OT1/cmr/m/n/8 (0\OML/cmm/m/it/8 ; \OT1/cm
@@ -287,11 +287,11 @@ OML/cmm/m/it/8 ; \OT1/cmr/m/n/8 (3\OML/cmm/m/it/8 ; \OT1/cmr/m/n/8 2)[] 12$\OT1
  []
 
 LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 1
-206.
+207.
 (/usr/share/texlive/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 ) [14] [15]
-Overfull \hbox (49.7204pt too wide) in paragraph at lines 1326--1357
+Overfull \hbox (49.7204pt too wide) in paragraph at lines 1349--1380
 \OT1/ptm/m/n/10 the scripts and their saved out-puts ac-com-pany the pa-per in 
 the di-rec-tory \OT1/pcr/m/n/10 code/\OT1/ptm/m/n/10 . (i) \OT1/ptm/m/it/10 Or-
 bit level \OT1/ptm/m/n/10 (\OT1/pcr/m/n/10 code/validate_p1_14.py\OT1/ptm/m/n/1
@@ -299,7 +299,7 @@ bit level \OT1/ptm/m/n/10 (\OT1/pcr/m/n/10 code/validate_p1_14.py\OT1/ptm/m/n/1
  []
 
 [16] [17]
-Underfull \hbox (badness 5970) in paragraph at lines 1456--1459
+Underfull \hbox (badness 5970) in paragraph at lines 1479--1482
 []\OT1/ptm/m/n/8 T. Brun, I. De-ve-tak, and M.-H. Hsieh, Cor-rect-ing quan-tum 
 er-rors with en-tan-gle-ment, \OT1/ptm/m/it/8 Sci-ence \OT1/ptm/m/n/8 314 (2006
 ), 436--439.
@@ -312,10 +312,10 @@ L3 programming layer <2026-01-19>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 2797 strings out of 469514
- 44611 string characters out of 5470071
- 457696 words of memory out of 5000000
- 31454 multiletter control sequences out of 15000+600000
+ 2798 strings out of 469514
+ 44618 string characters out of 5470071
+ 461725 words of memory out of 5000000
+ 31455 multiletter control sequences out of 15000+600000
  671615 words of font info for 127 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  56i,13n,65p,486b,293s stack positions out of 10000i,1000n,20000p,200000b,200000s
@@ -346,7 +346,7 @@ sbm7.pfb></usr/share/texlive/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/share/texlive
 /texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/share/texlive/texmf-dist/fon
 ts/type1/urw/times/utmri8a.pfb>
-Output written on P1_41_MANUSCRIPT_IEEE_SINGLE_COLUMN.pdf (19 pages, 401847 byt
+Output written on P1_41_MANUSCRIPT_IEEE_SINGLE_COLUMN.pdf (19 pages, 403309 byt
 es).
 PDF statistics:
  213 PDF objects out of 1000 (max. 8388607)
