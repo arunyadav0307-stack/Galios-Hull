@@ -123,45 +123,32 @@ has computational content: at numerical values of \((u,z)\), each orbit
 trace can be evaluated by binary powering, using \(O(\log L)\)
 multiplications of \((P{+}1) \times (P{+}1)\) matrices, whereas direct
 enumeration inspects all \((P{+}1)^L\) assignments of the orbit.
-Table~\ref{tab:positioning} positions these results against the closest
-earlier work.
-
-\begin{table}[htbp]
-\centering
-\small
-\caption{Positioning relative to the closest earlier work. The
-comparison with \cite{DPI2023} is based on its published full text
-(Theorem~3, Corollary~1 and Theorem~4); the correction
-\cite{DPI2023corr} makes only minor textual corrections and does not
-change its theorems.}
-\label{tab:positioning}
-\begin{tabular}{@{}p{3.0cm}p{4.4cm}p{7.0cm}@{}}
-\hline
-Work & Setting & What is determined \\
-\hline
-\cite{DP2025} & constacyclic codes over finite fields and over an
-auxiliary ring & average Galois hull dimensions (field case:
-Theorem~3.3; for one component this is the hull mean of
-Theorem~\ref{thm:C5}) \\
-\cite{DPI2023, DPI2023corr} & constacyclic codes over a finite field,
-lengths \(n = n' p^{\nu}\) & Galois hull dimension of a given code
-(Theorem~3); number of codes with given hull dimension when
-reciprocal-orbit lengths are \(1, 2\) and \(4\) (Theorem~4) \\
-\cite{DIMP2026} & constacyclic codes over affine algebra rings
-(components over \(\Fq\)), lengths \(n = n' p^{e'}\) & Galois hull
-dimension of a given code, summed over components; LCD criterion;
-enumeration by hull dimension left open \\
-\cite{ES2026} & multi-twisted codes over a finite field, of which
-constacyclic codes are the index-one case & generator polynomial matrix
-and dimension formula for the Galois hull of a given code;
-self-orthogonal and LCD criteria; no enumeration over codes \\
-This paper & repeated-root length \(n = P n_0\) with compatible twists,
-over a finite product of finite fields & joint distribution of
-\((\dim C, \dim \Hull_k(C))\); LCD, self-orthogonal and dual-containing
-counts; exact mean and variance \\
-\hline
-\end{tabular}
-\end{table}
+It is useful to position these results against the closest earlier
+work. Debnath and Prakash~\cite{DP2025} compute average Galois hull
+dimensions for constacyclic codes over finite fields and over an
+auxiliary ring; in the field case, for a single component, their mean
+is the hull mean of Theorem~\ref{thm:C5}. Debnath, Prakash and
+Islam~\cite{DPI2023} determine the Galois hull dimension of a given
+constacyclic code over a finite field, including repeated-root lengths
+\(n = n' p^{\nu}\) (Theorem~3), and count such codes by hull dimension
+when the reciprocal-orbit lengths are \(1\), \(2\) and \(4\)
+(Theorem~4); our comparison with that work is based on its published
+full text, and the correction~\cite{DPI2023corr} makes only minor
+textual corrections, leaving its theorems unchanged. Over affine
+algebra rings whose components lie over \(\Fq\), Debnath, Islam,
+Mart\'inez-Moro and Prakash~\cite{DIMP2026} give the hull dimension of
+a given code componentwise and an LCD criterion, while the enumeration
+of such codes by hull dimension is left open there. Eldin and
+Sol\'e~\cite{ES2026} construct generator polynomial matrices and a
+hull-dimension formula for the Galois hull of a given multi-twisted
+code over a single finite field---constacyclic codes being the
+index-one case---together with self-orthogonal and LCD criteria, but
+no enumeration over codes. By contrast, the present paper works at
+repeated-root length \(n = P n_0\) with compatible twists over a
+finite product of finite fields, and determines the joint distribution
+of \((\dim C, \dim \Hull_k(C))\) over all labeled assignments, the
+LCD, self-orthogonal and dual-containing counts, and the exact mean
+and variance of the hull dimension.
 
 The present paper studies a distributional question in the repeated-root
 setting. Fix a finite product of finite fields
