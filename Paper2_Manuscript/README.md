@@ -7,8 +7,8 @@
 ---
 
 ## Directory Layout
-- `manuscript/` — Self-contained `elsarticle` journal source (`main.tex`, `references.bib`, `highlights.txt`, `elsarticle.cls`, `elsarticle-num.bst`).
-- `figures/` — All 9 publication vector PDFs (`fig1_workflow.pdf`–`fig9_conditional_F32.pdf`) + 300-DPI PNG previews.
+- `manuscript/` — Self-contained `elsarticle` journal source (`main.tex`, `references.bib`, `main.bbl`, `main.pdf` [36 pages], `highlights.txt`, `elsarticle.cls`, `elsarticle-num.bst`).
+- `figures/` — The 3 publication vector PDFs (`fig1_workflow.pdf`, `fig5_joint_F8_n14.pdf`, `fig6_joint_F32_n62.pdf`) + 300-DPI PNG previews.
 - `tables/` — All 18 exact CSV/JSON enumerator tables, moment tables, extremal tables, and `verification_log.txt`.
 - `code/` — Complete reproducible verification and generation suite:
   - `rr_enumerator.py` — Transfer-matrix dynamic programming, exact moments, LCD/SO/DC/SD extraction, support trapezoid.
