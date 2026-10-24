@@ -1,0 +1,33 @@
+# P3-4 quantum-parameter distribution log -- 2026-10-24T03:34:51Z
+Python 3.11.2
+
+e=2 matrix ((1, 1), (1, -1)): admissible=True, nu=2
+========================================================================================
+R_2 over F_9, n=2:  q field F_9, e=2, n=2, M=((1, 1), (1, -1))
+  dual-containing tuples with 2K - en >= 0 : 144
+  quantum-parameter distribution  [[en, 2K-en, >=d]],  en = 4
+    [[4, 0, >=2]]  :  8
+    [[4, 0, >=3]]  :  8
+    [[4, 2, >=2]]  :  64
+    [[4, 4, >=1]]  :  64
+  constituent-data groups: 3;  giving more than one quantum parameter: 1
+    ((1, 2), (1, 2)) -> [(2, 2), (2, 3)]
+========================================================================================
+R_2 over F_9, n=3:  q field F_9, e=2, n=3, M=((1, 1), (1, -1))
+  dual-containing tuples with 2K - en >= 0 : 144
+  quantum-parameter distribution  [[en, 2K-en, >=d]],  en = 6
+    [[6, 2, >=2]]  :  16
+    [[6, 4, >=2]]  :  64
+    [[6, 6, >=1]]  :  64
+  constituent-data groups: 3;  giving more than one quantum parameter: 0
+========================================================================================
+e=3 matrix ((1, 2, 2), (2, 1, 2), (2, 2, 1)): nu=1, nonzero entries=9
+========================================================================================
+R_3 over F_4, n=2:  q field F_4, e=3, n=2, M=((1, 2, 2), (2, 1, 2), (2, 2, 1))
+  dual-containing tuples with 2K - en >= 0 : 216
+  quantum-parameter distribution  [[en, 2K-en, >=d]],  en = 6
+    [[6, 0, >=2]]  :  27
+    [[6, 2, >=1]]  :  81
+    [[6, 4, >=1]]  :  81
+    [[6, 6, >=1]]  :  27
+  constituent-data groups: 4;  giving more than one quantum parameter: 0

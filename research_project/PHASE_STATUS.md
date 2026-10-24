@@ -407,24 +407,53 @@ environment regression, not a broken artifact, worked around by direct `sha256su
 **Verdict:** GO for the narrowed distributional contribution; **NO-GO** for a "Gray-coupling
 structural theorem" as the headline. Novelty not claimed (bounds likely folklore; B-1/B-2 open).
 
+## Phase 3 — P3-4 ring-level quantum-parameter distribution (2026-10-23)
+
+Deliverable `phase3/P3_4_QUANTUM_DISTRIBUTION.md`; probe `phase3/p3_quantum_dist.py`, log 33 lines.
+
+First exact distribution of dual-containing `λ`-constacyclic codes over `R_e` by quantum parameters
+`[[en, 2K−en, ≥d]]`, with `d` computed exactly through the Gray map for a **named** matrix `M`.
+
+| Instance | dual-containing tuples | distribution |
+|---|---|---|
+| `R_2`, `F_9`, `n=2`, `M=[[1,1],[1,−1]]` | 144 = 12² | `[[4,0,≥2]]`:8, `[[4,0,≥3]]`:8, `[[4,2,≥2]]`:64, `[[4,4,≥1]]`:64 |
+| `R_2`, `F_9`, `n=3`, same `M` | 144 = 12² | `[[6,2,≥2]]`:16, `[[6,4,≥2]]`:64, `[[6,6,≥1]]`:64 |
+| `R_3`, `F_4`, `n=2`, dense `M` (`ν=1`) | 216 = 6³ | `[[6,0,≥2]]`:27, `[[6,2,≥1]]`:81, `[[6,4,≥1]]`:81, `[[6,6,≥1]]`:27 |
+
+**Key result:** over `F_9`, `n=2`, constituent data `((1,2),(1,2))` yields **both** `[[4,0,≥2]]` and
+`[[4,0,≥3]]` — Theorem 5 of P3-3 lifted to the quantum parameters. The distribution is therefore not
+a product of field-level laws.
+
+**Honest counterweight recorded:** the effect is invisible in the `F_4`, `e=3` instance (0 of 4 groups)
+because all dual-containing field codes there share the same `(k,d)`; non-determination needs ties
+realised by inequivalent codes.
+
+**No claim** that these parameters are good, new or competitive — they are toy, and degenerate rows
+(`K=0`, `K=en`) are explicitly flagged. New limitation **L-8 (scaling)**: cost is `∏_ℓ |C_ℓ|` per
+tuple; feasibility for `n` beyond single digits is not established.
+
+**Phase 3 programme complete.** GO on the narrowed distributional contribution; NO-GO on a
+structural-theorem headline. Novelty not claimed (B-1/B-2 open).
+
 ## Next step
 
-**Phase 3 P3-3 is delivered.** The remaining Phase 3 work with real content is the **distribution over
-`R_e`**: enumerate dual-containing tuples, compute `d(ψ)` exactly for a fixed `M`, and record the
-quantum-parameter distribution `[[en, 2K−en, ≥d]]`. Instance size is controlled by
-`|C_1|·…·|C_e|`; the interesting cases begin at `e = 3`.
+**The Phase 3 programme identified in `R4_FEASIBILITY.md` §7 is complete**: K4-2, P3-1, P3-2, P3-3 and
+P3-4 are all delivered and committed.
 
-**A decision is required before that, and it changes the deliverable:**
+Nothing further should be computed before the two literature blockers are attacked, because every
+remaining claim depends on them:
 
-> Is the intended claim the **distribution** (a computational result with tables), or a **theorem**?
-> On the evidence of P3-3 no theorem beyond Theorems 1–5 is available at this generality, and those
-> are elementary. If a theorem is needed, the only remaining route is a restricted family where
-> `d(ψ)` *is* determined — Theorem 4's `σ = 1` case is the only one known — and to characterise it.
+* **B-1** — publisher full texts (ScienceDirect, Springer, AIMS). Needed to establish that no
+  accessible work already gives a joint (hull, distance) distribution for a constacyclic family.
+* **B-2** — Debnath–Prakash body text. The single most likely place for an existing count of this kind.
 
-Limitations carried forward and labelled: **L-1** four unproved middle distances; **L-2** `n=9`
-power-attainment conjecture; **L-3** choice of `M`; **L-4** even-characteristic matrix degeneracy;
-**L-5** publisher full texts; **L-6** Debnath–Prakash body; **L-7** Thm 5 is witness-based.
-R1, R2, R3 remain NO-GO. Gate 2 remains passed on R4. No novelty claimed; Phase 1 untouched.
+If both clear, the remaining work is **L-8 (scaling)**: whether the distribution can be computed
+beyond single-digit `n`, and whether any structure (rather than brute force) yields it. If they do not
+clear, the honest position is that the contribution is *distinguishable* (Gate 2 stands) but **not
+established as novel**, and no manuscript should be drafted on it.
+
+R1, R2, R3 remain NO-GO; Gate 2 remains passed on R4; Phase 1 deliverables untouched and the source
+PDF re-verified (612 826 B, sha256 `7f7e6803…`). Limitations L-1 … L-8 all recorded and unresolved.
 
 Phase 1 stands complete; nothing in Phase 2 changed a Phase 1 result, count or register entry.
 
