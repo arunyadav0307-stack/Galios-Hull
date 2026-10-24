@@ -1,0 +1,27 @@
+# P3-6 quantum parameter table log -- 2026-10-24T06:07:58Z
+Python 3.11.2
+numpy: ModuleNotFoundError: No module named 'numpy'
+
+wrote /home/user/Galios-Hull/research_project/phase3/QUANTUM_CODE_PARAMETER_TABLE.csv: 504 rows
+  R_2/F_9/n=2: 144 codes; quantum-MDS 136 (of which NON-TRIVIAL 64 of 64); distinct params 4
+      rank(psi(C)) == sum of component dims : 144/144
+      [[4,0,>=2]]_3  x8
+      [[4,0,>=3]]_3  x8
+      [[4,2,>=2]]_3  x64
+      [[4,4,>=1]]_3  x64
+  R_2/F_9/n=3: 144 codes; quantum-MDS 128 (of which NON-TRIVIAL 64 of 80); distinct params 3
+      rank(psi(C)) == sum of component dims : 144/144
+      [[6,2,>=2]]_3  x16
+      [[6,4,>=2]]_3  x64
+      [[6,6,>=1]]_3  x64
+  R_3/F_4/n=2: 216 codes; quantum-MDS 27 (of which NON-TRIVIAL 0 of 162); distinct params 4
+      rank(psi(C)) == sum of component dims : 216/216
+      [[6,0,>=2]]_2  x27
+      [[6,2,>=1]]_2  x81
+      [[6,4,>=1]]_2  x81
+      [[6,6,>=1]]_2  x27
+
+## csv head
+instance,q,e,n,M,lambda_components,component_dims,en,K,quantum_k,d,quantum_params,quantum_singleton_slack,rank_eq_sum_of_dims,degenerate_zero_k,trivial_full_k,distance_exact
+R_2/F_9/n=2,3,2,2,"((1,1),(1,-1))",1;1,2;2,4,4,4,1,"[[4,4,>=1]]_3",0,yes,no,yes,yes
+R_2/F_9/n=2,3,2,2,"((1,1),(1,-1))",1;2,2;2,4,4,4,1,"[[4,4,>=1]]_3",0,yes,no,yes,yes
