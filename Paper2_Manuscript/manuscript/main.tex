@@ -594,43 +594,6 @@ $\langle x,y\rangle_{s,k}=\sum_{i=0}^{n-1}x_i y_i^{p^k}$
 refer to the uniform measure $\mathbb P(C(e))=(M+1)^{-N_F}$ on $\mathscr C^{(M)}$.
 \end{enumerate}
 
-The symbols used throughout the manuscript are summarised in
-Table~\ref{tab:nomenclature}; none is overloaded elsewhere in the text.
-
-\begin{table}[htbp]
-\centering
-\caption{Master notation and dimension conventions used throughout the paper.}
-\label{tab:nomenclature}
-\small
-\begin{tabularx}{\textwidth}{@{}lX@{}}
-\toprule
-Symbol & Meaning \\
-\midrule
-$p$, $q=p^e$, $k$ & prime characteristic, base-field order ($e\ge 1$), and Galois twist exponent ($0\le k<e$) \\
-$s\in\{1,\dots,N\}$ & fixed component index in $\A\cong\prod_{s=1}^{N}K_s$ \\
-$K_s=\F_{q^{m_s}}=\F_{p^{d_s}}$ & $s$-th component field, with $m_s=[K_s:\F_q]$ and $d_s=em_s$ \\
-$n=n'p^t$, $M=p^t$ & code length with $\gcd(n',p)=1$, $t=v_p(n)\ge 0$, and factor multiplicity $M$ \\
-$\lambda_s$, $\lambda_{s,0}\in K_s^*$ & component twist and its unique $M$-th root satisfying $\lambda_{s,0}^M=\lambda_s$ \\
-$P_s(x)=x^n-\lambda_s$ & component constacyclic modulus, equal to $(x^{n'}-\lambda_{s,0})^M$ \\
-$\Fs$ & set of distinct monic irreducible factors of $x^{n'}-\lambda_{s,0}$ over $K_s$ \\
-$e=(e_f)_{f\in\Fs}$, $\mathscr C^{(M)}$ & exponent selection with $0\le e_f\le M$, and global selection space $\prod_s\{0,\dots,M\}^{\Fs}$ \\
-$g_e(x)$, $h_e(x)$ & generator $\prod_{f\in\Fs}f^{e_f}$ and parity-check polynomial $P_s/g_e=\prod_{f\in\Fs}f^{M-e_f}$ \\
-$C_s(e)$, $C(e)$ & component code $\langle g_e\rangle\subseteq K_s[x]/\langle P_s\rangle$ and global code $\prod_s C_s(e^{(s)})\subseteq\A^n$ \\
-$\sigma_{s,k}$, $\rho_{s,k}$ & $k$-Frobenius $a\mapsto a^{p^k}$ on $K_s$ and its inverse $a\mapsto a^{p^{d_s-k}}$ \\
-$f^{\#_{s,k}}$, $\tau_{s,k}$ & normalised inverse-Frobenius reciprocal \eqref{eq:reciprocal} and induced permutation of $\Fs$ \\
-$\Os$, $O$, $a_O$, $d_O$, $w_O$ & orbit set of $\tau_{s,k}$, an orbit $O\in\Os$, length $|O|$, factor degree, and $\F_q$-weight $m_s d_O$ \\
-$e_{O,i}$ ($i\in\Z/a_O\Z$) & cyclic exponent word along $O$, ordered by $\tau_{s,k}(f_{O,i})=f_{O,i+1}$ \\
-$D_k(\cdot)$, $\Hull_k(\cdot)$ & component $k$-Galois dual and hull; globally $D_{\A,k}(\cdot)$ and $\Hull_{\A,k}(\cdot)$ \\
-$\kappa(C)$, $\eta_k(C)$ & $\F_q$-dimensions $\dim_{\F_q}C$ and $\dim_{\F_q}\Hull_{\A,k}(C)$ \\
-$N_F$, $W$ & total distinct-factor count $\sum_s|\Fs|$ and ambient $\F_q$-dimension $n\sum_s m_s$ \\
-$U$, $Z$ & formal variables marking $\kappa(C)$ and $\eta_k(C)$ in generating polynomials \\
-$\Epoly^{(M)}(U,Z)$, $\Hpoly^{(M)}(Z)$ & exact joint enumerator and marginal hull polynomial $\Epoly^{(M)}(1,Z)$ \\
-$T^{(M)}_w(U,Z)$ & $(M+1)\times(M+1)$ transfer matrix on state set $\{0,\dots,M\}$ \\
-$\Phi_j(\kappa)$ & factorial-moment coefficient $[U^\kappa]\,\partial_Z^j\Epoly^{(M)}(U,Z)\big|_{Z=1}$ ($j=0,1,2$) \\
-\bottomrule
-\end{tabularx}
-\end{table}
-
 \section{\texorpdfstring{$k$}{k}-Galois duality}\label{sec:duality}
 
 We next determine the $k$-Galois dual of an arbitrary repeated-root constacyclic
@@ -1207,16 +1170,6 @@ establishing \eqref{eq:hull-min-component}. Part~\textup{(c)} follows from
 Proposition~\ref{prop:incompatible}\textup{(a)}, and \eqref{eq:hull-min-component}.
 \end{proof}
 
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.72\textwidth]{fig2_orbit_exponent_word.pdf}
-\caption{Local cyclic edge-minimum mechanism along a single $\tau_{s,k}$-orbit of
-length $a=6$ at multiplicity $M=3$ for the exponent word $e=(2,0,3,1,2,0)$: each
-directed edge $f_i\to f_{i+1}$ contributes $w\min\{e_i,M-e_{i+1}\}$, giving total
-orbit hull contribution $7w$.}
-\label{fig:orbit-word}
-\end{figure}
-
 \begin{remark}[Reconciliation with Debnath et al.\ {\cite[Theorem~8]{debnathAffine2026}}]\label{rem:debnath-hull}
 In the special case where every component is split over $\F_q$ ($m_s=1$),
 $\gcd(\ord(\lambda_s),n')=1$, and every component is compatible
@@ -1275,18 +1228,7 @@ U^2 Z & UZ & 1 \\
 U^2 Z^2 & UZ & 1
 \end{pmatrix}.
 \end{equation}
-Figure~\ref{fig:transfer-M2} displays the state-transition entries of
-$T_w^{(2)}(U,Z)$ coloured by the edge hull exponent $\min\{\alpha,M-\beta\}$.
 \end{definition}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.68\textwidth]{fig4_transfer_matrix_M2.pdf}
-\caption{Structure of the $(M+1)\times(M+1)$ repeated-root transfer matrix
-$T_w^{(2)}(U,Z)$ on states $\alpha,\beta\in\{0,1,2\}$, shaded according to the
-local hull exponent $\min\{\alpha,2-\beta\}\in\{0,1,2\}$.}
-\label{fig:transfer-M2}
-\end{figure}
 
 \begin{lemma}[Single-orbit trace formula]\label{lem:orbit-trace}
 For every integer $M\ge 1$, orbit length $a\ge 1$, and weight $w\ge 1$, the
@@ -1591,20 +1533,8 @@ Chen, Dinh, and Liu~\cite{chenDinhLiu2015}), while extending it simultaneously t
 arbitrary $k$-Galois pairings, general constacyclic twists (showing that
 incompatibility switches the scaling from $2^{|\Os|}$ to $(p^t+1)^{|\Fs|}$),
 non-split square-free affine algebras $\A$, and the full bivariate distribution
-around $\eta_k=0$ illustrated in Figure~\ref{fig:hull-marginals}.
+around $\eta_k=0$.
 \end{remark}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.78\textwidth]{fig7_hull_marginals.pdf}
-\caption{Evolution of the normalised marginal $1$-Galois hull distribution
-$\mathbb P(\eta_1(C)=\eta)$ versus $\eta/n$ along the $2$-power multiplicity tower
-$M=1,2,4$ ($n=7,14,28$) for the cyclic $\F_8$ orbit skeleton $(1,1),(6,1)$: while
-the absolute LCD count at $\eta=0$ stays locked at $2^2=4$ across all $M$, probability
-mass concentrates steadily around the asymptotic mean ratio $\eta/n\approx 19/63$
-($M=2$) and $\to 13/42$ as $M\to\infty$.}
-\label{fig:hull-marginals}
-\end{figure}
 
 \subsection{Exact single-orbit support trapezoid and hull spectrum}\label{sec:support}
 
@@ -1648,8 +1578,7 @@ reversal-complement involution $\tilde{x}_i:=M-x_{-i}$ satisfies
 $R(\tilde{x})=aM-R(x)$, $H(\tilde{x})=H(x)$, $\min_i\tilde{x}_i=M-\max_i x_i$,
 and $\max_i\tilde{x}_i=M-\min_i x_i$. Replacing $x$ by $\tilde{x}$ if necessary,
 we may assume $x_{\min}+x_{\max}\le M$, where $x_{\min}:=\min_i x_i$ and
-$x_{\max}:=\max_i x_i$. Write each edge minimum as the threshold sum (illustrated
-in Figure~\ref{fig:threshold-layers})
+$x_{\max}:=\max_i x_i$. Write each edge minimum as the threshold sum
 \[
 \min\{M-x_i,\,x_{i+1}\}
  =\sum_{r=1}^{M}\mathbf 1_{\{x_i\le M-r\;\text{and}\;x_{i+1}\ge r\}}.
@@ -1725,27 +1654,8 @@ every integer in $[M,R]$ is attained along the walk, proving \eqref{eq:support-t
 Finally, summing slice heights $\min\{R,aM-R\}-\min\{R,M,aM-R\}+1
 =1+(\min\{R,aM-R\}-M)_+$ over $0\le R\le aM$ gives $aM+1+\sum_{s=0}^{L}\min\{s,L-s\}$
 with $L:=(a-2)M$, and $\sum_{s=0}^{L}\min\{s,L-s\}=\lfloor L^2/4\rfloor$ yields
-\eqref{eq:support-cardinality} (cf.\ Figure~\ref{fig:support-trapezoid}).
+\eqref{eq:support-cardinality}.
 \end{proof}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.75\textwidth]{fig3_threshold_layers.pdf}
-\caption{Binary threshold-layer decomposition $e_i=\sum_{r=1}^{M}\mathbf 1_{\{e_i\ge r\}}$
-underlying the lower-bound proof of Theorem~\ref{thm:support-trapezoid}, shown for
-$a=4$, $M=3$, and $e=(2,0,3,1)$ with cyclic edge contributions $(2,0,2,1)$.}
-\label{fig:threshold-layers}
-\end{figure}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.76\textwidth]{fig8_support_trapezoid.pdf}
-\caption{Exact single-orbit support polygon $\operatorname{Supp}(E_{6,1}^{(3)})$
-for $a=6$, $M=3$, $w=1$: every lattice point $(R,H)$ between the lower floor
-$\min\{R,3,18-R\}$ (green dashed) and upper tent $\min\{R,18-R\}$ (red dashed) is
-attained, giving $6\cdot 3+1+\lfloor 4^2\cdot 3^2/4\rfloor=55$ distinct monomials.}
-\label{fig:support-trapezoid}
-\end{figure}
 
 \begin{corollary}[Global attainable $k$-Galois hull spectrum]\label{cor:hull-spectrum}
 For any unit $\lambda\in\A^*$ and $0\le k<e$, the set of $\F_q$-dimensions
@@ -1888,36 +1798,13 @@ Therefore
 \end{itemize}
 \end{proof}
 
-Table~\ref{tab:moment-coeffs} records exact rational values of the local moment
-constants across representative prime powers $M=p^t$.
-
-\begin{table}[htbp]
-\centering
-\caption{Exact unweighted local expectation, covariance, and variance constants across prime-power multiplicities $M=p^t$ (Theorem~\ref{thm:moments}).}
-\label{tab:moment-coeffs}
-\footnotesize
-\begin{tabular}{@{}rrrrrrrr@{}}
-\toprule
-$M$ & $\mathbb E[g]$ ($a\ge 2$) & $\mathbb E[Y_1]$ ($a=1$) & $\Var(g)$ & $\Cov_{\mathrm{adj}}$ & $\mathcal V_M(a)/a$ ($a\ge 3$) & $\mathcal V_M(2)$ & $\mathcal V_M(1)$ \\
-\midrule
-$1$  & $1/4$     & $0$       & $3/16$        & $-1/16$        & $1/16$        & $1/4$         & $0$ \\
-$2$  & $5/9$     & $1/3$     & $38/81$       & $-13/81$       & $4/27$        & $44/81$       & $2/9$ \\
-$3$  & $7/8$     & $1/2$     & $55/64$       & $-19/64$       & $17/64$       & $15/16$       & $1/4$ \\
-$4$  & $6/5$     & $4/5$     & $34/25$       & $-59/125$      & $52/125$      & $36/25$       & $14/25$ \\
-$5$  & $55/36$   & $1$       & $2555/1296$   & $-889/1296$    & $259/432$     & $665/324$     & $2/3$ \\
-$8$  & $68/27$   & $16/9$    & $3260/729$    & $-1138/729$    & $328/243$     & $3320/729$    & $140/81$ \\
-$9$  & $57/20$   & $2$       & $2211/400$    & $-3861/2000$   & $3333/2000$   & $561/100$     & $2$ \\
-$16$ & $88/17$   & $64/17$   & $4632/289$    & $-1620/289$    & $1392/289$    & $4656/289$    & $1752/289$ \\
-$25$ & $425/52$  & $6$       & $101475/2704$ & $-35505/2704$  & $30465/2704$  & $25425/676$   & $14$ \\
-$27$ & $495/56$  & $13/2$    & $136503/3136$ & $-47763/3136$  & $40977/3136$  & $34191/784$   & $65/4$ \\
-$32$ & $1040/99$ & $256/33$  & $592688/9801$ & $-207400/9801$ & $59296/3267$  & $593504/9801$ & $24752/1089$ \\
-\bottomrule
-\end{tabular}
-\end{table}
-
+For instance, at $M=1,2,3,4,5$, the unweighted local constants
+$\bigl(\mathbb E[g],\,\mathcal V_M(a)/a,\,\mathcal V_M(2),\,\mathcal V_M(1)\bigr)$
+equal $(1/4,1/16,1/4,0)$, $(5/9,4/27,44/81,2/9)$, $(7/8,17/64,15/16,1/4)$,
+$(6/5,52/125,36/25,14/25)$, and $(55/36,259/432,665/324,2/3)$ respectively.
 Although $\Cov(\kappa,\eta_k)=0$ globally, $\eta_k$ depends strongly and
 concavely on the code dimension $\kappa$, as captured exact slice by slice via
-factorial-moment extraction (Figure~\ref{fig:conditional-F32}).
+factorial-moment extraction.
 
 \begin{proposition}[Exact conditional moments given code dimension]\label{prop:conditional}
 For $j\in\{0,1,2\}$ and $0\le\kappa\le W$, put
@@ -1948,17 +1835,6 @@ at $Z=1$, and expanding $Z=1+\varepsilon\pmod{\varepsilon^3}$ yields
 $\Epoly^{(M)}(U,1+\varepsilon)\equiv\sum_\kappa\bigl(\Phi_0(\kappa)
 +\Phi_1(\kappa)\varepsilon+\frac{1}{2}\Phi_2(\kappa)\varepsilon^2\bigr)U^\kappa$.
 \end{proof}
-
-\begin{figure}[htbp]
-\centering
-\includegraphics[width=0.76\textwidth]{fig9_conditional_F32.pdf}
-\caption{Exact conditional expectation $\mathbb E[\eta_1\mid\kappa]/W$ versus
-normalised rate $\kappa/W$ for cyclic codes over $\F_{32}$ at repeated-root
-lengths $n=62$ ($M=2$, $3^{31}\approx 6.18\times 10^{14}$ codes) and $n=124$
-($M=4$, $5^{31}\approx 4.66\times 10^{21}$ codes), symmetric around $\kappa/W=1/2$
-with global linear covariance $\Cov(\kappa,\eta_1)=0$.}
-\label{fig:conditional-F32}
-\end{figure}
 
 \subsection{Self-orthogonal, dual-containing, and self-dual code counts}\label{sec:extremal}
 
@@ -2032,39 +1908,6 @@ all $i\in\Z/a_O\Z$, counted by $\tr(J^{a_O})$. Since $J^2=I_{M+1}$, $\tr(J^{a_O}
 when $a_O$ is even, while when $a_O$ is odd $\tr(J^{a_O})=\tr(J)
 =\#\{\alpha:2\alpha=M\}=\mathbf 1_{\{M\text{ even}\}}$, giving \eqref{eq:SD-count}.
 \end{proof}
-
-Table~\ref{tab:one-orbit-extremal} lists exact single-orbit counts across
-$1\le M\le 5$ and representative orbit lengths $a$.
-
-\begin{table}[htbp]
-\centering
-\caption{Exact single-orbit counts of total codes $(M+1)^a$, LCD codes, self-orthogonal / dual-containing codes ($N_{\mathrm{SO}}=N_{\mathrm{DC}}$), and self-dual codes across $1\le M\le 5$ (Theorems~\ref{thm:lcd-invariance} and \ref{thm:extremal}).}
-\label{tab:one-orbit-extremal}
-\footnotesize
-\begin{tabular}{@{}rrrrrr@{\hspace{2.2em}}rrrrrr@{}}
-\toprule
-$a$ & $M$ & $(M+1)^a$ & LCD & SO / DC & SD & $a$ & $M$ & $(M+1)^a$ & LCD & SO / DC & SD \\
-\midrule
-$1$ & $1$ & $2$    & $2$ & $1$   & $0$ & $4$  & $1$ & $16$       & $2$ & $7$       & $2$ \\
-$1$ & $2$ & $3$    & $2$ & $2$   & $1$ & $4$  & $2$ & $81$       & $2$ & $26$      & $3$ \\
-$1$ & $3$ & $4$    & $2$ & $2$   & $0$ & $4$  & $3$ & $256$      & $2$ & $70$      & $4$ \\
-$1$ & $4$ & $5$    & $2$ & $3$   & $1$ & $4$  & $4$ & $625$      & $2$ & $155$     & $5$ \\
-$1$ & $5$ & $6$    & $2$ & $3$   & $0$ & $4$  & $5$ & $1296$     & $2$ & $301$     & $6$ \\
-\addlinespace[2pt]
-$2$ & $1$ & $4$    & $2$ & $3$   & $2$ & $5$  & $1$ & $32$       & $2$ & $11$      & $0$ \\
-$2$ & $2$ & $9$    & $2$ & $6$   & $3$ & $5$  & $2$ & $243$      & $2$ & $57$      & $1$ \\
-$2$ & $3$ & $16$   & $2$ & $10$  & $4$ & $5$  & $3$ & $1024$     & $2$ & $197$     & $0$ \\
-$2$ & $4$ & $25$   & $2$ & $15$  & $5$ & $5$  & $4$ & $3125$     & $2$ & $533$     & $1$ \\
-$2$ & $5$ & $36$   & $2$ & $21$  & $6$ & $5$  & $5$ & $7776$     & $2$ & $1223$    & $0$ \\
-\addlinespace[2pt]
-$3$ & $1$ & $8$    & $2$ & $4$   & $0$ & $6$  & $1$ & $64$       & $2$ & $18$      & $2$ \\
-$3$ & $2$ & $27$   & $2$ & $11$  & $1$ & $6$  & $2$ & $729$      & $2$ & $129$     & $3$ \\
-$3$ & $3$ & $64$   & $2$ & $23$  & $0$ & $6$  & $3$ & $4096$     & $2$ & $571$     & $4$ \\
-$3$ & $4$ & $125$  & $2$ & $42$  & $1$ & $6$  & $4$ & $15625$    & $2$ & $1884$    & $5$ \\
-$3$ & $5$ & $216$  & $2$ & $69$  & $0$ & $10$ & $5$ & $60466176$ & $2$ & $1508401$ & $6$ \\
-\bottomrule
-\end{tabular}
-\end{table}
 
 \section{Computation and examples}\label{sec:examples}
 

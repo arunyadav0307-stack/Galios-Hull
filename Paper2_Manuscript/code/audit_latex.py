@@ -212,7 +212,7 @@ def main():
     if uncited:
         raise AssertionError(f"Orphan uncited BibTeX keys in references.bib: {uncited}")
 
-    # 5. Graphics paths check
+    # 5. Graphics paths check (Introduction workflow + Section 6 benchmark figures)
     imgs = re.findall(r"\\includegraphics(?:\[[^\]]*\])?\{([^}]+)\}", clean)
     for img in imgs:
         cand1 = os.path.join(ROOT, "manuscript", img)
@@ -220,7 +220,7 @@ def main():
         cand3 = os.path.join(ROOT, img)
         if not (os.path.exists(cand1) or os.path.exists(cand2) or os.path.exists(cand3)):
             raise AssertionError(f"Missing figure file referenced in main.tex: {img}")
-    assert len(set(imgs)) == 9, f"Expected all 9 figures included, got {len(set(imgs))}"
+    assert len(set(imgs)) == 3, f"Expected exactly 3 standard figures included, got {len(set(imgs))}"
 
     # 6. Notation & self-containment check: M_s and Paper 1 references forbidden
     if re.search(r"\bM_s\b", clean):
@@ -228,19 +228,8 @@ def main():
     if re.search(r"yadavPaper1|paper[ _~-]?1|companion|TODO", raw_tex, re.IGNORECASE):
         raise AssertionError("Forbidden Paper 1 / companion / TODO reference found in main.tex!")
 
-    # 7. Exact cell-by-cell audit of LaTeX tables against regenerated CSV files
+    # 7. Exact cell-by-cell audit of LaTeX benchmark table against regenerated CSV file
     import csv as _csv
-    with open(os.path.join(ROOT, "tables", "moment_coefficients_by_M.csv")) as f:
-        for row in _csv.DictReader(f):
-            expected_row = (
-                f"${row['M']}$", f"${row['mu_edge(a>=2)']}$", f"${row['nu(a=1)']}$",
-                f"${row['VarY']}$", f"${row['Cov_adjacent']}$", f"${row['Var_factor_a>=3']}$",
-                f"${row['Var_total_a=2']}$", f"${row['Var_a=1']}$",
-            )
-            for tok in expected_row:
-                if tok not in clean:
-                    raise AssertionError(f"Table token {tok} from moment_coefficients_by_M.csv missing in main.tex")
-
     with open(os.path.join(ROOT, "tables", "summary_families.csv")) as f:
         for row in _csv.DictReader(f):
             for field in ("joint_terms", "lcd", "self_dual", "mean_eta", "var_eta"):
@@ -260,8 +249,8 @@ def main():
     print(f"[PASS] Custom macros verified: {sorted(defined)}")
     print(f"[PASS] Cross-references verified: {len(labels)} unique labels, {len(refs)} resolved refs/eqrefs")
     print(f"[PASS] Bibliography 100% matched: {len(bib_entries)}/{len(bib_entries)} BibTeX entries cited, 0 orphans")
-    print(f"[PASS] All {len(set(imgs))}/9 publication PDF figures verified & cross-referenced")
-    print("[PASS] Automated CSV-to-LaTeX table audit passed across all 11 benchmark families & moment tables")
+    print(f"[PASS] All {len(set(imgs))}/3 publication PDF figures verified & cross-referenced")
+    print("[PASS] Automated CSV-to-LaTeX table audit passed across all 11 benchmark families")
     print(f"[PASS] Elsevier Highlights verified ({len(hl_lines)} bullets, max {max(len(x) for x in hl_lines)}/85 chars)")
     print("[PASS] Blueprint notation guards passed (zero M_s collisions, zero unknown control sequences)")
     print("ALL LATEX & BIBTEX AUDIT CHECKS PASSED!")
