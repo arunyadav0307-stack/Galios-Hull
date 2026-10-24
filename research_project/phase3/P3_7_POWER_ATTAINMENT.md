@@ -1,11 +1,35 @@
 # P3-7 — Power attainment for single-orbit repeated-root codes (limitation L-2)
 
+> ## STATUS REVISED (2026-10-24) — L-2 is a KNOWN THEOREM, not an open conjecture
+>
+> The mathematics below is retained unchanged as an audit trail, but its **framing is wrong**. The
+> exact minimum distance of `C_i = ⟨(x−1)^i⟩ ⊆ F_q[x]/⟨x^{p^s}−1⟩` is known for every `i`: see
+> H. Q. Dinh, *Finite Fields Appl.* **14**(1):22–40 (2008) — `d_i = (τ+1)p^t` on the band
+> `p^s − p^{s−t} + (τ−1)p^{s−t−1} < i <= p^s − p^{s−t} + τ p^{s−t−1}` — restated as Lemma 1 of
+> arXiv:2304.00762 and as Thm 2.4 of arXiv:1704.03311. The `s = 1` (MDS) case goes back to
+> Massey–Costello–Justesen, *IEEE TIT* **19**(1):101–110 (1973).
+>
+> Consequences (detailed in `P3_7B_L2_PROVENANCE_AUDIT.md`):
+> * **L-2 is closed by citation.** It is **not** a limitation and **not** a contribution.
+> * **Theorem A** (`s = 1`) and **Theorem B** (`1 <= a <= p^{s−1}`) below are the `t = 0`, `τ = i` and
+>   `t = 0`, `τ = 1` branches of that theorem. **Re-derived, not new.**
+> * The "open range" of §6 is **not open** — it is the `t >= 1` branch. The block/`ε`-decomposition
+>   obstruction recorded there is a route to a theorem that already exists.
+> * `m(a)` was checked against the published formula at **5050 values, 0 mismatches**
+>   (`p3_known_formula_check.py`), and the `n = 25` table below matches the published Example 1 of
+>   arXiv:2304.00762 band-for-band, including counts.
+> * The Weight Lemma, Lemmas H and C, and the two recorded bugs stand as correct work and as a
+>   reproducible verification of a known result. **No novelty is claimed for any of it.**
+>
+> Phase 9 remains **NO-GO**, and this finding reinforces it.
+
+
 Date: 2026-10-24. Probe: `phase3/p3_power_attainment.py`. Log: `phase3/p3_power_attainment_log.txt`
 (212 lines, exit 0, wall time 759 s). Pure stdlib, no numpy, no network.
 
-Status of this document: **two proved families + one conjecture that remains a conjecture.**
-Nothing here is promoted to a theorem beyond what is proved in §4 and §5. No novelty is claimed
-(B-1, B-2a, B-2b and Tian–Gao–Gao are still unread; see §8).
+Status of this document (as originally written): *two proved families + one conjecture.* **Revised:
+the conjecture is a known theorem — see the banner above and `P3_7B_L2_PROVENANCE_AUDIT.md`. Nothing
+here is new; no novelty is claimed.**
 
 ---
 
@@ -303,5 +327,6 @@ it is `j = 21 = 3 + 2·9` with `w = 6`, and so on.
   `research_project/phase3/p3_power_attainment_mbound_log.txt` (19 lines, `--mbound`).
 * `PHASE_STATUS.md`: the `P3_2_TWO_ORBIT.md` row `n = 9` `10/10` conjecture remains as a historical
   record; a new `P3-7` section records Theorem A, Theorem B and the widened verification, and the
-  limitation line for L-2 is updated from "conjecture, 10/10 at n=9" to
-  "**proved** for s=1 and for 1 ≤ a ≤ p^{s−1}; still a **conjecture** on p^{s−1} < a < p^s".
+  limitation line for L-2 was updated from "conjecture, 10/10 at n=9" to "proved for s=1 and for
+  1 ≤ a ≤ p^{s−1}; conjecture on p^{s−1} < a < p^s" — and then **superseded by P3-7b**: L-2 is a
+  known theorem (Dinh 2008) and is no longer counted as a limitation.

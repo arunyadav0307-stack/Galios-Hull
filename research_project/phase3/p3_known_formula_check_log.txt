@@ -1,0 +1,32 @@
+Agreement test: m(a)  vs  published d_a  (Dinh 2008, as quoted in arXiv:2304.00762 Lemma 1)
+  p= 2 s=1 n=   2:    3 values checked, 0 mismatches
+  p= 2 s=2 n=   4:    5 values checked, 0 mismatches
+  p= 2 s=3 n=   8:    9 values checked, 0 mismatches
+  p= 2 s=4 n=  16:   17 values checked, 0 mismatches
+  p= 2 s=5 n=  32:   33 values checked, 0 mismatches
+  p= 2 s=6 n=  64:   65 values checked, 0 mismatches
+  p= 2 s=7 n= 128:  129 values checked, 0 mismatches
+  p= 2 s=8 n= 256:  257 values checked, 0 mismatches
+  p= 3 s=1 n=   3:    4 values checked, 0 mismatches
+  p= 3 s=2 n=   9:   10 values checked, 0 mismatches
+  p= 3 s=3 n=  27:   28 values checked, 0 mismatches
+  p= 3 s=4 n=  81:   82 values checked, 0 mismatches
+  p= 5 s=1 n=   5:    6 values checked, 0 mismatches
+  p= 5 s=2 n=  25:   26 values checked, 0 mismatches
+  p= 5 s=3 n= 125:  126 values checked, 0 mismatches
+  p= 7 s=1 n=   7:    8 values checked, 0 mismatches
+  p= 7 s=2 n=  49:   50 values checked, 0 mismatches
+  p= 7 s=3 n= 343:  344 values checked, 0 mismatches
+  p=11 s=1 n=  11:   12 values checked, 0 mismatches
+  p=11 s=2 n= 121:  122 values checked, 0 mismatches
+  p=11 s=3 n=1331: 1332 values checked, 0 mismatches
+  p=13 s=1 n=  13:   14 values checked, 0 mismatches
+  p=13 s=2 n= 169:  170 values checked, 0 mismatches
+  p=13 s=3 n=2197: 2198 values checked, 0 mismatches
+
+TOTAL 5050 values, 0 mismatches
+
+Spot check against the published table (arXiv:2304.00762, Example 1: n = 25 over F_5,
+d = 2,3,4,5,10,15,20,25 for i = 1-5, 6-10, 11-15, 16-20, 21, 22, 23, 24):
+  m(a) by bands (value, count): [(2, 5), (3, 5), (4, 5), (5, 5), (10, 1), (15, 1), (20, 1), (25, 1)]
+  matches the published example: True

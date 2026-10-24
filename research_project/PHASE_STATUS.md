@@ -370,7 +370,7 @@ Deliverable `phase3/P3_2_TWO_ORBIT.md`.
 | Lemma 4: `d(C(1,1)) = 2` | **proved** |
 | Four middle values (`d = 3,3,4,3`) | computed only, no formula claimed |
 | `n=9` complete table (10 codes): `hull = min(a,9−a)` | computed, 10/10 |
-| `d(C_a) = min{w((x−1)^j) : j ≥ a}` at `n=9` | **conjecture**, 10/10 — kept as the historical record; extended and partly proved in **P3-7** |
+| `d(C_a) = min{w((x−1)^j) : j ≥ a}` at `n=9` | **conjecture**, 10/10 — historical record; **it is the known Dinh (2008) formula, see P3-7b** |
 
 Recorded error avoided: `(x−1)^9 = x^9 − 1 ≡ 0` in `R`, so it is *not* a weight-2 word — a natural
 mistake that would have broken the `n=9` reading.
@@ -518,7 +518,7 @@ Question: is `d(C_a) = m(a) := min_{a <= j <= n-1} w((x-1)^j)` for `C_a = <(x-1)
 | **Theorem A** `s = 1` (`n = p`): `d(C_a) = a + 1 = m(a)` for `0 <= a <= p-1` | **proved** (explicit word + Vandermonde lower bound) |
 | **Theorem B** `s >= 2`, `1 <= a <= p^{s-1}`: `d(C_a) = 2 = m(a)` | **proved** (word `1 - x^{p^{s-1}}`; proper ideal excludes weight 1); sharp at `a = p^{s-1}+1` |
 | Singleton consistency `m(a) <= a+1` | checked all `a` in 16 cases up to `n = 125` (`--mbound` log) |
-| L-2 on `p^{s-1} < a < p^s` | **still a conjecture**; block/`epsilon`-decomposition route recorded as open |
+| L-2 on `p^{s-1} < a < p^s` | **CLOSED by citation — see P3-7b**: it is the `t >= 1` branch of Dinh (2008). **Superseded; not open, not a contribution** |
 | Verification | 11 cases `(p,s)` = (2,1…4), (3,1…3), (5,1…2), (7,1), (11,1): **117/117 agree, 0 disagree, 0 undetermined** |
 | Two-method cross-check (circuit matroid vs enumeration) | **70 values, 0 mismatches** |
 | Not computed | `n = 49`, `n = 81`, `n = 125` — cap-7 subset search out of reach in pure Python (stated, not skipped silently) |
@@ -532,8 +532,57 @@ Recorded errors (audit trail, both caught by the project's own tables):
 
 **Effect on the standing decisions:** Phase 9 remains **NO-GO**. Theorems A and B are correct but
 small, are special cases of the conjecture, and are not claimed as new (B-1, B-2a, B-2b and
-Tian–Gao–Gao remain unread). L-2 changes from "conjecture, 10/10 at `n=9`" to
-"proved on `s = 1` and on `1 <= a <= p^{s-1}`; conjecture elsewhere".
+Tian–Gao–Gao remain unread).
+
+**SUPERSEDED by P3-7b (below):** L-2 is **not** a conjecture at all. It is Dinh (2008)'s theorem, and
+Theorems A and B are its `t = 0` branches. Nothing in this section is a contribution; the section is
+kept as the audit trail of how the identification was reached and of the two bugs it exposed.
+
+## Phase 3 — P3-7b L-2 provenance audit: L-2 is a KNOWN THEOREM (2026-10-24)
+
+Deliverable `phase3/P3_7B_L2_PROVENANCE_AUDIT.md`; probes `phase3/p3_known_formula_check.py`
+(log 32 lines, **5050 values, 0 mismatches**) and `phase3/p3_weight2_field.py` (log 39 lines).
+
+**Correction of the P3-7 status, not of the P3-7 mathematics.** The exact minimum distance of
+`C_i = <(x-1)^i> <= F_q[x]/<x^{p^s}-1>` is known for every `i`:
+
+> **Dinh, *Finite Fields Appl.* 14(1):22-40 (2008):** `d_i = (tau+1) p^t` where `1 <= tau <= p-1`,
+> `0 <= t <= s-1`, on the band `p^s - p^{s-t} + (tau-1)p^{s-t-1} < i <= p^s - p^{s-t} + tau p^{s-t-1}`.
+
+Restated as Lemma 1 of arXiv:2304.00762 (citing Dinh 2008 and Massey-Costello-Justesen 1973) and as
+Thm 2.4 of arXiv:1704.03311; used throughout the symbol-pair / `b`-symbol literature.
+
+| Item | Verdict |
+|---|---|
+| **L-2** (`d(C_a) = min_{j>=a} w((x-1)^j)`) | **CLOSED by citation** — never an open problem; **removed from the limitation list** |
+| Theorem A (`s = 1`, MDS) | **classical** re-derivation (`t = 0`, `tau = i`); not new |
+| Theorem B (`1 <= a <= p^{s-1}` ⇒ `d = 2`) | **classical** (`t = 0`, `tau = 1`); not new |
+| Theorem C (`p^{s-1} < a <= 2p^{s-1}` ⇒ `d = 3`) | **classical** (`t = 0`, `tau = 2`); verified 3/3 bands, not new |
+| "Open range" `p^{s-1} < a < p^s` in P3-7 §6 | **not open** — it is the `t >= 1` branch; the block/`epsilon` obstruction was a route to an existing theorem |
+| `n = 49, 81, 125, 343, 1331, 2197` "out of reach" | **moot** — settled by the formula; `m(a)` agrees at all of them |
+| Weight Lemma, Lemma H, Lemma C, both recorded bugs | **correct work**, no novelty claimed |
+
+**Verification of the identification:** `m(a)` vs the published formula at **5050 values**
+(`p = 2, s <= 8`; `p = 3, s <= 4`; `p = 5, 7, 11, 13, `s <= 3`), **0 mismatches**. Independent anchor:
+the published Example 1 of arXiv:2304.00762 gives, for `n = 25` over `F_5`, the bands
+`2,3,4,5,10,15,20,25` with counts `5,5,5,5,1,1,1,1` — my `m(a)` produces exactly the same band
+structure, and my `n = 25` distances in P3-7 §7.3 were computed by matroid girth, not by the formula,
+so the two routes agree independently.
+
+**Two small correct results that survive, neither claimed as new:** field independence of `d(C_a)`
+(`H_a` has entries in `F_p`, rank is field-independent; checked `F_9` vs `F_3` at `n = 9`), and the
+weight-2 classification (`a = 0` ⇒ `w = 1`; `1 <= a <= p^{s-1}` ⇒ `w = 2`; verified at 90 values over
+10 `(p,s)` pairs) which is exactly the `tau = 1` branch.
+
+**Methodological lesson recorded:** the Phase 2 rule "read complete theorem statements, not abstracts"
+fails in a second way here — the theorem exists but sits in a 2008 paper about *negacyclic* codes whose
+title names distance distributions generally, and is restated in a 2025 paper about *weight
+distributions*. Searching the project's own topic (hulls) does not surface it; searching the specific
+object (`<(x-1)^i>`, length `p^s`) does. Prior-art row added to `phase2/LITERATURE_COMPARISON_MATRIX.csv`.
+
+**Effect on standing decisions:** Phase 9 remains **NO-GO and is now reinforced** — the last route to a
+"substantive proved theorem" leads to a 2008 result. R4 is unaffected (the Dinh theorem has no hull
+content), and the withdrawal rule for R4 is untouched.
 
 ## Next step
 
@@ -548,13 +597,16 @@ Only two kinds of work remain, and neither is mine to do unilaterally:
 2. **A structural idea** for the one restricted family where `d(ψ)` is determined (`σ = 1` is the only
    known case). Without it there is no route to the primary objective.
 
+The third option that existed at the end of P3-7 — *decide L-2 and turn it into a theorem* — is now
+**gone**: P3-7b shows L-2 is Dinh's 2008 theorem. It was never a contribution. Nothing on the distance
+side of the single-orbit family is left to settle.
+
 Everything computable at this scale has been computed and cross-checked (P3-7 extends this to `n = 4, 8,
 16, 25, 27` for the distance side). Further computation at this scale would repeat verified work; the
 remaining distance question is a proof, not a computation, and `n = 49, 81, 125` are out of reach of
 the pure-Python subset search.
 
-R1, R2, R3 remain NO-GO; Gate 2 stands on R4; novelty claimed nowhere; L-1, L-3 … L-8 open, **L-2
-split**: proved for `s = 1` and `1 <= a <= p^{s-1}`, conjecture on `p^{s-1} < a < p^s`; source PDF
+R1, R2, R3 remain NO-GO; Gate 2 stands on R4; novelty claimed nowhere; L-1, L-3 … L-8 open, **L-2 closed by citation (Dinh 2008)**; source PDF
 re-verified 612 826 B / sha256 `7f7e6803…`.
 
 Phase 1 stands complete; nothing in Phase 2 changed a Phase 1 result, count or register entry.

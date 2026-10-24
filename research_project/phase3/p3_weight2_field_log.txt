@@ -1,0 +1,39 @@
+==============================================================================
+(A) Field independence:  d(C_a) over F_9  vs  d(C_a) over F_3,  n = 9
+    H_a has entries in F_p; rank over F_q = rank over F_p (minors), so d cannot depend on q.
+     a   d over F_3 (P3-7)   d over F_9 (cap 4)   agree
+     0        1                   1             yes
+     1        2                   2             yes
+     2        2                   2             yes
+     3        2                   2             yes
+     4        3                   3             yes
+     5        3                   3             yes
+     6        3                   3             yes
+     7        6                  >4             yes
+     8        9                  >4             yes
+    mismatches: 0
+
+==============================================================================
+(B) Weight-2 classification:  weight<=2 word exists  <=>  a = 0 (w=1) or 1 <= a <= p^(s-1) (w=2)
+    p= 2, n= 2, e= 1  0:1 1:2
+    p= 2, n= 4, e= 2  0:1 1:2 2:2 3:None
+    p= 2, n= 8, e= 4  0:1 1:2 2:2 3:2 4:2 5:None 6:None 7:None
+    p= 2, n=16, e= 8  0:1 1:2 2:2 3:2 4:2 5:2 6:2 7:2 8:2 9:None 10:None 11:None 12:None 13:None 14:None 15:None
+    p= 3, n= 3, e= 1  0:1 1:2 2:None
+    p= 3, n= 9, e= 3  0:1 1:2 2:2 3:2 4:None 5:None 6:None 7:None 8:None
+    p= 5, n= 5, e= 1  0:1 1:2 2:None 3:None 4:None
+    p= 5, n=25, e= 5  0:1 1:2 2:2 3:2 4:2 5:2 6:None 7:None 8:None 9:None 10:None 11:None 12:None 13:None 14:None 15:None 16:None 17:None 18:None 19:None 20:None 21:None 22:None 23:None 24:None
+    p= 7, n= 7, e= 1  0:1 1:2 2:None 3:None 4:None 5:None 6:None
+    p=11, n=11, e= 1  0:1 1:2 2:None 3:None 4:None 5:None 6:None 7:None 8:None 9:None 10:None
+    total 90 values, 0 disagreements with Lemma W2
+
+==============================================================================
+(C) Theorem C:  d(C_a) = 3 exactly for e < a <= 2e when p >= 3
+    p=3, n=9, e=3:  a with d = 3 (cap 4): [4, 5, 6]
+      expected band e < a <= 2e: [4, 5, 6]
+    p=5, n=25, e=5:  a with d = 3 (cap 4): [6, 7, 8, 9, 10]
+      expected band e < a <= 2e: [6, 7, 8, 9, 10]
+    p=3, n=27, e=9:  a with d = 3 (cap 4): [10, 11, 12, 13, 14, 15, 16, 17, 18]
+      expected band e < a <= 2e: [10, 11, 12, 13, 14, 15, 16, 17, 18]
+
+Overall: PASS
