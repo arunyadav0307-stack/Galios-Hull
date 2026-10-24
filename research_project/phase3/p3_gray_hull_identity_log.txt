@@ -1,0 +1,7 @@
+# P3-5 companion: Gray-image hull identity log -- 2026-10-24T04:14:06Z
+Python 3.11.2
+
+F_9, e=2, roots of u^2-1: [1, 2]
+  field codes: 16
+  pairs: 256;  dim Hull(psi(C)) = sum_l dim Hull(C_l):  256 agree, 0 differ
+  => the Gray-image hull dimension is the same invariant, not a new one

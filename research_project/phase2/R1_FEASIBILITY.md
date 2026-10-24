@@ -87,11 +87,22 @@ decides R1 in §5.
 | Sharma, *Cryptogr. Commun.* (Springer), length `ℓ^t p^s` | Structure and duals, `ℓ ≡ 1 mod 2`, `ℓ ≠ p` primes. | ABSTRACT |
 | Dinh, Dinh, Vo, *FFA* **43** (2017), length `p^s` over finite **chain** rings | `R[x]/⟨x^{p^s} − λ⟩` is a chain ring; structure, sizes, duals. | ABSTRACT |
 | *FFA* (2024), length `k^s l^m p^n` | `x^{k^s l^m p^n} − λ` explicitly factorised; **all** repeated-root constacyclic codes and their duals characterised. | ABSTRACT |
-| Debnath & Prakash, *SIST* 325:309–319, DOI `10.1007/s12095-022-00591-6` | Prior art on hulls over affine algebra rings. Body text still not obtainable (**blocker B-2**). | ABSTRACT |
+| Debnath, Prakash, Islam, *Cryptogr. Commun.* **15**:111–127 (2023), DOI `10.1007/s12095-022-00591-6` | Galois hulls of `λ`-constacyclic codes over `F_q`: dimension formula, **and the number of constacyclic codes of length `n` with a given Galois hull dimension, "considering some restrictions on q"**. Body not read (**blocker B-2**). | ABSTRACT |
+| Debnath & Prakash, *SIST* **325**:309–319, DOI `10.1007/978-981-95-1365-9_25` (ICTIS 2025) | *Hulls of Cyclic Codes Over a Local Ring*: hull generators, LCD condition, and a count of all cyclic codes for a fixed `p`-dimension of the hull, over the chain ring `Z_{p^3}`. Body not read. | ABSTRACT |
 
 **Blockers.** **B-1**: publisher full texts (ScienceDirect, Springer, AIMS) remain inaccessible, so
 every row above except the source paper is ABSTRACT or SNIPPET — per Phase 2 rules this bounds no
-absence claim. **B-2**: Debnath–Prakash body text still unobtainable. R1's own stated kill criterion
+absence claim. **B-2**: Debnath–Prakash body text still unobtainable.
+
+> **Correction (2026-10-24).** This table previously carried a single row whose citation conflated two
+> different papers: it gave the *Cryptogr. Commun.* DOI together with the *SIST* volume/pages and the
+> description "hulls over affine algebra rings". The DOI `10.1007/s12095-022-00591-6` belongs to
+> Debnath, Prakash & **Islam**, *Galois hulls of constacyclic codes over finite fields*, *Cryptogr.
+> Commun.* **15**:111–127 (2023) — a **finite-field** paper with **three** authors; the *SIST*
+> 325:309–319 entry is a separate paper (ICTIS 2025, *Hulls of Cyclic Codes Over a Local Ring*,
+> DOI `10.1007/978-981-95-1365-9_25`) about a **chain** ring `Z_{p^3}`. The rows are now separated.
+> No verdict changes: `LITERATURE_COMPARISON_MATRIX.csv` rows 10 and 12 had both entries correctly and
+> were already consistent with this correction; the error was confined to this summary table. R1's own stated kill criterion
 in `NOVELTY_ASSESSMENT.md` §5 was *"if Debnath & Prakash (2022/23) already covers `p \| n` and their
 count composes over the `e` components"* — that specific condition **cannot be evaluated** on the
 available evidence. Section 5 therefore does **not** rely on it.

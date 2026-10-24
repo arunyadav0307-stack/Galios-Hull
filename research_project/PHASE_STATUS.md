@@ -435,25 +435,40 @@ tuple; feasibility for `n` beyond single digits is not established.
 **Phase 3 programme complete.** GO on the narrowed distributional contribution; NO-GO on a
 structural-theorem headline. Novelty not claimed (B-1/B-2 open).
 
+## Phase 3 — P3-5 literature checkpoint (2026-10-24)
+
+Deliverable `phase3/P3_5_LITERATURE_CHECKPOINT.md`; probe `phase3/p3_gray_hull_identity.py`, log 5 lines.
+
+| Item | Outcome |
+|---|---|
+| **Citation error found in my own record** | `R1_FEASIBILITY.md` merged two different papers into one row. DOI `10.1007/s12095-022-00591-6` = Debnath, Prakash & **Islam**, *Cryptogr. Commun.* **15**:111–127 (2023), **finite fields**, three authors — *not* the `SIST` 325:309–319 paper (ICTIS 2025, *Hulls of Cyclic Codes Over a Local Ring*, chain ring `Z_{p³}`). **Corrected by new commit with the note left in place.** CSV rows 10 and 12 were already correct; no verdict depended on it |
+| **B-2 refined** | split into **B-2a** (Cryptogr. Commun. 2023: field-level count by Galois hull dimension, "restrictions on `q`" unverified) and **B-2b** (SIST 2025: count over chain ring `Z_{p³}`). Neither can reproduce a joint (hull, distance) law. **Both open** |
+| **B-1 advanced** | arXiv:2606.22069 (Qian–Wang–Wang) read **in full text**: generator polynomials of Euclidean/Hermitian hulls and sums over `F_q × (F_q+vF_q)` **and their Gray images**, plus QECC tables — **no counting**. This is the closest work in shape |
+| **New verified proposition** | `dim Hull_H(ψ(C)) = dim Hull_H(C) = Σ_ℓ dim Hull_H(C_ℓ)`, from the source's Lemma 3 + bijectivity + Thm 1. Checked `F_9, e=2, n=2`: **256/256** by two independent routes. So Tian–Gao–Gao's "hull dimensions of Gray images" is **the same invariant**, not extra prior art |
+| **Bug recorded** | first version of that check used `basis × basis` (does not span the product code) and reported **112 spurious mismatches**; correct spanning set `{(a,0)} ∪ {(0,b)}` gives 256/256 |
+| Novelty | **still not claimed**; B-2a/B-2b bodies and the Tian–Gao–Gao full text remain unobtainable |
+
 ## Next step
 
-**The Phase 3 programme identified in `R4_FEASIBILITY.md` §7 is complete**: K4-2, P3-1, P3-2, P3-3 and
-P3-4 are all delivered and committed.
+**The Phase 3 programme is complete and the literature position is now as strong as access allows.**
+K4-2, P3-1, P3-2, P3-3, P3-4 and P3-5 are delivered and committed.
 
-Nothing further should be computed before the two literature blockers are attacked, because every
-remaining claim depends on them:
+What remains is **not computation**: three library-access checks decide the claim.
 
-* **B-1** — publisher full texts (ScienceDirect, Springer, AIMS). Needed to establish that no
-  accessible work already gives a joint (hull, distance) distribution for a constacyclic family.
-* **B-2** — Debnath–Prakash body text. The single most likely place for an existing count of this kind.
+1. **B-2a** — Debnath, Prakash & Islam, *Cryptogr. Commun.* **15**:111–127 (2023): read the body; does
+   the count cover `p \| n`, and is it per-dimension?
+2. **B-2b** — Debnath & Prakash, *SIST* **325**:309–319 (2025): confirm it counts hull dimension only.
+3. **Tian, Gao & Gao**, *QIP* **23**(1):9 (2024): full text, to confirm the Gray-image hull results
+   contain no distribution.
 
-If both clear, the remaining work is **L-8 (scaling)**: whether the distribution can be computed
-beyond single-digit `n`, and whether any structure (rather than brute force) yields it. If they do not
-clear, the honest position is that the contribution is *distinguishable* (Gate 2 stands) but **not
-established as novel**, and no manuscript should be drafted on it.
+If any of the three contains a joint (hull dimension, minimum distance) distribution for a
+constacyclic family, the contribution must be **withdrawn**, not narrowed post hoc. If none does, the
+contribution stands as **distinguishable and supported by exact computation**, with novelty still
+stated only in the guarded form ("not found under an explicit search").
 
-R1, R2, R3 remain NO-GO; Gate 2 remains passed on R4; Phase 1 deliverables untouched and the source
-PDF re-verified (612 826 B, sha256 `7f7e6803…`). Limitations L-1 … L-8 all recorded and unresolved.
+**GO** on the narrowed distributional contribution; **NO-GO** on a structural-theorem headline.
+R1, R2, R3 remain NO-GO; Gate 2 remains passed on R4; Phase 1 deliverables untouched; source PDF
+re-verified (612 826 B, sha256 `7f7e6803…`). Limitations L-1 … L-8 remain open.
 
 Phase 1 stands complete; nothing in Phase 2 changed a Phase 1 result, count or register entry.
 
