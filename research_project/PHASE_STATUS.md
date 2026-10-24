@@ -448,27 +448,51 @@ Deliverable `phase3/P3_5_LITERATURE_CHECKPOINT.md`; probe `phase3/p3_gray_hull_i
 | **Bug recorded** | first version of that check used `basis × basis` (does not span the product code) and reported **112 spurious mismatches**; correct spanning set `{(a,0)} ∪ {(0,b)}` gives 256/256 |
 | Novelty | **still not claimed**; B-2a/B-2b bodies and the Tian–Gao–Gao full text remain unobtainable |
 
+## Phase 3 — blueprint Phases 3, 4 and 8 delivered (2026-10-24)
+
+| Blueprint phase | Deliverable | Status |
+|---|---|---|
+| 3 Precise formulation | `phase3/MATHEMATICAL_FRAMEWORK.md` | **done** — all six §3A well-posedness questions answered with pointers to proofs |
+| 4 Factor-orbit enumeration | `phase3/CONSTITUENT_ENUMERATOR_FORMULA.md` | **done (`5fa1ac0`)** — orbit-product form **proved**, not merely verified |
+| 8 Gap / contribution decision | `phase3/RESEARCH_GAP_AND_CONTRIBUTION_DECISION.md` | **done — decision: STOP before Phase 9** |
+
+**Phase 4 theorem (new proof, no novelty).** `H_α(z) = ∏_{σ-orbits} P_O(z)` with
+`P_i(z) = Σ_a z^{m_i min(a,p^v−a)}` (fixed orbit) and `P_ij(z) = Σ_{a,b} z^{m_i min(a+b, 2p^v−a−b)}`
+(2-cycle), and `H_α(1) = (p^v+1)^s`. Complete proof: Lemma 1 (divisors ↔ codes bijection, settling the
+blueprint's "codes vs generator descriptions" requirement at field level), Lemma 2 (every factor of
+`x^n − α` has multiplicity exactly `p^v`; `f^† ∝ f` under `α^{q+1} = 1`), Lemma 3 (`†` is an involutive
+factor permutation), Lemma 4 (lcm exponents, plus the max-sum identity). The step the blueprint insists
+on — independence of local choices — is proved from the fact that the only constraint on exponents is a
+per-factor multiplicity bound, so the admissible set is a Cartesian product of orbit boxes. Re-verified
+against enumeration 24/24 this turn. **Classification: `K`** — prior art in the square-free case,
+routine refinement of source Theorem 8 in the repeated-root case.
+
+**Phase 8 decision: Phase 9 (manuscript) is NO-GO.** The blueprint's gate requires "at least one
+substantive proved theorem"; the proved inventory is thin and the strongest content is computational.
+All six of the blueprint's candidate contributions are `K` or unresolved (§2 of the decision document).
+R4 remains the only defensible direction and it carries no substantive theorem. Three library-access
+checks (B-2a, B-2b, Tian–Gao–Gao full text) decide whether R4 can be written up at all; if any contains
+a joint (hull, distance) distribution, the contribution must be **withdrawn**.
+
 ## Next step
 
-**The Phase 3 programme is complete and the literature position is now as strong as access allows.**
-K4-2, P3-1, P3-2, P3-3, P3-4 and P3-5 are delivered and committed.
+**The blueprint's phase programme is complete through Phase 8.** Phases 0–2 PASS (Gate 1; Gate 2 on R4);
+Phases 3, 4 and 8 delivered; Phases 5–7 content exists with two clerical gaps named in the Phase 8
+document §1. **Phase 9 is deliberately not started** and must not be, per the blueprint's own gate.
 
-What remains is **not computation**: three library-access checks decide the claim.
+Nothing further should be computed. The remaining work is three library-access checks that decide
+whether the R4 contribution survives at all:
 
-1. **B-2a** — Debnath, Prakash & Islam, *Cryptogr. Commun.* **15**:111–127 (2023): read the body; does
-   the count cover `p \| n`, and is it per-dimension?
-2. **B-2b** — Debnath & Prakash, *SIST* **325**:309–319 (2025): confirm it counts hull dimension only.
-3. **Tian, Gao & Gao**, *QIP* **23**(1):9 (2024): full text, to confirm the Gray-image hull results
-   contain no distribution.
+1. **B-2a** — Debnath, Prakash & Islam, *Cryptogr. Commun.* **15**:111–127 (2023): read the body.
+2. **B-2b** — Debnath & Prakash, *SIST* **325**:309–319 (2025): confirm hull-dimension only.
+3. **Tian, Gao & Gao**, *QIP* **23**(1):9 (2024): full text, confirm no distribution.
 
-If any of the three contains a joint (hull dimension, minimum distance) distribution for a
-constacyclic family, the contribution must be **withdrawn**, not narrowed post hoc. If none does, the
-contribution stands as **distinguishable and supported by exact computation**, with novelty still
-stated only in the guarded form ("not found under an explicit search").
+If any contains a joint (hull dimension, minimum distance) distribution for a constacyclic family, the
+contribution is **withdrawn**, not narrowed. If none does, R4 is writable as an *exact computational
+distribution* — with no claim of a new theorem, which is why it is a secondary-objective result.
 
-**GO** on the narrowed distributional contribution; **NO-GO** on a structural-theorem headline.
-R1, R2, R3 remain NO-GO; Gate 2 remains passed on R4; Phase 1 deliverables untouched; source PDF
-re-verified (612 826 B, sha256 `7f7e6803…`). Limitations L-1 … L-8 remain open.
+R1, R2, R3 remain NO-GO. Novelty is claimed nowhere. Limitation L-1 … L-8 remain open. Source PDF
+re-verified 612 826 B / sha256 `7f7e6803…`.
 
 Phase 1 stands complete; nothing in Phase 2 changed a Phase 1 result, count or register entry.
 
