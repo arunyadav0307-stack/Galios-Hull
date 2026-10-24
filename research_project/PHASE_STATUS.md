@@ -370,7 +370,7 @@ Deliverable `phase3/P3_2_TWO_ORBIT.md`.
 | Lemma 4: `d(C(1,1)) = 2` | **proved** |
 | Four middle values (`d = 3,3,4,3`) | computed only, no formula claimed |
 | `n=9` complete table (10 codes): `hull = min(a,9−a)` | computed, 10/10 |
-| `d(C_a) = min{w((x−1)^j) : j ≥ a}` at `n=9` | **conjecture**, 10/10 |
+| `d(C_a) = min{w((x−1)^j) : j ≥ a}` at `n=9` | **conjecture**, 10/10 — kept as the historical record; extended and partly proved in **P3-7** |
 
 Recorded error avoided: `(x−1)^9 = x^9 − 1 ≡ 0` in `R`, so it is *not* a weight-2 word — a natural
 mistake that would have broken the `n=9` reading.
@@ -502,6 +502,39 @@ contradicted an expectation (mine or the code's), all retained rather than smoot
 Phase 8 standing decision unchanged: **Phase 9 (manuscript) is NO-GO.** These files make the package
 auditable; they do not create a theorem.
 
+## Phase 3 — P3-7 power attainment, limitation L-2 (2026-10-24)
+
+Deliverable `phase3/P3_7_POWER_ATTAINMENT.md`; probe `phase3/p3_power_attainment.py`;
+log `phase3/p3_power_attainment_log.txt` (212 lines, exit 0, 759 s, stdlib only).
+
+Question: is `d(C_a) = m(a) := min_{a <= j <= n-1} w((x-1)^j)` for `C_a = <(x-1)^a> <= F_q[x]/(x^n - 1)`,
+`n = p^s`? This was the `n = 9` conjecture in the P3-2 table.
+
+| Result | Status |
+|---|---|
+| **Lemma W** `w((x-1)^j) = prod_i (d_i + 1)` for `j = sum d_i p^i` | **proved** (no cancellation across residue classes) |
+| **Lemma H** `C_a = ker H_a`, `H_a[i][j] = C(j,i) mod p` (Lucas) | **proved**; falling factorials are **wrong** in char `p` for `a > p` |
+| **Lemma C** `d(C_a)` = girth of the column matroid of `H_a` | **proved**; no codeword enumeration needed |
+| **Theorem A** `s = 1` (`n = p`): `d(C_a) = a + 1 = m(a)` for `0 <= a <= p-1` | **proved** (explicit word + Vandermonde lower bound) |
+| **Theorem B** `s >= 2`, `1 <= a <= p^{s-1}`: `d(C_a) = 2 = m(a)` | **proved** (word `1 - x^{p^{s-1}}`; proper ideal excludes weight 1); sharp at `a = p^{s-1}+1` |
+| Singleton consistency `m(a) <= a+1` | checked all `a` in 16 cases up to `n = 125` (`--mbound` log) |
+| L-2 on `p^{s-1} < a < p^s` | **still a conjecture**; block/`epsilon`-decomposition route recorded as open |
+| Verification | 11 cases `(p,s)` = (2,1…4), (3,1…3), (5,1…2), (7,1), (11,1): **117/117 agree, 0 disagree, 0 undetermined** |
+| Two-method cross-check (circuit matroid vs enumeration) | **70 values, 0 mismatches** |
+| Not computed | `n = 49`, `n = 81`, `n = 125` — cap-7 subset search out of reach in pure Python (stated, not skipped silently) |
+
+Recorded errors (audit trail, both caught by the project's own tables):
+1. Using falling factorials `j(j-1)…(j-i+1)` instead of `C(j,i)` made `d = 2` for every `a >= 3` at
+   `n = 9` (5 disagreements with the committed table). Over `F_3`, `(x-1)^3 = x^3 - 1` kills all
+   ordinary derivatives at 1 although the root has multiplicity 3.
+2. `code_distance_direct` divided by `k!` mod `p`, invalid for `k >= p`; it reported `d = 3` for
+   `(x-1)^8` over `F_3` instead of `9`.
+
+**Effect on the standing decisions:** Phase 9 remains **NO-GO**. Theorems A and B are correct but
+small, are special cases of the conjecture, and are not claimed as new (B-1, B-2a, B-2b and
+Tian–Gao–Gao remain unread). L-2 changes from "conjecture, 10/10 at `n=9`" to
+"proved on `s = 1` and on `1 <= a <= p^{s-1}`; conjecture elsewhere".
+
 ## Next step
 
 **The blueprint's deliverable set is now complete through Phase 8.** Every named file exists except the
@@ -515,10 +548,13 @@ Only two kinds of work remain, and neither is mine to do unilaterally:
 2. **A structural idea** for the one restricted family where `d(ψ)` is determined (`σ = 1` is the only
    known case). Without it there is no route to the primary objective.
 
-Everything computable at this scale has been computed and cross-checked. Further computation would
-repeat work already verified twice.
+Everything computable at this scale has been computed and cross-checked (P3-7 extends this to `n = 4, 8,
+16, 25, 27` for the distance side). Further computation at this scale would repeat verified work; the
+remaining distance question is a proof, not a computation, and `n = 49, 81, 125` are out of reach of
+the pure-Python subset search.
 
-R1, R2, R3 remain NO-GO; Gate 2 stands on R4; novelty claimed nowhere; L-1 … L-8 open; source PDF
+R1, R2, R3 remain NO-GO; Gate 2 stands on R4; novelty claimed nowhere; L-1, L-3 … L-8 open, **L-2
+split**: proved for `s = 1` and `1 <= a <= p^{s-1}`, conjecture on `p^{s-1} < a < p^s`; source PDF
 re-verified 612 826 B / sha256 `7f7e6803…`.
 
 Phase 1 stands complete; nothing in Phase 2 changed a Phase 1 result, count or register entry.

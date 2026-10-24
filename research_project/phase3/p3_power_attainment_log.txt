@@ -1,0 +1,212 @@
+L-2 power-attainment check: d(C_a) = min_{j>=a} w((x-1)^j), n = p^s
+d(C_a) computed exactly in two independent ways (circuit matroid / enumeration).
+==============================================================================
+p=2, s=1, n=2:  x^2 - 1 = (x-1)^2
+  w((x-1)^j) for j=0..1: [1, 2]
+   a   dim   d(computed)   d(conjecture)   agree   method
+    0     2            1              1     yes   circuit
+    1     1            2              2     yes   circuit
+    2     0           --           None     n/a   zero code
+  agree 2, disagree 0, undetermined 0
+  [elapsed 0.0s]
+==============================================================================
+p=2, s=2, n=4:  x^4 - 1 = (x-1)^4
+  w((x-1)^j) for j=0..3: [1, 2, 2, 4]
+   a   dim   d(computed)   d(conjecture)   agree   method
+    0     4            1              1     yes   circuit
+    1     3            2              2     yes   circuit
+    2     2            2              2     yes   circuit
+    3     1            4              4     yes   circuit
+    4     0           --           None     n/a   zero code
+  agree 4, disagree 0, undetermined 0
+  [elapsed 0.0s]
+==============================================================================
+p=2, s=3, n=8:  x^8 - 1 = (x-1)^8
+  w((x-1)^j) for j=0..7: [1, 2, 2, 4, 2, 4, 4, 8]
+   a   dim   d(computed)   d(conjecture)   agree   method
+    0     8            1              1     yes   circuit
+    1     7            2              2     yes   circuit
+    2     6            2              2     yes   circuit
+    3     5            2              2     yes   circuit
+    4     4            2              2     yes   circuit
+    5     3            4              4     yes   circuit
+    6     2            4              4     yes   circuit
+    7     1            8              8     yes   enumerate
+    8     0           --           None     n/a   zero code
+  agree 8, disagree 0, undetermined 0
+  [elapsed 0.0s]
+==============================================================================
+p=2, s=4, n=16:  x^16 - 1 = (x-1)^16
+  w((x-1)^j) for j=0..14: [1, 2, 2, 4, 2, 4, 4, 8, 2, 4, 4, 8, 4, 8, 8]
+   a   dim   d(computed)   d(conjecture)   agree   method
+    0    16            1              1     yes   circuit
+    1    15            2              2     yes   circuit
+    2    14            2              2     yes   circuit
+    3    13            2              2     yes   circuit
+    4    12            2              2     yes   circuit
+    5    11            2              2     yes   circuit
+    6    10            2              2     yes   circuit
+    7     9            2              2     yes   circuit
+    8     8            2              2     yes   circuit
+    9     7            4              4     yes   circuit
+   10     6            4              4     yes   circuit
+   11     5            4              4     yes   circuit
+   12     4            4              4     yes   circuit
+   13     3            8              8     yes   enumerate
+   14     2            8              8     yes   enumerate
+   15     1           16             16     yes   enumerate
+   16     0           --           None     n/a   zero code
+  agree 16, disagree 0, undetermined 0
+  [elapsed 1.8s]
+==============================================================================
+p=3, s=1, n=3:  x^3 - 1 = (x-1)^3
+  w((x-1)^j) for j=0..2: [1, 2, 3]
+   a   dim   d(computed)   d(conjecture)   agree   method
+    0     3            1              1     yes   circuit
+    1     2            2              2     yes   circuit
+    2     1            3              3     yes   circuit
+    3     0           --           None     n/a   zero code
+  agree 3, disagree 0, undetermined 0
+  [elapsed 1.8s]
+==============================================================================
+p=3, s=2, n=9:  x^9 - 1 = (x-1)^9
+  w((x-1)^j) for j=0..8: [1, 2, 3, 2, 4, 6, 3, 6, 9]
+   a   dim   d(computed)   d(conjecture)   agree   method
+    0     9            1              1     yes   circuit
+    1     8            2              2     yes   circuit
+    2     7            2              2     yes   circuit
+    3     6            2              2     yes   circuit
+    4     5            3              3     yes   circuit
+    5     4            3              3     yes   circuit
+    6     3            3              3     yes   circuit
+    7     2            6              6     yes   circuit
+    8     1            9              9     yes   enumerate
+    9     0           --           None     n/a   zero code
+  agree 9, disagree 0, undetermined 0
+  [elapsed 1.8s]
+==============================================================================
+p=3, s=3, n=27:  x^27 - 1 = (x-1)^27
+  w((x-1)^j) for j=0..14: [1, 2, 3, 2, 4, 6, 3, 6, 9, 2, 4, 6, 4, 8, 12]
+   a   dim   d(computed)   d(conjecture)   agree   method
+    0    27            1              1     yes   circuit
+    1    26            2              2     yes   circuit
+    2    25            2              2     yes   circuit
+    3    24            2              2     yes   circuit
+    4    23            2              2     yes   circuit
+    5    22            2              2     yes   circuit
+    6    21            2              2     yes   circuit
+    7    20            2              2     yes   circuit
+    8    19            2              2     yes   circuit
+    9    18            2              2     yes   circuit
+   10    17            3              3     yes   circuit
+   11    16            3              3     yes   circuit
+   12    15            3              3     yes   circuit
+   13    14            3              3     yes   circuit
+   14    13            3              3     yes   circuit
+   15    12            3              3     yes   circuit
+   16    11            3              3     yes   circuit
+   17    10            3              3     yes   circuit
+   18     9            3              3     yes   circuit
+   19     8            6              6     yes   circuit
+   20     7            6              6     yes   circuit
+   21     6            6              6     yes   circuit
+   22     5            9              9     yes   enumerate
+   23     4            9              9     yes   enumerate
+   24     3            9              9     yes   enumerate
+   25     2           18             18     yes   enumerate
+   26     1           27             27     yes   enumerate
+   27     0           --           None     n/a   zero code
+  agree 27, disagree 0, undetermined 0
+  [elapsed 257.3s]
+==============================================================================
+p=5, s=1, n=5:  x^5 - 1 = (x-1)^5
+  w((x-1)^j) for j=0..4: [1, 2, 3, 4, 5]
+   a   dim   d(computed)   d(conjecture)   agree   method
+    0     5            1              1     yes   circuit
+    1     4            2              2     yes   circuit
+    2     3            3              3     yes   circuit
+    3     2            4              4     yes   circuit
+    4     1            5              5     yes   circuit
+    5     0           --           None     n/a   zero code
+  agree 5, disagree 0, undetermined 0
+  [elapsed 257.3s]
+==============================================================================
+p=5, s=2, n=25:  x^25 - 1 = (x-1)^25
+  w((x-1)^j) for j=0..14: [1, 2, 3, 4, 5, 2, 4, 6, 8, 10, 3, 6, 9, 12, 15]
+   a   dim   d(computed)   d(conjecture)   agree   method
+    0    25            1              1     yes   circuit
+    1    24            2              2     yes   circuit
+    2    23            2              2     yes   circuit
+    3    22            2              2     yes   circuit
+    4    21            2              2     yes   circuit
+    5    20            2              2     yes   circuit
+    6    19            3              3     yes   circuit
+    7    18            3              3     yes   circuit
+    8    17            3              3     yes   circuit
+    9    16            3              3     yes   circuit
+   10    15            3              3     yes   circuit
+   11    14            4              4     yes   circuit
+   12    13            4              4     yes   circuit
+   13    12            4              4     yes   circuit
+   14    11            4              4     yes   circuit
+   15    10            4              4     yes   circuit
+   16     9            5              5     yes   circuit
+   17     8            5              5     yes   circuit
+   18     7            5              5     yes   circuit
+   19     6            5              5     yes   circuit
+   20     5            5              5     yes   circuit
+   21     4           10             10     yes   enumerate
+   22     3           15             15     yes   enumerate
+   23     2           20             20     yes   enumerate
+   24     1           25             25     yes   enumerate
+   25     0           --           None     n/a   zero code
+  agree 25, disagree 0, undetermined 0
+  [elapsed 378.6s]
+==============================================================================
+p=7, s=1, n=7:  x^7 - 1 = (x-1)^7
+  w((x-1)^j) for j=0..6: [1, 2, 3, 4, 5, 6, 7]
+   a   dim   d(computed)   d(conjecture)   agree   method
+    0     7            1              1     yes   circuit
+    1     6            2              2     yes   circuit
+    2     5            3              3     yes   circuit
+    3     4            4              4     yes   circuit
+    4     3            5              5     yes   circuit
+    5     2            6              6     yes   circuit
+    6     1            7              7     yes   circuit
+    7     0           --           None     n/a   zero code
+  agree 7, disagree 0, undetermined 0
+  [elapsed 378.6s]
+==============================================================================
+p=11, s=1, n=11:  x^11 - 1 = (x-1)^11
+  w((x-1)^j) for j=0..10: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+   a   dim   d(computed)   d(conjecture)   agree   method
+    0    11            1              1     yes   circuit
+    1    10            2              2     yes   circuit
+    2     9            3              3     yes   circuit
+    3     8            4              4     yes   circuit
+    4     7            5              5     yes   circuit
+    5     6            6              6     yes   circuit
+    6     5            7              7     yes   circuit
+    7     4            8              8     yes   enumerate
+    8     3            9              9     yes   enumerate
+    9     2           10             10     yes   enumerate
+   10     1           11             11     yes   enumerate
+   11     0           --           None     n/a   zero code
+  agree 11, disagree 0, undetermined 0
+  [elapsed 378.8s]
+==============================================================================
+TOTAL agree 117, disagree 0, undetermined 0
+
+Cross-check of the two tools (where both are affordable):
+  p=2, n=2: 2 values compared, 0 mismatches
+  p=2, n=4: 4 values compared, 0 mismatches
+  p=2, n=8: 8 values compared, 0 mismatches
+  p=2, n=16: 15 values compared, 0 mismatches
+  p=3, n=3: 3 values compared, 0 mismatches
+  p=3, n=9: 9 values compared, 0 mismatches
+  p=3, n=27: 9 values compared, 0 mismatches
+  p=5, n=5: 5 values compared, 0 mismatches
+  p=5, n=25: 6 values compared, 0 mismatches
+  p=7, n=7: 5 values compared, 0 mismatches
+  p=11, n=11: 4 values compared, 0 mismatches
+  [elapsed 759.1s]

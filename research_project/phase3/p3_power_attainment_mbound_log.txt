@@ -1,0 +1,19 @@
+Lemma-W check: m(a) = min_{j>=a} w((x-1)^j) <= a+1 (Singleton-consistent)
+No code is constructed; only powers of (x-1) are weighed.
+  p= 2, n=  2: m(a) <= a+1 for all a? True
+  p= 2, n=  4: m(a) <= a+1 for all a? True
+  p= 2, n=  8: m(a) <= a+1 for all a? True
+  p= 2, n= 16: m(a) <= a+1 for all a? True
+  p= 2, n= 32: m(a) <= a+1 for all a? True
+  p= 3, n=  3: m(a) <= a+1 for all a? True
+  p= 3, n=  9: m(a) <= a+1 for all a? True
+  p= 3, n= 27: m(a) <= a+1 for all a? True
+  p= 3, n= 81: m(a) <= a+1 for all a? True
+  p= 5, n=  5: m(a) <= a+1 for all a? True
+  p= 5, n= 25: m(a) <= a+1 for all a? True
+  p= 5, n=125: m(a) <= a+1 for all a? True
+  p= 7, n=  7: m(a) <= a+1 for all a? True
+  p= 7, n= 49: m(a) <= a+1 for all a? True
+  p=11, n= 11: m(a) <= a+1 for all a? True
+  p=13, n= 13: m(a) <= a+1 for all a? True
+  all cases satisfy m(a) <= a+1: True
