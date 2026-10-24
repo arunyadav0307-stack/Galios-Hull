@@ -378,16 +378,53 @@ mistake that would have broken the `n=9` reading.
 The field-level picture is now documented; next is **P3-3**, the ring-level `R_e` Gray coupling,
 which is the actual R4 question.
 
+## Phase 3 — P3-3 ring-level Gray coupling (2026-10-23)
+
+Deliverable `phase3/P3_3_RING_GRAY.md`; probe `phase3/p3_ring_gray.py`, log 43 lines.
+
+| Result | Status |
+|---|---|
+| **Thm 1** `Hull_H(C) = ⊕_ℓ Hull_H(C_ℓ)`; `C^{⊥_H} ⊆ C` iff componentwise | **proved**; hull is `ψ`-independent |
+| **Thm 2** `min_ℓ d_ℓ ≤ d(ψ(C)) ≤ e·min_ℓ d_ℓ` for every admissible `M` | **proved**; elementary (support counting) |
+| **Thm 3** single-component codes: `d(ψ) = ρ_k·d(C_k)` | **proved**; verified 40/40 |
+| **Thm 4** equal components: `d(ψ) ≤ σ·d(D)`, equality when `σ = 1` | **proved**; `σ=1` verified 40/40 |
+| **Thm 5** non-determination: `(k_1,d_1,k_2,d_2) = (1,3,1,3)` realises `d(ψ) ∈ {3,4,5}` | **proved by witnesses** |
+| Bounds (exact enumeration) | 256 + 576 pairs, 216 triples: **0 violations** |
+| Corrected prediction | `σ = 3` was expected tight; data show `d(ψ(D,D,D)) = d(D)`, so the diagonal codeword is **not** optimal for `e ≥ 3` — recorded as refuted |
+
+**Key distinction recorded:** the bounds are convention-free (they use only `M` invertible, i.e.
+`ν ≠ 0`); the exact values depend on `M` and on the `η`-normalisation (F-1). Rescaling a component
+coordinate does not change supports but does change `(sM)`'s zeros.
+
+**Environment incidents (three, none changed a result):** (i) `numpy` disappeared between turns, so
+`p3_tables.py` was rewritten in stdlib and re-run — every committed P3-1 figure reproduced exactly;
+(ii) the local `.git` was a fresh clone at `33aeb79` with `research_project/` untracked, while the
+remote held all commits, so the branch was restored by `git fetch` + `git reset --mixed FETCH_HEAD`
+— **no commit lost or rewritten**, working tree untouched, source PDF re-verified as 612 826 B and
+sha256 `7f7e6803…`; (iii) `pypdf` is gone, so `tools/preflight.py` can no longer run — an
+environment regression, not a broken artifact, worked around by direct `sha256sum` verification only.
+
+**Verdict:** GO for the narrowed distributional contribution; **NO-GO** for a "Gray-coupling
+structural theorem" as the headline. Novelty not claimed (bounds likely folklore; B-1/B-2 open).
+
 ## Next step
 
-**Phase 3 continues with P3-3** — the ring-level statement: the joint distribution of dual-containing
-`λ`-constacyclic codes over `R_e` by quantum parameters, using the Gray coupling proved in
-`R4_FEASIBILITY.md` §3 and the field-level tables of P3-1/P3-2.
+**Phase 3 P3-3 is delivered.** The remaining Phase 3 work with real content is the **distribution over
+`R_e`**: enumerate dual-containing tuples, compute `d(ψ)` exactly for a fixed `M`, and record the
+quantum-parameter distribution `[[en, 2K−en, ≥d]]`. Instance size is controlled by
+`|C_1|·…·|C_e|`; the interesting cases begin at `e = 3`.
 
-Open items carried forward, all recorded: the four unproved middle distances of the two-orbit family;
-the `n=9` power-attainment conjecture; choice of `M` in the Gray map (must be fixed in any theorem
-statement); the even-characteristic limitation of the paper's `e=2` matrix. R1, R2, R3 remain NO-GO.
-Blockers B-1 (publisher full texts) and B-2 (Debnath–Prakash body) remain open. No novelty claimed.
+**A decision is required before that, and it changes the deliverable:**
+
+> Is the intended claim the **distribution** (a computational result with tables), or a **theorem**?
+> On the evidence of P3-3 no theorem beyond Theorems 1–5 is available at this generality, and those
+> are elementary. If a theorem is needed, the only remaining route is a restricted family where
+> `d(ψ)` *is* determined — Theorem 4's `σ = 1` case is the only one known — and to characterise it.
+
+Limitations carried forward and labelled: **L-1** four unproved middle distances; **L-2** `n=9`
+power-attainment conjecture; **L-3** choice of `M`; **L-4** even-characteristic matrix degeneracy;
+**L-5** publisher full texts; **L-6** Debnath–Prakash body; **L-7** Thm 5 is witness-based.
+R1, R2, R3 remain NO-GO. Gate 2 remains passed on R4. No novelty claimed; Phase 1 untouched.
 
 Phase 1 stands complete; nothing in Phase 2 changed a Phase 1 result, count or register entry.
 

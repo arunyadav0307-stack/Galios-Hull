@@ -31,15 +31,30 @@ from r3_probe import in_span                                               # noq
 CAP = 700000
 
 
+def all_words(F, basis, n):
+    """Every word of the span, as a list of tuples (pure stdlib, iterated doubling)."""
+    ADD, MUL = F.add, F.mul
+    words = [tuple([F.zero] * n)]
+    for row in basis:
+        extra = []
+        for w in words:
+            for c in range(1, F.Q):
+                extra.append(tuple(ADD[w[i]][MUL[c][row[i]]] for i in range(n)))
+        words = words + extra
+    return words
+
+
 def dist_of_span(F, basis, n):
     """Exact minimum distance of the span; None if it could not be computed.
 
-    Vectorised: the whole code is built as an array of words by iterated doubling, which
-    costs O(q^k) in numpy rather than O(q^k * k) in Python.  A cheap weight<=3 membership
-    pass runs first, because most codes have small distance and the pass bounds the work
-    when q^k is large.
+    Weights 1..3 are settled by membership testing first (cheap, and most codes are small
+    distance); otherwise the code is fully enumerated when q^k is within CAP.  A code that
+    fits neither is reported as None -- never guessed.
+
+    NOTE: this replaced a numpy version whose dependency is no longer present in the
+    environment.  The replacement reproduces the previously committed numbers exactly;
+    see P3_3_RING_GRAY.md section 5.
     """
-    import numpy as np
     k = len(basis)
     if k == 0:
         return None
@@ -53,20 +68,16 @@ def dist_of_span(F, basis, n):
                     v[i] = c
                 if in_span(F, basis, v, n):
                     return w
-    if F.Q ** k > 700000:
+    if F.Q ** k > CAP:
         return None
-    ADD = np.array(F.add, dtype=np.int64)
-    MUL = np.array(F.mul, dtype=np.int64)
-    words = np.zeros((1, n), dtype=np.int64)
-    for row in basis:
-        row = np.array(row, dtype=np.int64)
-        parts = [words]
-        for c in range(1, F.Q):
-            parts.append(ADD[words, MUL[c][row]])
-        words = np.vstack(parts)
-    wt = (words != 0).sum(axis=1)
-    nz = wt[wt > 0]
-    return int(nz.min()) if nz.size else None
+    best = None
+    for v in all_words(F, basis, n):
+        w = sum(1 for x in v if x != F.zero)
+        if w and (best is None or w < best):
+            best = w
+            if best == 1:
+                return 1
+    return best
 
 
 def instance(p, q, n, alphas, label):
