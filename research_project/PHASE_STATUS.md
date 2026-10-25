@@ -584,6 +584,35 @@ object (`<(x-1)^i>`, length `p^s`) does. Prior-art row added to `phase2/LITERATU
 "substantive proved theorem" leads to a 2008 result. R4 is unaffected (the Dinh theorem has no hull
 content), and the withdrawal rule for R4 is untouched.
 
+## Phase 3 — P3-8 blocker progress (2026-10-24)
+
+Deliverable `phase3/P3_8_BLOCKER_PROGRESS.md`. **No blocker closed; nothing computed.** After the
+P3-7b lesson (search the exact object, not the topic), the four unread bodies were re-searched on
+author, title and DOI.
+
+| Blocker | Change |
+|---|---|
+| **B-2b** | **Fully identified**, record was correct: Debnath & Prakash, *Hulls of Cyclic Codes Over a Local Ring*, ICTIS 2025, SIST **325**:309–319, DOI `10.1007/978-981-95-1365-9_25`. Abstract quoted verbatim (`Z_{p^3}`, count of all cyclic codes **for a fixed hull `p`-dimension**, no distance). Body paywalled. **Still open** |
+| **B-2a** | Body still paywalled — but a **Correction** exists: *Correction to: Galois hulls of constacyclic codes over finite fields*, Cryptogr. Commun. **15**:129–130 (2023), DOI `10.1007/s12095-022-00602-6` (clarifies a primitive element of `F_8`). So B-2a is **two** unread documents. Blocker **slightly worse**, not better. **Still open** |
+| **B-1** | unchanged; publisher bodies inaccessible |
+| **Tian–Gao–Gao** | no preprint located by search (stated as "not located", not "does not exist"); body unread |
+| **Line scope, from a full text we can read** | arXiv:2412.08512 (Debnath–Islam–Martínez-Moro–Prakash, *Discrete Math.* 349 (2026) 18) read directly: `k`-Galois hull dimension formula, LCD/dual-containing conditions, EAQECC examples; its counting object is `delta_k(n,q,lambda)` = **number of distinct attainable hull dimensions**; **no distance distribution anywhere**; it also independently describes the source paper's contribution as "Hermitian hull dimensions + Hermitian LCD conditions" |
+
+**What is still not established:** that none of B-1/B-2a/B-2b/Tian–Gao–Gao contains a joint
+`(hull, distance)` distribution. **R4 is not withdrawn and not promoted; novelty still claimed
+nowhere; Phase 9 remains NO-GO.**
+
+**Distinction sharpened (with sources):** B-2a gives a *marginal* count of codes by Galois hull
+dimension; arXiv:2412.08512 gives only the *number of distinct attainable hull dimensions*; B-2b gives
+a marginal count over `Z_{p^3}` with no Gray map. R4 asks for the *joint* `(dim Hull_H, d)` law over
+`R_e` **together with its Gray image** — and P3-1 already showed the joint law is not the product of
+its marginals (independence violations 5, 5, 11, 2, 3, 9). A distinction in **kind**, not an absence
+claim.
+
+**Next action on B-2a recorded:** request **both** `10.1007/s12095-022-00591-6` **and** its
+Correction `10.1007/s12095-022-00602-6`; requesting only the original would repeat a known-incomplete
+read.
+
 ## Next step
 
 **The blueprint's deliverable set is now complete through Phase 8.** Every named file exists except the
@@ -591,9 +620,12 @@ manuscript (Phase 9), which is deliberately withheld.
 
 Only two kinds of work remain, and neither is mine to do unilaterally:
 
-1. **Library access** — **B-2a** (Debnath–Prakash–Islam 2023 body), **B-2b** (SIST 2025 body),
-   **Tian–Gao–Gao** QIP 2024 full text. If any contains a joint (hull, distance) distribution for a
-   constacyclic family, the R4 contribution is **withdrawn**, not narrowed.
+1. **Library access** — **B-2a** (Debnath–Prakash–Islam 2023 body **and now also its Correction**,
+   DOI `10.1007/s12095-022-00602-6`), **B-2b** (ICTIS 2025 chapter, DOI
+   `10.1007/978-981-95-1365-9_25`), **Tian–Gao–Gao** QIP 2024 full text. If any contains a joint
+   (hull, distance) distribution for a constacyclic family, the R4 contribution is **withdrawn**, not
+   narrowed. See `P3_8_BLOCKER_PROGRESS.md`: three of the four bodies are now identified to DOI
+   level, so an interlibrary request can be made precisely.
 2. **A structural idea** for the one restricted family where `d(ψ)` is determined (`σ = 1` is the only
    known case). Without it there is no route to the primary objective.
 
