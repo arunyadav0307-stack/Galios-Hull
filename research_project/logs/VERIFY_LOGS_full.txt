@@ -1,0 +1,22 @@
+Regression check: re-run each probe, compare with the committed log
+(elapsed-time lines dropped; everything else compared exactly)
+
+probe                          status      detail
+----------------------------------------------------------------------------------------------------
+r1_probe                       PASS        179 lines identical
+r2_probe                       PASS        49 lines identical
+r3_probe                       PASS        64 lines identical
+r4_probe                       PASS        26 lines identical
+r4_field_joint                 PASS        54 lines identical
+p3_tables                      PASS        82 lines identical
+p3_ring_gray                   PASS        40 lines identical
+p3_quantum_dist                PASS        30 lines identical
+p3_quantum_table               PASS        18 lines identical + artifacts byte-identical
+p3_gray_hull_identity          PASS        4 lines identical
+p3_known_formula_check         PASS        32 lines identical
+p3_weight2_field               PASS        39 lines identical
+p3_power_attainment_mbound     PASS        19 lines identical
+p3_power_attainment            PASS        200 lines identical
+----------------------------------------------------------------------------------------------------
+ran 14, skipped 0, failures 0
+RESULT: ALL LOGS REPRODUCE

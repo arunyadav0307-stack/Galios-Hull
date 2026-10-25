@@ -25,6 +25,8 @@ For a frozen version, add the commit hash instead of the branch name — see §6
 | Script: `m(a)` vs Dinh's published formula | [p3_known_formula_check.py](https://github.com/arunyadav0307-stack/Galios-Hull/blob/arena/831a2e65-galios-hull/research_project/phase3/p3_known_formula_check.py) |
 | Log: 5050 values, 0 mismatches | [p3_known_formula_check_log.txt](https://github.com/arunyadav0307-stack/Galios-Hull/blob/arena/831a2e65-galios-hull/research_project/phase3/p3_known_formula_check_log.txt) |
 | Script + log: circuit matroid, 117/117 agree | [p3_power_attainment.py](https://github.com/arunyadav0307-stack/Galios-Hull/blob/arena/831a2e65-galios-hull/research_project/phase3/p3_power_attainment.py) · [log](https://github.com/arunyadav0307-stack/Galios-Hull/blob/arena/831a2e65-galios-hull/research_project/phase3/p3_power_attainment_log.txt) |
+| **P3-9 — regression audit: all 14 logs + the 504-row CSV reproduce** | [P3_9_REGRESSION_AUDIT.md](https://github.com/arunyadav0307-stack/Galios-Hull/blob/arena/831a2e65-galios-hull/research_project/phase3/P3_9_REGRESSION_AUDIT.md) |
+| Tool: re-run every probe and diff against its committed log | [verify_logs.py](https://github.com/arunyadav0307-stack/Galios-Hull/blob/arena/831a2e65-galios-hull/research_project/tools/verify_logs.py) · [full-run log](https://github.com/arunyadav0307-stack/Galios-Hull/blob/arena/831a2e65-galios-hull/research_project/logs/VERIFY_LOGS_full.txt) |
 | **P3-8 — blocker progress (B-1, B-2a, B-2b, Tian–Gao–Gao)** | [P3_8_BLOCKER_PROGRESS.md](https://github.com/arunyadav0307-stack/Galios-Hull/blob/arena/831a2e65-galios-hull/research_project/phase3/P3_8_BLOCKER_PROGRESS.md) |
 | Script + log: field independence, weight-2 classification | [p3_weight2_field.py](https://github.com/arunyadav0307-stack/Galios-Hull/blob/arena/831a2e65-galios-hull/research_project/phase3/p3_weight2_field.py) · [log](https://github.com/arunyadav0307-stack/Galios-Hull/blob/arena/831a2e65-galios-hull/research_project/phase3/p3_weight2_field_log.txt) |
 
@@ -76,6 +78,7 @@ For a frozen version, add the commit hash instead of the branch name — see §6
 
 | Commit | Link |
 |---|---|
+| `913e2d9` — P3-8 blocker progress | [commit](https://github.com/arunyadav0307-stack/Galios-Hull/commit/913e2d9) |
 | `1a11f05` — LINKS.md index | [commit](https://github.com/arunyadav0307-stack/Galios-Hull/commit/1a11f05) |
 | `214ff86` — P3-7b, the L-2 correction | [commit](https://github.com/arunyadav0307-stack/Galios-Hull/commit/214ff86c49425ad2697bb9f92d4cc1a82265ccb3) |
 | `d676e09` — P3-7 power attainment | [commit](https://github.com/arunyadav0307-stack/Galios-Hull/commit/d676e09) |

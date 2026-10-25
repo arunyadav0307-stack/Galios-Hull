@@ -613,6 +613,34 @@ claim.
 Correction `10.1007/s12095-022-00602-6`; requesting only the original would repeat a known-incomplete
 read.
 
+## Phase 3 — P3-9 regression audit: every log reproduces (2026-10-25)
+
+Deliverable `phase3/P3_9_REGRESSION_AUDIT.md`; tool `tools/verify_logs.py`;
+full-run log `logs/VERIFY_LOGS_full.txt`.
+
+**Result: 14 of 14 probes reproduce, 0 failures, exit 0. 836 log lines compared.
+`QUANTUM_CODE_PARAMETER_TABLE.csv` regenerates byte-identically (504 rows).**
+
+| Item | Detail |
+|---|---|
+| Method | re-run each committed script from the repo root with `PYTHONHASHSEED=0`, capture stdout, compare line-by-line with the committed log; exit code must be 0 |
+| Tolerated differences | only text the *logging command* wrote: elapsed-time lines, the `# ... generated <timestamp>` banner, the `Python 3.11.x` interpreter line, `## <script>.py --` part headers, one recorded historical `numpy: ModuleNotFoundError` line, and the trailing CSV dump (replaced by a byte-for-byte CSV check) |
+| Not tolerated | any changed digit anywhere; the report prints the first differing line with both versions |
+| Structure found | `r1_probe_log.txt` (2 parts), `r2_probe_log.txt` (1), `r3_probe_log.txt` (3) are **composite** logs and need two or three scripts to regenerate — recorded so a re-runner does not produce a truncated log and mistake it for missing evidence |
+| History found | `p3_quantum_table_log.txt` deliberately preserves the pre-rewrite `numpy: ModuleNotFoundError`; it is skipped explicitly rather than quietly deleted |
+| Strongest single check | the 504-row CSV is snapshotted before the run and must be byte-identical after; `git status` is clean after the full run |
+
+**What it establishes:** the package is internally reproducible — run the committed code, get the
+committed output, including the largest deliverable.
+**What it does not establish:** correctness (a script that reproduces a wrong number reproduces it
+faithfully — this is a drift check, not a proof), novelty (blockers unchanged), or that Phase 9 should
+be written. **Phase 9 NO-GO is unchanged.**
+
+Excluded, and why: `tools/preflight.py` (needs `pypdf`, absent), `tools/selftest_gate.py` (environment
+gate, PASS 7/7, no committed log), the acquisition/inventory tools (bound to the network and to the
+source PDF, which `PHASE0_VERIFICATION_LOG.md` pins by sha256), and `code/phase1_*.py` (outputs quoted
+inside `phase1/*.md`).
+
 ## Next step
 
 **The blueprint's deliverable set is now complete through Phase 8.** Every named file exists except the
@@ -633,10 +661,12 @@ The third option that existed at the end of P3-7 — *decide L-2 and turn it int
 **gone**: P3-7b shows L-2 is Dinh's 2008 theorem. It was never a contribution. Nothing on the distance
 side of the single-orbit family is left to settle.
 
-Everything computable at this scale has been computed and cross-checked (P3-7 extends this to `n = 4, 8,
-16, 25, 27` for the distance side). Further computation at this scale would repeat verified work; the
-remaining distance question is a proof, not a computation, and `n = 49, 81, 125` are out of reach of
-the pure-Python subset search.
+Everything computable at this scale has been computed, cross-checked, and now **re-verified
+end-to-end**: P3-9 re-runs all 14 probes and reproduces 836 log lines exactly, plus the 504-row CSV
+byte-for-byte. There is no remaining computational step at this scale. Both remaining items require
+material this workspace does not have — library access (B-1, B-2a + its Correction, B-2b,
+Tian–Gao–Gao) or a new structural idea — so further "proceed" turns have nothing legitimate left to
+execute, and manufacturing activity would violate the standing rule against it.
 
 R1, R2, R3 remain NO-GO; Gate 2 stands on R4; novelty claimed nowhere; L-1, L-3 … L-8 open, **L-2 closed by citation (Dinh 2008)**; source PDF
 re-verified 612 826 B / sha256 `7f7e6803…`.
