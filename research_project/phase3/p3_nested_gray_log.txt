@@ -1,0 +1,31 @@
+P3-10: psi(C1 x C2) is the |u|u+v| code, so d = min{2 d(C1), d(C2)} when C2 <= C1
+(e = 2, Gray matrix M = ((1,1),(1,-1)) = the two roots of u^2 - 1)
+
+p= 3, n=2:   4 cyclic codes,   5 nested pairs checked, 0 disagreements, 4 skipped   [PASS]
+p= 3, n=4:   8 cyclic codes,  19 nested pairs checked, 0 disagreements, 8 skipped   [PASS]
+p= 3, n=5:   4 cyclic codes,   5 nested pairs checked, 0 disagreements, 4 skipped   [PASS]
+p= 5, n=2:   4 cyclic codes,   5 nested pairs checked, 0 disagreements, 4 skipped   [PASS]
+p= 5, n=3:   4 cyclic codes,   5 nested pairs checked, 0 disagreements, 4 skipped   [PASS]
+p= 5, n=4:  16 cyclic codes,  64 nested pairs checked, 0 disagreements, 17 skipped   [PASS]
+p= 5, n=6:  16 cyclic codes,  41 nested pairs checked, 0 disagreements, 40 skipped   [PASS]
+p= 7, n=2:   4 cyclic codes,   5 nested pairs checked, 0 disagreements, 4 skipped   [PASS]
+p= 7, n=3:   8 cyclic codes,  19 nested pairs checked, 0 disagreements, 8 skipped   [PASS]
+p= 7, n=4:   8 cyclic codes,  16 nested pairs checked, 0 disagreements, 11 skipped   [PASS]
+p= 7, n=5:   4 cyclic codes,   2 nested pairs checked, 0 disagreements, 7 skipped   [PASS]
+p= 7, n=6:  64 cyclic codes, 371 nested pairs checked, 0 disagreements, 358 skipped   [PASS]
+p=11, n=2:   4 cyclic codes,   5 nested pairs checked, 0 disagreements, 4 skipped   [PASS]
+p=11, n=3:   4 cyclic codes,   4 nested pairs checked, 0 disagreements, 5 skipped   [PASS]
+p=11, n=4:   8 cyclic codes,  12 nested pairs checked, 0 disagreements, 15 skipped   [PASS]
+p=11, n=5:  32 cyclic codes, 115 nested pairs checked, 0 disagreements, 128 skipped   [PASS]
+p=11, n=6:  16 cyclic codes,  19 nested pairs checked, 0 disagreements, 62 skipped   [PASS]
+p=13, n=2:   4 cyclic codes,   5 nested pairs checked, 0 disagreements, 4 skipped   [PASS]
+p=13, n=3:   8 cyclic codes,  15 nested pairs checked, 0 disagreements, 12 skipped   [PASS]
+p=13, n=4:  16 cyclic codes,  34 nested pairs checked, 0 disagreements, 47 skipped   [PASS]
+p=13, n=5:   4 cyclic codes,   1 nested pairs checked, 0 disagreements, 8 skipped   [PASS]
+p=13, n=6:  64 cyclic codes, 111 nested pairs checked, 0 disagreements, 618 skipped   [PASS]
+
+TOTAL nested pairs checked: 878, disagreements: 0
+non-nested pairs where the unqualified formula FAILS: 2915
+(the hypothesis C_2 <= C_1 is therefore necessary as well as sufficient in the cases tested)
+
+Overall: PASS

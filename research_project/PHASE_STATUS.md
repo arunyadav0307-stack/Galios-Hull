@@ -385,7 +385,7 @@ Deliverable `phase3/P3_3_RING_GRAY.md`; probe `phase3/p3_ring_gray.py`, log 43 l
 | Result | Status |
 |---|---|
 | **Thm 1** `Hull_H(C) = ⊕_ℓ Hull_H(C_ℓ)`; `C^{⊥_H} ⊆ C` iff componentwise | **proved**; hull is `ψ`-independent |
-| **Thm 2** `min_ℓ d_ℓ ≤ d(ψ(C)) ≤ e·min_ℓ d_ℓ` for every admissible `M` | **proved**; elementary (support counting) |
+| **Thm 2** `min_ℓ d_ℓ ≤ d(ψ(C)) ≤ e·min_ℓ d_ℓ` for every admissible `M` | **proved**; elementary (support counting). **Superseded for `e = 2` nested components by P3-10**: `d(ψ) = min{2d_1,d_2}` exactly |
 | **Thm 3** single-component codes: `d(ψ) = ρ_k·d(C_k)` | **proved**; verified 40/40 |
 | **Thm 4** equal components: `d(ψ) ≤ σ·d(D)`, equality when `σ = 1` | **proved**; `σ=1` verified 40/40 |
 | **Thm 5** non-determination: `(k_1,d_1,k_2,d_2) = (1,3,1,3)` realises `d(ψ) ∈ {3,4,5}` | **proved by witnesses** |
@@ -640,6 +640,32 @@ Excluded, and why: `tools/preflight.py` (needs `pypdf`, absent), `tools/selftest
 gate, PASS 7/7, no committed log), the acquisition/inventory tools (bound to the network and to the
 source PDF, which `PHASE0_VERIFICATION_LOG.md` pins by sha256), and `code/phase1_*.py` (outputs quoted
 inside `phase1/*.md`).
+
+## Phase 3 — P3-10 the e = 2 Gray image is |u|u+v|, distance exact (2026-10-25)
+
+Deliverable `phase3/P3_10_GRAY_E2_UV.md`; probe `phase3/p3_nested_gray.py`
+(log in the P3-9 regression set, exit 0, 501 s, stdlib only).
+
+**Theorem P3-10 (proved, elementary).** For `q` odd and linear codes `C_2 <= C_1` of length `n` over
+`F_q`, the `e = 2` Gray map `psi(c_1,c_2) = (c_1+c_2, c_1-c_2)` satisfies
+
+    psi(C_1 x C_2) = { (u, u+v) : u in C_1, v in C_2 }        (the |u|u+v| / Plotkin-sum code)
+
+and therefore `d(psi(C_1 x C_2)) = min { 2 d(C_1), d(C_2) }`.
+
+| Item | Detail |
+|---|---|
+| Proof | substitute `u = c_1+c_2`, `v = -2c_2`; bijection needs only `C_2 <= C_1` and `2` invertible; triangle inequality for the lower bound, `u = 0` for the upper |
+| Verification | **878 nested pairs, 0 disagreements**, 22 `(p,n)` cases with `p` in 3..13 and `n` in 2..6, `gcd(n,p)=1` |
+| Hypothesis is necessary | the same sweep finds **2915 non-nested pairs** where the formula fails |
+| Relation to P3-3 Thm 2 | `min{2d_1,d_2} <= 2d_1 = e min d_l`, so the new value sits inside the old band and is exact, not a bound; it equals `e min d_l` only when `d_2 >= 2 d_1` |
+| **Provenance** | this is the **classical** `|u|u+v|` construction: van Lint, IEEE TIT 37(2):343-345 (1991); Castagnoli et al., IEEE TIT 37(2):337-342 (1991); restated as Thm 2.1 of arXiv:2402.02853. **Re-derived, not new** |
+| Forward value | for nested `e = 2`, `d(psi)` is a *function* of `(d(C_1),d(C_2))`, so R4's joint law collapses to a deterministic map on the field-level joint law (hull dimensions add by P3-3 Thm 1). The distribution is then a computation, not a new structural problem |
+| Consistency with P3-3 Thm 5 | the non-determination witness `(d_1,d_2) = (3,3)` giving `d(psi) in {3,4,5}` must be **non-nested** — exactly where the sweep finds the formula failing. The two results agree |
+| Not done | `e >= 3` untouched (`|u|u+v|` is specific to `e = 2`); hull side untouched; blockers unchanged |
+
+**Same pattern as P3-7b:** a question carried in this project as "bounded / open" is settled in the
+literature. **Phase 9 remains NO-GO** — a re-derived classical formula is not a new theorem.
 
 ## Next step
 

@@ -68,6 +68,8 @@ CASES = [
      P3 + "p3_known_formula_check_log.txt", False, []),
     ("p3_weight2_field", [(P3 + "p3_weight2_field.py", [])],
      P3 + "p3_weight2_field_log.txt", False, []),
+    ("p3_nested_gray", [(P3 + "p3_nested_gray.py", [])],
+     P3 + "p3_nested_gray_log.txt", True, []),
     ("p3_power_attainment_mbound", [(P3 + "p3_power_attainment.py", ["--mbound"])],
      P3 + "p3_power_attainment_mbound_log.txt", False, []),
     ("p3_power_attainment", [(P3 + "p3_power_attainment.py", [])],
