@@ -1,0 +1,122 @@
+P3-11: exact joint (Hermitian hull dim, distance) for NESTED e = 2 over F_9
+d(psi) = min{2 d(C_1), d(C_2)}  (P3-10)   h(psi) = h(C_1) + h(C_2)  (P3-3 Thm 1)
+lambda = (1,1): components are cyclic codes, so every C_2 <= C_1 is realisable.
+
+  sanity: conj(x) == x^3 for all x in F_9, and x*conj(x) != 0 for x != 0   [ok]
+
+================================================================================================
+n = 2 over F_9:  4 cyclic codes (x^2-1 has 4 monic divisors)
+  nested pairs with both components nonzero: 5
+    h    d   count
+    0    1       1
+    0    2       4
+================================================================================================
+n = 4 over F_9:  16 cyclic codes (x^4-1 has 16 monic divisors)
+  nested pairs with both components nonzero: 65
+    h    d   count
+    0    1       1
+    0    2      24
+    0    3      12
+    0    4      28
+================================================================================================
+n = 5 over F_9:  8 cyclic codes (x^5-1 has 8 monic divisors)
+  nested pairs with both components nonzero: 19
+    h    d   count
+    0    1       1
+    0    2       3
+    0    5       1
+    2    2       4
+    2    4       2
+    2    5       2
+    4    3       2
+    4    4       4
+================================================================================================
+n = 7 over F_9:  8 cyclic codes (x^7-1 has 8 monic divisors)
+  nested pairs with both components nonzero: 9
+    h    d   count
+    0    4       2
+    0    5       4
+    0    7       3
+================================================================================================
+n = 8 over F_9:  256 cyclic codes (x^8-1 has 256 monic divisors)
+  nested pairs with both components nonzero: 3270
+    h    d   count
+    0    2      10
+    0    3      20
+    0    4     176
+    0    6      68
+    0    8      52
+    1    2       4
+    1    3       8
+    1    4     340
+    1    5      24
+    1    6     208
+    1    7      48
+    1    8     180
+    2    2       4
+    2    3      16
+    2    4     316
+    2    5      48
+    2    6     264
+    2    7     208
+    2    8     232
+    3    4      96
+    3    5     144
+    3    6     264
+    3    7     176
+    3    8     104
+    4    3       8
+    4    4      32
+    4    5     104
+    4    6     116
+
+================================================================================================
+Independence test: is P(h,d) = P(h) P(d) on this family?
+(exact rational arithmetic; TV = total variation distance, MAXDEV = max |obs-exp| count)
+  n  pairs       TV   MAXDEV  verdict
+  2      5   0.0000   0.0000  independent
+  4     65   0.0000   0.0000  independent
+  5     19   0.2078   2.1053  NOT independent
+  7      9   0.0000   0.0000  independent
+  8   3270   0.1753 134.1651  NOT independent
+
+================================================================================================
+TOTAL nested pairs over all n: 3368
+Hull additivity cross-check failures (additive vs direct on psi(C)): 0
+
+Joint distribution of (dim Hull_H(psi(C)), d(psi(C))) over ALL n pooled:
+  h    d    count
+  0    1        3
+  0    2       41
+  0    3       32
+  0    4      206
+  0    5        5
+  0    6       68
+  0    7        3
+  0    8       52
+  1    2        4
+  1    3        8
+  1    4      340
+  1    5       24
+  1    6      208
+  1    7       48
+  1    8      180
+  2    2        8
+  2    3       16
+  2    4      318
+  2    5       50
+  2    6      264
+  2    7      208
+  2    8      232
+  3    4       96
+  3    5      144
+  3    6      264
+  3    7      176
+  3    8      104
+  4    3       10
+  4    4       36
+  4    5      104
+  4    6      116
+sum of counts: 3368  (must equal 3368)
+
+Overall: PASS

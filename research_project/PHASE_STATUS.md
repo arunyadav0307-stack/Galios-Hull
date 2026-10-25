@@ -667,6 +667,29 @@ and therefore `d(psi(C_1 x C_2)) = min { 2 d(C_1), d(C_2) }`.
 **Same pattern as P3-7b:** a question carried in this project as "bounded / open" is settled in the
 literature. **Phase 9 remains NO-GO** — a re-derived classical formula is not a new theorem.
 
+## Phase 3 — P3-11 exact joint (hull, distance) law, nested e = 2 (2026-10-25)
+
+Deliverable `phase3/P3_11_JOINT_NESTED_E2.md`; probe `phase3/p3_joint_nested_e2.py`
+(log 112 lines, exit 0, 428 s, stdlib only).
+
+**This is the object R4 asks for, on the one sub-family where both coordinates are determined.**
+`e = 2` with `C_2 <= C_1`: distance exact by P3-10 (`min{2d_1,d_2}`), hull exact by P3-3 Thm 1
+(additive).
+
+| Item | Detail |
+|---|---|
+| Enumeration | all nested pairs of cyclic codes over `F_9`, `lambda = (1,1)`, `n in {2,4,5,7,8}` (`psi`-lengths 4,8,10,14,16), `gcd(n,3)=1` |
+| Pairs | **3368** with both components nonzero |
+| Independent cross-check | hull computed **directly** on `psi(C)` from its own generator matrix for all 3368 pairs: **0 failures** vs the additive value |
+| Sanity assertions | `conj(x) == x^3` for all `x in F_9`; `x*conj(x) != 0` for `x != 0` |
+| Largest table | `n = 8`, 3270 pairs, `h in 0..4`, `d in 2..8`; counts printed cell by cell |
+| **R4 finding** | the joint law is **NOT the product of its marginals**: TV = **0.2078** at `n = 5` (19 pairs) and **0.1753** at `n = 8` (3270 pairs), exact rational arithmetic. Independence holds only where one marginal is degenerate (`h = 0` throughout at `n = 2,4,7`), so those cases are uninformative |
+| Consequence | P3-1's "joint law is not a product" is **not** an artefact of the non-determined regime. A hull-dimension-only count (what B-2a and B-2b do) cannot reproduce this table — a difference in **kind**, now shown by exhaustive enumeration |
+| Not claimed | not a theorem (finite enumeration); not new mathematics (P3-10 is classical `|u|u+v|`); general `C_2` not subset of `C_1` still governed by P3-3 Thm 5; **no** claim that these parameters are good; **no** novelty claim while B-1/B-2a/B-2b/Tian-Gao-Gao are unread |
+
+**Phase 9 remains NO-GO** — a distribution table is not the "substantive proved theorem" the
+blueprint requires.
+
 ## Next step
 
 **The blueprint's deliverable set is now complete through Phase 8.** Every named file exists except the
