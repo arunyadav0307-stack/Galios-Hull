@@ -15,8 +15,13 @@ p3_quantum_table               PASS        18 lines identical + artifacts byte-i
 p3_gray_hull_identity          PASS        4 lines identical
 p3_known_formula_check         PASS        32 lines identical
 p3_weight2_field               PASS        39 lines identical
+p3_lambda_robust               PASS        49 lines identical
+p3_joint_nested_e2             PASS        122 lines identical
+p3_nested_gray                 PASS        31 lines identical
+p3_joint_e3                    PASS        76 lines identical
 p3_power_attainment_mbound     PASS        19 lines identical
 p3_power_attainment            PASS        200 lines identical
 ----------------------------------------------------------------------------------------------------
-ran 14, skipped 0, failures 0
+ran 18, skipped 0, failures 0
 RESULT: ALL LOGS REPRODUCE
+EXIT=0

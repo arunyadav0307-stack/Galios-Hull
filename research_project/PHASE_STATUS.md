@@ -621,6 +621,10 @@ full-run log `logs/VERIFY_LOGS_full.txt`.
 **Result: 14 of 14 probes reproduce, 0 failures, exit 0. 836 log lines compared.
 `QUANTUM_CODE_PARAMETER_TABLE.csv` regenerates byte-identically (504 rows).**
 
+*As of P3-13 the suite has grown to 18 cases and has been **re-run in full**: 18/18 PASS, 1114 lines
+identical, exit 0 (`P3_9_REGRESSION_AUDIT.md` §9). The 14/14 figure above is the P3-9 record and is kept
+for the audit trail; §9 is the current number.*
+
 | Item | Detail |
 |---|---|
 | Method | re-run each committed script from the repo root with `PYTHONHASHSEED=0`, capture stdout, compare line-by-line with the committed log; exit code must be 0 |
@@ -747,6 +751,32 @@ What is non-degenerate: `F_25 = F_5[t]/(t²−2)`, **negacyclic** components (id
 
 **Phase 9 remains NO-GO.**
 
+## Phase 3 — P3-9 addendum: the regression suite re-run in full at 18 cases (2026-10-25)
+
+No new research claim. This closes a gap in the reproducibility record: four probes were registered with
+`tools/verify_logs.py` after P3-9 (`p3_nested_gray`, `p3_joint_nested_e2`, `p3_lambda_robust`,
+`p3_joint_e3`), and the committed full-run log still said **14 cases / 836 lines**. The headline figure
+in `P3_9_REGRESSION_AUDIT.md` was stale.
+
+```
+$ python3 research_project/tools/verify_logs.py > research_project/logs/VERIFY_LOGS_full.txt 2>&1
+ran 18, skipped 0, failures 0
+RESULT: ALL LOGS REPRODUCE
+EXIT=0
+```
+
+| Item | Detail |
+|---|---|
+| Result | **18/18 PASS, 1114 log lines compared, 0 failures, exit 0**; 504-row CSV byte-identical again |
+| Scope | every case run, including the four slow ones (~760 s worst); `--fast` **not** used, nothing skipped |
+| Newly covered | `p3_nested_gray` 31, `p3_joint_nested_e2` 122, `p3_lambda_robust` 49, `p3_joint_e3` 76 lines |
+| Correction | `p3_joint_nested_e2_log.txt` reproduces at **122** lines, not the 112 recorded at P3-11; the comparison is byte-exact and passes, so the log was never wrong — a prose count was. Nothing depends on it |
+| Audit trail | `P3_9_REGRESSION_AUDIT.md` §1–§8 kept unaltered; §9 carries the current numbers, and the header now points to it rather than silently overwriting the P3-9 result |
+| What it buys | the reproducibility claim now covers **every** probe the project has, not the 14 that existed when the claim was made |
+| What it does not buy | correctness (a faithful reproduction of a wrong number is still wrong), novelty, or a Phase 9. **Phase 9 remains NO-GO** |
+| Regression fixed | the P3-13 edit had silently deleted the `## Next step` heading, leaving that section dangling under P3-13. Restored here |
+
+## Next step
 
 **The blueprint's deliverable set is now complete through Phase 8.** Every named file exists except the
 manuscript (Phase 9), which is deliberately withheld.
@@ -767,7 +797,8 @@ The third option that existed at the end of P3-7 — *decide L-2 and turn it int
 side of the single-orbit family is left to settle.
 
 Everything computable at this scale has been computed, cross-checked, and now **re-verified
-end-to-end**: P3-9 re-runs all 14 probes and reproduces 836 log lines exactly, plus the 504-row CSV
+end-to-end**: P3-9 re-runs every probe and reproduces every log line exactly — now **18 probes, 1114
+lines, 0 failures** (§9 of the audit) — plus the 504-row CSV
 byte-for-byte. There is no remaining computational step at this scale. Both remaining items require
 material this workspace does not have — library access (B-1, B-2a + its Correction, B-2b,
 Tian–Gao–Gao) or a new structural idea — so further "proceed" turns have nothing legitimate left to

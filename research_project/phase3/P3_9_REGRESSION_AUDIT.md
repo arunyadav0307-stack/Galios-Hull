@@ -4,6 +4,10 @@ Date: 2026-10-25. Tool: `tools/verify_logs.py`. Full-run log: `logs/VERIFY_LOGS_
 **Result: 14 of 14 probes reproduce, 0 failures, exit code 0**, and the 504-row CSV regenerates
 byte-identically.
 
+> **Superseded on the count, not on the finding — see §9.** The suite has since grown to **18 cases**
+> and has been re-run in full: **18/18 PASS, 1114 lines identical, exit 0.** Sections 1–8 are kept as
+> the P3-9 record; §9 carries the current number.
+
 ```
 $ python3 research_project/tools/verify_logs.py > research_project/logs/VERIFY_LOGS_full.txt 2>&1
 ran 14, skipped 0, failures 0
@@ -141,3 +145,42 @@ re-verified elsewhere.
 * `PHASE_STATUS.md`: P3-9 section added; "next step" updated to note that the package is now
   reproducible end-to-end and that no further work is available without library access.
 * `LINKS.md`: tool and log added.
+
+---
+
+## 9. Addendum (2026-10-25, P3-13) — the suite is now 18 cases, and all 18 were re-run in full
+
+Sections 1–8 above are the record as of P3-9 and are left unaltered, including the "14 of 14 / 836
+lines" result. Four probes were registered afterwards — `p3_lambda_robust` (P3-12),
+`p3_joint_nested_e2` (P3-11), `p3_nested_gray` (P3-10) and `p3_joint_e3` (P3-13) — and only the first
+of those had ever been re-run through the suite. **So the headline number in this document was stale,
+and this section replaces it.**
+
+```
+$ python3 research_project/tools/verify_logs.py > research_project/logs/VERIFY_LOGS_full.txt 2>&1
+ran 18, skipped 0, failures 0
+RESULT: ALL LOGS REPRODUCE
+EXIT=0
+```
+
+**18 of 18 PASS, 1114 log lines compared, 0 failures, exit 0.** The 504-row CSV is byte-identical
+again. Every case was run, including the four slow ones (`p3_joint_nested_e2`, `p3_nested_gray`,
+`p3_power_attainment` at ~760 s, `p3_power_attainment_mbound`); nothing was skipped and `--fast` was
+not used.
+
+| Added since P3-9 | Case | Lines compared |
+|---|---|---|
+| P3-10 | `p3_nested_gray` (slow) | 31 |
+| P3-11 | `p3_joint_nested_e2` (slow) | 122 |
+| P3-12 | `p3_lambda_robust` | 49 |
+| P3-13 | `p3_joint_e3` | 76 |
+| | **new total** | **836 + 278 = 1114** |
+
+One correction to a figure recorded elsewhere: `p3_joint_nested_e2_log.txt` reproduces at **122**
+lines, not the 112 noted when P3-11 was committed. The comparison is byte-exact and passes, so the log
+was never wrong — the line count in the prose was. No research claim depends on it.
+
+**Unchanged conclusions.** Reproducing a log is still not a theorem; nothing here bears on the
+literature question; blockers B-1, B-2a (+ its Correction), B-2b and Tian–Gao–Gao remain open. **Phase 9
+remains NO-GO.** What this section buys is narrower and worth stating plainly: the reproducibility claim
+now covers every probe the project has, rather than the 14 that existed when the claim was made.
