@@ -68,6 +68,8 @@ CASES = [
      P3 + "p3_known_formula_check_log.txt", False, []),
     ("p3_weight2_field", [(P3 + "p3_weight2_field.py", [])],
      P3 + "p3_weight2_field_log.txt", False, []),
+    ("p3_lambda_robust", [(P3 + "p3_lambda_robust.py", [])],
+     P3 + "p3_lambda_robust_log.txt", False, []),
     ("p3_joint_nested_e2", [(P3 + "p3_joint_nested_e2.py", [])],
      P3 + "p3_joint_nested_e2_log.txt", True, []),
     ("p3_nested_gray", [(P3 + "p3_nested_gray.py", [])],

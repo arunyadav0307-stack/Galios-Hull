@@ -683,12 +683,40 @@ Deliverable `phase3/P3_11_JOINT_NESTED_E2.md`; probe `phase3/p3_joint_nested_e2.
 | Independent cross-check | hull computed **directly** on `psi(C)` from its own generator matrix for all 3368 pairs: **0 failures** vs the additive value |
 | Sanity assertions | `conj(x) == x^3` for all `x in F_9`; `x*conj(x) != 0` for `x != 0` |
 | Largest table | `n = 8`, 3270 pairs, `h in 0..4`, `d in 2..8`; counts printed cell by cell |
-| **R4 finding** | the joint law is **NOT the product of its marginals**: TV = **0.2078** at `n = 5` (19 pairs) and **0.1753** at `n = 8` (3270 pairs), exact rational arithmetic. Independence holds only where one marginal is degenerate (`h = 0` throughout at `n = 2,4,7`), so those cases are uninformative |
+| **R4 finding** | (strengthened by P3-12: neither `lambda=(1,1)` nor nesting is needed for it) the joint law is **NOT the product of its marginals**: TV = **0.2078** at `n = 5` (19 pairs) and **0.1753** at `n = 8` (3270 pairs), exact rational arithmetic. Independence holds only where one marginal is degenerate (`h = 0` throughout at `n = 2,4,7`), so those cases are uninformative |
 | Consequence | P3-1's "joint law is not a product" is **not** an artefact of the non-determined regime. A hull-dimension-only count (what B-2a and B-2b do) cannot reproduce this table — a difference in **kind**, now shown by exhaustive enumeration |
 | Not claimed | not a theorem (finite enumeration); not new mathematics (P3-10 is classical `|u|u+v|`); general `C_2` not subset of `C_1` still governed by P3-3 Thm 5; **no** claim that these parameters are good; **no** novelty claim while B-1/B-2a/B-2b/Tian-Gao-Gao are unread |
 
 **Phase 9 remains NO-GO** — a distribution table is not the "substantive proved theorem" the
 blueprint requires.
+
+## Phase 3 — P3-12 the non-product finding survives removing P3-11's hypotheses (2026-10-25)
+
+Deliverable `phase3/P3_12_LAMBDA_ROBUSTNESS.md`; probe `phase3/p3_lambda_robust.py`
+(log in the verify_logs set, exit 0, 1.0 s, stdlib only).
+
+P3-11 assumed `lambda = (1,1)` (both components cyclic) and `C_2 <= C_1` (nested). **Both are removed
+here.** Nesting is dropped by measuring `d(psi)` directly as `min w(c_1+c_2) + w(c_1-c_2)`; `lambda` is
+dropped by running all four `lambda in {+1,-1}^2`, so components are cyclic **or negacyclic**.
+
+| `n` | scope | pairs | result |
+|---|---|---|---|
+| 2 | all pairs, 4 lambda | 15 / 7 / 7 / 3 | independence holds but is **VACUOUS** (`h` has one value) |
+| 3 | all pairs, 4 lambda | 15 each | **NOT independent** for `(+,+)` TV=0.2200, `(+,-)` TV=0.1689, `(-,+)` TV=0.1689; vacuous for `(-,-)` |
+| 4 | nested only (cost 10^8 otherwise), `(1,1)` and `(-1,-1)` | 65 / 1 | vacuous |
+
+**Conclusion at the strength the data supports: in every case where the independence test is not
+vacuous, it fails.** 0 direct-hull cross-check failures over all 150 words-pairs enumerated.
+
+| Item | Detail |
+|---|---|
+| Vacuity control added | an earlier version reported "independent" for degenerate rows; the probe now prints `h`-value and `d`-value counts and flags vacuity. **Every** "independent" row in this sweep turned out to be vacuous — the distinction is the whole finding |
+| Symmetry check | `(+,-)` and `(-,+)` give identical TV and identical tables, as required by component swap |
+| Most informative case | `n = 3`, `lambda = (+,-)`: components are genuinely different classes (cyclic x negacyclic), no nesting formula available, distance measured not deduced — and still not a product |
+| Feasibility stated | `n = 4` all-pairs costs 10^8 word-pairs (out of reach); mixed `lambda` at `n = 4` has no nontrivial nesting because `gcd(x^n-1, x^n+1)` divides 2 — skipped **by reasoning**, not by omission |
+| Not claimed | not a theorem (small finite tables); no proof that the joint law can never be a product; no novelty claim; blockers unchanged |
+
+**Phase 9 remains NO-GO.**
 
 ## Next step
 

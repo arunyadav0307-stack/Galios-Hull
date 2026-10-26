@@ -1,0 +1,49 @@
+P3-12: robustness of the P3-11 non-product finding -- all pairs, and all four lambda
+sanity: conj(x) == x^3 for all x in F_9   [ok]
+
+================================================================================================
+n = 2: ALL pairs, all four lambda, d(psi) enumerated directly (no nesting)
+  lambda=(+,+):    15 pairs, 1 skipped, hull cross-check failures 0, TV=0.0000, MAXDEV=0.0000, h-values 1, d-values 3  -> independent (VACUOUS: marginal degenerate)
+  lambda=(+,-):     7 pairs, 1 skipped, hull cross-check failures 0, TV=0.0000, MAXDEV=0.0000, h-values 1, d-values 3  -> independent (VACUOUS: marginal degenerate)
+  lambda=(-,+):     7 pairs, 1 skipped, hull cross-check failures 0, TV=0.0000, MAXDEV=0.0000, h-values 1, d-values 3  -> independent (VACUOUS: marginal degenerate)
+  lambda=(-,-):     3 pairs, 1 skipped, hull cross-check failures 0, TV=0.0000, MAXDEV=0.0000, h-values 1, d-values 2  -> independent (VACUOUS: marginal degenerate)
+================================================================================================
+n = 3: ALL pairs, all four lambda, d(psi) enumerated directly (no nesting)
+  lambda=(+,+):    15 pairs, 1 skipped, hull cross-check failures 0, TV=0.2200, MAXDEV=2.2000, h-values 3, d-values 5  -> NOT independent
+      h values [0, 1, 2], d values [1, 2, 3, 4, 6]
+       h/d      1      2      3      4      6
+         0      1      2      0      0      0
+         1      0      4      0      2      2
+         2      0      1      3      0      0
+  lambda=(+,-):    15 pairs, 1 skipped, hull cross-check failures 0, TV=0.1689, MAXDEV=1.4000, h-values 2, d-values 6  -> NOT independent
+      h values [0, 1], d values [1, 2, 3, 4, 5, 6]
+       h/d      1      2      3      4      5      6
+         0      1      4      0      1      0      1
+         1      0      2      3      1      1      1
+  lambda=(-,+):    15 pairs, 1 skipped, hull cross-check failures 0, TV=0.1689, MAXDEV=1.4000, h-values 2, d-values 6  -> NOT independent
+      h values [0, 1], d values [1, 2, 3, 4, 5, 6]
+       h/d      1      2      3      4      5      6
+         0      1      4      0      1      0      1
+         1      0      2      3      1      1      1
+  lambda=(-,-):    15 pairs, 1 skipped, hull cross-check failures 0, TV=0.0000, MAXDEV=0.0000, h-values 1, d-values 5  -> independent (VACUOUS: marginal degenerate)
+================================================================================================
+n = 4: NESTED pairs only, d = min{2 d(C_1), d(C_2)} (P3-10, proved)
+  lambda=(+,+):    65 nested pairs, hull cross-check failures 0, TV=0.0000, MAXDEV=0.0000, h-values 1, d-values 4  -> independent (VACUOUS: marginal degenerate)
+  lambda=(-,-):     1 nested pairs, hull cross-check failures 0, TV=0.0000, MAXDEV=0.0000, h-values 1, d-values 1  -> independent (VACUOUS: marginal degenerate)
+
+================================================================================================
+SUMMARY
+  n   lambda   pairs     mode       TV  verdict
+  2    (+,+)      15      all   0.0000  independent (VACUOUS)
+  2    (+,-)       7      all   0.0000  independent (VACUOUS)
+  2    (-,+)       7      all   0.0000  independent (VACUOUS)
+  2    (-,-)       3      all   0.0000  independent (VACUOUS)
+  3    (+,+)      15      all   0.2200  NOT independent
+  3    (+,-)      15      all   0.1689  NOT independent
+  3    (-,+)      15      all   0.1689  NOT independent
+  3    (-,-)      15      all   0.0000  independent (VACUOUS)
+  4    (+,+)      65   nested   0.0000  independent (VACUOUS)
+  4    (-,-)       1   nested   0.0000  independent (VACUOUS)
+
+hull cross-check failures across all rows: 0
+Overall: PASS
