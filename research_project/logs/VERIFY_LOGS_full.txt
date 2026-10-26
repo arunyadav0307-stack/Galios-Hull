@@ -18,10 +18,11 @@ p3_weight2_field               PASS        39 lines identical
 p3_lambda_robust               PASS        49 lines identical
 p3_joint_nested_e2             PASS        122 lines identical
 p3_nested_gray                 PASS        31 lines identical
-p3_joint_e3                    PASS        76 lines identical
+p3_joint_e3                    PASS        75 lines identical
+p3_killtest_nonproduct         PASS        68 lines identical
 p3_power_attainment_mbound     PASS        19 lines identical
 p3_power_attainment            PASS        200 lines identical
 ----------------------------------------------------------------------------------------------------
-ran 18, skipped 0, failures 0
+ran 19, skipped 0, failures 0
 RESULT: ALL LOGS REPRODUCE
 EXIT=0

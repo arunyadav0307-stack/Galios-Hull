@@ -4,8 +4,8 @@ Date: 2026-10-25. Tool: `tools/verify_logs.py`. Full-run log: `logs/VERIFY_LOGS_
 **Result: 14 of 14 probes reproduce, 0 failures, exit code 0**, and the 504-row CSV regenerates
 byte-identically.
 
-> **Superseded on the count, not on the finding — see §9.** The suite has since grown to **18 cases**
-> and has been re-run in full: **18/18 PASS, 1114 lines identical, exit 0.** Sections 1–8 are kept as
+> **Superseded on the count, not on the finding — see §9.** The suite has since grown to **19 cases**
+> and has been re-run in full: **19/19 PASS, 1181 lines identical, exit 0.** Sections 1–8 are kept as
 > the P3-9 record; §9 carries the current number.
 
 ```
@@ -158,12 +158,12 @@ and this section replaces it.**
 
 ```
 $ python3 research_project/tools/verify_logs.py > research_project/logs/VERIFY_LOGS_full.txt 2>&1
-ran 18, skipped 0, failures 0
+ran 19, skipped 0, failures 0
 RESULT: ALL LOGS REPRODUCE
 EXIT=0
 ```
 
-**18 of 18 PASS, 1114 log lines compared, 0 failures, exit 0.** The 504-row CSV is byte-identical
+**19 of 19 PASS, 1181 log lines compared, 0 failures, exit 0.** The 504-row CSV is byte-identical
 again. Every case was run, including the four slow ones (`p3_joint_nested_e2`, `p3_nested_gray`,
 `p3_power_attainment` at ~760 s, `p3_power_attainment_mbound`); nothing was skipped and `--fast` was
 not used.
@@ -174,7 +174,9 @@ not used.
 | P3-11 | `p3_joint_nested_e2` (slow) | 122 |
 | P3-12 | `p3_lambda_robust` | 49 |
 | P3-13 | `p3_joint_e3` | 76 |
-| | **new total** | **836 + 278 = 1114** |
+| P3-13 correction | `p3_joint_e3` (75, was 76 — one row was being dropped, see P3-14 §4) | -1 |
+| P3-14 | `p3_killtest_nonproduct` | 68 |
+| | **new total** | **836 + 345 = 1181** |
 
 One correction to a figure recorded elsewhere: `p3_joint_nested_e2_log.txt` reproduces at **122**
 lines, not the 112 noted when P3-11 was committed. The comparison is byte-exact and passes, so the log
@@ -184,3 +186,7 @@ was never wrong — the line count in the prose was. No research claim depends o
 literature question; blockers B-1, B-2a (+ its Correction), B-2b and Tian–Gao–Gao remain open. **Phase 9
 remains NO-GO.** What this section buys is narrower and worth stating plainly: the reproducibility claim
 now covers every probe the project has, rather than the 14 that existed when the claim was made.
+
+**Re-run again after P3-14** (2026-10-25): 19 cases, 1181 lines, 0 failures, exit 0 — including the
+corrected P3-13 log and the new kill-test probe. Every committed log in the repository reproduces from
+its committed script.

@@ -621,7 +621,7 @@ full-run log `logs/VERIFY_LOGS_full.txt`.
 **Result: 14 of 14 probes reproduce, 0 failures, exit 0. 836 log lines compared.
 `QUANTUM_CODE_PARAMETER_TABLE.csv` regenerates byte-identically (504 rows).**
 
-*As of P3-13 the suite has grown to 18 cases and has been **re-run in full**: 18/18 PASS, 1114 lines
+*As of P3-14 the suite has grown to 19 cases and has been **re-run in full**: 19/19 PASS, 1181 lines
 identical, exit 0 (`P3_9_REGRESSION_AUDIT.md` §9). The 14/14 figure above is the P3-9 record and is kept
 for the audit trail; §9 is the current number.*
 
@@ -742,8 +742,8 @@ What is non-degenerate: `F_25 = F_5[t]/(t²−2)`, **negacyclic** components (id
 | Item | Detail |
 |---|---|
 | Method | distance **exact** by the circuit characterisation (P3-7 Lemma C): girth of `H`'s column matroid — no codeword enumeration at length 12; hull as `k − rank(G conj(G)ᵀ)`, cross-checked by additivity (P3-3 Thm 1) |
-| Enumeration | 256 nested chains `C₃ ⊆ C₂ ⊆ C₁` (multichains in the Boolean lattice `B₄`, `4⁴`); 234 gave an exact distance, 22 exceeded the weight cap of 6 and are **listed**, not dropped |
-| Result | 7 hull values × 4 distances; **TV = 0.1991, max deviation 11.2991 → joint law is NOT a product** |
+| Enumeration | 256 nested chains `C₃ ⊆ C₂ ⊆ C₁` (multichains in the Boolean lattice `B₄`, `4⁴`); **235** gave an exact distance, 21 exceeded the weight cap of 6 and are **listed**, not dropped |
+| Result | 7 hull values × 5 distances; **TV = 0.1989, max deviation 11.3617 → joint law is NOT a product** (corrected in P3-14: one chain had been mislabelled and dropped, see that section) |
 | Agreement | the first `e = 3` evidence for the same non-product phenomenon found at `e = 2` in P3-11/P3-12 |
 | Bug 1 (kept) | `fneg` took an encoding but was called with the raw integer `-1`, returning `6 = 1+t`; the modulus was `x⁴+t+1`, not `x⁴+1`, and an earlier run wrongly reported `n = 4` as degenerate. Caught by the divisor count (4 where 16 expected) |
 | Bug 2 (kept) | I wrote `C(4+3,3) = 35` chains for `B₄`; the correct multichain count is `4⁴ = 256`. Divisibility verified independently — 81 ordered divisor pairs `= 3⁴`, 0 disagreements — so the enumeration was right and my arithmetic was wrong |
@@ -755,7 +755,7 @@ What is non-degenerate: `F_25 = F_5[t]/(t²−2)`, **negacyclic** components (id
 
 No new research claim. This closes a gap in the reproducibility record: four probes were registered with
 `tools/verify_logs.py` after P3-9 (`p3_nested_gray`, `p3_joint_nested_e2`, `p3_lambda_robust`,
-`p3_joint_e3`), and the committed full-run log still said **14 cases / 836 lines**. The headline figure
+`p3_joint_e3`, then `p3_killtest_nonproduct`), and the committed full-run log still said **14 cases / 836 lines**. The headline figure
 in `P3_9_REGRESSION_AUDIT.md` was stale.
 
 ```
@@ -767,7 +767,7 @@ EXIT=0
 
 | Item | Detail |
 |---|---|
-| Result | **18/18 PASS, 1114 log lines compared, 0 failures, exit 0**; 504-row CSV byte-identical again |
+| Result | **19/19 PASS, 1181 log lines compared, 0 failures, exit 0** (re-run after P3-14); 504-row CSV byte-identical again |
 | Scope | every case run, including the four slow ones (~760 s worst); `--fast` **not** used, nothing skipped |
 | Newly covered | `p3_nested_gray` 31, `p3_joint_nested_e2` 122, `p3_lambda_robust` 49, `p3_joint_e3` 76 lines |
 | Correction | `p3_joint_nested_e2_log.txt` reproduces at **122** lines, not the 112 recorded at P3-11; the comparison is byte-exact and passes, so the log was never wrong — a prose count was. Nothing depends on it |
@@ -775,6 +775,38 @@ EXIT=0
 | What it buys | the reproducibility claim now covers **every** probe the project has, not the 14 that existed when the claim was made |
 | What it does not buy | correctness (a faithful reproduction of a wrong number is still wrong), novelty, or a Phase 9. **Phase 9 remains NO-GO** |
 | Regression fixed | the P3-13 edit had silently deleted the `## Next step` heading, leaving that section dangling under P3-13. Restored here |
+
+## Phase 3 — P3-14 kill test: the non-product finding is DEMOTED (2026-10-25)
+
+Deliverable `phase3/P3_14_KILLTEST_NONPRODUCT.md`; probe `phase3/p3_killtest_nonproduct.py` (log 68
+lines, exit 0, 0.6 s, registered in `verify_logs.py`).
+
+This probe was written to try to **destroy** the project's last surviving candidate contribution, and it
+succeeded. The objection: P3-3 Thm 1 makes `h(ψ)` a function of the component **hulls** alone, P3-10
+makes `d(ψ)` a function of the component **distances** alone, so ψ-level dependence can only ever be
+inherited from `h`–`d` dependence *inside a single component* — a fact nobody would doubt.
+
+| Step | Result |
+|---|---|
+| Component law (`F₉`, `n = 5`, 7 nonzero codes) | **TV = 0.2449**; mean `d` by hull: `h=0` → 2.667, `h=2` → 3.500 |
+| ψ-level law (26 nested pairs) | **TV = 0.2382**; hull additivity 0 failures, P3-10 distance law **0 failures** |
+| Comparison | ψ-level TV is **not larger** than component-level TV — nothing is amplified |
+| Decisive test | move to a product-ised component law and push through `(h₁+h₂, min{2d₁,d₂})`: **TV = 0.0000000000, exactly zero** |
+
+**Conclusion: the non-product property is a deterministic consequence of one trivial component-level
+correlation, not a phenomenon of the Gray image.** The proposition it yields
+(`h(ψ) ⊥ d(ψ) ⟺ h(C) ⊥ d(C)`) is true and trivial and is **not a contribution**.
+
+**R4 is withdrawn on these grounds** — the joint `(hull, distance)` law was the last candidate
+contribution, and its headline property is now explained rather than discovered. The unread-literature
+withdrawal rule (B-1, B-2a, B-2b, Tian–Gao–Gao) still applies separately.
+
+**Defect found and fixed:** `girth()` returned `None` for an empty parity-check matrix, so a
+whole-space code (whose `d` is 1) was reported as "above the cap". P3-13 was silently missing that
+chain. Corrected: P3-13 is now **235** triples with a `d = 1` column, **TV 0.1989** (was 0.1991), and a
+correction note in both documents. The P3-13 computations were never wrong; one row was dropped.
+
+**Phase 9 remains NO-GO, and this strengthens it: the last candidate contribution has been withdrawn.**
 
 ## Next step
 
@@ -785,10 +817,15 @@ Only two kinds of work remain, and neither is mine to do unilaterally:
 
 1. **Library access** — **B-2a** (Debnath–Prakash–Islam 2023 body **and now also its Correction**,
    DOI `10.1007/s12095-022-00602-6`), **B-2b** (ICTIS 2025 chapter, DOI
-   `10.1007/978-981-95-1365-9_25`), **Tian–Gao–Gao** QIP 2024 full text. If any contains a joint
-   (hull, distance) distribution for a constacyclic family, the R4 contribution is **withdrawn**, not
-   narrowed. See `P3_8_BLOCKER_PROGRESS.md`: three of the four bodies are now identified to DOI
-   level, so an interlibrary request can be made precisely.
+   `10.1007/978-981-95-1365-9_25`), **Tian–Gao–Gao** QIP 2024 full text. See
+   `P3_8_BLOCKER_PROGRESS.md`: three of the four bodies are identified to DOI level, so an
+   interlibrary request can be made precisely.
+
+   **This item has lost most of its urgency.** It used to matter because a joint `(hull, distance)`
+   distribution in one of those papers would force R4's withdrawal. **R4 is now withdrawn anyway**
+   (P3-14), on independent grounds: its headline property turned out to be a trivial consequence of
+   component-level correlation. Reading these papers can still change the *literature* record, but it
+   can no longer rescue a contribution, because there is none left to rescue.
 2. **A structural idea** for the one restricted family where `d(ψ)` is determined (`σ = 1` is the only
    known case). Without it there is no route to the primary objective.
 
@@ -797,7 +834,7 @@ The third option that existed at the end of P3-7 — *decide L-2 and turn it int
 side of the single-orbit family is left to settle.
 
 Everything computable at this scale has been computed, cross-checked, and now **re-verified
-end-to-end**: P3-9 re-runs every probe and reproduces every log line exactly — now **18 probes, 1114
+end-to-end**: P3-9 re-runs every probe and reproduces every log line exactly — now **19 probes, 1181
 lines, 0 failures** (§9 of the audit) — plus the 504-row CSV
 byte-for-byte. There is no remaining computational step at this scale. Both remaining items require
 material this workspace does not have — library access (B-1, B-2a + its Correction, B-2b,
@@ -805,7 +842,15 @@ Tian–Gao–Gao) or a new structural idea — so further "proceed" turns have n
 execute, and manufacturing activity would violate the standing rule against it.
 
 P3-13 extends the non-product finding to `e = 3` for one field/length/`λ` (see above) and records two
-structural dead ends (`F_4`; `F_25` cyclic) on the way. It does not settle `e ≥ 3`.
+structural dead ends (`F_4`; `F_25` cyclic) on the way. It does not settle `e ≥ 3`. **P3-14 then
+demoted the finding itself**, so P3-13 is now best read as a set of correct tables with a withdrawn
+interpretation.
+
+**Where that leaves the question "is further work worth it?"** On the evidence in this file: no, not on
+the R4 line. The one candidate contribution has been shown to be a consequence. The only remaining
+sources of a real result are an unread paper that already contains our answer (which would not help us)
+or a genuinely new structural idea (which no amount of further computation will produce). Saying so is
+the honest report; generating another table would not be.
 
 R1, R2, R3 remain NO-GO; Gate 2 stands on R4; novelty claimed nowhere; L-1, L-3 … L-8 open, **L-2 closed by citation (Dinh 2008)**; source PDF
 re-verified 612 826 B / sha256 `7f7e6803…`.

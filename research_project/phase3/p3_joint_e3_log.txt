@@ -15,7 +15,7 @@ F_25 = F_5[t]/(t^2-2), conjugation = Frobenius x -> x^5
 (B) lambda = (-1,-1,-1), NEGACYCLIC components, n = 4  (psi-length 12)
   16 negacyclic codes of length 4:
   deg  k  h   d
-    0  4  0 None
+    0  4  0   1
     1  3  1   2
     1  3  1   2
     1  3  1   2
@@ -33,7 +33,6 @@ F_25 = F_5[t]/(t^2-2), conjugation = Frobenius x -> x^5
     4  0  0 None
   hull dimensions present among components: [0, 1, 2]  <- NON-degenerate
 
-    (chain (1,)|(1,)|(1,): distance above the search cap 6, skipped)
     (chain (1, 5, 1)|(5, 3, 10, 1)|(1, 0, 0, 0, 1): distance above the search cap 6, skipped)
     (chain (1, 5, 1)|(15, 2, 20, 1)|(1, 0, 0, 0, 1): distance above the search cap 6, skipped)
     (chain (1, 5, 1)|(1, 0, 0, 0, 1)|(1, 0, 0, 0, 1): distance above the search cap 6, skipped)
@@ -60,16 +59,16 @@ F_25 = F_5[t]/(t^2-2), conjugation = Frobenius x -> x^5
      note said C(4+3,3) = 35, which counts something else -- 256 is the right number and the
      divisibility test was confirmed independently: 81 ordered divisor pairs = 3^4, 0 errors.)
 
-    all nested chains: 234 triples
-           h/d     2     3     4     6
-             0     3     7     0     2
-             1     8    20     4     8
-             2     8    24    16    14
-             3     8    12    32     8
-             4     6     6    26     2
-             5     4     4     8     0
-             6     2     2     0     0
-          TV=0.1991, MAXDEV=11.2991, h-values 7, d-values 4  -> NOT independent
+    all nested chains: 235 triples
+           h/d     1     2     3     4     6
+             0     1     3     7     0     2
+             1     0     8    20     4     8
+             2     0     8    24    16    14
+             3     0     8    12    32     8
+             4     0     6     6    26     2
+             5     0     4     4     8     0
+             6     0     2     2     0     0
+          TV=0.1989, MAXDEV=11.3617, h-values 7, d-values 5  -> NOT independent
 
 ================================================================================================
 hull cross-check failures: 0

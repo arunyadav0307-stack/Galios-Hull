@@ -219,7 +219,11 @@ def parity_check(G, N):
 def girth(H, N, cap=None):
     """Smallest dependent set of columns of H = d(C) (P3-7 Lemma C); None for the whole space."""
     if not H:
-        return None
+        # No parity checks: G spans everything, so the code is the whole space and d = 1.
+        # An earlier version returned None here, which made the all-full-space chain print
+        # "distance above the search cap 6" and drop out of the table.  Real defect, found by
+        # the P3-14 kill test; the corrected row (h=0, d=1) is in the re-run log.
+        return 1 if N > 0 else None
     cols = [[H[i][j] for i in range(len(H))] for j in range(N)]
     top = N if cap is None else min(cap, N)
     for w in range(1, top + 1):

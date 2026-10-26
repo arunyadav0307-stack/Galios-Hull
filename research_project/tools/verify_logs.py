@@ -76,6 +76,8 @@ CASES = [
      P3 + "p3_nested_gray_log.txt", True, []),
     ("p3_joint_e3", [(P3 + "p3_joint_e3.py", [])],
      P3 + "p3_joint_e3_log.txt", False, []),
+    ("p3_killtest_nonproduct", [(P3 + "p3_killtest_nonproduct.py", [])],
+     P3 + "p3_killtest_nonproduct_log.txt", False, []),
     ("p3_power_attainment_mbound", [(P3 + "p3_power_attainment.py", ["--mbound"])],
      P3 + "p3_power_attainment_mbound_log.txt", False, []),
     ("p3_power_attainment", [(P3 + "p3_power_attainment.py", [])],

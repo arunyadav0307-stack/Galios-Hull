@@ -1,0 +1,68 @@
+P3-14 kill test: is the non-product (hull, distance) law a real effect or inherited?
+field F_9 = F_3[t]/(t^2+1), conj = Frobenius x -> x^3; cyclic length n = 5, psi-length 10
+
+  sanity: conj == x^3; x*conj(x) != 0 for x != 0  [ok]
+
+  x^5 - 1 has 8 divisors over F_9
+    (5 does not divide |F_9^*| = 8, so it does NOT split here; ord_5(9) = 2, so the
+     factorisation is (x-1) times two quadratics and there are 2^3 = 8 divisors)
+
+================================================================================================
+STEP 1 -- one code on its own: are HULL and DISTANCE independent within a single component?
+    component law over the 7 nonzero codes: N = 7, h-values 2, d-values 5
+           h\d     1     2     3     4     5
+             0     1     1     0     0     1
+             2     0     0     2     2     0
+          TV = 0.2449
+
+    mean distance as a function of hull dimension:
+      h = 0:  3 codes, mean d = 2.667, d range 1..5
+      h = 2:  4 codes, mean d = 3.500, d range 3..4
+
+================================================================================================
+STEP 2 -- nested pairs at psi level: reproduce P3-11's non-product table
+    psi law over 27 nested pairs: N = 26, h-values 3, d-values 8
+           h\d     1     2     3     4     5     6     8    10
+             0     1     4     0     1     1     0     0     1
+             2     0     4     0     2     2     2     2     0
+             4     0     0     2     4     0     0     0     0
+          TV = 0.2382
+      hull additivity h(psi) = h(C_1)+h(C_2): 0 failures
+      distance law d(psi) = min{2d(C_1), d(C_2)}: 0 failures
+
+================================================================================================
+STEP 3 -- the comparison that decides it
+
+    component-level TV (one code)  = 0.2449
+    psi-level      TV (nested pair) = 0.2382
+
+    Reading: both are non-product.  At psi level the dependence is inherited, because
+    h(psi) is a function of the component HULLS alone (P3-3 Thm 1) and d(psi) a function of
+    the component DISTANCES alone (P3-10).  So if (h, d) were independent inside a component,
+    psi-level independence would follow for free.  It does not hold -- see the mean-distance
+    column above -- and that single fact is the entire content of the psi-level tables.
+
+================================================================================================
+STEP 4 -- force the component law to be a product, push it through the same map
+    TV of the pushed-forward law when components obey h _|_ d : 0.0000000000
+
+    EXACTLY ZERO.  So the non-product-ness disappears the moment the component-level
+    (hull, distance) correlation is removed.  The psi-level finding is therefore a
+    deterministic consequence of that one trivial correlation, not a new phenomenon.
+
+================================================================================================
+THE RESULTING STATEMENT (short enough to prove, not tabulate)
+
+    Let C_1, C_2 be linear codes over F_{q^2} with C_2 <= C_1, psi the |u|u+v| map.
+    By P3-3 Thm 1, h(psi) = h(C_1) + h(C_2); by P3-10, d(psi) = min{2d(C_1), d(C_2)}.
+    Hence h(psi) is a function of (h(C_1), h(C_2)) alone and d(psi) a function of
+    (d(C_1), d(C_2)) alone.  Consequently:
+
+      h(psi) _|_ d(psi)  <=>  h(C_i) _|_ d(C_i) for the component ensemble.
+
+    The observed failure of independence at psi level is exactly the component-level fact
+    that a code with a larger hull tends to have a larger minimum distance.  That is true,
+    and it is unsurprising, and it is not a contribution.
+
+================================================================================================
+Overall: PASS (the computation completed; the finding is DEMOTED, which is the point)

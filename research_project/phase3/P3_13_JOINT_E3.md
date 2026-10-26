@@ -1,7 +1,7 @@
 # P3-13 — The exact joint `(hull, distance)` law for `e = 3`, and where it fails
 
-Date: 2026-10-25. Probe: `phase3/p3_joint_e3.py`. Log: `phase3/p3_joint_e3_log.txt` (~60 lines, exit 0,
-4.7 s). Pure stdlib, ASCII.
+Date: 2026-10-25. Probe: `phase3/p3_joint_e3.py`. Log: `phase3/p3_joint_e3_log.txt` (75 lines, exit 0,
+4.9 s). Pure stdlib, ASCII.
 
 Status: **one computed distribution (non-degenerate, `e = 3`) plus two documented failures.** P3-11 and
 P3-12 were confined to `e = 2`; this is the first `e ≥ 3` joint law in the project. No theorem and no
@@ -43,24 +43,46 @@ family here that is non-degenerate.
 ## 3. Result
 
 `λ = (−1,−1,−1)`, `n = 4`, ψ-length 12. The 256 nested chains `C₃ ⊆ C₂ ⊆ C₁` (multichains in `B₄`,
-`4⁴ = 256`); **234** gave an exact distance, 22 exceeded the cap of 6.
+`4⁴ = 256`); **235** gave an exact distance, 21 exceeded the cap of 6.
 
-| h \ d | 2 | 3 | 4 | 6 |
-|---|---|---|---|---|
-| 0 | 3 | 7 | 0 | 2 |
-| 1 | 8 | 20 | 4 | 8 |
-| 2 | 8 | 24 | 16 | 14 |
-| 3 | 8 | 12 | 32 | 8 |
-| 4 | 6 | 6 | 26 | 2 |
-| 5 | 4 | 4 | 8 | 0 |
-| 6 | 2 | 2 | 0 | 0 |
+| h \ d | 1 | 2 | 3 | 4 | 6 |
+|---|---|---|---|---|---|
+| 0 | 1 | 3 | 7 | 0 | 2 |
+| 1 | 0 | 8 | 20 | 4 | 8 |
+| 2 | 0 | 8 | 24 | 16 | 14 |
+| 3 | 0 | 8 | 12 | 32 | 8 |
+| 4 | 0 | 6 | 6 | 26 | 2 |
+| 5 | 0 | 4 | 4 | 8 | 0 |
+| 6 | 0 | 2 | 2 | 0 | 0 |
 
-* 7 distinct hull dimensions, 4 distinct distances — **the test is not vacuous**.
-* **TV = 0.1991, max deviation 11.2991 → the joint law is NOT the product of its marginals.**
+* 7 distinct hull dimensions, 5 distinct distances — **the test is not vacuous**.
+* **TV = 0.1989, max deviation 11.3617 → the joint law is NOT the product of its marginals.**
+  (Corrected values. The earlier 234-triple version read TV 0.1991 / max deviation 11.2991; see the
+  correction note below and `P3_14_KILLTEST_NONPRODUCT.md` §4.)
 * Component distances cover 2, 3, 4 (and 1 for the whole space); hull dimensions 0, 1, 2.
 
 This is the first `e = 3` evidence for the non-product phenomenon established for `e = 2` in P3-11 and
 P3-12, and it agrees with it.
+
+## 3a. Correction (2026-10-25, P3-14) — one chain was silently mislabelled
+
+The P3-14 kill test found that `girth()` returned `None` whenever the parity-check matrix was empty,
+i.e. when the code is the whole space. That code has `d = 1`, not "undefined". So the chain whose three
+components are all the full space printed *"distance above the search cap 6, skipped"* and dropped out
+of the table, when it belongs at `(h = 0, d = 1)`.
+
+Corrected and re-run: **235** triples (was 234), a new `d = 1` column with `(h=0, d=1) = 1`, **TV =
+0.1989** (was 0.1991), max deviation **11.3617** (was 11.2991), log 75 lines. The conclusion is
+unchanged — still not a product. The table and the figures above are the corrected ones; the old values
+are recorded here rather than erased.
+
+## 3b. Interpretation withdrawn (2026-10-25, P3-14) — read this before citing the table
+
+The non-product property above is **not** a phenomenon of the Gray image. It is a deterministic
+consequence of hull and distance already being correlated inside a single component code, because
+`h(ψ)` depends on the components only through their hulls (P3-3 Thm 1) and `d(ψ)` only through their
+distances (P3-10). `P3_14_KILLTEST_NONPRODUCT.md` shows that product-ising the component law makes the
+ψ-level TV **exactly zero**. The table stands; the finding it was offered as is withdrawn.
 
 ## 4. Two bugs this run exposed (kept as an audit trail)
 
@@ -78,7 +100,7 @@ Both are now stated in the script, not silently fixed.
 
 ## 5. Scope
 
-**Not a theorem.** A finite table over one field at one length, with 22 of 256 chains excluded by a
+**Not a theorem.** A finite table over one field at one length, with 21 of 256 chains excluded by a
 search cap.
 
 **Not a claim that `e ≥ 3` is settled.** Only `n = 4` over `F_25` with `λ = (−1,−1,−1)` is covered.
