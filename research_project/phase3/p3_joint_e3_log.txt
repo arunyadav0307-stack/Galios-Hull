@@ -1,0 +1,76 @@
+P3-13: exact joint (Hermitian hull dim, distance) for e = 3 over F_25
+F_25 = F_5[t]/(t^2-2), conjugation = Frobenius x -> x^5
+
+  sanity: conj == x^5; x*conj(x) != 0 for x != 0; cube roots 1, 12, 17  [ok]
+
+================================================================================================
+(A) lambda = (1,1,1), CYCLIC components, n = 2 and n = 3
+  n = 2: 4 cyclic codes, hull dimensions present: [0]
+    -> DEGENERATE: every component has hull 0, so the joint law has a single h-value and the independence test is vacuous. This family cannot answer the question. Cause: generator matrices have entries in F_5 and conjugation fixes F_5.
+
+  n = 3: 8 cyclic codes, hull dimensions present: [0]
+    -> DEGENERATE: every component has hull 0, so the joint law has a single h-value and the independence test is vacuous. This family cannot answer the question. Cause: generator matrices have entries in F_5 and conjugation fixes F_5.
+
+================================================================================================
+(B) lambda = (-1,-1,-1), NEGACYCLIC components, n = 4  (psi-length 12)
+  16 negacyclic codes of length 4:
+  deg  k  h   d
+    0  4  0 None
+    1  3  1   2
+    1  3  1   2
+    1  3  1   2
+    1  3  1   2
+    2  2  2   3
+    2  2  2   3
+    2  2  2   2
+    2  2  2   2
+    2  2  0   3
+    2  2  0   3
+    3  1  1   4
+    3  1  1   4
+    3  1  1   4
+    3  1  1   4
+    4  0  0 None
+  hull dimensions present among components: [0, 1, 2]  <- NON-degenerate
+
+    (chain (1,)|(1,)|(1,): distance above the search cap 6, skipped)
+    (chain (1, 5, 1)|(5, 3, 10, 1)|(1, 0, 0, 0, 1): distance above the search cap 6, skipped)
+    (chain (1, 5, 1)|(15, 2, 20, 1)|(1, 0, 0, 0, 1): distance above the search cap 6, skipped)
+    (chain (1, 5, 1)|(1, 0, 0, 0, 1)|(1, 0, 0, 0, 1): distance above the search cap 6, skipped)
+    (chain (1, 20, 1)|(10, 2, 5, 1)|(1, 0, 0, 0, 1): distance above the search cap 6, skipped)
+    (chain (1, 20, 1)|(20, 3, 15, 1)|(1, 0, 0, 0, 1): distance above the search cap 6, skipped)
+    (chain (1, 20, 1)|(1, 0, 0, 0, 1)|(1, 0, 0, 0, 1): distance above the search cap 6, skipped)
+    (chain (4, 10, 1)|(15, 2, 20, 1)|(1, 0, 0, 0, 1): distance above the search cap 6, skipped)
+    (chain (4, 10, 1)|(20, 3, 15, 1)|(1, 0, 0, 0, 1): distance above the search cap 6, skipped)
+    (chain (4, 10, 1)|(1, 0, 0, 0, 1)|(1, 0, 0, 0, 1): distance above the search cap 6, skipped)
+    (chain (4, 15, 1)|(5, 3, 10, 1)|(1, 0, 0, 0, 1): distance above the search cap 6, skipped)
+    (chain (4, 15, 1)|(10, 2, 5, 1)|(1, 0, 0, 0, 1): distance above the search cap 6, skipped)
+    (chain (4, 15, 1)|(1, 0, 0, 0, 1)|(1, 0, 0, 0, 1): distance above the search cap 6, skipped)
+    (chain (5, 3, 10, 1)|(5, 3, 10, 1)|(1, 0, 0, 0, 1): distance above the search cap 6, skipped)
+    (chain (5, 3, 10, 1)|(1, 0, 0, 0, 1)|(1, 0, 0, 0, 1): distance above the search cap 6, skipped)
+    (chain (10, 2, 5, 1)|(10, 2, 5, 1)|(1, 0, 0, 0, 1): distance above the search cap 6, skipped)
+    (chain (10, 2, 5, 1)|(1, 0, 0, 0, 1)|(1, 0, 0, 0, 1): distance above the search cap 6, skipped)
+    (chain (15, 2, 20, 1)|(15, 2, 20, 1)|(1, 0, 0, 0, 1): distance above the search cap 6, skipped)
+    (chain (15, 2, 20, 1)|(1, 0, 0, 0, 1)|(1, 0, 0, 0, 1): distance above the search cap 6, skipped)
+    (chain (20, 3, 15, 1)|(20, 3, 15, 1)|(1, 0, 0, 0, 1): distance above the search cap 6, skipped)
+    (chain (20, 3, 15, 1)|(1, 0, 0, 0, 1)|(1, 0, 0, 0, 1): distance above the search cap 6, skipped)
+  nested chains C_3 <= C_2 <= C_1: 256
+    (x^4+1 splits into 4 distinct linear factors over F_25 because 8 | 24, so the divisors
+     form the Boolean lattice B_4 and the chains are its multichains: 4^4 = 256.  An earlier
+     note said C(4+3,3) = 35, which counts something else -- 256 is the right number and the
+     divisibility test was confirmed independently: 81 ordered divisor pairs = 3^4, 0 errors.)
+
+    all nested chains: 234 triples
+           h/d     2     3     4     6
+             0     3     7     0     2
+             1     8    20     4     8
+             2     8    24    16    14
+             3     8    12    32     8
+             4     6     6    26     2
+             5     4     4     8     0
+             6     2     2     0     0
+          TV=0.1991, MAXDEV=11.2991, h-values 7, d-values 4  -> NOT independent
+
+================================================================================================
+hull cross-check failures: 0
+Overall: PASS

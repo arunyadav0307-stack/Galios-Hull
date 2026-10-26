@@ -703,7 +703,7 @@ dropped by running all four `lambda in {+1,-1}^2`, so components are cyclic **or
 |---|---|---|---|
 | 2 | all pairs, 4 lambda | 15 / 7 / 7 / 3 | independence holds but is **VACUOUS** (`h` has one value) |
 | 3 | all pairs, 4 lambda | 15 each | **NOT independent** for `(+,+)` TV=0.2200, `(+,-)` TV=0.1689, `(-,+)` TV=0.1689; vacuous for `(-,-)` |
-| 4 | nested only (cost 10^8 otherwise), `(1,1)` and `(-1,-1)` | 65 / 1 | vacuous |
+| 4 | nested only (cost 10^8 otherwise), `(1,1)` and `(-1,-1)` | 65 / 1 | vacuous at `e = 2`; the `e = 3` analogue at `F_25` is P3-13 |
 
 **Conclusion at the strength the data supports: in every case where the independence test is not
 vacuous, it fails.** 0 direct-hull cross-check failures over all 150 words-pairs enumerated.
@@ -718,7 +718,35 @@ vacuous, it fails.** 0 direct-hull cross-check failures over all 150 words-pairs
 
 **Phase 9 remains NO-GO.**
 
-## Next step
+## Phase 3 — P3-13 the first `e = 3` joint law, and two dead ends on the way (2026-10-25)
+
+Deliverable `phase3/P3_13_JOINT_E3.md`; probe `phase3/p3_joint_e3.py` (log in the verify_logs set,
+76 lines identical, exit 0, 4.7 s, stdlib only).
+
+P3-11 and P3-12 were confined to `e = 2`. `e = 3` needs `gcd(3,q) = 1` and `q` a square, which leaves
+`F_4, F_16, F_25, …`. Two natural choices fail **structurally**, and both failures are recorded rather
+than worked around:
+
+* **`F_4`** — in characteristic 2, `1·conj(1) + 1·conj(1) = 0`, so every code of length 3 has hull 0.
+* **`F_25`, cyclic components** — the 4 codes of length 2 and the 8 of length 3 are all Hermitian LCD;
+  their generator matrices live in `F_5` and conjugation fixes `F_5`, so the Hermitian hull collapses to
+  the Euclidean one.
+
+What is non-degenerate: `F_25 = F_5[t]/(t²−2)`, **negacyclic** components (ideals of `F_25[x]/(x⁴+1)`),
+`λ = (−1,−1,−1)`, ψ-length 12. Hull dimensions cover `0, 1, 2` at component level.
+
+| Item | Detail |
+|---|---|
+| Method | distance **exact** by the circuit characterisation (P3-7 Lemma C): girth of `H`'s column matroid — no codeword enumeration at length 12; hull as `k − rank(G conj(G)ᵀ)`, cross-checked by additivity (P3-3 Thm 1) |
+| Enumeration | 256 nested chains `C₃ ⊆ C₂ ⊆ C₁` (multichains in the Boolean lattice `B₄`, `4⁴`); 234 gave an exact distance, 22 exceeded the weight cap of 6 and are **listed**, not dropped |
+| Result | 7 hull values × 4 distances; **TV = 0.1991, max deviation 11.2991 → joint law is NOT a product** |
+| Agreement | the first `e = 3` evidence for the same non-product phenomenon found at `e = 2` in P3-11/P3-12 |
+| Bug 1 (kept) | `fneg` took an encoding but was called with the raw integer `-1`, returning `6 = 1+t`; the modulus was `x⁴+t+1`, not `x⁴+1`, and an earlier run wrongly reported `n = 4` as degenerate. Caught by the divisor count (4 where 16 expected) |
+| Bug 2 (kept) | I wrote `C(4+3,3) = 35` chains for `B₄`; the correct multichain count is `4⁴ = 256`. Divisibility verified independently — 81 ordered divisor pairs `= 3⁴`, 0 disagreements — so the enumeration was right and my arithmetic was wrong |
+| Not claimed | not a theorem; only one field, one length, one `λ`; `e ≥ 3` is **not** settled; no novelty claim; blockers unchanged |
+
+**Phase 9 remains NO-GO.**
+
 
 **The blueprint's deliverable set is now complete through Phase 8.** Every named file exists except the
 manuscript (Phase 9), which is deliberately withheld.
@@ -744,6 +772,9 @@ byte-for-byte. There is no remaining computational step at this scale. Both rema
 material this workspace does not have — library access (B-1, B-2a + its Correction, B-2b,
 Tian–Gao–Gao) or a new structural idea — so further "proceed" turns have nothing legitimate left to
 execute, and manufacturing activity would violate the standing rule against it.
+
+P3-13 extends the non-product finding to `e = 3` for one field/length/`λ` (see above) and records two
+structural dead ends (`F_4`; `F_25` cyclic) on the way. It does not settle `e ≥ 3`.
 
 R1, R2, R3 remain NO-GO; Gate 2 stands on R4; novelty claimed nowhere; L-1, L-3 … L-8 open, **L-2 closed by citation (Dinh 2008)**; source PDF
 re-verified 612 826 B / sha256 `7f7e6803…`.
